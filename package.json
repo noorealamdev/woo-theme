@@ -1,0 +1,12 @@
+{
+  "name": "ecombon-theme",
+  "private": true,
+  "description": "Build tooling for the Ecombon theme's SCSS.",
+  "scripts": {
+    "build:css": "sass assets/scss/main.scss:assets/css/main.css --style=compressed --no-source-map",
+    "watch:css": "sass assets/scss/main.scss:assets/css/main.css --watch --no-source-map"
+  },
+  "devDependencies": {
+    "sass": "^1.102.0"
+  }
+}

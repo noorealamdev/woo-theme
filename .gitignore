@@ -1,0 +1,12 @@
+# Static HTML reference source used while building — not part of the
+# running theme.
+Ecombon-HTML/
+
+# Node tooling (SCSS build)
+node_modules/
+
+# OS/editor cruft
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

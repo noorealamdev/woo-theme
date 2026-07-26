@@ -1,0 +1,280 @@
+// Ecombon-authored overrides on top of the Amerce partials above.
+// Keep this file the only place we deviate from the byte-verified source
+// split, so the rest of assets/scss/ stays a faithful mirror of styles.css.
+
+// The shop sort dropdown sits inside `.tf-shop-control.sticky-top`, which
+// is `position: sticky` — that makes it the positioning context for any
+// `position: absolute` descendant, so the un-anchored `.dropdown-menu`
+// (Popper never adds `[data-bs-popper]` positioning here) was stretching
+// to that container's full width instead of sitting under the button.
+// Pin it explicitly instead of depending on Popper.
+.tf-dropdown-sort {
+	position: relative;
+
+	.dropdown-menu {
+		position: absolute !important;
+		inset: auto !important;
+		top: 100% !important;
+		right: 0 !important;
+		left: auto !important;
+		transform: none !important;
+		width: max-content;
+		max-width: min(320px, 90vw);
+	}
+}
+
+// The Amerce card design assumes a fixed 330:440 (3:4) portrait product
+// photo — `.product-img img` is `height: 100%` + `object-fit: cover`, but
+// that only resolves once its container has a real height. Real product
+// photos (any aspect ratio, e.g. these square merch mockups) were left to
+// their own intrinsic ratio instead, leaving a gap between a short image
+// and the info below (and stranding the absolutely-positioned "Add to
+// Cart" button in that gap). Give the container a real height instead of
+// depending on a specific source-image shape.
+.card-product_wrapper .product-img {
+	aspect-ratio: 3 / 4;
+}
+
+// `.tf-page-pagination` is `display: flex` but never centers its own
+// items — the `justify-content-center` Bootstrap utility on its wrapper
+// div does nothing there since that wrapper isn't itself a flex container.
+.tf-page-pagination {
+	justify-content: center;
+}
+
+// The Amerce grid-column classes (`.tf-col-4` etc.) aren't responsive by
+// themselves — the source relies on shop.js rewriting the class at
+// different breakpoints, which we don't enqueue (see assets/js/ecombon-shop.js).
+// Force the shop grid down to 2 columns on mobile directly instead.
+@media (max-width: 767px) {
+	#gridLayout.tf-grid-layout {
+		grid-template-columns: repeat(2, 1fr) !important;
+	}
+}
+
+// Single product page: WooCommerce's own real add-to-cart form (quantity
+// input, variation selects, add-to-cart button) reused as-is for its real
+// stock/variation logic. The swatch/pill picker built by
+// assets/js/ecombon-product-variations.js reuses the theme's own mirrored
+// Amerce classes (.variant-picker-item, .color-btn, .size-btn — see
+// assets/scss/elements/_product.scss) so it needs no bespoke CSS here;
+// this block only covers what's left of WooCommerce's own real markup.
+.tf-product-variant {
+	// The Amerce reference markup has `.variant-picker-item`/
+	// `.tf-product-total-quantity` as direct children of `.tf-product-variant`
+	// itself, so its own `gap` (assets/scss/elements/_product.scss) spaces
+	// them. WooCommerce's real add-to-cart form wraps all of that in one
+	// extra `<form class="cart">` element — the form itself is the only
+	// direct child here, so the same grid + gap has to be repeated one
+	// level down, on the form, for the spacing to reach its actual children.
+	form.cart {
+		display: grid;
+		gap: 20px;
+	}
+
+	.quantity {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border: 1px solid var(--line);
+		padding: 8px 16px;
+		border-radius: 100px;
+		min-width: 150px;
+		flex-shrink: 0;
+		width: fit-content;
+
+		.qty {
+			width: 40px;
+			padding: 0;
+			background: transparent;
+			border: 0;
+			text-align: center;
+			font-weight: 600;
+			-moz-appearance: textfield;
+
+			&::-webkit-inner-spin-button,
+			&::-webkit-outer-spin-button {
+				-webkit-appearance: none;
+				margin: 0;
+			}
+		}
+
+		.btn-quantity {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: none;
+			border: none;
+			cursor: pointer;
+			font-size: 18px;
+		}
+	}
+
+	// No-JS fallback only: assets/js/ecombon-product-variations.js hides
+	// this real table (adding `.d-none`) once it has built the swatch/pill
+	// picker mirrored from it — if that script fails to run, this stays
+	// visible and fully usable with WooCommerce's real native <select>s.
+	table.variations {
+		width: 100%;
+		margin-bottom: 16px;
+
+		tr {
+			display: block;
+			margin-bottom: 12px;
+		}
+
+		td,
+		th {
+			display: block;
+			text-align: left;
+			padding: 0;
+		}
+
+		label {
+			font-weight: 600;
+			margin-bottom: 8px;
+			display: block;
+		}
+
+		select {
+			width: 100%;
+			max-width: 320px;
+			padding: 10px 14px;
+			border: 1px solid var(--line);
+			border-radius: 4px;
+			background: var(--white);
+		}
+	}
+
+	.reset_variations {
+		display: inline-block;
+		margin-bottom: 16px;
+		font-size: 13px;
+		text-decoration: underline;
+	}
+
+	// Redundant with the heading price and the Add To Cart button's own
+	// dynamic "- $price" (see ecombon-product-variations.js).
+	.woocommerce-variation-price,
+	.woocommerce-variation-description {
+		display: none;
+	}
+
+	.woocommerce-variation-availability {
+		margin-bottom: 12px;
+	}
+
+	.single_add_to_cart_button {
+		&.disabled,
+		&.wc-variation-selection-needed,
+		&.wc-variation-is-unavailable {
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
+
+		&.loading {
+			opacity: 0.7;
+			cursor: wait;
+		}
+	}
+
+	.stock {
+		margin-bottom: 12px;
+
+		&.out-of-stock {
+			color: var(--critical);
+		}
+	}
+}
+
+// Standard WordPress/WooCommerce visually-hidden utility — used throughout
+// core comment-form markup (field labels, "required field" notices) but
+// never previously styled here, so it rendered as plain visible text.
+.screen-reader-text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+// Product reviews: real WordPress/WooCommerce comment loop + review form
+// (woocommerce/single-product-reviews.php, woocommerce/single-product/review.php)
+// restyled with Amerce's `.product-desc_review` markup — see those templates
+// for what real data/functions back each piece.
+.product-desc_review {
+	// WooCommerce's own `single-product.js` progressively enhances the real
+	// `#rating` <select> into this `<p class="stars">` of real, individually
+	// clickable `<a class="star-1">`..`<a class="star-5">` links (see
+	// assets/js/frontend/single-product.js in WooCommerce core) — already
+	// wired up to the real select value and the real "rating required"
+	// validation. Only the visual (plain link text into icon stars, with a
+	// cumulative fill up to the hovered/chosen star) is new here.
+	.comment-form-rating {
+		display: flex;
+		align-items: center;
+	}
+
+	.stars {
+		display: flex;
+		gap: 4px;
+		margin: 0;
+
+		a {
+			font-size: 0;
+			line-height: 1;
+			color: var(--line);
+			text-decoration: none;
+
+			&::before {
+				font-family: 'icomoon';
+				content: "\e92c"; // icon-Star
+				font-size: 22px;
+			}
+
+			&:hover,
+			&:has(~ a:hover),
+			&.active,
+			&:has(~ a.active) {
+				color: var(--yellow);
+			}
+		}
+	}
+
+	// WordPress's own real comment threading (wp_list_comments(), a real
+	// reply is just a nested `<ol class="children">`) — no custom Walker
+	// needed, just indent it the same way the reference design's own
+	// (demo-only) `.comment_reply` block was.
+	.children {
+		margin-left: 30px;
+		padding-left: 16px;
+		border-left: 2px solid var(--line);
+		list-style: none;
+
+		@media (min-width: 1200px) {
+			margin-left: 60px;
+			border-left-width: 4px;
+		}
+	}
+
+	.woocommerce-noreviews {
+		color: var(--text-2);
+	}
+}
+
+// The Amerce gallery hardcodes a 106px max thumbnail height, tuned for its
+// own demo assuming a 7-image gallery (`data-preview="7"` divided evenly
+// into a ~764px rail). template-parts/product/gallery.php now sets
+// `data-preview` to each real product's actual image count instead (see
+// its own comment), so zoom.js's Swiper already computes a taller slide
+// for a shorter real gallery — this fixed cap was clamping that back down,
+// leaving thumbnails just as small regardless.
+@media (min-width: 1200px) {
+	.product-thumbs-slider.style-row .tf-product-media-thumbs .swiper-slide {
+		max-height: none;
+	}
+}

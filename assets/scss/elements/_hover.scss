@@ -1,0 +1,312 @@
+/*--------- Abstracts variable ---------- */
+.hover-img .img-style {
+  overflow: hidden;
+}
+.hover-img .img-style > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  -webkit-transition: opacity 0.5s ease, transform 1.5s cubic-bezier(0, 0, 0.44, 1.18);
+  transition: opacity 0.5s ease, transform 1.5s cubic-bezier(0, 0, 0.44, 1.18);
+}
+.hover-img:hover .img-style > img {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+.hover-img .img-style2 {
+  overflow: hidden;
+  border-radius: 10px;
+}
+.hover-img .img-style2 .img-hv {
+  width: 100%;
+  object-fit: cover;
+  -webkit-transition: all 1s cubic-bezier(0.3, 1, 0.35, 1) 0s;
+  transition: all 1s cubic-bezier(0.3, 1, 0.35, 1) 0s;
+  transition: transform 500ms ease;
+}
+
+.hover-img2 .img-style2 {
+  overflow: hidden;
+  border-radius: 8px;
+}
+.hover-img2 .img-style2 .img2 {
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.hover-img2:hover .img2 {
+  transform: scale(1.1) rotate(3deg);
+}
+
+.hover-img3 .img-style3 {
+  border-radius: 8px;
+  overflow: hidden;
+}
+.hover-img3 .img-style3 img {
+  width: 100%;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.hover-img3:hover img {
+  transform: scale(1.075);
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.hover-img4 .img-style4 {
+  position: relative;
+  overflow: hidden;
+}
+.hover-img4 .img-style4:after {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 0%;
+  left: 50%;
+  top: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%) rotate(-45deg);
+  z-index: 1;
+  pointer-events: none;
+}
+.hover-img4 .img-style4 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 1s;
+}
+.hover-img4:hover .img-style4:after {
+  height: 250%;
+  transition: all 600ms linear;
+  background-color: transparent;
+}
+.hover-img4:hover .img-style4 img {
+  transform: scale(1.1);
+}
+
+.pagi2 .swiper-pagination2:hover .box-img .icon-practice,
+.swiper-button-next2:hover .box-img .icon-practice,
+.swiper-button-prev2:hover .box-img .icon-practice,
+.hv-one:hover .box-img .icon-practice {
+  opacity: 1;
+  z-index: 99;
+  top: 50%;
+  transition-delay: 0.5s;
+}
+.pagi2 .swiper-pagination2:hover .img-style::before,
+.swiper-button-next2:hover .img-style::before,
+.swiper-button-prev2:hover .img-style::before,
+.hv-one:hover .img-style::before {
+  opacity: 1;
+}
+.pagi2 .swiper-pagination2 .img-style,
+.swiper-button-next2 .img-style,
+.swiper-button-prev2 .img-style,
+.hv-one .img-style {
+  border-radius: 10px;
+  overflow: hidden;
+}
+.pagi2 .swiper-pagination2 .img-style::before,
+.swiper-button-next2 .img-style::before,
+.swiper-button-prev2 .img-style::before,
+.hv-one .img-style::before {
+  content: "";
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5019607843);
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  z-index: 99;
+  opacity: 0;
+  border-radius: 10px;
+}
+.pagi2 .swiper-pagination2 .img-style.s-one::before,
+.swiper-button-next2 .img-style.s-one::before,
+.swiper-button-prev2 .img-style.s-one::before,
+.hv-one .img-style.s-one::before {
+  border-radius: 50%;
+}
+
+.hv-one2:hover .img-style2::before {
+  opacity: 1;
+  visibility: visible;
+}
+.hv-one2 .img-style2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all 0.4s ease-out 0s;
+  -moz-transition: all 0.4s ease-out 0s;
+  -ms-transition: all 0.4s ease-out 0s;
+  -o-transition: all 0.4s ease-out 0s;
+  transition: all 0.4s ease-out 0s;
+  opacity: 0;
+  visibility: hidden;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.hv-tool {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.hover-tooltip {
+  position: relative;
+}
+.hover-tooltip .tooltip {
+  font-family: "DM Sans", sans-serif;
+  position: absolute;
+  white-space: nowrap;
+  padding: 2px 12px;
+  border-radius: 2px;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  visibility: hidden;
+  color: var(--white);
+  background-color: var(--black);
+  transition: transform 0.3s ease 0.1s, opacity 0.3s ease 0.1s;
+  z-index: 5;
+  font-size: 12px;
+  line-height: 22px;
+  font-weight: 400;
+  border-radius: 8px;
+  text-align: center;
+  display: none;
+}
+.hover-tooltip .tooltip::before {
+  content: "";
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  top: 22px;
+  position: absolute;
+  background: var(--black);
+  width: 9px;
+  height: 9px;
+  z-index: -1;
+}
+@media (min-width: 1200px) {
+  .hover-tooltip .tooltip {
+    display: block;
+  }
+}
+.hover-tooltip:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+.hover-tooltip.tooltip-bot .tooltip {
+  top: calc(100% + 9px);
+  bottom: unset;
+}
+.hover-tooltip.tooltip-bot .tooltip::before {
+  top: -5px;
+}
+.hover-tooltip.tooltip-left .tooltip {
+  right: 100%;
+  bottom: auto;
+  transform: translateX(0px);
+  left: unset;
+}
+.hover-tooltip.tooltip-left .tooltip::before {
+  top: 50%;
+  left: auto;
+  transform: translateY(-50%) rotate(45deg);
+  right: -4px;
+}
+.hover-tooltip.tooltip-left:hover .tooltip {
+  transform: translateX(-12px);
+}
+.hover-tooltip.tooltip-right .tooltip {
+  left: 100%;
+  bottom: auto;
+  transform: translateX(0px);
+}
+.hover-tooltip.tooltip-right .tooltip::before {
+  top: 50%;
+  right: auto;
+  transform: translateY(-50%) rotate(45deg);
+  left: -4px;
+}
+.hover-tooltip.tooltip-right:hover .tooltip {
+  transform: translateX(8px);
+}
+
+.hover-overlay {
+  position: relative;
+}
+.hover-overlay::before {
+  position: absolute;
+  z-index: 2;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  top: 0;
+  left: 0;
+  transition: 0.4s ease 0.1s;
+  opacity: 0;
+  visibility: hidden;
+}
+.hover-overlay:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+.hover-cursor-img .hover-image {
+  display: none;
+}
+@media (min-width: 1200px) {
+  .hover-cursor-img {
+    position: relative;
+  }
+  .hover-cursor-img .hover-image {
+    position: fixed;
+    display: block;
+    transform: scale(0);
+    pointer-events: none;
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 1000;
+  }
+  .hover-cursor-img .hover-image img {
+    border-radius: 50%;
+    max-width: 150px;
+    box-shadow: 0px 10px 25px 0px rgba(43, 52, 74, 0.1215686275);
+  }
+}
+
+/* ---------------------------------------------------------
+    * Name: Amerce - Multipurpose eCommerce HTML Template
+    * Version: 1.0.2
+    * Author: Themesflat
+    * Author URI: http://themesflat.com 
+
+	* Abstracts variable
+
+    * Core CSS
+
+    * Components
+ ------------------------------------------------------------------------------ */
