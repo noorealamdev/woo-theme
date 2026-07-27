@@ -304,6 +304,12 @@
   border-radius: 12px;
   z-index: 0;
   width: 100%;
+  // `img` inside is `height: 100%` + `object-fit: cover`, which only
+  // resolves once this container has a real height — real product photos
+  // (any aspect ratio) were left to their own intrinsic ratio otherwise,
+  // leaving a gap between a short image and the info below (and stranding
+  // the absolutely-positioned "Add to Cart" button in that gap).
+  aspect-ratio: 3 / 4;
 }
 .card-product_wrapper img {
   display: block;
@@ -769,7 +775,7 @@
   border-color: var(--text);
 }
 .product-thumbs-slider .tf-product-media-thumbs .swiper-slide:not(.swiper-slide-thumb-active) .item {
-  opacity: 0.6;
+  opacity: 1;
 }
 .product-thumbs-slider .tf-product-media-main {
   border-radius: 16px;
@@ -803,7 +809,18 @@
     width: 80px;
   }
   .product-thumbs-slider.style-row .tf-product-media-thumbs .swiper-slide {
-    max-height: 106px;
+    // Sized by Swiper's `slidesPerView: 'auto'` (see gallery.php's
+    // `data-preview="auto"`) using each slide's own real CSS size here,
+    // instead of dividing the rail's rendered height evenly by a fixed
+    // slide count — a plain square matching the column's fixed 80px
+    // width, i.e. each thumbnail at its own natural, undistorted crop.
+    // Swiper's own base CSS sets `.swiper-slide { height: 100% }`
+    // unconditionally — `aspect-ratio` only fills in a *missing*
+    // dimension, so it's ignored unless that explicit height is cleared
+    // first.
+    height: auto;
+    max-height: none;
+    aspect-ratio: 1;
   }
   .product-thumbs-slider.style-row.row_left .flat-wrap-media-product {
     order: 1;
@@ -876,9 +893,169 @@
 .tf-product-info-wrap .product-infor-price .badge-sale {
   margin-left: 8px;
 }
+// A variable product's parent-level regular/sale prices are empty (each
+// variation has its own), so its real get_price_html() output — a real
+// <del>/<ins> pair when on sale — falls back to plain browser styling (a
+// strikethrough *and* an underline) instead of the badge/divider markup
+// used for a simple product's clean before/after price. Restyle that
+// fallback to the same typography: a large, plain current price with a
+// small muted strikethrough price beside it, current price first.
+.tf-product-info-wrap .product-infor-price del {
+  order: 2;
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--text-3);
+  font-weight: 400;
+}
+.tf-product-info-wrap .product-infor-price ins {
+  order: 1;
+  font-size: clamp(24px, 3.5vw, 30px);
+  line-height: clamp(32px, 4.2vw, 42px);
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text);
+}
+// Not on sale: get_price_html() returns a bare .woocommerce-Price-amount
+// with no del/ins at all, sized the same as the current-price case above.
+.tf-product-info-wrap .product-infor-price > .woocommerce-Price-amount {
+  font-size: clamp(24px, 3.5vw, 30px);
+  line-height: clamp(32px, 4.2vw, 42px);
+  font-weight: 500;
+}
 .tf-product-info-wrap .tf-product-variant {
   display: grid;
   gap: 20px;
+}
+// WooCommerce's own real add-to-cart form (quantity input, variation
+// selects, add-to-cart button) reused as-is for its real stock/variation
+// logic. The swatch/pill picker built by assets/js/ecombon-product-variations.js
+// reuses this file's own .variant-picker-item/.color-btn/.size-btn classes
+// (above), so it needs no bespoke CSS here — this block only covers what's
+// left of WooCommerce's own real markup.
+.tf-product-variant {
+  // Direct children of .tf-product-variant get spaced by its own `gap`
+  // above — but WooCommerce's real add-to-cart form wraps all of that in
+  // one extra `<form class="cart">` element, which is the only direct
+  // child here, so the same grid + gap has to be repeated one level down,
+  // on the form, for the spacing to reach its actual children.
+  form.cart {
+    display: grid;
+    gap: 20px;
+  }
+
+  .quantity {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--line);
+    padding: 8px 16px;
+    border-radius: 100px;
+    min-width: 150px;
+    flex-shrink: 0;
+    width: fit-content;
+
+    .qty {
+      width: 40px;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      text-align: center;
+      font-weight: 600;
+      -moz-appearance: textfield;
+
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+
+    .btn-quantity {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+    }
+  }
+
+  // No-JS fallback only: assets/js/ecombon-product-variations.js hides
+  // this real table (adding `.d-none`) once it has built the swatch/pill
+  // picker mirrored from it — if that script fails to run, this stays
+  // visible and fully usable with WooCommerce's real native <select>s.
+  table.variations {
+    width: 100%;
+    margin-bottom: 16px;
+
+    tr {
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    td,
+    th {
+      display: block;
+      text-align: left;
+      padding: 0;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    select {
+      width: 100%;
+      max-width: 320px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--white);
+    }
+  }
+
+  .reset_variations {
+    display: inline-block;
+    margin-bottom: 16px;
+    font-size: 13px;
+    text-decoration: underline;
+  }
+
+  // Redundant with the heading price and the Add To Cart button's own
+  // dynamic "- $price" (see ecombon-product-variations.js).
+  .woocommerce-variation-price,
+  .woocommerce-variation-description {
+    display: none;
+  }
+
+  .woocommerce-variation-availability {
+    margin-bottom: 12px;
+  }
+
+  .single_add_to_cart_button {
+    &.disabled,
+    &.wc-variation-selection-needed,
+    &.wc-variation-is-unavailable {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &.loading {
+      opacity: 0.7;
+      cursor: wait;
+    }
+  }
+
+  .stock {
+    margin-bottom: 12px;
+
+    &.out-of-stock {
+      color: var(--critical);
+    }
+  }
 }
 .tf-product-info-wrap .tf-product-variant .variant-picker-label {
   display: flex;
@@ -2376,15 +2553,3 @@
   flex-wrap: wrap;
 }
 
-/* ---------------------------------------------------------
-    * Name: Amerce - Multipurpose eCommerce HTML Template
-    * Version: 1.0.2
-    * Author: Themesflat
-    * Author URI: http://themesflat.com 
-
-	* Abstracts variable
-
-    * Core CSS
-
-    * Components
- ------------------------------------------------------------------------------ */

@@ -359,6 +359,13 @@
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
   border-radius: 4px;
+  // Sits inside `.tf-shop-control.sticky-top`, which is `position: sticky`
+  // — that makes it the positioning context for any `position: absolute`
+  // descendant, so the un-anchored `.dropdown-menu` below (Popper never
+  // adds `[data-bs-popper]` positioning here) was stretching to that
+  // container's full width instead of sitting under the button. Pin this
+  // as its own positioning context instead of depending on Popper.
+  position: relative;
 }
 .tf-dropdown-sort .icon {
   -webkit-transition: all 0.3s ease;
@@ -395,6 +402,14 @@
   overscroll-behavior-y: contain;
   overflow-y: auto;
   z-index: 99;
+  position: absolute !important;
+  inset: auto !important;
+  top: 100% !important;
+  right: 0 !important;
+  left: auto !important;
+  transform: none !important;
+  width: max-content;
+  max-width: min(320px, 90vw);
 }
 .tf-dropdown-sort .dropdown-menu::-webkit-scrollbar {
   width: 3px;
@@ -723,15 +738,3 @@
   border-radius: 50%;
 }
 
-/* ---------------------------------------------------------
-    * Name: Amerce - Multipurpose eCommerce HTML Template
-    * Version: 1.0.2
-    * Author: Themesflat
-    * Author URI: http://themesflat.com 
-
-	* Abstracts variable
-
-    * Core CSS
-
-    * Components
- ------------------------------------------------------------------------------ */

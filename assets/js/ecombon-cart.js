@@ -11,7 +11,17 @@
 	// `added_to_cart` opens the drawer; `removed_from_cart` (real AJAX
 	// removal via `.remove_from_cart_button`, same script) re-shows it
 	// after the fragment swap instead, since it was already open.
+	//
+	// Not on the real cart page itself, though (WordPress's own real
+	// `body_class()` marks it with `.woocommerce-cart`) — popping a
+	// mini-cart preview open on top of the full cart page you're already
+	// looking at is redundant, and the page's own table/totals already
+	// refresh in place via the fragments CartFragments adds there.
 	$( document.body ).on( 'added_to_cart removed_from_cart', function () {
+		if ( document.body.classList.contains( 'woocommerce-cart' ) ) {
+			return;
+		}
+
 		setTimeout( function () {
 			var el = document.getElementById( 'shoppingCart' );
 
@@ -48,6 +58,17 @@
 		}
 
 		$qty.val( value ).trigger( 'change' );
+
+		// On the real cart page, also trigger WooCommerce's own real
+		// AJAX quantity update (wc-cart.js) — its `change` handler only
+		// *enables* the (hidden) "Update cart" button rather than
+		// auto-submitting, since it's built for an explicit click; a
+		// stepper click is that explicit action here, so finish the job.
+		var $cartForm = $qty.closest( 'form.woocommerce-cart-form' );
+
+		if ( $cartForm.length ) {
+			$cartForm.find( ':input[name="update_cart"]' ).prop( 'disabled', false ).trigger( 'click' );
+		}
 	} );
 
 	// AJAX-ify the single product page's real add-to-cart form (simple and

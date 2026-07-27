@@ -203,6 +203,56 @@
 .product-desc_review .box-write-comment .rate-click .icon {
   font-size: 32px;
 }
+// WooCommerce's own single-product.js progressively enhances the real
+// #rating <select> into this <p class="stars"> of real, individually
+// clickable <a class="star-1">..<a class="star-5"> links (see
+// assets/js/frontend/single-product.js in WooCommerce core) — already
+// wired up to the real select value and the real "rating required"
+// validation. Only the visual (plain link text into icon stars, with a
+// cumulative fill up to the hovered/chosen star) is added here.
+.product-desc_review .comment-form-rating {
+  display: flex;
+  align-items: center;
+}
+.product-desc_review .stars {
+  display: flex;
+  gap: 4px;
+  margin: 0;
+}
+.product-desc_review .stars a {
+  font-size: 0;
+  line-height: 1;
+  color: var(--line);
+  text-decoration: none;
+}
+.product-desc_review .stars a::before {
+  font-family: 'icomoon';
+  content: "\e92c"; // icon-Star
+  font-size: 22px;
+}
+.product-desc_review .stars a:hover,
+.product-desc_review .stars a:has(~ a:hover),
+.product-desc_review .stars a.active,
+.product-desc_review .stars a:has(~ a.active) {
+  color: var(--yellow);
+}
+// WordPress's own real comment threading (wp_list_comments()) — a real
+// reply is just a nested <ol class="children">, no custom Walker needed.
+.product-desc_review .children {
+  margin-left: 30px;
+  padding-left: 16px;
+  border-left: 2px solid var(--line);
+  list-style: none;
+}
+@media (min-width: 1200px) {
+  .product-desc_review .children {
+    margin-left: 60px;
+    border-left-width: 4px;
+  }
+}
+.product-desc_review .woocommerce-noreviews {
+  color: var(--text-2);
+}
 @media (max-width: 991px) {
   .product-desc_review .comment-item.child {
     margin-left: 30px;

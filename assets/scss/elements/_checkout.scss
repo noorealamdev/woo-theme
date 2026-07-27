@@ -1,0 +1,494 @@
+/*------------ Checkout ---------------- */
+/* WooCommerce's own default checkout/*.php templates (not overridden) —
+   styled here to match the theme's design language. Real classes only
+   (.col2-set, .form-row-first/-last/-wide, .woocommerce-checkout-review-
+   order-table, .wc_payment_methods, #place_order, etc.) — see
+   plugins/woocommerce/templates/checkout/*.php for the exact real markup.
+
+   IMPORTANT: always scope as `form.woocommerce-checkout`, never the bare
+   class. WordPress's own real body_class() adds `woocommerce-checkout` to
+   <body> on this page (is_checkout()), and WC's default form-checkout.php
+   independently puts the exact same class on the real <form> — two
+   unrelated WC conventions colliding on one class name. A bare
+   `.woocommerce-checkout` selector matches BOTH; `display:grid` etc. was
+   applying to <body> itself, dragging the header/offcanvas drawers/footer
+   into the grid alongside the checkout form. */
+
+form.woocommerce-checkout {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 15px 100px;
+  box-sizing: border-box;
+}
+form.woocommerce-checkout h3 {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+/* Order summary (#order_review_heading + #order_review, WC's own real
+   direct children of the checkout <form>, straight after #customer_details)
+   sits in a right-hand sidebar next to the billing/shipping fields on
+   desktop — placement only, no markup change. */
+@media (min-width: 992px) {
+  form.woocommerce-checkout {
+    display: grid;
+    // 60/40 billing-to-order-summary split. minmax(0, ...) on both tracks —
+    // a bare percentage/fr track still respects its item's intrinsic
+    // min-content width by default, which previously let a wide column
+    // refuse to shrink and pushed the whole page (and everything inside
+    // #wrapper, header included) wider than the viewport.
+    grid-template-columns: minmax(0, 60%) minmax(0, 40%);
+    column-gap: 40px;
+    align-items: start;
+  }
+  form.woocommerce-checkout > #customer_details {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    min-width: 0;
+  }
+  form.woocommerce-checkout > #order_review_heading {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  form.woocommerce-checkout > #order_review {
+    grid-column: 2;
+    grid-row: 2;
+    min-width: 0;
+  }
+}
+
+/* Real notices — checkout.js prepends a `.woocommerce-NoticeGroup-checkout`
+   wrapper containing a `.woocommerce-error` <ul> straight into the form on a
+   failed validation/submit (also reused for coupon apply/remove and
+   update_order_review success/error messages), completely unstyled by
+   default since this theme disables WC's own stylesheet. */
+.woocommerce-NoticeGroup {
+  margin-bottom: 24px;
+  scroll-margin-top: 100px;
+}
+.woocommerce-error,
+.woocommerce-message,
+.woocommerce-info {
+  padding: 16px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 22px;
+}
+.woocommerce-error {
+  background: rgba(240, 62, 62, 0.06);
+  border: 1px solid var(--critical);
+  color: var(--critical);
+}
+.woocommerce-error li {
+  list-style: none;
+}
+.woocommerce-message {
+  background: rgba(61, 171, 37, 0.06);
+  border: 1px solid var(--success);
+  color: var(--success);
+}
+.woocommerce-info {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  color: var(--text-2);
+}
+.woocommerce-error a,
+.woocommerce-message a,
+.woocommerce-info a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* Real field-level validation — checkout.js adds/removes these classes on
+   `.form-row` itself (not the input) as the customer fills the form, plus a
+   real inline <p class="checkout-inline-error-message"> per invalid field. */
+.woocommerce-invalid input.input-text,
+.woocommerce-invalid textarea,
+.woocommerce-invalid .select2-selection--single {
+  border-color: var(--critical);
+}
+.woocommerce-validated input.input-text,
+.woocommerce-validated .select2-selection--single {
+  border-color: var(--success);
+}
+.checkout-inline-error-message {
+  margin-top: 6px;
+  color: var(--critical);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+// WC's own default template names these columns .col-1/.col-2 — this theme
+// also loads Bootstrap (assets/css/bootstrap.min.css) whose same-named
+// .col-1/.col-2 utility classes set a fixed `width` (part of its 12-column
+// grid), which wins over this grid's default item stretch and collapses
+// these columns to ~8% width. Reset by ID-scoped child selector so real
+// Bootstrap .col-N classes elsewhere on the site stay untouched.
+.col2-set#customer_details {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+.col2-set#customer_details > div {
+  width: auto;
+  max-width: 100%;
+  flex: none;
+}
+
+.woocommerce-billing-fields__field-wrapper,
+.woocommerce-shipping-fields__field-wrapper,
+.woocommerce-additional-fields__field-wrapper,
+.create-account {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.form-row {
+  flex: 1 1 100%;
+}
+.form-row-first,
+.form-row-last {
+  flex: 1 1 calc(50% - 8px);
+}
+@media (max-width: 575px) {
+  .form-row-first,
+  .form-row-last {
+    flex: 1 1 100%;
+  }
+}
+
+.woocommerce-account-fields {
+  margin-top: 16px;
+}
+.woocommerce-account-fields .create-account {
+  margin-top: 16px;
+}
+.form-row.create-account label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+form.woocommerce-checkout .woocommerce-input-wrapper {
+  display: block;
+  position: relative;
+}
+
+// WC's real checkout/form-billing.php + form-shipping.php run the country/
+// state <select> through select2 (wc-country-select.js, a real WC frontend
+// script, not something this theme added) — it hides the plain <select>
+// (`select2-hidden-accessible`, effectively 1x1) and renders its own
+// `.select2-container` markup instead, so styling the <select> itself has
+// no visible effect; select2's own default look (select2.css, still loaded —
+// only WC's *theme* stylesheets were disabled) is what actually needs
+// reskinning here.
+.select2-container--default .select2-selection--single {
+  height: auto;
+  padding: 11px 40px 11px 15px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  transition: all 0.3s ease;
+}
+.select2-container--default.select2-container--open .select2-selection--single,
+.select2-container--default .select2-selection--single:hover {
+  border-color: var(--black);
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  padding: 0;
+  line-height: 24px;
+  color: var(--text);
+  font-weight: 500;
+}
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+  color: var(--text-3);
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 100%;
+  right: 15px;
+  top: 0;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+  display: none;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow::after {
+  font-family: "icomoon";
+  content: "\e908";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: var(--text);
+}
+.select2-dropdown {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+.select2-results__option {
+  padding: 8px 15px;
+  font-size: 14px;
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background: var(--black);
+  color: var(--white);
+}
+.select2-search--dropdown .select2-search__field {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 12px;
+  outline: 0;
+}
+
+#ship-to-different-address label,
+.woocommerce-account-fields > p label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+.shipping_address {
+  margin-top: 16px;
+}
+
+/* Order review */
+.woocommerce-checkout-review-order-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+}
+.woocommerce-checkout-review-order-table th,
+.woocommerce-checkout-review-order-table td {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  overflow-wrap: break-word;
+  font-weight: 400;
+  color: var(--text);
+}
+.woocommerce-checkout-review-order-table th.product-total,
+.woocommerce-checkout-review-order-table td.product-total {
+  text-align: right;
+  white-space: nowrap;
+}
+.woocommerce-checkout-review-order-table thead th {
+  font-weight: 600;
+  padding-bottom: 16px;
+}
+.woocommerce-checkout-review-order-table tfoot th {
+  font-weight: 400;
+  color: var(--text-2);
+}
+.woocommerce-checkout-review-order-table .product-quantity {
+  color: var(--text-2);
+  font-weight: 400;
+}
+.woocommerce-checkout-review-order-table .order-total th,
+.woocommerce-checkout-review-order-table .order-total td {
+  border-bottom: 0;
+  padding-top: 16px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Coupon — hooked to `woocommerce_before_checkout_form`, so it renders as a
+   sibling *before* `form.woocommerce-checkout` (inside the shared
+   `.woocommerce` shortcode wrapper, not the form) — give it the same boxed
+   width/padding as the form below so the two line up. */
+.woocommerce-form-coupon-toggle,
+.woocommerce-form-coupon {
+  max-width: 1440px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  box-sizing: border-box;
+}
+.woocommerce-form-coupon-toggle {
+  padding-top: 40px;
+  margin-bottom: 20px;
+}
+.woocommerce-form-coupon-toggle .showcoupon {
+  text-decoration: underline;
+  color: var(--text);
+  cursor: pointer;
+}
+.woocommerce-form-coupon {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.woocommerce-form-coupon .form-row-first {
+  flex: 1 1 auto;
+}
+.woocommerce-form-coupon .form-row-last {
+  flex: 0 0 auto;
+}
+.woocommerce-form-coupon button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 24px;
+  border-radius: 60px;
+  background: var(--black);
+  color: var(--white);
+  border: 0;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+}
+.woocommerce-form-coupon button:hover {
+  opacity: 0.85;
+}
+
+/* Payment */
+#payment {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 24px;
+}
+.wc_payment_methods {
+  margin-bottom: 20px;
+}
+.wc_payment_method {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px 16px;
+  transition: background-color 0.3s ease;
+}
+.wc_payment_method:not(:last-child) {
+  margin-bottom: 12px;
+}
+.wc_payment_method:has(input:checked) {
+  background: var(--bg-2);
+}
+.wc_payment_method > label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text);
+}
+.wc_payment_method input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--black);
+  flex-shrink: 0;
+}
+.payment_box {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  color: var(--text-2);
+  font-size: 14px;
+  line-height: 22px;
+}
+.payment_box .form-row {
+  margin-top: 12px;
+}
+
+/* Real checkboxes (create-account, ship-to-different-address, terms) all
+   render as plain unstyled native checkboxes by default — give them the
+   same custom checkmark look as the theme's own .tf-check element
+   (assets/scss/elements/_form.scss) without needing that class in markup. */
+form.woocommerce-checkout input[type="checkbox"] {
+  position: relative;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  padding: 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--text-3);
+  border-radius: 3px;
+  background-color: var(--white);
+  cursor: pointer;
+  outline: 0;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+form.woocommerce-checkout input[type="checkbox"]:checked {
+  background: var(--black);
+  border-color: var(--black);
+}
+form.woocommerce-checkout input[type="checkbox"]::before {
+  font-family: "icomoon";
+  content: "\e90f";
+  position: absolute;
+  color: var(--white);
+  font-size: 11px;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s ease;
+}
+form.woocommerce-checkout input[type="checkbox"]:checked::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.woocommerce-terms-and-conditions-wrapper {
+  padding-top: 16px;
+  margin-bottom: 16px;
+}
+.woocommerce-terms-and-conditions-wrapper .form-row {
+  margin: 0;
+}
+.woocommerce-terms-and-conditions-wrapper label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--text-2);
+}
+.woocommerce-terms-and-conditions-wrapper label input[type="checkbox"] {
+  margin-top: 2px;
+}
+.woocommerce-terms-and-conditions-wrapper abbr.required {
+  color: var(--critical);
+  text-decoration: none;
+  margin-left: 2px;
+}
+
+.place-order #place_order {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  border-radius: 60px;
+  background: var(--black);
+  color: var(--white);
+  border: 0;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+.place-order #place_order:hover {
+  opacity: 0.85;
+}
+.place-order button[name="woocommerce_checkout_update_totals"] {
+  padding: 10px 20px;
+  border-radius: 60px;
+  background: var(--bg-2);
+  border: 0;
+  cursor: pointer;
+}

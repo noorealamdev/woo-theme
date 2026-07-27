@@ -1,11 +1,12 @@
 <?php
 /**
  * Single review: real avatar, author, date, star rating (from real comment
- * meta) and comment text — restyled with Amerce's `.box-comment` markup.
+ * meta) and comment text — restyled with the theme's own `.box-comment`
+ * markup.
  *
  * Closing </li> is left out on purpose — wp_list_comments()'s walker adds
  * it (and nests real threaded replies inside, as a real <ol class="children">,
- * before doing so; see the `.children` rule in assets/scss/theme/_overrides.scss
+ * before doing so; see the `.children` rule in assets/scss/elements/_section.scss
  * for how those get the same indent/border treatment as any other reply).
  *
  * @package Ecombon

@@ -21,17 +21,6 @@ if ( empty( $image_ids ) ) {
 	$image_ids = array( 0 );
 }
 
-/*
- * zoom.js sizes each thumbnail slot by dividing the rail's fixed height by
- * `data-preview` (Swiper's `slidesPerView`) — the Amerce demo hardcodes 7
- * assuming a 7-image gallery, but real products here usually have far
- * fewer, which left each real thumbnail tiny (sized as if 7 were present).
- * Size it to how many images this product actually has instead, capped at
- * 5 — the same breakpoint value zoom.js itself already falls back to below
- * desktop widths — so a short gallery gets proportionally larger thumbs
- * and a long one still scrolls instead of shrinking further.
- */
-$thumb_preview = max( 1, min( 5, count( $image_ids ) ) );
 ?>
 <div class="tf-product-media-wrap sticky-top">
 	<div class="product-thumbs-slider style-row row_left">
@@ -67,10 +56,32 @@ $thumb_preview = max( 1, min( 5, count( $image_ids ) ) );
 		 * or the missing element crashes that script.
 		 */
 		?>
-		<div dir="ltr" class="swiper tf-product-media-thumbs other-image-zoom<?php echo count( $image_ids ) <= 1 ? ' d-none' : ''; ?>" data-direction="vertical" data-preview="<?php echo esc_attr( $thumb_preview ); ?>">
-			<div class="swiper-wrapper stagger-wrap">
+		<?php
+		/**
+		 * No `stagger-wrap`/`stagger-item` here — those classes drive
+		 * main.js's staggerWrap(), a scale/rotate/skew "spin in" entrance
+		 * animation per thumbnail. Applied to a real product gallery, it
+		 * made thumbnails visibly jump around in size for the first ~600ms
+		 * after load (its mid-transition bounding box is nothing like its
+		 * settled size), which read as a layout bug rather than a nice
+		 * reveal.
+		 */
+		?>
+		<?php
+		/**
+		 * `data-preview="auto"` (Swiper's `slidesPerView: 'auto'`) sizes
+		 * each thumbnail by its own real CSS size (see the square
+		 * `aspect-ratio` rule in assets/scss/elements/_product.scss)
+		 * instead of dividing the rail's rendered height evenly by a fixed
+		 * slide count, which stretched real thumbnails into tall,
+		 * distorted rectangles whenever a product had fewer images than
+		 * that fixed count.
+		 */
+		?>
+		<div dir="ltr" class="swiper tf-product-media-thumbs other-image-zoom<?php echo count( $image_ids ) <= 1 ? ' d-none' : ''; ?>" data-direction="vertical" data-preview="auto">
+			<div class="swiper-wrapper">
 				<?php foreach ( $image_ids as $image_id ) : ?>
-					<div class="swiper-slide stagger-item">
+					<div class="swiper-slide">
 						<div class="item">
 							<?php if ( $image_id ) : ?>
 								<?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'thumbnail' ) ); ?>

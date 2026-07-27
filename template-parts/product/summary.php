@@ -20,7 +20,6 @@ $category_list = wc_get_product_category_list( $product->get_id() );
 $rating_count  = $product->get_rating_count();
 $average       = $product->get_average_rating();
 $review_count  = $product->get_review_count();
-$contact_url   = get_permalink( get_page_by_path( 'contact-us' ) ?: 0 );
 ?>
 <div class="tf-product-info-wrap position-relative mt-md-0">
 	<?php /* assets/js/zoom.js renders the hover-zoom pane into this element. */ ?>
@@ -31,7 +30,7 @@ $contact_url   = get_permalink( get_page_by_path( 'contact-us' ) ?: 0 );
 				<p class="product-infor-cate text-caption-01 mb-4"><?php echo wp_kses_post( $category_list ); ?></p>
 			<?php endif; ?>
 
-			<h1 class="product-infor-name mb-12"><?php echo wp_kses_post( $product->get_name() ); ?></h1>
+			<h3 class="product-infor-name mb-12"><?php echo wp_kses_post( $product->get_name() ); ?></h3>
 
 			<div class="product-infor-meta mb-20">
 				<?php if ( $rating_count > 0 ) : ?>
@@ -61,8 +60,32 @@ $contact_url   = get_permalink( get_page_by_path( 'contact-us' ) ?: 0 );
 				<?php endif; ?>
 			</div>
 
+			<?php
+			// A clean before/after/percentage-off display needs single,
+			// unambiguous regular and sale prices — true for a simple
+			// product, not for a variable product's own parent-level
+			// price fields (which are empty; each variation has its own).
+			// Those fall back to WooCommerce's own real get_price_html()
+			// output below, already restyled to match in
+			// assets/scss/elements/_product.scss.
+			$regular_price = $product->get_regular_price();
+			$sale_price    = $product->get_sale_price();
+			$show_badge    = $product->is_on_sale() && '' !== $regular_price && '' !== $sale_price && (float) $regular_price > 0;
+			?>
 			<div class="product-infor-price mb-12">
-				<?php echo wp_kses_post( $product->get_price_html() ); ?>
+				<?php if ( $show_badge ) : ?>
+					<h4 class="price-on-sale"><?php echo wp_kses_post( wc_price( wc_get_price_to_display( $product ) ) ); ?></h4>
+					<div class="br-line type-vertical"></div>
+					<p class="cl-text-3 text-decoration-line-through"><?php echo wp_kses_post( wc_price( wc_get_price_to_display( $product, array( 'price' => $regular_price ) ) ) ); ?></p>
+					<span class="badge-sale text-white fw-semibold text-caption-02">
+						<?php
+						$percent_off = round( ( ( (float) $regular_price - (float) $sale_price ) / (float) $regular_price ) * 100 );
+						printf( '-%s%%', esc_html( $percent_off ) );
+						?>
+					</span>
+				<?php else : ?>
+					<?php echo wp_kses_post( $product->get_price_html() ); ?>
+				<?php endif; ?>
 			</div>
 
 			<?php if ( $product->get_short_description() ) : ?>
@@ -77,26 +100,6 @@ $contact_url   = get_permalink( get_page_by_path( 'contact-us' ) ?: 0 );
 		<div class="tf-product-variant">
 			<?php woocommerce_template_single_add_to_cart(); ?>
 		</div>
-
-		<div class="tf-product-extra-link">
-			<?php /* Compare is a Core Plugin module — left inert until it ships. */ ?>
-			<a href="#" class="product-extra-icon link">
-				<i class="icon icon-ArrowsLeftRight"></i>
-				<?php esc_html_e( 'Compare', 'ecombon' ); ?>
-			</a>
-			<?php if ( $contact_url ) : ?>
-				<a href="<?php echo esc_url( $contact_url ); ?>" class="product-extra-icon link">
-					<i class="icon icon-Question"></i>
-					<?php esc_html_e( 'Ask A Question', 'ecombon' ); ?>
-				</a>
-			<?php endif; ?>
-			<a href="mailto:?subject=<?php echo esc_attr( rawurlencode( $product->get_name() ) ); ?>&body=<?php echo esc_attr( rawurlencode( get_permalink( $product->get_id() ) ) ); ?>" class="product-extra-icon link">
-				<i class="icon icon-ShareNetwork"></i>
-				<?php esc_html_e( 'Share', 'ecombon' ); ?>
-			</a>
-		</div>
-
-		<div class="br-line"></div>
 
 		<?php
 		$delivery_note = apply_filters( 'ecombon_product_delivery_note', '' );

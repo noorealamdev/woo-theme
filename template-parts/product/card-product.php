@@ -1,6 +1,6 @@
 <?php
 /**
- * Reusable WooCommerce product card (Amerce "card-product" markup).
+ * Reusable WooCommerce product card ("card-product" markup).
  *
  * Expects a `$product` (WC_Product) passed via get_template_part()'s
  * $args. Wishlist / compare / quick view stay inert links — those are

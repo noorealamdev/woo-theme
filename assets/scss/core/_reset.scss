@@ -1,16 +1,4 @@
 /*------------ Core CSS ---------------- */
-/* ---------------------------------------------------------
-    * Name: Amerce - Multipurpose eCommerce HTML Template
-    * Version: 1.0.2
-    * Author: Themesflat
-    * Author URI: http://themesflat.com 
-
-	* Abstracts variable
-
-    * Core CSS
-
-    * Components
- ------------------------------------------------------------------------------ */
 /*--------- Abstracts variable ---------- */
 html,
 body,
@@ -525,3 +513,18 @@ p {
   width: max-content !important;
 }
 
+
+// Standard WordPress/WooCommerce visually-hidden utility — used throughout
+// core comment-form markup (field labels, "required field" notices) and
+// other accessibility-only text.
+.screen-reader-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

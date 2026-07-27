@@ -1,6 +1,6 @@
 <?php
 /**
- * Single variation cart button, restyled with the theme's real Amerce
+ * Single variation cart button, restyled with the theme's own real
  * quantity/action markup, plus a real "Buy It Now" button.
  *
  * WooCommerce's own variation-matching JS (add-to-cart-variation.js) finds

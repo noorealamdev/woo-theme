@@ -1,10 +1,10 @@
 <?php
 /**
- * Single product content override, matching product-detail.html.
+ * Single product content override.
  *
- * The gallery and buy-box layout is custom (Amerce markup); the actual
- * add-to-cart form, attributes table, and reviews reuse WooCommerce's own
- * real templates/functions — see template-parts/product/*.php.
+ * The gallery and buy-box layout is custom; the actual add-to-cart form,
+ * attributes table, and reviews reuse WooCommerce's own real templates/
+ * functions — see template-parts/product/*.php.
  *
  * @package Ecombon
  */

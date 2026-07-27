@@ -45,6 +45,42 @@ class CartFragments implements ComponentInterface {
 		get_template_part( 'template-parts/header/cart-drawer' );
 		$fragments['#shoppingCart'] = ob_get_clean();
 
+		/*
+		 * WooCommerce's own remove-from-cart AJAX (wc-add-to-cart.js) only
+		 * ever applies whatever fragments are registered here — without
+		 * these two, removing an item on the real cart page would refresh
+		 * the header badge and mini-cart drawer but leave the page's own
+		 * item table and order summary showing stale data.
+		 *
+		 * Deliberately not gated behind `is_cart()`: that conditional tag
+		 * isn't reliably true from inside a `wc-ajax` request (there's no
+		 * main-query page context the way a real page load has one), so
+		 * gating on it silently dropped these fragments from every AJAX
+		 * remove. `$(selector).replaceWith(...)` on a page that has no
+		 * `.woocommerce-cart-form`/`.cart_totals` element (i.e. every page
+		 * other than the real cart page) is already a harmless no-op, so
+		 * there's no real page-context check needed either way.
+		 */
+		if ( WC()->cart->is_empty() ) {
+			// A bare selector slot, not a real <form> — there's nothing
+			// left to submit. Keeping the `.woocommerce-cart-form` class
+			// on it is what lets this fragment replace the real form in
+			// place (see cart-table.php's own docblock).
+			ob_start();
+			get_template_part( 'template-parts/cart/empty-content' );
+			$empty_content = ob_get_clean();
+
+			$fragments['.woocommerce-cart-form'] = '<div class="woocommerce-cart-form">' . $empty_content . '</div>';
+		} else {
+			ob_start();
+			get_template_part( 'template-parts/cart/cart-table' );
+			$fragments['.woocommerce-cart-form'] = ob_get_clean();
+		}
+
+		ob_start();
+		wc_get_template( 'cart/cart-totals.php' );
+		$fragments['.cart_totals'] = ob_get_clean();
+
 		return $fragments;
 	}
 }

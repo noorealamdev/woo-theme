@@ -908,15 +908,21 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   padding-right: 16px;
 }
 
-/* ---------------------------------------------------------
-    * Name: Amerce - Multipurpose eCommerce HTML Template
-    * Version: 1.0.2
-    * Author: Themesflat
-    * Author URI: http://themesflat.com 
 
-	* Abstracts variable
+// display: flex but never centers its own items — the justify-content-center
+// Bootstrap utility on its wrapper div does nothing there since that
+// wrapper isn't itself a flex container.
+.tf-page-pagination {
+  justify-content: center;
+}
 
-    * Core CSS
-
-    * Components
- ------------------------------------------------------------------------------ */
+// The grid-column classes (.tf-col-4 etc.) aren't responsive by themselves
+// — the design relies on shop.js rewriting the class at different
+// breakpoints, which this theme doesn't enqueue (assets/js/main.js's own
+// shop.js isn't loaded; assets/js/ecombon-shop.js covers real filtering
+// instead). Force the shop grid down to 2 columns on mobile directly.
+@media (max-width: 767px) {
+  #gridLayout.tf-grid-layout {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}

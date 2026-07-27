@@ -83,6 +83,51 @@
   padding-top: 11px;
   padding-bottom: 11px;
 }
+// The cart quantity control is WooCommerce's own real <div class="quantity">
+// <input class="qty"> (via woocommerce_quantity_input(), restyled around by
+// Ecombon\WooCommerce\QuantityStepper's real +/- buttons) — not the
+// .wg-quantity/.quantity-product demo markup above, so it needs the same
+// pill treatment given to that class repeated here for WooCommerce's real
+// class names instead.
+.tf-table-page-cart .cart_quantity .quantity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--line);
+  padding: 8px 16px;
+  border-radius: 100px;
+  max-width: 160px;
+  min-width: unset;
+  flex-shrink: 0;
+}
+.tf-table-page-cart .cart_quantity .qty {
+  width: 40px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  text-align: center;
+  font-weight: 600;
+  -moz-appearance: textfield;
+}
+.tf-table-page-cart .cart_quantity .qty::-webkit-inner-spin-button,
+.tf-table-page-cart .cart_quantity .qty::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.tf-table-page-cart .cart_quantity .btn-quantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--black);
+  transition: all 0.3s ease;
+}
+.tf-table-page-cart .cart_quantity .btn-quantity:hover {
+  color: var(--primary);
+}
 @media (min-width: 576px) {
   .tf-table-page-cart td:nth-child(1),
   .tf-table-page-cart th:nth-child(1) {
@@ -587,6 +632,21 @@
   .ip-discount-code button {
     height: 48px;
   }
+}
+// Real coupon-error text — WooCommerce's own cart.js appends this (a real
+// "coupon does not exist"/"already applied"/etc. message) into `.coupon`
+// after a rejected apply_coupon AJAX call.
+.ip-discount-code.coupon {
+  flex-wrap: wrap;
+}
+.ip-discount-code .coupon-error-notice {
+  width: 100%;
+  margin: 0;
+  color: var(--critical);
+  font-size: 14px;
+}
+.ip-discount-code input.has-error {
+  border-color: var(--critical) !important;
 }
 
 @media (min-width: 1200px) {
@@ -1094,15 +1154,3 @@
   margin-bottom: 20px;
 }
 
-/* ---------------------------------------------------------
-    * Name: Amerce - Multipurpose eCommerce HTML Template
-    * Version: 1.0.2
-    * Author: Themesflat
-    * Author URI: http://themesflat.com 
-
-	* Abstracts variable
-
-    * Core CSS
-
-    * Components
- ------------------------------------------------------------------------------ */

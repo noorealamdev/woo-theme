@@ -32,6 +32,7 @@
 @forward "elements/product";
 @forward "elements/zoom";
 @forward "elements/cart";
+@forward "elements/checkout";
 @forward "elements/account";
 @forward "elements/lookbook";
 @forward "elements/widget";
@@ -45,6 +46,3 @@
 
 /*------------ RTL ---------------- */
 @forward "rtl/rtl";
-
-/*------------ Ecombon overrides ---------------- */
-@forward "theme/overrides";

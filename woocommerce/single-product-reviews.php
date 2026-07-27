@@ -2,8 +2,8 @@
 /**
  * Single product reviews: real rating summary/breakdown, real WP comment
  * list (including real threaded replies), and the real WP/WC review form —
- * all restyled with Amerce's `.product-desc_review` markup instead of
- * WooCommerce's default review template.
+ * all restyled with the theme's own `.product-desc_review` markup instead
+ * of WooCommerce's default review template.
  *
  * @package Ecombon
  */

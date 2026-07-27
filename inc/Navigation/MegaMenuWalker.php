@@ -8,7 +8,7 @@
 namespace Ecombon\Navigation;
 
 /**
- * Renders the primary nav menu using the Amerce header markup.
+ * Renders the primary nav menu using the theme's own header markup.
  *
  * A top-level menu item becomes a full-width mega menu (grouped into
  * columns, one per direct child, with grandchildren as the column's links)

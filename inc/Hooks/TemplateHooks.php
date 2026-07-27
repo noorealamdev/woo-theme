@@ -24,6 +24,27 @@ class TemplateHooks implements ComponentInterface {
 		add_filter( 'excerpt_length', array( $this, 'excerpt_length' ) );
 		add_filter( 'excerpt_more', array( $this, 'excerpt_more' ) );
 		add_filter( 'nav_menu_link_attributes', array( $this, 'footer_menu_link_attributes' ), 10, 3 );
+
+		// WooCommerce's own `woocommerce_breadcrumb()` (hooked to
+		// `woocommerce_before_main_content` at priority 20) renders a second,
+		// unstyled breadcrumb on top of the theme's own real one
+		// (template-parts/product/breadcrumb-nav.php, and the page-title
+		// template part on shop/category archives) — remove the default.
+		remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
+
+		// Checkout uses WooCommerce's own default checkout/form-checkout.php
+		// template (not overridden) so the real field/order-review/payment
+		// structure and hooks stay exactly as WooCommerce ships them — the
+		// theme only adds its own page-title banner via this real hook,
+		// same as every other page-title in the theme.
+		add_action( 'woocommerce_before_checkout_form', array( $this, 'checkout_page_title' ), 5 );
+	}
+
+	/**
+	 * Renders the theme's page-title banner above the default checkout form.
+	 */
+	public function checkout_page_title(): void {
+		get_template_part( 'template-parts/checkout/page-title' );
 	}
 
 	/**
@@ -67,7 +88,7 @@ class TemplateHooks implements ComponentInterface {
 	}
 
 	/**
-	 * Adds the Amerce footer link styling to the footer nav menus.
+	 * Adds the theme's footer link styling to the footer nav menus.
 	 *
 	 * @param string[]  $atts Link attributes.
 	 * @param \WP_Post  $item Menu item.

@@ -45,8 +45,9 @@ class ThemeSupport implements ComponentInterface {
 		) );
 		add_theme_support( 'customize-selective-refresh-widgets' );
 		// Deliberately NOT declaring wc-product-gallery-zoom/lightbox/slider:
-		// the single product gallery is a full custom replacement (Amerce's
-		// own swiper + zoom.js + photoswipe), not WooCommerce's default one.
+		// the single product gallery is a full custom replacement (the
+		// theme's own swiper + zoom.js + photoswipe), not WooCommerce's
+		// default one.
 		// Those supports would make WC enqueue its own competing zoom/
 		// flexslider/photoswipe scripts expecting markup that doesn't exist
 		// here, which throws (see template-parts/product/gallery.php).

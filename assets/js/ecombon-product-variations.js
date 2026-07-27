@@ -187,7 +187,7 @@
 	 * already-formatted (currency symbol, decimals, position) price
 	 * string, so this never needs to format a number itself.
 	 *
-	 * Deliberately named `.tf-add-price*`, not Amerce's own `.price-add`:
+	 * Deliberately named `.tf-add-price*`, not the theme's own `.price-add`:
 	 * main.js's fake demo variant-price calculator (`totalPriceVariant()`)
 	 * finds any real `.price-add` element unconditionally on page load and
 	 * overwrites it based on a `data-price` attribute this real markup

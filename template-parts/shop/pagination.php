@@ -1,6 +1,6 @@
 <?php
 /**
- * Shop pagination, styled to match the Amerce `.tf-page-pagination` markup.
+ * Shop pagination, styled to match the theme's own `.tf-page-pagination` markup.
  *
  * @package Ecombon
  */
@@ -41,7 +41,7 @@ if ( empty( $links ) ) {
 			$is_current = false !== strpos( $link, 'current' );
 
 			// Pull the inner text/markup and href out of WP's <a>/<span> and
-			// re-render with the Amerce `.pag-item` markup instead.
+			// re-render with the theme's own `.pag-item` markup instead.
 			preg_match( '/href="([^"]*)"/', $link, $href_match );
 			preg_match( '/>(.*)<\/(?:a|span)>/s', $link, $content_match );
 

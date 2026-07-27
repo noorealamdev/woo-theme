@@ -3,7 +3,7 @@
  * The shop / product taxonomy archive template.
  *
  * Full override of WooCommerce's default archive-product.php to match the
- * Amerce shop layout (page-title banner, filter/sort control bar, grid).
+ * theme's own shop layout (page-title banner, filter/sort control bar, grid).
  *
  * @package Ecombon
  */

@@ -18,20 +18,7 @@ if ( ! class_exists( 'WooCommerce' ) || ! WC()->cart ) {
 
 $cart = WC()->cart;
 
-$free_shipping_threshold = null;
-foreach ( WC_Shipping_Zones::get_zones() as $zone_data ) {
-	$zone = new WC_Shipping_Zone( $zone_data['zone_id'] );
-	foreach ( $zone->get_shipping_methods( true ) as $method ) {
-		if ( 'free_shipping' !== $method->id || 'no' === $method->enabled ) {
-			continue;
-		}
-		$min_amount = (float) ( $method->min_amount ?? 0 );
-		if ( $min_amount > 0 && in_array( $method->requires, array( 'min_amount', 'either', 'both' ), true ) ) {
-			$free_shipping_threshold = null === $free_shipping_threshold ? $min_amount : min( $free_shipping_threshold, $min_amount );
-		}
-	}
-}
-
+$free_shipping_threshold = \Ecombon\WooCommerce\Shipping::get_free_shipping_threshold();
 ?>
 <div class="offcanvas offcanvas-end popup-shopping-cart" id="shoppingCart">
 	<div class="canvas-wrapper">

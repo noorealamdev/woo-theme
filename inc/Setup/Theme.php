@@ -62,6 +62,7 @@ final class Theme {
 			$this->components[] = new \Ecombon\WooCommerce\QuantityStepper();
 			$this->components[] = new \Ecombon\WooCommerce\BuyItNow();
 			$this->components[] = new \Ecombon\WooCommerce\VariationPricing();
+			$this->components[] = new \Ecombon\WooCommerce\CheckoutFields();
 		}
 	}
 

@@ -32,7 +32,7 @@ $social_icons = array(
 ?>
 	<footer class="tf-footer">
 		<div class="footer-inner flat-spacing position-relative">
-			<div class="br-line top-0"></div>
+			<div class="br-line fake-class top-0"></div>
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6 col-lg-4">

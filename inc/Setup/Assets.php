@@ -11,8 +11,8 @@ namespace Ecombon\Setup;
  * Registers and conditionally enqueues the theme's CSS and JS.
  *
  * The design system (fonts, icon font, vendor libraries, compiled SCSS,
- * and the vendor carousel/menu/offcanvas scripts) comes from the Amerce
- * template; see assets/scss and assets/js for the source.
+ * and the vendor carousel/menu/offcanvas scripts) is the theme's own; see
+ * assets/scss and assets/js for the source.
  */
 class Assets implements ComponentInterface {
 
@@ -134,6 +134,15 @@ class Assets implements ComponentInterface {
 				'ecombonCartParams',
 				array( 'checkoutUrl' => wc_get_checkout_url() )
 			);
+
+			// Safe here specifically: the reload landmine documented above
+			// only fires when `.woocommerce-cart-form` is missing from the
+			// page — on the real Cart page (woocommerce/cart/cart.php) it's
+			// always present, so this gives real AJAX quantity/coupon/
+			// shipping-calculator updates instead of a full form POST.
+			if ( function_exists( 'is_cart' ) && is_cart() ) {
+				wp_enqueue_script( 'wc-cart' );
+			}
 		}
 
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
