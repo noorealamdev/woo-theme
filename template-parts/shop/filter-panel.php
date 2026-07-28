@@ -49,7 +49,7 @@ $attribute_taxonomies = function_exists( 'wc_get_attribute_taxonomies' ) ? wc_ge
 	<div class="canvas-wrapper">
 		<div class="canvas-header">
 			<div class="h5 title"><?php esc_html_e( 'Filters', 'ecombon' ); ?></div>
-			<span class="icon-X2 fs-24 link icon-close-popup" data-bs-dismiss="offcanvas"></span>
+			<span class="icon-close-popup" data-bs-dismiss="offcanvas"><?php \Ecombon\Setup\Icons::render( 'X2', 'fs-24 link' ); ?></span>
 		</div>
 		<div class="canvas-body">
 
@@ -57,7 +57,7 @@ $attribute_taxonomies = function_exists( 'wc_get_attribute_taxonomies' ) ? wc_ge
 				<div class="widget-facet">
 					<div class="facet-title" data-bs-target="#facet-category" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="facet-category">
 						<h6><?php esc_html_e( 'Product Categories', 'ecombon' ); ?></h6>
-						<span class="icon icon-CaretDown"></span>
+						<?php \Ecombon\Setup\Icons::render( 'CaretDown' ); ?>
 					</div>
 					<div id="facet-category" class="collapse show">
 						<ul class="collapse-body filter-group-check group-category">
@@ -79,7 +79,7 @@ $attribute_taxonomies = function_exists( 'wc_get_attribute_taxonomies' ) ? wc_ge
 				<div class="widget-facet">
 					<div class="facet-title" data-bs-target="#facet-price" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="facet-price">
 						<h6><?php esc_html_e( 'Filter By Price', 'ecombon' ); ?></h6>
-						<span class="icon icon-CaretDown"></span>
+						<?php \Ecombon\Setup\Icons::render( 'CaretDown' ); ?>
 					</div>
 					<div id="facet-price" class="collapse show">
 						<form class="collapse-body widget-price filter-price" method="get" action="<?php echo esc_url( strtok( wp_unslash( $_SERVER['REQUEST_URI'] ), '?' ) ); ?>">
@@ -127,7 +127,7 @@ $attribute_taxonomies = function_exists( 'wc_get_attribute_taxonomies' ) ? wc_ge
 				<div class="widget-facet">
 					<div class="facet-title" data-bs-target="#facet-<?php echo esc_attr( $attribute->attribute_name ); ?>" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="facet-<?php echo esc_attr( $attribute->attribute_name ); ?>">
 						<h6><?php echo esc_html( $attribute->attribute_label ); ?></h6>
-						<span class="icon icon-CaretDown"></span>
+						<?php \Ecombon\Setup\Icons::render( 'CaretDown' ); ?>
 					</div>
 					<div id="facet-<?php echo esc_attr( $attribute->attribute_name ); ?>" class="collapse show">
 						<ul class="collapse-body filter-group-check">

@@ -168,13 +168,27 @@ input[type=number]::-webkit-outer-spin-button {
   opacity: 1;
   transform: scale(1);
 }
+// Real icon-check glyph path (see assets/icon/svg/sprite.svg), delivered
+// as a CSS mask instead of a DOM element since this decorates a real
+// <input type="checkbox"> — a void element, no room for a child <svg>.
+// mask + background-color (rather than background-image) is what lets
+// this still take its color from `background-color: currentColor`/a real
+// CSS variable, the same way the icon font's `color` property used to.
 .tf-check::before {
-  font-family: "icomoon";
-  content: "\e90f";
+  content: "";
   position: absolute;
-  color: var(--white);
+  width: 12px;
+  height: 12px;
+  background-color: var(--white);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 1024'%3E%3Cpath transform='translate(0,960) scale(1,-1)' d='M139.704 454.884l194.783-250.436c4.845-6.227 10.96-11.354 17.938-15.040s14.66-5.843 22.536-6.33c7.876-0.493 15.766 0.698 23.147 3.494 7.381 2.79 14.083 7.123 19.663 12.704l473.045 473.041c5.312 5.133 9.555 11.274 12.467 18.064 2.918 6.79 4.454 14.093 4.518 21.482s-1.344 14.717-4.141 21.557c-2.797 6.84-6.931 13.053-12.16 18.278-5.222 5.226-11.437 9.357-18.278 12.156-6.835 2.798-14.163 4.206-21.555 4.142-7.386-0.065-14.688-1.599-21.478-4.516s-12.934-7.156-18.067-12.472l-428.466-428.466-156.076 200.682c-9.070 11.642-22.39 19.21-37.034 21.041s-29.417-2.223-41.075-11.274c-11.642-9.070-19.21-22.389-21.041-37.034s2.223-29.417 11.274-41.075z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 1024'%3E%3Cpath transform='translate(0,960) scale(1,-1)' d='M139.704 454.884l194.783-250.436c4.845-6.227 10.96-11.354 17.938-15.040s14.66-5.843 22.536-6.33c7.876-0.493 15.766 0.698 23.147 3.494 7.381 2.79 14.083 7.123 19.663 12.704l473.045 473.041c5.312 5.133 9.555 11.274 12.467 18.064 2.918 6.79 4.454 14.093 4.518 21.482s-1.344 14.717-4.141 21.557c-2.797 6.84-6.931 13.053-12.16 18.278-5.222 5.226-11.437 9.357-18.278 12.156-6.835 2.798-14.163 4.206-21.555 4.142-7.386-0.065-14.688-1.599-21.478-4.516s-12.934-7.156-18.067-12.472l-428.466-428.466-156.076 200.682c-9.070 11.642-22.39 19.21-37.034 21.041s-29.417-2.223-41.075-11.274c-11.642-9.070-19.21-22.389-21.041-37.034s2.223-29.417 11.274-41.075z'/%3E%3C/svg%3E");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
   opacity: 0;
-  font-size: 12px;
   transform: scale(0);
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
@@ -477,66 +491,6 @@ select.select-3:focus {
   font-size: 12px;
 }
 
-.tf-select {
-  position: relative;
-}
-.tf-select select {
-  width: 100%;
-  padding: 11px 15px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  color: var(--text);
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -ms-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-  -webkit-appearance: none;
-  appearance: none;
-  outline: 0 !important;
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -ms-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-  font-weight: 500;
-}
-.tf-select select:focus {
-  border-color: var(--text);
-}
-.tf-select::after {
-  font-family: "icomoon";
-  position: absolute;
-  content: "\e908";
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 20px;
-  z-index: 1;
-  font-weight: 400;
-  color: var(--text);
-  pointer-events: none;
-}
-.tf-select:hover select {
-  border-color: var(--text);
-}
-.tf-select.style-2 {
-  min-width: 100px;
-}
-.tf-select.style-3 select {
-  padding: 8px 20px 8px 12px;
-  border-radius: 8px;
-}
-.tf-select.style-3::after {
-  right: 10px;
-  font-size: 16px;
-}
-.tf-select.style-4 select {
-  background: var(--bg-2);
-  border: 0;
-  padding: 14px 16px;
-  padding-right: 40px;
-}
 
 .password-wrapper {
   position: relative;

@@ -46,12 +46,12 @@ $next_post         = get_next_post();
 
 							<div class="entry-meta">
 								<div class="meta-item meta-date">
-									<i class="icon icon-CalendarBlank"></i>
+									<?php \Ecombon\Setup\Icons::render( 'CalendarBlank' ); ?>
 									<span class="text-body-1"><?php echo esc_html( get_the_date() ); ?></span>
 								</div>
 								<div class="br-line type-vertical"></div>
 								<div class="meta-item meta-author">
-									<i class="icon icon-User"></i>
+									<?php \Ecombon\Setup\Icons::render( 'User' ); ?>
 									<span class="text-body-1">
 										<?php
 										/* translators: %s: post author display name. */
@@ -90,17 +90,17 @@ $next_post         = get_next_post();
 								<ul class="tf-social-icon-2">
 									<li>
 										<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo esc_attr( $share_url ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Share on Facebook', 'ecombon' ); ?>">
-											<i class="icon icon-FacebookLogo"></i>
+											<?php \Ecombon\Setup\Icons::render( 'FacebookLogo' ); ?>
 										</a>
 									</li>
 									<li>
 										<a href="https://x.com/intent/tweet?url=<?php echo esc_attr( $share_url ); ?>&text=<?php echo esc_attr( $share_title ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Share on X', 'ecombon' ); ?>">
-											<i class="icon icon-XLogo"></i>
+											<?php \Ecombon\Setup\Icons::render( 'XLogo' ); ?>
 										</a>
 									</li>
 									<li>
 										<a href="https://www.pinterest.com/pin/create/button/?url=<?php echo esc_attr( $share_url ); ?>&description=<?php echo esc_attr( $share_title ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Share on Pinterest', 'ecombon' ); ?>">
-											<i class="icon icon-ShareNetwork"></i>
+											<?php \Ecombon\Setup\Icons::render( 'ShareNetwork' ); ?>
 										</a>
 									</li>
 								</ul>

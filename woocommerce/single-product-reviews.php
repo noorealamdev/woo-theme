@@ -36,7 +36,7 @@ $rating_counts = $product->get_rating_counts();
 				<p class="text-display fw-medium"><?php echo esc_html( number_format( (float) $average, 1 ) ); ?></p>
 				<div class="star-wrap normal d-flex align-items-center">
 					<?php for ( $star = 1; $star <= 5; $star++ ) : ?>
-						<i class="icon fs-24 <?php echo esc_attr( $star <= round( $average ) ? 'icon-Star' : 'icon-Star-thin' ); ?>"></i>
+						<?php \Ecombon\Setup\Icons::render( $star <= round( $average ) ? 'Star' : 'Star-thin', 'fs-24' ); ?>
 					<?php endfor; ?>
 				</div>
 				<p class="rate-number">
@@ -59,7 +59,7 @@ $rating_counts = $product->get_rating_counts();
 						?>
 						<div class="rate-progress-star fw-medium">
 							<span class="number-star"><?php echo (int) $star; ?></span>
-							<i class="icon icon-Star fs-20 cl-text-yellow"></i>
+							<?php \Ecombon\Setup\Icons::render( 'Star', 'fs-20 cl-text-yellow' ); ?>
 							<div class="progress" role="progressbar" aria-label="<?php echo esc_attr( $star ); ?> star ratings" aria-valuenow="<?php echo esc_attr( $percent ); ?>" aria-valuemin="0" aria-valuemax="100">
 								<div class="progress-bar" style="width: <?php echo esc_attr( $percent ); ?>%;"></div>
 							</div>

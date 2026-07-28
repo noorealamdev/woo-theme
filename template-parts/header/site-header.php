@@ -24,7 +24,7 @@ if ( function_exists( 'WC' ) && WC()->cart ) {
 		<div class="header-inner">
 			<div class="box-open-menu-mobile d-xl-none">
 				<a href="#mobileMenu" data-bs-toggle="offcanvas" class="btn-open-menu">
-					<i class="icon icon-List"></i>
+					<?php \Ecombon\Setup\Icons::render( 'List' ); ?>
 				</a>
 			</div>
 
@@ -60,23 +60,17 @@ if ( function_exists( 'WC' ) && WC()->cart ) {
 				<ul class="nav-icon-list">
 					<li class="d-none d-sm-block">
 						<a href="#search" data-bs-toggle="modal" class="nav-icon-item link">
-							<i class="icon icon-MagnifyingGlass"></i>
+							<?php \Ecombon\Setup\Icons::render( 'MagnifyingGlass' ); ?>
 						</a>
 					</li>
 					<li>
 						<a href="<?php echo esc_url( $account_url ); ?>" class="nav-icon-item link">
-							<i class="icon icon-User"></i>
-						</a>
-					</li>
-					<li class="d-none d-sm-block">
-						<?php /* Wishlist is a Core Plugin module — left inert until it ships. */ ?>
-						<a href="#" class="nav-icon-item link">
-							<i class="icon icon-HeartStraight"></i>
+							<?php \Ecombon\Setup\Icons::render( 'User' ); ?>
 						</a>
 					</li>
 					<li>
 						<a href="#shoppingCart" data-bs-toggle="offcanvas" class="nav-icon-item link shop-cart">
-							<i class="icon icon-Handbag"></i>
+							<?php \Ecombon\Setup\Icons::render( 'Handbag' ); ?>
 							<span class="count"><?php echo esc_html( (string) $cart_count ); ?></span>
 						</a>
 					</li>

@@ -30,13 +30,13 @@ class QuantityStepper implements ComponentInterface {
 	 * Outputs the decrease ("-") button before the real quantity input.
 	 */
 	public function render_decrease_button(): void {
-		echo '<button type="button" class="btn-quantity btn-decrease" aria-label="' . esc_attr__( 'Decrease quantity', 'ecombon' ) . '"><i class="icon icon-minus"></i></button>';
+		echo '<button type="button" class="btn-quantity btn-decrease" aria-label="' . esc_attr__( 'Decrease quantity', 'ecombon' ) . '">' . \Ecombon\Setup\Icons::html( 'minus' ) . '</button>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	/**
 	 * Outputs the increase ("+") button after the real quantity input.
 	 */
 	public function render_increase_button(): void {
-		echo '<button type="button" class="btn-quantity btn-increase" aria-label="' . esc_attr__( 'Increase quantity', 'ecombon' ) . '"><i class="icon icon-plus"></i></button>';
+		echo '<button type="button" class="btn-quantity btn-increase" aria-label="' . esc_attr__( 'Increase quantity', 'ecombon' ) . '">' . \Ecombon\Setup\Icons::html( 'plus' ) . '</button>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 }

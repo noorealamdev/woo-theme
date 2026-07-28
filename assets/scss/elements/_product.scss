@@ -209,26 +209,6 @@
 .card-product:hover .product-marquee_sale {
   transform: translateY(50px);
 }
-.card-product.style-2 .product-action_list {
-  top: unset;
-  left: 8px;
-  right: 8px;
-  justify-content: center;
-  flex-direction: row;
-  bottom: 58px;
-}
-.card-product.style-2 .product-action_list li {
-  transform: translateY(0px);
-  transition-delay: unset !important;
-}
-@media (min-width: 576px) {
-  .card-product.style-2 .product-action_list {
-    bottom: 12px;
-  }
-  .card-product.style-2.has-size .product-action_list {
-    bottom: 66px;
-  }
-}
 .card-product.style-5 {
   padding: 20px;
   background-color: #f7f7f7;
@@ -242,51 +222,6 @@
     bottom: 64px;
   }
 }
-@media (min-width: 1200px) {
-  .card-product:hover .product-action_list li {
-    opacity: 1;
-    visibility: visible;
-  }
-  .card-product:hover .product-action_list li:nth-child(1) {
-    transform: translateX(0px);
-  }
-  .card-product:hover .product-action_list li:nth-child(2) {
-    transform: translateX(0px);
-    transition-delay: 0.1s;
-  }
-  .card-product:hover .product-action_list li:nth-child(3) {
-    transform: translateX(0px);
-    transition-delay: 0.2s;
-  }
-  .card-product:hover .product-action_list li:nth-child(4) {
-    transform: translateX(0px);
-    transition-delay: 0.3s;
-  }
-  .card-product.style-2 .product-action_list li {
-    transform: translateY(20px);
-  }
-  .card-product.style-2:hover .product-action_list li {
-    transform: translateY(0px);
-  }
-  .card-product.style-4 .product-action_list li {
-    transform: translateY(20px);
-  }
-  .card-product.style-4 .product-action_list {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    justify-content: center;
-    flex-direction: row;
-  }
-  .card-product.style-4 .product-action_list li {
-    transform: translateY(0px);
-    transition-delay: unset !important;
-  }
-  .card-product.style-4:hover .product-action_list li {
-    transform: translateY(0px);
-  }
-}
-
 .card-product_wrapper {
   aspect-ratio: 0.75;
   z-index: 20;
@@ -371,65 +306,6 @@
   .product-action_remove {
     top: 12px;
     right: 12px;
-  }
-}
-
-.product-action_list {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 8px;
-  top: 8px;
-  right: 8px;
-  z-index: 6;
-}
-.product-action_list .box-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-color: var(--white);
-  box-shadow: 0px 10px 25px 0px rgba(43, 52, 74, 0.1215686275);
-}
-.product-action_list .box-icon:hover {
-  background-color: var(--black);
-  color: var(--white);
-}
-.product-action_list .icon {
-  font-size: 20px;
-}
-@media (min-width: 1200px) {
-  .product-action_list {
-    top: 12px;
-    right: 12px;
-  }
-  .product-action_list li {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(20px);
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-  }
-  .product-action_list.style-row li {
-    transform: translateY(-16px);
-    transition-delay: unset !important;
-  }
-}
-@media (max-width: 1199px) {
-  .product-action_list.style-row {
-    position: unset;
-  }
-}
-@media (max-width: 575px) {
-  .product-action_list .wishlist,
-  .product-action_list .compare {
-    display: none;
-  }
-  .product-action_list .icon {
-    font-size: 16px;
   }
 }
 
@@ -2120,19 +1996,6 @@
   border-color: var(--black);
 }
 
-.btn-wishlist {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--text);
-  color: var(--white);
-  flex-shrink: 0;
-  font-size: 24px;
-}
-
 .tf-product-pre-order {
   padding: 0px 16px;
   background-color: var(--text);
@@ -2229,15 +2092,6 @@
 }
 .product-style_list .product-size_list {
   padding: 0;
-}
-.product-style_list .product-action_list {
-  position: unset;
-  flex-direction: row;
-}
-.product-style_list .product-action_list li {
-  opacity: 1;
-  visibility: visible;
-  transform: unset;
 }
 @media (min-width: 1200px) {
   .product-style_list {

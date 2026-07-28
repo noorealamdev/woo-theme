@@ -29,24 +29,24 @@ $next_post     = get_next_post();
 			<div class="breadcrumbs">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="text-caption-01 cl-text-3 link"><?php esc_html_e( 'Home', 'ecombon' ); ?></a>
 				<?php if ( $first_category ) : ?>
-					<i class="icon icon-CaretRightThin cl-text-3"></i>
+					<?php \Ecombon\Setup\Icons::render( 'CaretRightThin', 'cl-text-3' ); ?>
 					<a href="<?php echo esc_url( get_category_link( $first_category ) ); ?>" class="text-caption-01 cl-text-3 link"><?php echo esc_html( $first_category->name ); ?></a>
 				<?php endif; ?>
-				<i class="icon icon-CaretRightThin cl-text-3"></i>
+				<?php \Ecombon\Setup\Icons::render( 'CaretRightThin', 'cl-text-3' ); ?>
 				<p class="text-caption-01"><?php the_title(); ?></p>
 			</div>
 			<div class="nav-post-list">
 				<?php if ( $previous_post ) : ?>
 					<a href="<?php echo esc_url( get_permalink( $previous_post ) ); ?>" class="link nav-post-item nav-post-prev" aria-label="<?php esc_attr_e( 'Previous post', 'ecombon' ); ?>">
-						<i class="icon icon-CaretLeft"></i>
+						<?php \Ecombon\Setup\Icons::render( 'CaretLeft' ); ?>
 					</a>
 				<?php endif; ?>
 				<a href="<?php echo esc_url( $all_posts_url ); ?>" class="link nav-all-post nav-post-link" aria-label="<?php esc_attr_e( 'All posts', 'ecombon' ); ?>">
-					<i class="icon icon-SquaresFour"></i>
+					<?php \Ecombon\Setup\Icons::render( 'SquaresFour' ); ?>
 				</a>
 				<?php if ( $next_post ) : ?>
 					<a href="<?php echo esc_url( get_permalink( $next_post ) ); ?>" class="link nav-post-item nav-post-next" aria-label="<?php esc_attr_e( 'Next post', 'ecombon' ); ?>">
-						<i class="icon icon-CaretRightThin"></i>
+						<?php \Ecombon\Setup\Icons::render( 'CaretRightThin' ); ?>
 					</a>
 				<?php endif; ?>
 			</div>

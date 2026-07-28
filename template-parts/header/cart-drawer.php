@@ -25,7 +25,7 @@ $free_shipping_threshold = \Ecombon\WooCommerce\Shipping::get_free_shipping_thre
 		<div class="popup-header">
 			<div class="d-flex align-items-center justify-content-between mb-12">
 				<h5 class="title"><?php esc_html_e( 'Shopping Cart', 'ecombon' ); ?></h5>
-				<span class="icon-X2 icon-close-popup" data-bs-dismiss="offcanvas"></span>
+				<span class="icon-close-popup" data-bs-dismiss="offcanvas"><?php \Ecombon\Setup\Icons::render( 'X2' ); ?></span>
 			</div>
 
 			<?php if ( $free_shipping_threshold && ! $cart->is_empty() ) : ?>
@@ -49,7 +49,9 @@ $free_shipping_threshold = \Ecombon\WooCommerce\Shipping::get_free_shipping_thre
 						<p class="text"><?php esc_html_e( "You've unlocked free shipping!", 'ecombon' ); ?></p>
 					<?php endif; ?>
 					<div class="tf-progress-bar tf-progress-ship">
-						<div class="value" style="width: <?php echo esc_attr( (string) $percent ); ?>%"></div>
+						<div class="value" style="width: <?php echo esc_attr( (string) $percent ); ?>%">
+							<?php \Ecombon\Setup\Icons::render( 'Truck' ); ?>
+						</div>
 					</div>
 				</div>
 			<?php endif; ?>
@@ -62,7 +64,7 @@ $free_shipping_threshold = \Ecombon\WooCommerce\Shipping::get_free_shipping_thre
 							<?php if ( $cart->is_empty() ) : ?>
 								<div class="box-text_empty type-shop_cart">
 									<div class="shop-empty_top">
-										<span class="icon"><i class="icon-Handbag"></i></span>
+										<?php \Ecombon\Setup\Icons::render( 'Handbag' ); ?>
 										<h4 class="text-emp"><?php esc_html_e( 'Your cart is empty', 'ecombon' ); ?></h4>
 										<p class="cl-text-2"><?php esc_html_e( 'Your cart is currently empty. Let us help you find the right product.', 'ecombon' ); ?></p>
 									</div>

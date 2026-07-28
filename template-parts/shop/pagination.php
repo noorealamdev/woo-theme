@@ -24,8 +24,8 @@ $links = paginate_links(
 		'total'     => $total,
 		'current'   => $current,
 		'prev_next' => true,
-		'prev_text' => '<i class="icon icon-CaretLeft"></i>',
-		'next_text' => '<i class="icon icon-CaretRightThin"></i>',
+		'prev_text' => \Ecombon\Setup\Icons::html( 'CaretLeft' ),
+		'next_text' => \Ecombon\Setup\Icons::html( 'CaretRightThin' ),
 		'type'      => 'array',
 	)
 );

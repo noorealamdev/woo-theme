@@ -17,14 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="offcanvas offcanvas-start canvas-mb" id="mobileMenu">
 	<div class="canvas-header">
 		<span class="icon-close-popup" data-bs-dismiss="offcanvas">
-			<i class="icon icon-X2"></i>
+			<?php \Ecombon\Setup\Icons::render( 'X2' ); ?>
 		</span>
 		<form class="form-search-nav" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 			<fieldset>
 				<input type="text" name="s" placeholder="<?php esc_attr_e( 'What are you looking for?', 'ecombon' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>" required>
 			</fieldset>
 			<button type="submit" class="btn-action">
-				<i class="icon icon-MagnifyingGlass"></i>
+				<?php \Ecombon\Setup\Icons::render( 'MagnifyingGlass' ); ?>
 			</button>
 		</form>
 	</div>

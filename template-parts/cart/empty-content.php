@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
 ?>
 <div class="box-text_empty type-shop_cart text-center mx-auto" style="max-width: 420px;">
 	<div class="shop-empty_top">
-		<span class="icon"><i class="icon-Handbag"></i></span>
+		<?php \Ecombon\Setup\Icons::render( 'Handbag' ); ?>
 		<h4 class="text-emp"><?php esc_html_e( 'Your cart is empty', 'ecombon' ); ?></h4>
 		<div class="cl-text-2">
 			<?php

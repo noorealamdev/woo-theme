@@ -22,13 +22,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'ecombon' ); ?></a>
 
-<button id="goTop">
-	<span class="border-progress"></span>
-	<span class="ic-wrap">
-		<span class="icon icon-CaretTopThin"></span>
-	</span>
-</button>
-
 <div class="preload preload-container" id="preload">
 	<div class="preload-logo">
 		<div class="spinner"></div>

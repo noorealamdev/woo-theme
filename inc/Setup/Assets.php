@@ -34,8 +34,6 @@ class Assets implements ComponentInterface {
 	 * Enqueues the theme stylesheets.
 	 */
 	public function enqueue_styles(): void {
-		wp_enqueue_style( 'ecombon-fonts', ECOMBON_THEME_URI . '/assets/fonts/fonts.css', array(), ECOMBON_VERSION );
-		wp_enqueue_style( 'ecombon-icomoon', ECOMBON_THEME_URI . '/assets/icon/icomoon/style.css', array(), ECOMBON_VERSION );
 		wp_enqueue_style( 'ecombon-bootstrap', ECOMBON_THEME_URI . '/assets/css/bootstrap.min.css', array(), '5.3.3' );
 		wp_enqueue_style( 'ecombon-swiper', ECOMBON_THEME_URI . '/assets/css/swiper-bundle.min.css', array(), '11' );
 		wp_enqueue_style( 'ecombon-animate', ECOMBON_THEME_URI . '/assets/css/animate.css', array(), '4' );
@@ -44,7 +42,7 @@ class Assets implements ComponentInterface {
 		wp_enqueue_style(
 			'ecombon-main',
 			ECOMBON_THEME_URI . '/assets/css/main.css',
-			array( 'ecombon-fonts', 'ecombon-icomoon', 'ecombon-bootstrap', 'ecombon-swiper', 'ecombon-animate', 'ecombon-style' ),
+			array( 'ecombon-bootstrap', 'ecombon-swiper', 'ecombon-animate', 'ecombon-style' ),
 			ECOMBON_VERSION
 		);
 
@@ -66,15 +64,11 @@ class Assets implements ComponentInterface {
 
 		// WordPress's core jQuery always calls noConflict(), so the bare
 		// global `$` several vendor scripts below expect (carousel.js,
-		// infinityslide.js, zoom.js) doesn't exist unless we restore it.
+		// zoom.js) doesn't exist unless we restore it.
 		wp_add_inline_script( 'jquery', 'window.$ = window.jQuery;' );
 
 		wp_enqueue_script( 'ecombon-bootstrap-js', "{$plugin_uri}/bootstrap.min.js", array(), '5.3.3', $footer );
 		wp_enqueue_script( 'ecombon-swiper-js', "{$plugin_uri}/swiper-bundle.min.js", array(), '11', $footer );
-		wp_enqueue_script( 'ecombon-bootstrap-select', "{$plugin_uri}/bootstrap-select.min.js", array( 'jquery' ), '1.14', $footer );
-		wp_enqueue_script( 'ecombon-countdown', "{$plugin_uri}/count-down.js", array( 'jquery' ), ECOMBON_VERSION, $footer );
-		wp_enqueue_script( 'ecombon-infinityslide', "{$plugin_uri}/infinityslide.js", array( 'jquery' ), ECOMBON_VERSION, $footer );
-		wp_enqueue_script( 'ecombon-wow', "{$plugin_uri}/wow.min.js", array(), '1.3', $footer );
 
 		wp_enqueue_script(
 			'ecombon-carousel',
@@ -86,7 +80,7 @@ class Assets implements ComponentInterface {
 		wp_enqueue_script(
 			'ecombon-main-js',
 			ECOMBON_THEME_URI . '/assets/js/main.js',
-			array( 'jquery', 'ecombon-bootstrap-js', 'ecombon-swiper-js', 'ecombon-wow' ),
+			array( 'jquery', 'ecombon-bootstrap-js', 'ecombon-swiper-js' ),
 			ECOMBON_VERSION,
 			$footer
 		);

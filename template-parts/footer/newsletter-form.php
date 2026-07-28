@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<input type="email" name="email" placeholder="<?php esc_attr_e( 'Enter your e-mail', 'ecombon' ); ?>" required>
 	</fieldset>
 	<button type="submit" class="btn-action">
-		<i class="icon icon-ArrowUpRight"></i>
+		<?php \Ecombon\Setup\Icons::render( 'ArrowUpRight' ); ?>
 	</button>
 </form>
 <p class="text-remember cl-text-2">

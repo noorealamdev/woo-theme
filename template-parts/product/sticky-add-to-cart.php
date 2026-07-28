@@ -56,11 +56,11 @@ if ( ! $product->is_purchasable() || ! $product->is_in_stock() ) {
 						<p class="title"><?php esc_html_e( 'Quantity:', 'ecombon' ); ?></p>
 						<div class="wg-quantity style-2 quantity">
 							<button type="button" class="btn-quantity btn-decrease" aria-label="<?php esc_attr_e( 'Decrease quantity', 'ecombon' ); ?>">
-								<i class="icon icon-minus"></i>
+								<?php \Ecombon\Setup\Icons::render( 'minus' ); ?>
 							</button>
 							<input class="quantity-product qty" type="number" name="quantity" min="<?php echo esc_attr( (string) $product->get_min_purchase_quantity() ); ?>" value="<?php echo esc_attr( (string) $product->get_min_purchase_quantity() ); ?>">
 							<button type="button" class="btn-quantity btn-increase" aria-label="<?php esc_attr_e( 'Increase quantity', 'ecombon' ); ?>">
-								<i class="icon icon-plus"></i>
+								<?php \Ecombon\Setup\Icons::render( 'plus' ); ?>
 							</button>
 						</div>
 					</div>

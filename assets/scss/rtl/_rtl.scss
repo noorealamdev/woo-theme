@@ -149,33 +149,6 @@
     right: 12px;
   }
 }
-.rtl .product-action_list {
-  left: 8px;
-  right: auto;
-}
-@media (min-width: 1200px) {
-  .rtl .product-action_list {
-    left: 12px;
-  }
-  .rtl .product-action_list li {
-    transform: translateX(-20px);
-  }
-}
-.rtl .product-action_list .hover-tooltip.tooltip-left .tooltip {
-  right: auto;
-  left: 100%;
-  bottom: auto;
-  transform: translateX(0px);
-}
-.rtl .product-action_list .hover-tooltip.tooltip-left .tooltip::before {
-  top: 50%;
-  right: auto;
-  transform: translateY(-50%) rotate(45deg);
-  left: -4px;
-}
-.rtl .product-action_list .hover-tooltip.tooltip-left:hover .tooltip {
-  transform: translateX(8px);
-}
 .rtl .lookbook-product {
   direction: rtl;
 }
@@ -184,15 +157,6 @@
 }
 .rtl .testimonial-v01 {
   direction: rtl;
-}
-.rtl #goTop {
-  right: auto;
-  left: 20px;
-}
-@media (min-width: 992px) {
-  .rtl #goTop {
-    left: 40px;
-  }
 }
 .rtl .has-sub-nav-category .sub-nav-category {
   left: auto;

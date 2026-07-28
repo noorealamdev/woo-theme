@@ -26,7 +26,7 @@ $search_form_id = 'search-form-' . wp_unique_id();
 		/>
 	</fieldset>
 	<button type="submit" class="search-form__submit btn-action link">
-		<i class="icon icon-MagnifyingGlass" aria-hidden="true"></i>
+		<?php \Ecombon\Setup\Icons::render( 'MagnifyingGlass' ); ?>
 		<span class="screen-reader-text"><?php esc_html_e( 'Search', 'ecombon' ); ?></span>
 	</button>
 </form>

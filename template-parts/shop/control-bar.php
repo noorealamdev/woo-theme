@@ -60,25 +60,25 @@ foreach ( array_keys( $active_chips ) as $query_var ) {
 ?>
 <div class="tf-shop-control sticky-top no-offset">
 	<a href="#filterShop" data-bs-toggle="offcanvas" class="tf-btn-filter">
-		<span class="icon icon-filter"></span>
+		<?php \Ecombon\Setup\Icons::render( 'filter' ); ?>
 		<span class="text"><?php esc_html_e( 'Show Filters', 'ecombon' ); ?></span>
 	</a>
 	<ul class="tf-control-layout">
 		<li class="tf-view-layout-switch active" data-value-layout="tf-col-4">
-			<i class="icon-grid-4"></i>
+			<?php \Ecombon\Setup\Icons::render( 'grid-4' ); ?>
 		</li>
 		<li class="tf-view-layout-switch" data-value-layout="tf-col-3">
-			<i class="icon-grid-3"></i>
+			<?php \Ecombon\Setup\Icons::render( 'grid-3' ); ?>
 		</li>
 		<li class="tf-view-layout-switch" data-value-layout="tf-col-2">
-			<i class="icon-grid-2"></i>
+			<?php \Ecombon\Setup\Icons::render( 'grid-2' ); ?>
 		</li>
 	</ul>
 	<div class="tf-control-sorting">
 		<div class="tf-dropdown-sort">
 			<div class="btn-select" data-bs-toggle="dropdown" aria-expanded="false">
 				<span class="text-sort-value"><?php echo esc_html( $sort_options[ $current_orderby ] ); ?></span>
-				<span class="icon icon-CaretDown"></span>
+				<?php \Ecombon\Setup\Icons::render( 'CaretDown' ); ?>
 			</div>
 			<div class="dropdown-menu">
 				<?php foreach ( $sort_options as $value => $label ) : ?>
@@ -107,12 +107,12 @@ foreach ( array_keys( $active_chips ) as $query_var ) {
 				<?php foreach ( $active_chips as $chip ) : ?>
 					<a href="<?php echo esc_url( $chip['url'] ); ?>" class="filter-tag">
 						<?php echo esc_html( $chip['label'] ); ?>
-						<i class="icon icon-X2"></i>
+						<?php \Ecombon\Setup\Icons::render( 'X2' ); ?>
 					</a>
 				<?php endforeach; ?>
 			</div>
 			<button type="button" onclick="window.location.href='<?php echo esc_url( $clear_all_url ); ?>'" id="remove-all" class="remove-all-filters">
-				<i class="icon icon-X2"></i>
+				<?php \Ecombon\Setup\Icons::render( 'X2' ); ?>
 				<?php esc_html_e( 'Clear all', 'ecombon' ); ?>
 			</button>
 		<?php endif; ?>

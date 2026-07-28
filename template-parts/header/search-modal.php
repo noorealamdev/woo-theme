@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="d-flex align-items-center justify-content-between gap-10">
 				<h3><?php esc_html_e( 'Search', 'ecombon' ); ?></h3>
 				<span class="icon-close-popup flex-shrink-0" data-bs-dismiss="modal">
-					<i class="icon-X2"></i>
+					<?php \Ecombon\Setup\Icons::render( 'X2' ); ?>
 				</span>
 			</div>
 			<form role="search" method="get" class="form-search-nav style-2" action="<?php echo esc_url( home_url( '/' ) ); ?>">
@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<input type="hidden" name="post_type" value="product">
 				<?php endif; ?>
 				<button type="submit" class="btn-action">
-					<i class="icon icon-MagnifyingGlass"></i>
+					<?php \Ecombon\Setup\Icons::render( 'MagnifyingGlass' ); ?>
 				</button>
 			</form>
 			<div class="tf-search-live-results" aria-live="polite"></div>

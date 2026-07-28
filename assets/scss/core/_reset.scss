@@ -514,6 +514,19 @@ p {
 }
 
 
+// Real inline SVG icons (see Ecombon\Setup\Icons) — every icon is a real
+// <svg class="icon icon-Name"><use></svg> referencing the inlined sprite.
+// Sized to 1em/currentColor so the exact same font-size/color rules and
+// utility classes (fs-20, cl-text-2, etc.) that used to size/color the old
+// icon font glyphs keep working unmodified.
+.icon {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+}
+
 // Standard WordPress/WooCommerce visually-hidden utility — used throughout
 // core comment-form markup (field labels, "required field" notices) and
 // other accessibility-only text.

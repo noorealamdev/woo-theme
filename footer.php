@@ -59,7 +59,7 @@ $social_icons = array(
 										<?php if ( empty( $social_icons[ $network ] ) ) { continue; } ?>
 										<li>
 											<a href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener">
-												<i class="icon icon-<?php echo esc_attr( $social_icons[ $network ] ); ?>"></i>
+												<?php \Ecombon\Setup\Icons::render( $social_icons[ $network ] ); ?>
 											</a>
 										</li>
 									<?php endforeach; ?>

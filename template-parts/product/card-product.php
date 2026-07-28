@@ -3,8 +3,7 @@
  * Reusable WooCommerce product card ("card-product" markup).
  *
  * Expects a `$product` (WC_Product) passed via get_template_part()'s
- * $args. Wishlist / compare / quick view stay inert links — those are
- * Core Plugin modules, not theme business logic.
+ * $args.
  *
  * @package Ecombon
  *
@@ -70,15 +69,6 @@ if ( $product->is_type( 'variable' ) ) {
 			<?php endif; ?>
 		</a>
 
-		<ul class="product-action_list">
-			<li class="wishlist">
-				<a href="#" class="hover-tooltip tooltip-left box-icon">
-					<span class="icon icon-heart"></span>
-					<span class="tooltip"><?php esc_html_e( 'Add to Wishlist', 'ecombon' ); ?></span>
-				</a>
-			</li>
-		</ul>
-
 		<?php if ( $is_new || $is_sale ) : ?>
 			<ul class="product-badge_list">
 				<?php if ( $is_sale && $product->get_regular_price() ) : ?>
@@ -114,7 +104,7 @@ if ( $product->is_type( 'variable' ) ) {
 		<?php if ( $rating_count > 0 ) : ?>
 			<div class="star-wrap d-flex align-items-center">
 				<?php for ( $star = 1; $star <= 5; $star++ ) : ?>
-					<i class="icon <?php echo esc_attr( $star <= round( $average ) ? 'icon-Star' : 'icon-Star-thin' ); ?>"></i>
+					<?php \Ecombon\Setup\Icons::render( $star <= round( $average ) ? 'Star' : 'Star-thin' ); ?>
 				<?php endfor; ?>
 			</div>
 		<?php endif; ?>

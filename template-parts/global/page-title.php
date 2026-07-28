@@ -32,10 +32,10 @@ if ( '' === $title ) {
 			<div class="breadcrumbs">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="text-caption-01 cl-text-3 link"><?php esc_html_e( 'Home', 'ecombon' ); ?></a>
 				<?php foreach ( $breadcrumbs as $crumb ) : ?>
-					<i class="icon icon-CaretRightThin cl-text-3"></i>
+					<?php \Ecombon\Setup\Icons::render( 'CaretRightThin', 'cl-text-3' ); ?>
 					<a href="<?php echo esc_url( $crumb['url'] ); ?>" class="text-caption-01 cl-text-3 link"><?php echo esc_html( $crumb['label'] ); ?></a>
 				<?php endforeach; ?>
-				<i class="icon icon-CaretRightThin cl-text-3"></i>
+				<?php \Ecombon\Setup\Icons::render( 'CaretRightThin', 'cl-text-3' ); ?>
 				<p class="text-caption-01"><?php echo esc_html( $title ); ?></p>
 			</div>
 			<h3><?php echo esc_html( $title ); ?></h3>

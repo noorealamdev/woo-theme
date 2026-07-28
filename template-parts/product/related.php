@@ -20,7 +20,7 @@ if ( empty( $related_ids ) ) {
 ?>
 <section class="flat-spacing-25">
 	<div class="container">
-		<div class="sect-heading type-2 text-center wow fadeInUp">
+		<div class="sect-heading type-2 text-center">
 			<h3 class="s-title"><?php esc_html_e( 'You May Also Like', 'ecombon' ); ?></h3>
 		</div>
 		<div class="wrapper-shop tf-grid-layout tf-col-4">

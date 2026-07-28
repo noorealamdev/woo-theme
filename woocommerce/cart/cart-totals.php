@@ -44,7 +44,7 @@ $free_shipping_threshold = \Ecombon\WooCommerce\Shipping::get_free_shipping_thre
 			<?php endif; ?>
 			<div class="progress-cart">
 				<div class="value" style="width: <?php echo esc_attr( (string) $percent ); ?>%;" data-progress="<?php echo esc_attr( (string) $percent ); ?>">
-					<span class="round"></span>
+					<span class="round"><?php \Ecombon\Setup\Icons::render( 'Truck' ); ?></span>
 				</div>
 			</div>
 		</div>

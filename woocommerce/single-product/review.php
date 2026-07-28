@@ -38,7 +38,7 @@ $rating = (int) get_comment_meta( $comment->comment_ID, 'rating', true );
 			<?php if ( $rating && wc_review_ratings_enabled() ) : ?>
 				<div class="star-wrap normal d-flex align-items-center mb-8">
 					<?php for ( $star = 1; $star <= 5; $star++ ) : ?>
-						<i class="icon <?php echo esc_attr( $star <= $rating ? 'icon-Star' : 'icon-Star-thin' ); ?>"></i>
+						<?php \Ecombon\Setup\Icons::render( $star <= $rating ? 'Star' : 'Star-thin' ); ?>
 					<?php endfor; ?>
 				</div>
 			<?php endif; ?>

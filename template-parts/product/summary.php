@@ -37,7 +37,7 @@ $review_count  = $product->get_review_count();
 					<div class="meta_rate">
 						<div class="star-wrap normal d-flex align-items-center">
 							<?php for ( $star = 1; $star <= 5; $star++ ) : ?>
-								<i class="icon <?php echo esc_attr( $star <= round( $average ) ? 'icon-Star' : 'icon-Star-thin' ); ?>"></i>
+								<?php \Ecombon\Setup\Icons::render( $star <= round( $average ) ? 'Star' : 'Star-thin' ); ?>
 							<?php endfor; ?>
 						</div>
 						<span class="text-caption-01 cl-text-2">
@@ -109,13 +109,13 @@ $review_count  = $product->get_review_count();
 			<div class="tf-product-delivery-return">
 				<?php if ( $delivery_note ) : ?>
 					<div class="product-delivery">
-						<i class="icon icon-Timer"></i>
+						<?php \Ecombon\Setup\Icons::render( 'Timer' ); ?>
 						<p><?php echo wp_kses_post( $delivery_note ); ?></p>
 					</div>
 				<?php endif; ?>
 				<?php if ( $return_note ) : ?>
 					<div class="product-delivery return">
-						<i class="icon icon-ArrowClockwise"></i>
+						<?php \Ecombon\Setup\Icons::render( 'ArrowClockwise' ); ?>
 						<p><?php echo wp_kses_post( $return_note ); ?></p>
 					</div>
 				<?php endif; ?>

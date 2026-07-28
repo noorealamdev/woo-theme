@@ -51,6 +51,7 @@ final class Theme {
 		$this->components = array(
 			new ThemeSupport(),
 			new Assets(),
+			new Icons(),
 			new NavMenus(),
 			new NavMenuAdminUi(),
 			new \Ecombon\Hooks\TemplateHooks(),
