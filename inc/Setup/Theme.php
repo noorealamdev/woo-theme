@@ -52,7 +52,9 @@ final class Theme {
 			new ThemeSupport(),
 			new Assets(),
 			new NavMenus(),
+			new NavMenuAdminUi(),
 			new \Ecombon\Hooks\TemplateHooks(),
+			new \Ecombon\Search\LiveSearch(),
 		);
 
 		if ( class_exists( 'WooCommerce' ) ) {

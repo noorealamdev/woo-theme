@@ -91,6 +91,27 @@ class Assets implements ComponentInterface {
 			$footer
 		);
 
+		// Real-time results in the header search modal — see
+		// Ecombon\Search\LiveSearch. The modal (template-parts/header/
+		// search-modal.php) is rendered on every page via footer.php, so
+		// this loads unconditionally too.
+		wp_enqueue_script(
+			'ecombon-search',
+			ECOMBON_THEME_URI . '/assets/js/ecombon-search.js',
+			array( 'jquery', 'ecombon-bootstrap-js' ),
+			ECOMBON_VERSION,
+			$footer
+		);
+		wp_localize_script(
+			'ecombon-search',
+			'ecombonSearchParams',
+			array(
+				'ajaxUrl'  => admin_url( 'admin-ajax.php' ),
+				'nonce'    => wp_create_nonce( 'ecombon_live_search' ),
+				'minChars' => \Ecombon\Search\LiveSearch::MIN_CHARS,
+			)
+		);
+
 		if ( $this->is_shop_context() ) {
 			wp_enqueue_script( 'ecombon-nouislider', "{$plugin_uri}/nouislider.min.js", array(), '15', $footer );
 			wp_enqueue_script( 'ecombon-shop', ECOMBON_THEME_URI . '/assets/js/ecombon-shop.js', array( 'jquery', 'ecombon-nouislider' ), ECOMBON_VERSION, $footer );
@@ -113,6 +134,7 @@ class Assets implements ComponentInterface {
 			// happens.
 			wp_enqueue_script( 'ecombon-product-variations', ECOMBON_THEME_URI . '/assets/js/ecombon-product-variations.js', array( 'jquery' ), ECOMBON_VERSION, $footer );
 			wp_enqueue_script( 'ecombon-product-tabs', ECOMBON_THEME_URI . '/assets/js/ecombon-product-tabs.js', array( 'jquery', 'ecombon-bootstrap-js' ), ECOMBON_VERSION, $footer );
+			wp_enqueue_script( 'ecombon-sticky-add-to-cart', ECOMBON_THEME_URI . '/assets/js/ecombon-sticky-add-to-cart.js', array( 'jquery', 'ecombon-product-variations' ), ECOMBON_VERSION, $footer );
 		}
 
 		if ( class_exists( 'WooCommerce' ) ) {

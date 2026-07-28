@@ -522,6 +522,98 @@
   }
 }
 
+// Real-time results (Ecombon\Search\LiveSearch) — JS empties this element
+// back out when the query is cleared, so :empty is what keeps it (and the
+// .modal-content gap above) collapsed with no extra show/hide class needed.
+.tf-search-live-results {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+.tf-search-live-results:empty {
+  display: none;
+}
+.tf-search-results_empty {
+  padding: 12px 0;
+  color: var(--text-2);
+}
+.tf-search-results_group:not(:last-child) {
+  margin-bottom: 20px;
+}
+.tf-search-results_label {
+  margin-bottom: 8px;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: 12px;
+  font-weight: 600;
+}
+.tf-search-results_list {
+  display: grid;
+  gap: 4px;
+}
+.tf-search-result-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 8px;
+}
+.tf-search-result-item:hover {
+  background: var(--bg);
+}
+.tf-search-result-item--compact {
+  padding: 8px 8px;
+  color: var(--text-2);
+}
+.tf-search-result-image {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.tf-search-result-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.tf-search-result-info {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+.tf-search-result-name {
+  color: var(--text);
+  font-weight: 500;
+}
+.tf-search-result-price {
+  font-size: 14px;
+}
+.tf-search-result-price del {
+  order: 2;
+  margin-left: 6px;
+  color: var(--text-3);
+  text-decoration: line-through;
+}
+.tf-search-result-price ins {
+  order: 1;
+  text-decoration: none;
+  color: var(--text);
+}
+.tf-search-result-price,
+.tf-search-result-price .woocommerce-Price-amount {
+  display: inline-flex;
+}
+.tf-search-results_view-all {
+  display: block;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
 /* -- Shoping Cart -- */
 .tf-minicart-recommendations {
   width: 260px;

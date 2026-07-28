@@ -1650,7 +1650,7 @@
   transform: translateY(100%);
 }
 .tf-sticky-btn-atc .tf-height-observer {
-  padding: 16px 0;
+  padding: 10px 0;
   column-gap: 5px;
 }
 .tf-sticky-btn-atc .tf-sticky-atc-product {
@@ -1662,8 +1662,12 @@
   align-items: center;
   gap: 16px;
 }
+// Deliberately smaller than the reference's own 60px: at that size the
+// image (60 / 0.75 aspect-ratio = 80px tall) was the tallest element in
+// the row, forcing the whole fixed bar taller than the button/quantity
+// control next to it needed and eating into scrollable viewport height.
 .tf-sticky-btn-atc .atc-product-side .prd_img {
-  max-width: 60px;
+  max-width: 44px;
   border-radius: 4px;
   overflow: hidden;
 }
@@ -1675,7 +1679,7 @@
 }
 .tf-sticky-btn-atc .atc-product-side .prd_info {
   display: grid;
-  gap: 4px;
+  gap: 2px;
 }
 .tf-sticky-btn-atc .tf-sticky-atc-variant-price,
 .tf-sticky-btn-atc .tf-product-info-quantity {
@@ -1688,6 +1692,18 @@
   gap: 32px;
   align-items: center;
   flex-wrap: wrap;
+}
+// Shorter than the default .tf-btn/.wg-quantity sizing used in the main
+// buy-box (up to 58px tall at ≥1200px) — this bar is fixed on screen the
+// whole time it's visible, so keeping it compact matters more here than
+// it does for a one-off in-page button.
+.tf-sticky-btn-atc .quantity {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  min-width: unset;
+}
+.tf-sticky-btn-atc .btn-add-to-cart {
+  height: 44px;
 }
 .tf-sticky-btn-atc.show {
   transform: translateY(0);
@@ -1710,11 +1726,6 @@
     gap: 20px;
   }
 }
-@media (max-width: 1199px) {
-  .tf-sticky-btn-atc {
-    bottom: 70px;
-  }
-}
 @media (max-width: 767px) {
   .tf-sticky-btn-atc .title,
   .tf-sticky-btn-atc .tf-sticky-atc-product {
@@ -1726,6 +1737,19 @@
   .tf-sticky-btn-atc .tf-sticky-atc-infos form {
     justify-content: center;
   }
+}
+
+// Mirrors .tf-product-info-wrap .product-infor-price's real del/ins
+// treatment (see above) at the sticky bar's smaller scale — a real
+// get_price_html()/variation.price_html sale price is a <del>/<ins> pair.
+.tf-sticky-btn-atc .price__prd del {
+  margin-left: 6px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-3);
+}
+.tf-sticky-btn-atc .price__prd ins {
+  text-decoration: none;
 }
 
 .product-style_stroke {

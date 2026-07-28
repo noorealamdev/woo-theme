@@ -39,6 +39,8 @@ get_template_part( 'template-parts/product/breadcrumb-nav' );
 </section>
 
 <?php
+get_template_part( 'template-parts/product/sticky-add-to-cart' );
+
 get_template_part( 'template-parts/product/tabs' );
 get_template_part( 'template-parts/product/related' );
 

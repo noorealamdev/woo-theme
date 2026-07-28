@@ -2,8 +2,10 @@
 /**
  * Header search modal.
  *
- * Live AJAX suggestions and "recently viewed" are Core Plugin territory
- * (AJAX Search module); this is a real, working WordPress search form.
+ * The form is a real, working WordPress/WooCommerce search (submits on
+ * Enter with no JS required). Ecombon\Search\LiveSearch adds real-time
+ * results underneath as the user types — see assets/js/ecombon-search.js
+ * and template-parts/header/search-results.php for the actual query/markup.
  *
  * @package Ecombon
  */
@@ -32,6 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<i class="icon icon-MagnifyingGlass"></i>
 				</button>
 			</form>
+			<div class="tf-search-live-results" aria-live="polite"></div>
 		</div>
 	</div>
 </div>
