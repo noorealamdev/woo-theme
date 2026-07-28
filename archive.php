@@ -10,37 +10,47 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 get_header();
+
+get_template_part(
+	'template-parts/global/page-title',
+	null,
+	array(
+		'title'    => wp_strip_all_tags( get_the_archive_title() ),
+		'subtitle' => get_the_archive_description(),
+	)
+);
 ?>
 
-<div id="primary" class="site-main">
-	<div class="content-area">
-		<div class="content-area__main">
-			<?php if ( have_posts() ) : ?>
+<section class="section-blog flat-spacing">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8">
+				<?php if ( have_posts() ) : ?>
 
-				<header class="archive-header">
-					<h1 class="archive-header__title"><?php the_archive_title(); ?></h1>
-					<?php the_archive_description( '<div class="archive-header__description">', '</div>' ); ?>
-				</header>
+					<div class="tf-grid-layout sm-col-2">
+						<?php
+						while ( have_posts() ) :
+							the_post();
+							get_template_part( 'template-parts/content/content' );
+						endwhile;
+						?>
 
-				<div class="entry-list">
-					<?php
-					while ( have_posts() ) :
-						the_post();
-						get_template_part( 'template-parts/content/content' );
-					endwhile;
-					?>
-				</div>
+						<div class="wd-full">
+							<?php the_posts_pagination( array( 'class' => 'tf-page-pagination' ) ); ?>
+						</div>
+					</div>
 
-				<?php the_posts_pagination(); ?>
+				<?php else : ?>
+					<?php get_template_part( 'template-parts/content/content-none' ); ?>
+				<?php endif; ?>
+			</div>
 
-			<?php else : ?>
-				<?php get_template_part( 'template-parts/content/content-none' ); ?>
-			<?php endif; ?>
+			<div class="col-lg-4 d-none d-lg-block">
+				<?php get_sidebar(); ?>
+			</div>
 		</div>
-
-		<?php get_sidebar(); ?>
 	</div>
-</div>
+</section>
 
 <?php
 get_footer();

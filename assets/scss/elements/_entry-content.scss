@@ -1,0 +1,113 @@
+/*------------ Entry Content ---------------- */
+/* Real page/post body typography — page.php, single.php, archive.php,
+   search.php, 404.php all render raw the_content()/the_excerpt() output
+   with zero prior styling (the theme's global reset strips all default
+   margins/list-style). Scoped to .entry-content so it never touches
+   WooCommerce's own real card/product text elsewhere on the site. */
+
+.entry--page {
+  margin-bottom: 40px;
+}
+
+.entry-thumbnail {
+  margin-bottom: 32px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.entry-thumbnail img {
+  width: 100%;
+  height: auto;
+}
+
+.entry-content > * + * {
+  margin-top: 20px;
+}
+.entry-content h1,
+.entry-content h2,
+.entry-content h3,
+.entry-content h4,
+.entry-content h5,
+.entry-content h6 {
+  margin-top: 32px;
+  margin-bottom: 4px;
+}
+.entry-content p {
+  line-height: 26px;
+  color: var(--text-2);
+}
+.entry-content a {
+  color: var(--text);
+  text-decoration: underline;
+}
+.entry-content ul,
+.entry-content ol {
+  padding-left: 20px;
+}
+.entry-content ul {
+  list-style: disc;
+}
+.entry-content ol {
+  list-style: decimal;
+}
+.entry-content li {
+  line-height: 26px;
+  color: var(--text-2);
+  margin-bottom: 8px;
+}
+.entry-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+.entry-content blockquote {
+  padding: 16px 24px;
+  border-left: 3px solid var(--black);
+  font-style: italic;
+  color: var(--text);
+}
+.entry-content table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.entry-content table th,
+.entry-content table td {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  text-align: left;
+}
+
+.error-404 {
+  text-align: center;
+}
+.error-404__description {
+  margin: 16px 0 24px;
+  color: var(--text-2);
+}
+.error-404__home-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 28px;
+  margin-top: 16px;
+  border-radius: 60px;
+  background: var(--black);
+  color: var(--white);
+  font-weight: 600;
+}
+
+.no-results {
+  text-align: center;
+  padding: 40px 0;
+}
+.no-results__title {
+  margin-bottom: 12px;
+}
+.no-results p {
+  color: var(--text-2);
+  margin-bottom: 16px;
+}
+
+.site-sidebar {
+  min-width: 0;
+}

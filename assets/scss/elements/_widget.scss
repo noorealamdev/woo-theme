@@ -33,17 +33,26 @@
   border-radius: 50%;
   overflow: hidden;
 }
-.wg-comment .comment_reply {
-  margin-left: 30px;
-  padding-left: 16px;
-  border-left: 2px solid var(--line);
-}
 .wg-comment .info_author {
   display: grid;
   gap: 4px;
 }
+// WordPress's own real comment threading (wp_list_comments()) — a real
+// reply is just a nested <ol class="children">, no custom Walker needed
+// (same real pattern as .product-desc_review .children for reviews).
+.wg-comment .children {
+  margin-left: 30px;
+  padding-left: 16px;
+  border-left: 2px solid var(--line);
+  list-style: none;
+}
+.wg-comment .comment_reply_link a {
+  color: var(--text);
+  text-decoration: underline;
+  font-weight: 600;
+}
 @media (min-width: 1200px) {
-  .wg-comment .comment_reply {
+  .wg-comment .children {
     margin-left: 60px;
     border-left: 4px solid var(--line);
   }

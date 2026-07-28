@@ -1,0 +1,419 @@
+/*------------ My Account ---------------- */
+/* WooCommerce's own default myaccount/*.php templates (not overridden) —
+   styled here to match the theme's design language, same approach as
+   checkout (see _checkout.scss). Real classes only — see
+   plugins/woocommerce/templates/myaccount/*.php and templates/order/*.php
+   for the exact real markup.
+
+   Reuses the global .form-row/.form-row-first/.form-row-last/.form-row-wide
+   rules already defined in _checkout.scss (WC uses the exact same field
+   classes here — login, edit-account, edit-address forms) — only the flex
+   *container* rule needs repeating per real wrapper class below, since
+   these forms don't share checkout's wrapper element. */
+
+body.woocommerce-account .woocommerce {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 15px 100px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 992px) {
+  body.woocommerce-account .woocommerce {
+    display: grid;
+    // minmax(0, 1fr) — see the checkout overflow-trap writeup in
+    // _checkout.scss for why a bare 1fr track is unsafe here.
+    grid-template-columns: 260px minmax(0, 1fr);
+    column-gap: 40px;
+    align-items: start;
+  }
+}
+
+.woocommerce-MyAccount-navigation {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+}
+@media (min-width: 992px) {
+  .woocommerce-MyAccount-navigation {
+    position: sticky;
+    top: 100px;
+  }
+}
+.woocommerce-MyAccount-navigation ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.woocommerce-MyAccount-navigation li {
+  list-style: none;
+}
+.woocommerce-MyAccount-navigation li a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  border-radius: 8px;
+  color: var(--text-2);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.woocommerce-MyAccount-navigation a::before {
+  font-family: "icomoon";
+  content: "";
+  display: inline-block;
+  width: 18px;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--text-3);
+  transition: color 0.3s ease;
+}
+.woocommerce-MyAccount-navigation li:hover a,
+.woocommerce-MyAccount-navigation li.is-active a {
+  background: var(--bg-2);
+  color: var(--text);
+}
+.woocommerce-MyAccount-navigation li:hover a::before,
+.woocommerce-MyAccount-navigation li.is-active a::before {
+  color: var(--text);
+}
+// Codes verified directly against assets/icon/icomoon/style.css (no
+// selection.json/demo shipped with this icon font to cross-check visually
+// otherwise) — HouseLine/Package/Files/Tag/User/SignOut. No credit-card-
+// style glyph exists in this set, so payment-methods gets no icon rather
+// than a wrong one.
+.woocommerce-MyAccount-navigation-link--dashboard a::before {
+  content: "\e917";
+}
+.woocommerce-MyAccount-navigation-link--orders a::before {
+  content: "\e922";
+}
+.woocommerce-MyAccount-navigation-link--downloads a::before {
+  content: "\e954";
+}
+.woocommerce-MyAccount-navigation-link--edit-address a::before {
+  content: "\e92d";
+}
+.woocommerce-MyAccount-navigation-link--edit-account a::before {
+  content: "\e931";
+}
+.woocommerce-MyAccount-navigation-link--customer-logout a::before {
+  content: "\e929";
+}
+
+.woocommerce-MyAccount-content {
+  min-width: 0;
+}
+.woocommerce-MyAccount-content > p {
+  margin-bottom: 16px;
+  line-height: 24px;
+  color: var(--text-2);
+}
+.woocommerce-MyAccount-content > p a {
+  color: var(--text);
+  text-decoration: underline;
+}
+// Scoped to body.woocommerce-account, not .woocommerce-MyAccount-content —
+// the logged-out login form (form-login.php) renders directly, without
+// ever being wrapped in .woocommerce-MyAccount-content, so a heading rule
+// scoped only to that content div misses it entirely.
+body.woocommerce-account .woocommerce h2 {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 500;
+  margin: 24px 0 16px;
+}
+
+/* Real forms (login, edit-account, edit-address) — give each its own flex
+   container so the shared .form-row-first/-last/-wide rules from
+   _checkout.scss can pair fields the same way checkout does. */
+.woocommerce-form-login,
+.woocommerce-EditAccountForm,
+.woocommerce-address-fields__field-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  max-width: 500px;
+}
+.woocommerce-EditAccountForm fieldset {
+  flex: 1 1 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  border: 0;
+  padding: 0;
+  margin: 8px 0 0;
+}
+.woocommerce-EditAccountForm fieldset legend {
+  flex: 1 1 100%;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.woocommerce-form-login .clear,
+.woocommerce-EditAccountForm .clear {
+  display: none;
+}
+.woocommerce-form-row .description {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--text-3);
+}
+.woocommerce-form-login__rememberme {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+.woocommerce-LostPassword a {
+  color: var(--text-2);
+  text-decoration: underline;
+  font-size: 14px;
+}
+.woocommerce-form-login__submit,
+.woocommerce-EditAccountForm button[type="submit"],
+.woocommerce-address-fields button[type="submit"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 28px;
+  border-radius: 60px;
+  background: var(--black);
+  color: var(--white);
+  border: 0;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+.woocommerce-form-login__submit:hover,
+.woocommerce-EditAccountForm button[type="submit"]:hover,
+.woocommerce-address-fields button[type="submit"]:hover {
+  opacity: 0.85;
+}
+
+/* Addresses list (my-address.php) — each card also carries the real
+   .col-1/.col-2 classes, which collide with this theme's Bootstrap grid
+   (same trap as checkout's #customer_details, see _checkout.scss) and set
+   an explicit `width: 8.33%` that wins over the grid's own item sizing
+   even though we target the different, real .woocommerce-Address class —
+   an explicit width on the SAME element still applies regardless of which
+   selector set the surrounding layout, so it must be reset here too. */
+.woocommerce-Addresses {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 768px) {
+  .woocommerce-Addresses {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.woocommerce-Address {
+  width: auto;
+  max-width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 24px;
+}
+.woocommerce-Address-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.woocommerce-Address-title h2 {
+  margin: 0;
+}
+.woocommerce-Address-title .edit {
+  color: var(--text-2);
+  text-decoration: underline;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.woocommerce-Address address {
+  font-style: normal;
+  line-height: 24px;
+  color: var(--text-2);
+}
+
+/* Orders / payment-methods tables — shop_table_responsive collapses to a
+   label:value card list on narrow screens via the real data-title
+   attribute WC already renders (no JS needed, pure CSS). */
+.woocommerce-orders-table,
+.woocommerce-MyAccount-paymentMethods {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+}
+.woocommerce-orders-table th,
+.woocommerce-orders-table td,
+.woocommerce-MyAccount-paymentMethods th,
+.woocommerce-MyAccount-paymentMethods td {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+.woocommerce-orders-table thead th,
+.woocommerce-MyAccount-paymentMethods thead th {
+  font-weight: 600;
+  color: var(--text);
+}
+.woocommerce-orders-table td,
+.woocommerce-MyAccount-paymentMethods td {
+  color: var(--text-2);
+}
+.woocommerce-orders-table__cell-order-actions,
+.woocommerce-PaymentMethod--actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  white-space: nowrap;
+}
+.woocommerce-orders-table .button,
+.woocommerce-MyAccount-paymentMethods .button,
+.woocommerce-orders-table .woocommerce-button,
+a.woocommerce-Button.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 18px;
+  border-radius: 60px;
+  background: var(--bg-2);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 500;
+  border: 0;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+.woocommerce-orders-table .button:hover,
+.woocommerce-MyAccount-paymentMethods .button:hover,
+a.woocommerce-Button.button:hover {
+  background: var(--black);
+  color: var(--white);
+}
+.woocommerce-orders-table .button.pay,
+a.woocommerce-Button.button.pay {
+  background: var(--black);
+  color: var(--white);
+}
+@media (max-width: 767px) {
+  .woocommerce-orders-table thead,
+  .woocommerce-MyAccount-paymentMethods thead {
+    display: none;
+  }
+  .woocommerce-orders-table tbody tr,
+  .woocommerce-MyAccount-paymentMethods tbody tr {
+    display: block;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+  }
+  .woocommerce-orders-table tbody td,
+  .woocommerce-MyAccount-paymentMethods tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--line);
+    padding: 10px 0;
+    text-align: right;
+  }
+  .woocommerce-orders-table tbody td:last-child,
+  .woocommerce-MyAccount-paymentMethods tbody td:last-child {
+    border-bottom: 0;
+  }
+  .woocommerce-orders-table tbody td::before,
+  .woocommerce-MyAccount-paymentMethods tbody td::before {
+    content: attr(data-title);
+    font-weight: 600;
+    color: var(--text);
+    text-align: left;
+  }
+}
+
+.woocommerce-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* View order page */
+.woocommerce-order-details__title {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.woocommerce-table--order-details {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 32px;
+}
+.woocommerce-table--order-details th,
+.woocommerce-table--order-details td {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+.woocommerce-table--order-details .product-total,
+.woocommerce-table--order-details td:last-child,
+.woocommerce-table--order-details th:last-child {
+  text-align: right;
+}
+.woocommerce-table--order-details tfoot th {
+  font-weight: 400;
+  color: var(--text-2);
+}
+
+.woocommerce-customer-details {
+  margin-top: 8px;
+}
+.woocommerce-columns--addresses {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 768px) {
+  .woocommerce-columns--addresses {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+// Same real .col-1/.col-2 + Bootstrap width collision as .woocommerce-
+// Address above — these columns carry both classes too.
+.woocommerce-column--billing-address,
+.woocommerce-column--shipping-address {
+  width: auto;
+  max-width: 100%;
+}
+.woocommerce-column__title {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.woocommerce-customer-details address {
+  font-style: normal;
+  line-height: 24px;
+  color: var(--text-2);
+}
+
+.woocommerce-OrderUpdates {
+  margin: 16px 0 32px;
+}
+.woocommerce-OrderUpdate {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.woocommerce-OrderUpdate-meta {
+  font-size: 13px;
+  color: var(--text-3);
+  margin-bottom: 4px;
+}

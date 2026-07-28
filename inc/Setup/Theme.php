@@ -52,7 +52,6 @@ final class Theme {
 			new ThemeSupport(),
 			new Assets(),
 			new NavMenus(),
-			new WidgetAreas(),
 			new \Ecombon\Hooks\TemplateHooks(),
 		);
 

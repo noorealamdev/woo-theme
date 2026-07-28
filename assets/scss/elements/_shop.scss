@@ -920,9 +920,12 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 // — the design relies on shop.js rewriting the class at different
 // breakpoints, which this theme doesn't enqueue (assets/js/main.js's own
 // shop.js isn't loaded; assets/js/ecombon-shop.js covers real filtering
-// instead). Force the shop grid down to 2 columns on mobile directly.
+// instead). Force every real product grid down to 2 columns on mobile
+// directly — covers both the shop archive (#gridLayout) and any other real
+// .wrapper-shop grid (e.g. template-parts/product/related.php's "You May
+// Also Like"), since both reuse the exact same non-responsive classes.
 @media (max-width: 767px) {
-  #gridLayout.tf-grid-layout {
+  .wrapper-shop.tf-grid-layout {
     grid-template-columns: repeat(2, 1fr) !important;
   }
 }

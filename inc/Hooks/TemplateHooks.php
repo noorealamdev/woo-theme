@@ -63,8 +63,9 @@ class TemplateHooks implements ComponentInterface {
 	 * @return string[] Filtered body classes.
 	 */
 	public function body_classes( array $classes ): array {
-		$blog_context = is_singular( 'post' ) || is_home() || is_archive();
-		$has_sidebar  = $blog_context && is_active_sidebar( 'sidebar-blog' );
+		// Single posts are full-width in the reference (no sidebar column) —
+		// only the blog listing (home/archive/search) really uses one.
+		$has_sidebar = is_home() || is_archive() || is_search();
 
 		if ( ! $has_sidebar ) {
 			$classes[] = 'no-sidebar';
