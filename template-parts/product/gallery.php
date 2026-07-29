@@ -22,10 +22,10 @@ if ( empty( $image_ids ) ) {
 }
 
 ?>
-<div class="tf-product-media-wrap sticky-top">
+<div class="product-media-wrap sticky-top">
 	<div class="product-thumbs-slider style-row row_left">
 		<div class="flat-wrap-media-product">
-			<div dir="ltr" class="swiper tf-product-media-main" id="gallery-swiper-started" data-spacing="0">
+			<div dir="ltr" class="swiper product-media-main" id="gallery-swiper-started" data-spacing="0">
 				<div class="swiper-wrapper">
 					<?php foreach ( $image_ids as $image_id ) : ?>
 						<?php
@@ -37,9 +37,9 @@ if ( empty( $image_ids ) ) {
 						<div class="swiper-slide">
 							<a href="<?php echo esc_url( $full_url ); ?>" target="_blank" class="item" data-pswp-width="<?php echo esc_attr( (string) $width ); ?>" data-pswp-height="<?php echo esc_attr( (string) $height ); ?>">
 								<?php if ( $image_id ) : ?>
-									<?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'large', false, array( 'class' => 'tf-image-zoom', 'data-zoom' => $full_url ) ) ); ?>
+									<?php echo wp_kses_post( wp_get_attachment_image( $image_id, 'large', false, array( 'class' => 'image-zoom', 'data-zoom' => $full_url ) ) ); ?>
 								<?php else : ?>
-									<img loading="lazy" class="tf-image-zoom" data-zoom="<?php echo esc_url( $full_url ); ?>" src="<?php echo esc_url( $full_url ); ?>" alt="<?php echo esc_attr( $product->get_name() ); ?>">
+									<img loading="lazy" class="image-zoom" data-zoom="<?php echo esc_url( $full_url ); ?>" src="<?php echo esc_url( $full_url ); ?>" alt="<?php echo esc_attr( $product->get_name() ); ?>">
 								<?php endif; ?>
 							</a>
 						</div>
@@ -51,7 +51,7 @@ if ( empty( $image_ids ) ) {
 		<?php
 		/**
 		 * assets/js/zoom.js unconditionally initializes a Swiper on
-		 * `.tf-product-media-thumbs` whenever `.product-thumbs-slider`
+		 * `.product-media-thumbs` whenever `.product-thumbs-slider`
 		 * exists — it must always be present (even for a single image),
 		 * or the missing element crashes that script.
 		 */
@@ -78,7 +78,7 @@ if ( empty( $image_ids ) ) {
 		 * that fixed count.
 		 */
 		?>
-		<div dir="ltr" class="swiper tf-product-media-thumbs other-image-zoom<?php echo count( $image_ids ) <= 1 ? ' d-none' : ''; ?>" data-direction="vertical" data-preview="auto">
+		<div dir="ltr" class="swiper product-media-thumbs other-image-zoom<?php echo count( $image_ids ) <= 1 ? ' d-none' : ''; ?>" data-direction="vertical" data-preview="auto">
 			<div class="swiper-wrapper">
 				<?php foreach ( $image_ids as $image_id ) : ?>
 					<div class="swiper-slide">

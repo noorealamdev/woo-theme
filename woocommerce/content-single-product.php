@@ -25,7 +25,7 @@ do_action( 'woocommerce_before_single_product' );
 get_template_part( 'template-parts/product/breadcrumb-nav' );
 ?>
 
-<section class="section-product-single tf-main-product section-image-zoom">
+<section class="section-product-single main-product section-image-zoom">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6">

@@ -1,13 +1,13 @@
 /*------------ Section (layout/structure real classes only) ---------------- */
-.tf-list {
+.list {
   display: flex;
   align-items: center;
   gap: 24px;
 }
-.tf-list li {
+.list li {
   display: flex;
 }
-.tf-list.vertical {
+.list.vertical {
   display: grid;
 }
 

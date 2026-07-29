@@ -4,9 +4,11 @@
   "description": "Build tooling for the Ecombon theme's SCSS.",
   "scripts": {
     "build:css": "sass assets/scss/main.scss:assets/css/main.css --style=compressed --no-source-map",
-    "watch:css": "sass assets/scss/main.scss:assets/css/main.css --watch --no-source-map"
+    "watch:css": "sass assets/scss/main.scss:assets/css/main.css --watch --no-source-map",
+    "build:bootstrap": "sass assets/scss/bootstrap-custom.scss:assets/css/bootstrap-custom.min.css --style=compressed --no-source-map"
   },
   "devDependencies": {
+    "bootstrap": "^5.3.3",
     "sass": "^1.102.0"
   }
 }

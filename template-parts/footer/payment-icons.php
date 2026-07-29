@@ -18,7 +18,7 @@ if ( empty( $icons ) ) {
 	return;
 }
 
-$list_class = $args['list_class'] ?? 'tf-list payment-list';
+$list_class = $args['list_class'] ?? 'list payment-list';
 $item_class = $args['item_class'] ?? '';
 ?>
 <ul class="<?php echo esc_attr( $list_class ); ?>">

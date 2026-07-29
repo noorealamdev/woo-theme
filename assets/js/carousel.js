@@ -54,8 +54,8 @@ $(window).on("load", function () {
             }
             : {
                 el: [
-                    $this.find(".tf-sw-pagination")[0],
-                    $this.closest(".tf-pag-swiper").find(".tf-sw-pagination")[0],
+                    $this.find(".sw-pagination")[0],
+                    $this.closest(".pag-swiper").find(".sw-pagination")[0],
                 ],
                 clickable: true,
             };
@@ -89,13 +89,13 @@ $(window).on("load", function () {
             navigation: {
                 nextEl: [
                     $this.find(".nav-next-swiper")[0],
-                    $this.closest(".tf-btn-swiper-main").find(".nav-next-swiper")[0],
+                    $this.closest(".btn-swiper-main").find(".nav-next-swiper")[0],
                     $this.closest(".box-swiper").find(".nav-next-swiper")[0],
                     $this.closest(".container").find(".group-btn-slider .nav-next-swiper")[0],
                 ],
                 prevEl: [
                     $this.find(".nav-prev-swiper")[0],
-                    $this.closest(".tf-btn-swiper-main").find(".nav-prev-swiper")[0],
+                    $this.closest(".btn-swiper-main").find(".nav-prev-swiper")[0],
                     $this.closest(".box-swiper").find(".nav-prev-swiper")[0],
                     $this.closest(".container").find(".group-btn-slider .nav-prev-swiper")[0],
                 ],
@@ -157,8 +157,8 @@ $(window).on("load", function () {
     });
 });
 
-if ($(".tf-sw-thumbs").length > 0) {
-    var $this = $(".tf-sw-thumbs");
+if ($(".sw-thumbs").length > 0) {
+    var $this = $(".sw-thumbs");
     var thumbEffect = $this.find(".sw-thumb").data("effect") || "slide";
 
     var thumbSwiper = new Swiper(".sw-thumb", {
@@ -213,8 +213,8 @@ if ($(".slider-thumb-wrap").length > 0) {
     });
 }
 
-if ($(".tf-sw-mobile").length > 0) {
-    $(".tf-sw-mobile").each(function () {
+if ($(".sw-mobile").length > 0) {
+    $(".sw-mobile").each(function () {
         var swiperMb;
         var $this = $(this);
         var screenWidth = $this.data("screen");

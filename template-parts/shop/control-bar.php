@@ -58,24 +58,24 @@ foreach ( array_keys( $active_chips ) as $query_var ) {
 	}
 }
 ?>
-<div class="tf-shop-control sticky-top no-offset">
-	<a href="#filterShop" data-bs-toggle="offcanvas" class="tf-btn-filter">
+<div class="shop-control sticky-top no-offset">
+	<a href="#filterShop" data-bs-toggle="offcanvas" class="btn-filter">
 		<?php \Ecombon\Setup\Icons::render( 'filter' ); ?>
 		<span class="text"><?php esc_html_e( 'Show Filters', 'ecombon' ); ?></span>
 	</a>
-	<ul class="tf-control-layout">
-		<li class="tf-view-layout-switch active" data-value-layout="tf-col-4">
+	<ul class="control-layout">
+		<li class="view-layout-switch active" data-value-layout="tf-col-4">
 			<?php \Ecombon\Setup\Icons::render( 'grid-4' ); ?>
 		</li>
-		<li class="tf-view-layout-switch" data-value-layout="tf-col-3">
+		<li class="view-layout-switch" data-value-layout="tf-col-3">
 			<?php \Ecombon\Setup\Icons::render( 'grid-3' ); ?>
 		</li>
-		<li class="tf-view-layout-switch" data-value-layout="tf-col-2">
+		<li class="view-layout-switch" data-value-layout="tf-col-2">
 			<?php \Ecombon\Setup\Icons::render( 'grid-2' ); ?>
 		</li>
 	</ul>
-	<div class="tf-control-sorting">
-		<div class="tf-dropdown-sort">
+	<div class="control-sorting">
+		<div class="dropdown-sort">
 			<div class="btn-select" data-bs-toggle="dropdown" aria-expanded="false">
 				<span class="text-sort-value"><?php echo esc_html( $sort_options[ $current_orderby ] ); ?></span>
 				<?php \Ecombon\Setup\Icons::render( 'CaretDown' ); ?>

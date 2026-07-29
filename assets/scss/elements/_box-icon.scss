@@ -122,12 +122,12 @@
   visibility: visible;
 }
 
-.tf-social-icon-2 {
+.social-icon-2 {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-.tf-social-icon-2 a {
+.social-icon-2 a {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -136,31 +136,31 @@
   border-radius: 50%;
   border: 1px solid var(--line);
 }
-.tf-social-icon-2 a:hover {
+.social-icon-2 a:hover {
   border-color: var(--primary);
   background-color: var(--primary);
   color: var(--white);
 }
-.tf-social-icon-2 .icon {
+.social-icon-2 .icon {
   font-size: 24px;
 }
-.tf-social-icon-2.style-2 a {
+.social-icon-2.style-2 a {
   width: 32px;
   height: 32px;
 }
-.tf-social-icon-2.style-2 a:hover {
+.social-icon-2.style-2 a:hover {
   border-color: var(--text);
   background-color: var(--text);
 }
-.tf-social-icon-2.style-2 .icon {
+.social-icon-2.style-2 .icon {
   font-size: 16px;
 }
-.tf-social-icon-2.hv-dark a:hover {
+.social-icon-2.hv-dark a:hover {
   border-color: var(--text);
   background-color: var(--text);
 }
 @media (min-width: 1200px) {
-  .tf-social-icon-2 a {
+  .social-icon-2 a {
     width: 44px;
     height: 44px;
   }
@@ -275,7 +275,7 @@
 .box-icon_V03 .ic-wrap {
   margin-bottom: 20px;
 }
-.box-icon_V03 .tf-btn-line-2 {
+.box-icon_V03 .btn-line-2 {
   padding-bottom: 2px;
 }
 .box-icon_V03:hover .icon {

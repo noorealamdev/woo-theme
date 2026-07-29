@@ -30,7 +30,7 @@ $social_icons = array(
 	'youtube'   => 'YoutubeLogo',
 );
 ?>
-	<footer class="tf-footer">
+	<footer class="footer">
 		<div class="footer-inner flat-spacing position-relative">
 			<div class="br-line fake-class top-0"></div>
 			<div class="container">
@@ -54,7 +54,7 @@ $social_icons = array(
 								<a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ); ?>" class="cl-text-2 link mb-16"><?php echo esc_html( $phone ); ?></a>
 							<?php endif; ?>
 							<?php if ( ! empty( $socials ) ) : ?>
-								<ul class="tf-social-icon-2">
+								<ul class="social-icon-2">
 									<?php foreach ( $socials as $network => $url ) : ?>
 										<?php if ( empty( $social_icons[ $network ] ) ) { continue; } ?>
 										<li>
@@ -70,7 +70,7 @@ $social_icons = array(
 					<div class="col-sm-6 col-md-6 col-lg-2">
 						<div class="footer-col-block footer-wrap-1 mx-xl-auto">
 							<p class="footer-heading footer-heading-mobile"><?php esc_html_e( 'Company', 'ecombon' ); ?></p>
-							<div class="tf-collapse-content">
+							<div class="collapse-content">
 								<?php
 								if ( has_nav_menu( 'footer_company' ) ) {
 									wp_nav_menu(
@@ -89,7 +89,7 @@ $social_icons = array(
 					<div class="col-sm-6 col-md-6 col-lg-2">
 						<div class="footer-col-block footer-wrap-2 mx-xl-auto">
 							<p class="footer-heading footer-heading-mobile"><?php esc_html_e( 'Customer Care', 'ecombon' ); ?></p>
-							<div class="tf-collapse-content">
+							<div class="collapse-content">
 								<?php
 								if ( has_nav_menu( 'footer_customer' ) ) {
 									wp_nav_menu(
@@ -108,7 +108,7 @@ $social_icons = array(
 					<div class="col-md-6 col-lg-4">
 						<div class="footer-col-block footer-wrap-3 mb-0">
 							<p class="footer-heading footer-heading-mobile"><?php esc_html_e( 'Newsletter', 'ecombon' ); ?></p>
-							<div class="tf-collapse-content">
+							<div class="collapse-content">
 								<p class="footer-desc cl-text-2"><?php esc_html_e( 'Subscribe for store updates and discounts.', 'ecombon' ); ?></p>
 								<?php get_template_part( 'template-parts/footer/newsletter-form' ); ?>
 							</div>

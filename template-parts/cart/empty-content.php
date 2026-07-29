@@ -28,10 +28,10 @@ defined( 'ABSPATH' ) || exit;
 	</div>
 	<div class="shop-empty_bot d-flex justify-content-center gap-12">
 		<?php if ( wc_get_page_id( 'shop' ) > 0 ) : ?>
-			<a href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>" class="tf-btn animate-btn">
+			<a href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>" class="btn animate-btn">
 				<?php echo esc_html( apply_filters( 'woocommerce_return_to_shop_text', __( 'Return to shop', 'ecombon' ) ) ); ?>
 			</a>
 		<?php endif; ?>
-		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="tf-btn btn-stroke"><?php esc_html_e( 'Back to home', 'ecombon' ); ?></a>
+		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="btn btn-stroke"><?php esc_html_e( 'Back to home', 'ecombon' ); ?></a>
 	</div>
 </div>

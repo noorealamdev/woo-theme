@@ -74,7 +74,7 @@ if ( ! $related_query->have_posts() ) {
 				endwhile;
 				?>
 			</div>
-			<div class="sw-dot-default tf-sw-pagination"></div>
+			<div class="sw-dot-default sw-pagination"></div>
 		</div>
 	</div>
 </section>

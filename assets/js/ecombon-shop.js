@@ -5,19 +5,19 @@
 	function initLayoutSwitch() {
 		var $grid = $( '#gridLayout' );
 
-		$( '.tf-view-layout-switch' ).on( 'click', function () {
+		$( '.view-layout-switch' ).on( 'click', function () {
 			var layout = $( this ).data( 'value-layout' );
 
 			if ( ! layout ) {
 				return;
 			}
 
-			$( '.tf-view-layout-switch' ).removeClass( 'active' );
+			$( '.view-layout-switch' ).removeClass( 'active' );
 			$( this ).addClass( 'active' );
 
 			$grid
 				.removeClass( function ( index, className ) {
-					return ( className.match( /tf-col-\d+/g ) || [] ).join( ' ' );
+					return ( className.match( /col-\d+/g ) || [] ).join( ' ' );
 				} )
 				.addClass( layout );
 		} );

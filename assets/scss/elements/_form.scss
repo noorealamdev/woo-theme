@@ -128,7 +128,7 @@ form .form-content {
   display: grid;
   gap: 20px;
 }
-form .tf-grid-layout {
+form .grid-layout {
   gap: 20px;
 }
 
@@ -138,7 +138,7 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-.tf-check {
+.check {
   position: relative;
   background: transparent;
   cursor: pointer;
@@ -160,11 +160,11 @@ input[type=number]::-webkit-outer-spin-button {
   line-height: 1;
   border-radius: 1px;
 }
-.tf-check:checked {
+.check:checked {
   background: var(--black);
   border-color: var(--black);
 }
-.tf-check:checked::before {
+.check:checked::before {
   opacity: 1;
   transform: scale(1);
 }
@@ -174,7 +174,7 @@ input[type=number]::-webkit-outer-spin-button {
 // mask + background-color (rather than background-image) is what lets
 // this still take its color from `background-color: currentColor`/a real
 // CSS variable, the same way the icon font's `color` property used to.
-.tf-check::before {
+.check::before {
   content: "";
   position: absolute;
   width: 12px;
@@ -196,16 +196,16 @@ input[type=number]::-webkit-outer-spin-button {
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
-.tf-check.style-2 {
+.check.style-2 {
   width: 20px;
   height: 20px;
   border-radius: 3px;
 }
-.tf-check.style-2::before {
+.check.style-2::before {
   font-size: 14px;
 }
 
-.tf-check-rounded {
+.check-rounded {
   padding: 0 !important;
   position: relative;
   border: 1px solid #9a9a9a;
@@ -221,7 +221,7 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: var(--white);
   -webkit-appearance: none;
 }
-.tf-check-rounded::before {
+.check-rounded::before {
   content: "";
   position: absolute;
   border-radius: 50%;
@@ -235,25 +235,25 @@ input[type=number]::-webkit-outer-spin-button {
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
-.tf-check-rounded:checked {
+.check-rounded:checked {
   border-color: var(--text);
 }
-.tf-check-rounded:checked::before {
+.check-rounded:checked::before {
   opacity: 1;
 }
-.tf-check-rounded.style-2 {
+.check-rounded.style-2 {
   width: 22px;
   height: 22px;
 }
-.tf-check-rounded.style-2::before {
+.check-rounded.style-2::before {
   width: 16px;
   height: 16px;
 }
-.tf-check-rounded.style-small {
+.check-rounded.style-small {
   width: 12px;
   height: 12px;
 }
-.tf-check-rounded.style-small::before {
+.check-rounded.style-small::before {
   width: 6px;
   height: 6px;
 }
@@ -270,12 +270,12 @@ input[type=number]::-webkit-outer-spin-button {
   cursor: pointer;
 }
 
-.tf-field {
+.field {
   position: relative;
   display: grid;
   place-items: start;
 }
-.tf-field .tf-lable {
+.field .lable {
   margin-bottom: 6px;
 }
 
@@ -424,7 +424,7 @@ input[type=number]::-webkit-outer-spin-button {
   border-radius: 999px;
   background: var(--bg);
 }
-.form_search-product .tf-select-category {
+.form_search-product .select-category {
   white-space: nowrap;
 }
 .form_search-product .ipt {
@@ -469,7 +469,7 @@ select.select-3:focus {
   }
 }
 
-.form-quick-login .tf-grid-layout {
+.form-quick-login .grid-layout {
   margin-bottom: 12px;
 }
 @media (min-width: 1200px) {
@@ -630,10 +630,10 @@ select.select-3:focus {
   gap: 8px;
   display: none;
 }
-.form-gift .tf-product-form-gift:has(input:checked) .checkbox-wrap {
+.form-gift .product-form-gift:has(input:checked) .checkbox-wrap {
   margin-bottom: 16px;
 }
-.form-gift .tf-product-form-gift:has(input:checked) .form-content {
+.form-gift .product-form-gift:has(input:checked) .form-content {
   display: grid;
 }
 

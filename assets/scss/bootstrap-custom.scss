@@ -1,0 +1,96 @@
+// Custom Bootstrap 5.3.3 build — only the modules this theme actually
+// uses, compiled from the real Bootstrap source (node_modules/bootstrap)
+// instead of shipping the full ~300KB prebuilt bootstrap.min.css.
+//
+// Kept, and why (verified by grepping every .php template for the
+// matching markup/data-bs-* attributes before adding each line):
+//   - grid/containers  → .container, .row, .col-*
+//   - dropdown         → shop sort dropdown (control-bar.php)
+//   - offcanvas        → cart drawer, mobile menu
+//   - modal            → search modal
+//   - nav              → .tab-content/.tab-pane (product tabs)
+//   - progress         → review star rating bars
+//   - transitions      → .fade/.collapse mechanics all of the above rely on
+//   - reboot/root/type/images → base reset, kept as-is since the theme's
+//     own CSS has always assumed Bootstrap's reboot ran first
+//
+// Dropped: tables, forms, buttons, button-group, navbar, card, accordion,
+// breadcrumb, pagination, badge, alert, list-group, close, toasts,
+// tooltip, popover, carousel, spinners, placeholders, helpers — grepped
+// as zero real usage anywhere in the theme's PHP/JS.
+//
+// Utilities (spacing/flex/display/text/color classes like d-flex, w-100,
+// mb-16) are kept in full via utilities/api rather than hand-pruned: they
+// get pulled into markup pervasively, including via PHP string
+// concatenation that a static grep can't fully verify, so trimming the
+// utilities map isn't worth the regression risk for the size saved.
+
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/variables-dark";
+@import "../../node_modules/bootstrap/scss/maps";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/utilities";
+
+// Exclude the specific utility values (and the whole link-underline/
+// link-opacity/link-offset feature) that collide with the theme's own
+// hand-authored !important classes of the same name in
+// core/_spacing.scss — e.g. the theme's `.mb-4 { margin-bottom: 4px
+// !important }` vs Bootstrap's real `.mb-4 { margin-bottom: 1.5rem
+// !important }`. Both carry !important, so whichever stylesheet compiles
+// last silently wins; without this exclusion the theme's own intended
+// px-scale values were getting clobbered by Bootstrap's rem-scale ones
+// (confirmed by grepping every real base-selector collision in the repo).
+// Genuinely-used real Bootstrap utilities the theme does NOT redefine
+// (.mx-auto, .mb-0, .pb-0, .text-white, .w-100, .d-none, etc.) are left
+// untouched.
+$utilities: map-merge(
+  $utilities,
+  (
+    "margin-bottom": map-merge(
+      map-get($utilities, "margin-bottom"),
+      (values: map-remove(map-get(map-get($utilities, "margin-bottom"), "values"), 2, 3, 4, 5))
+    ),
+    "margin-top": map-merge(
+      map-get($utilities, "margin-top"),
+      (values: map-remove(map-get(map-get($utilities, "margin-top"), "values"), 4))
+    ),
+    "padding-bottom": map-merge(
+      map-get($utilities, "padding-bottom"),
+      (values: map-remove(map-get(map-get($utilities, "padding-bottom"), "values"), 4))
+    ),
+    "padding-y": map-merge(
+      map-get($utilities, "padding-y"),
+      (values: map-remove(map-get(map-get($utilities, "padding-y"), "values"), 4))
+    ),
+    "gap": map-merge(
+      map-get($utilities, "gap"),
+      (values: map-remove(map-get(map-get($utilities, "gap"), "values"), 4))
+    ),
+    "background-color": map-merge(
+      map-get($utilities, "background-color"),
+      (values: map-remove(map-get(map-get($utilities, "background-color"), "values"), "dark", "primary", "secondary"))
+    ),
+    "color": map-merge(
+      map-get($utilities, "color"),
+      (values: map-remove(map-get(map-get($utilities, "color"), "values"), "primary", "secondary", "white-50"))
+    ),
+  )
+);
+$utilities: map-remove($utilities, "link-underline", "link-underline-opacity", "link-opacity", "link-offset", "z-index");
+
+@import "../../node_modules/bootstrap/scss/root";
+@import "../../node_modules/bootstrap/scss/reboot";
+@import "../../node_modules/bootstrap/scss/type";
+@import "../../node_modules/bootstrap/scss/images";
+@import "../../node_modules/bootstrap/scss/containers";
+@import "../../node_modules/bootstrap/scss/grid";
+
+@import "../../node_modules/bootstrap/scss/transitions";
+@import "../../node_modules/bootstrap/scss/dropdown";
+@import "../../node_modules/bootstrap/scss/nav";
+@import "../../node_modules/bootstrap/scss/progress";
+@import "../../node_modules/bootstrap/scss/modal";
+@import "../../node_modules/bootstrap/scss/offcanvas";
+
+@import "../../node_modules/bootstrap/scss/utilities/api";

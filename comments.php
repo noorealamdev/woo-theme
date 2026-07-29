@@ -63,24 +63,24 @@ if ( post_password_required() ) {
 	$cookie_consent_field = '';
 	if ( has_action( 'set_comment_cookies', 'wp_set_comment_cookies' ) && get_option( 'show_comments_cookies_opt_in' ) ) {
 		$cookie_consent_field = '<div class="checkbox-wrap">
-			<input class="tf-check" type="checkbox" id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" value="yes">
+			<input class="check" type="checkbox" id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" value="yes">
 			<label for="wp-comment-cookies-consent">' . esc_html__( 'Save my name, email, and website in this browser for the next time I comment.', 'ecombon' ) . '</label>
 		</div>';
 	}
 
 	$comment_field = '<div class="form-content">
-			<div class="tf-grid-layout sm-col-2">
-				<fieldset class="tf-field">
-					<label for="author" class="tf-lable fw-medium">' . esc_html__( 'Your Name', 'ecombon' ) . $required_mark . '</label>
+			<div class="grid-layout sm-col-2">
+				<fieldset class="field">
+					<label for="author" class="lable fw-medium">' . esc_html__( 'Your Name', 'ecombon' ) . $required_mark . '</label>
 					<input id="author" name="author" type="text" placeholder="' . esc_attr__( 'Your Name', 'ecombon' ) . '" value="' . esc_attr( $commenter['comment_author'] ) . '"' . $required_attr . '>
 				</fieldset>
-				<fieldset class="tf-field">
-					<label for="email" class="tf-lable fw-medium">' . esc_html__( 'Your Email', 'ecombon' ) . $required_mark . '</label>
+				<fieldset class="field">
+					<label for="email" class="lable fw-medium">' . esc_html__( 'Your Email', 'ecombon' ) . $required_mark . '</label>
 					<input id="email" name="email" type="email" placeholder="' . esc_attr__( 'Your email (private)', 'ecombon' ) . '" value="' . esc_attr( $commenter['comment_author_email'] ) . '"' . $required_attr . '>
 				</fieldset>
 			</div>
-			<fieldset class="tf-field">
-				<label for="comment" class="tf-lable fw-medium">' . esc_html__( 'Your Message', 'ecombon' ) . ' <span class="text-primary">*</span></label>
+			<fieldset class="field">
+				<label for="comment" class="lable fw-medium">' . esc_html__( 'Your Message', 'ecombon' ) . ' <span class="text-primary">*</span></label>
 				<textarea id="comment" name="comment" placeholder="' . esc_attr__( 'Write your comment', 'ecombon' ) . '" cols="45" rows="8" required></textarea>
 			</fieldset>
 		</div>';
@@ -110,7 +110,7 @@ if ( post_password_required() ) {
 			'id_form'              => 'commentform',
 			'label_submit'         => __( 'Post Comment', 'ecombon' ),
 			'submit_button'        => '<button name="%1$s" type="submit" id="%2$s" class="%3$s"><span class="btn-text">%4$s</span></button>',
-			'class_submit'         => 'tf-btn animate-btn',
+			'class_submit'         => 'btn animate-btn',
 		)
 	);
 	?>

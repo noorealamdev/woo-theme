@@ -87,7 +87,7 @@ $next_post         = get_next_post();
 
 							<div class="social-left">
 								<p><?php esc_html_e( 'Share this post:', 'ecombon' ); ?></p>
-								<ul class="tf-social-icon-2">
+								<ul class="social-icon-2">
 									<li>
 										<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo esc_attr( $share_url ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Share on Facebook', 'ecombon' ); ?>">
 											<?php \Ecombon\Setup\Icons::render( 'FacebookLogo' ); ?>

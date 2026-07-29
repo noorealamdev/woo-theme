@@ -48,7 +48,7 @@ $free_shipping_threshold = \Ecombon\WooCommerce\Shipping::get_free_shipping_thre
 					<?php else : ?>
 						<p class="text"><?php esc_html_e( "You've unlocked free shipping!", 'ecombon' ); ?></p>
 					<?php endif; ?>
-					<div class="tf-progress-bar tf-progress-ship">
+					<div class="progress-bar progress-ship">
 						<div class="value" style="width: <?php echo esc_attr( (string) $percent ); ?>%">
 							<?php \Ecombon\Setup\Icons::render( 'Truck' ); ?>
 						</div>
@@ -57,10 +57,10 @@ $free_shipping_threshold = \Ecombon\WooCommerce\Shipping::get_free_shipping_thre
 			<?php endif; ?>
 		</div>
 		<div class="wrap">
-			<div class="tf-mini-cart-wrap list-file-delete">
-				<div class="tf-mini-cart-main">
-					<div class="tf-mini-cart-sroll">
-						<div class="tf-mini-cart-items">
+			<div class="mini-cart-wrap list-file-delete">
+				<div class="mini-cart-main">
+					<div class="mini-cart-sroll">
+						<div class="mini-cart-items">
 							<?php if ( $cart->is_empty() ) : ?>
 								<div class="box-text_empty type-shop_cart">
 									<div class="shop-empty_top">
@@ -70,9 +70,9 @@ $free_shipping_threshold = \Ecombon\WooCommerce\Shipping::get_free_shipping_thre
 									</div>
 									<div class="shop-empty_bot">
 										<?php if ( function_exists( 'wc_get_page_permalink' ) ) : ?>
-											<a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>" class="tf-btn animate-btn"><?php esc_html_e( 'Shopping', 'ecombon' ); ?></a>
+											<a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>" class="btn animate-btn"><?php esc_html_e( 'Shopping', 'ecombon' ); ?></a>
 										<?php endif; ?>
-										<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="tf-btn btn-stroke"><?php esc_html_e( 'Back to home', 'ecombon' ); ?></a>
+										<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="btn btn-stroke"><?php esc_html_e( 'Back to home', 'ecombon' ); ?></a>
 									</div>
 								</div>
 							<?php else : ?>
@@ -84,27 +84,27 @@ $free_shipping_threshold = \Ecombon\WooCommerce\Shipping::get_free_shipping_thre
 									$thumbnail  = $product->get_image( array( 100, 133 ) );
 									$remove_url = wc_get_cart_remove_url( $cart_item_key );
 									?>
-									<div class="tf-mini-cart-item">
-										<div class="tf-mini-cart-image">
+									<div class="mini-cart-item">
+										<div class="mini-cart-image">
 											<a href="<?php echo esc_url( $product->get_permalink( $cart_item ) ); ?>">
 												<?php echo wp_kses_post( $thumbnail ); ?>
 											</a>
 										</div>
-										<div class="tf-mini-cart-info">
+										<div class="mini-cart-info">
 											<a href="<?php echo esc_url( $product->get_permalink( $cart_item ) ); ?>" class="name fw-medium link text-line-clamp-1">
 												<?php echo wp_kses_post( \Ecombon\WooCommerce\CartItemVariations::get_title( $cart_item ) ); ?>
 											</a>
 											<?php foreach ( \Ecombon\WooCommerce\CartItemVariations::get_rows( $cart_item ) as $variation_row ) : ?>
-												<div class="tf-prd-select text-caption-01 mb-4">
+												<div class="prd-select text-caption-01 mb-4">
 													<span class="type-text cl-text-3"><?php echo esc_html( $variation_row['label'] ); ?>:&nbsp;</span>
 													<span class="cl-text-2"><?php echo wp_kses_post( $variation_row['value'] ); ?></span>
 												</div>
 											<?php endforeach; ?>
 										</div>
-										<div class="tf-mini-cart-price">
+										<div class="mini-cart-price">
 											<a
 												href="<?php echo esc_url( $remove_url ); ?>"
-												class="tf-btn-line-3 type-primary cs-pointer remove_from_cart_button"
+												class="btn-line-3 type-primary cs-pointer remove_from_cart_button"
 												aria-label="<?php echo esc_attr( sprintf( __( 'Remove %s from cart', 'ecombon' ), wp_strip_all_tags( \Ecombon\WooCommerce\CartItemVariations::get_title( $cart_item ) ) ) ); ?>"
 												data-product_id="<?php echo esc_attr( (string) $product->get_id() ); ?>"
 												data-cart_item_key="<?php echo esc_attr( $cart_item_key ); ?>"
@@ -115,7 +115,7 @@ $free_shipping_threshold = \Ecombon\WooCommerce\Shipping::get_free_shipping_thre
 											<div class="fw-semibold d-flex align-items-center justify-content-between gap-4">
 												<span class="number"><?php echo esc_html( (string) $cart_item['quantity'] ); ?></span>
 												<span>x</span>
-												<span class="price tf-mini-card-price"><?php echo wp_kses_post( wc_price( $product->get_price() ) ); ?></span>
+												<span class="price mini-card-price"><?php echo wp_kses_post( wc_price( $product->get_price() ) ); ?></span>
 											</div>
 										</div>
 									</div>
@@ -126,19 +126,19 @@ $free_shipping_threshold = \Ecombon\WooCommerce\Shipping::get_free_shipping_thre
 				</div>
 
 				<?php if ( ! $cart->is_empty() ) : ?>
-					<div class="tf-mini-cart-bottom-wrap">
-						<div class="tf-mini-cart-total">
+					<div class="mini-cart-bottom-wrap">
+						<div class="mini-cart-total">
 							<h5 class="text-total d-flex align-content-center justify-content-between">
 								<span class="subtotal"><?php esc_html_e( 'Subtotal', 'ecombon' ); ?></span>
-								<span class="total-price tf-totals-total-value"><?php echo wp_kses_post( $cart->get_cart_subtotal() ); ?></span>
+								<span class="total-price totals-total-value"><?php echo wp_kses_post( $cart->get_cart_subtotal() ); ?></span>
 							</h5>
 						</div>
 
-						<div class="tf-mini-cart-view-checkout">
-							<a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="tf-btn btn-stroke">
+						<div class="mini-cart-view-checkout">
+							<a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="btn btn-stroke">
 								<?php esc_html_e( 'View cart', 'ecombon' ); ?>
 							</a>
-							<a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="tf-btn animate-btn">
+							<a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="btn animate-btn">
 								<?php esc_html_e( 'Check Out', 'ecombon' ); ?>
 							</a>
 						</div>

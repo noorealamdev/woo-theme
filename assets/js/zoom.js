@@ -7,8 +7,8 @@ if ($(".product-thumbs-slider").length > 0) {
         $wrap.closest(".section-product-single")
             .hasClass("enable-filter-color-slider");
 
-    const $mainEl = $wrap.find(".tf-product-media-main");
-    const $thumbEl = $wrap.find(".tf-product-media-thumbs");
+    const $mainEl = $wrap.find(".product-media-main");
+    const $thumbEl = $wrap.find(".product-media-thumbs");
     const $section = $wrap.closest(".section-product-single");
 
     var direction = $thumbEl.data("direction") ?? "horizontal";
@@ -119,10 +119,10 @@ if ($(".product-thumbs-slider").length > 0) {
         var dataAttr = `data-${type}`;
 
         var currentClass =
-            `.tf-product-info-list .value-current${capitalizeFirstLetter(type)}`;
+            `.product-info-list .value-current${capitalizeFirstLetter(type)}`;
 
         var selectClass =
-            `.tf-product-info-list .select-current${capitalizeFirstLetter(type)}`;
+            `.product-info-list .select-current${capitalizeFirstLetter(type)}`;
 
         $section.find(btnClass).removeClass("active");
 
@@ -255,17 +255,17 @@ if ($(".product-thumbs-slider").length > 0) {
     "use strict";
 
     var section_zoom = function () {
-        $(".tf-image-zoom").on("mouseover", function () {
+        $(".image-zoom").on("mouseover", function () {
             $(this).closest(".section-image-zoom").addClass("zoom-active");
         });
-        $(".tf-image-zoom").on("mouseleave", function () {
+        $(".image-zoom").on("mouseleave", function () {
             $(this).closest(".section-image-zoom").removeClass("zoom-active");
         });
     };
     var cusZoom = function () {
         var image_zoom = function () {
-            var driftAll = document.querySelectorAll(".tf-image-zoom");
-            var pane = document.querySelector(".tf-zoom-main");
+            var driftAll = document.querySelectorAll(".image-zoom");
+            var pane = document.querySelector(".zoom-main");
 
             if (matchMedia("only screen and (min-width: 1200px)").matches) {
                 $(driftAll).each(function (i, el) {
@@ -307,7 +307,7 @@ if ($(".product-thumbs-slider").length > 0) {
     };
 
     var imageZoomMagnifier = function () {
-        var driftAll = document.querySelectorAll(".tf-image-zoom-magnifier");
+        var driftAll = document.querySelectorAll(".image-zoom-magnifier");
         $(driftAll).each(function (i, el) {
             new Drift(el, {
                 zoomFactor: 2,
@@ -318,8 +318,8 @@ if ($(".product-thumbs-slider").length > 0) {
     };
 
     var imageZoomInner = function () {
-        var driftAll = document.querySelectorAll(".tf-image-zoom-inner");
-        var pane = document.querySelector(".tf-product-zoom-inner");
+        var driftAll = document.querySelectorAll(".image-zoom-inner");
+        var pane = document.querySelector(".product-zoom-inner");
         $(driftAll).each(function (i, el) {
             new Drift(el, {
                 paneContainer: pane,
@@ -387,17 +387,17 @@ if ($(".product-thumbs-slider").length > 0) {
     };
 
     var modelViewer = function () {
-        if ($(".tf-model-viewer").length) {
-            $(".tf-model-viewer-ui-button").on("click", function (e) {
-                $(this).closest(".tf-model-viewer").find("model-viewer").removeClass("disabled");
-                $(this).closest(".tf-model-viewer").toggleClass("active");
+        if ($(".model-viewer").length) {
+            $(".model-viewer-ui-button").on("click", function (e) {
+                $(this).closest(".model-viewer").find("model-viewer").removeClass("disabled");
+                $(this).closest(".model-viewer").toggleClass("active");
             });
 
-            $(".tf-model-viewer-ui").on("dblclick", function (e) {
-                const modelViewer = $(this).closest(".tf-model-viewer").find("model-viewer")[0];
+            $(".model-viewer-ui").on("dblclick", function (e) {
+                const modelViewer = $(this).closest(".model-viewer").find("model-viewer")[0];
 
-                $(this).closest(".tf-model-viewer").find("model-viewer").addClass("disabled");
-                $(this).closest(".tf-model-viewer").toggleClass("active");
+                $(this).closest(".model-viewer").find("model-viewer").addClass("disabled");
+                $(this).closest(".model-viewer").toggleClass("active");
 
                 if (modelViewer) {
                     modelViewer.cameraOrbit = "0deg 90deg auto";

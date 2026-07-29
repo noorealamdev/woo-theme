@@ -23,7 +23,7 @@ if ( empty( $related_ids ) ) {
 		<div class="sect-heading type-2 text-center">
 			<h3 class="s-title"><?php esc_html_e( 'You May Also Like', 'ecombon' ); ?></h3>
 		</div>
-		<div class="wrapper-shop tf-grid-layout tf-col-4">
+		<div class="wrapper-shop grid-layout tf-col-4">
 			<?php foreach ( $related_ids as $related_id ) : ?>
 				<?php
 				$related_product = wc_get_product( $related_id );

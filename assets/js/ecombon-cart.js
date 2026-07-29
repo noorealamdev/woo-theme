@@ -29,6 +29,27 @@
 				return;
 			}
 
+			// WooCommerce's fragment swap replaces #shoppingCart's whole
+			// DOM node (see Ecombon\WooCommerce\CartFragments), so the
+			// Offcanvas instance that was open on the OLD node gets
+			// orphaned rather than closed: the old node is simply gone,
+			// with nothing left to call .hide() on. That leaves two
+			// things stuck behind, since only the instance that applied a
+			// lock ever releases it, and this one never gets the chance:
+			// its backdrop, and the body scroll-lock (Bootstrap sees the
+			// lock is already applied when the fresh instance below
+			// shows, so that new instance never takes responsibility for
+			// releasing it either — it would otherwise sit locked forever
+			// after this drawer is later closed). getOrCreateInstance()
+			// below only ever creates a fresh instance for the NEW node,
+			// so anything already in the DOM at this point is guaranteed
+			// to be one of these orphans.
+			document.querySelectorAll( '.offcanvas-backdrop' ).forEach( function ( backdrop ) {
+				backdrop.remove();
+			} );
+			document.body.style.removeProperty( 'overflow' );
+			document.body.style.removeProperty( 'padding-right' );
+
 			bootstrap.Offcanvas.getOrCreateInstance( el ).show();
 		}, 0 );
 	} );

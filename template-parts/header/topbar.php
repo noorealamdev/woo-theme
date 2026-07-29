@@ -22,7 +22,7 @@ if ( empty( $message ) ) {
 	return;
 }
 ?>
-<div class="tf-topbar bg-dark">
+<div class="topbar bg-dark">
 	<div class="container">
 		<div class="text-center">
 			<p class="text-white text-line-clamp-1"><?php echo esc_html( $message ); ?></p>

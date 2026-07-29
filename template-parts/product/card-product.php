@@ -89,7 +89,7 @@ if ( $product->is_type( 'variable' ) ) {
 				href="<?php echo esc_url( $product->add_to_cart_url() ); ?>"
 				data-quantity="1"
 				data-product_id="<?php echo esc_attr( $product->get_id() ); ?>"
-				class="tf-btn btn-white small w-100 <?php echo esc_attr( $product->supports( 'ajax_add_to_cart' ) && $product->is_purchasable() && $product->is_in_stock() ? 'add_to_cart_button ajax_add_to_cart' : '' ); ?>"
+				class="btn btn-white small w-100 <?php echo esc_attr( $product->supports( 'ajax_add_to_cart' ) && $product->is_purchasable() && $product->is_in_stock() ? 'add_to_cart_button ajax_add_to_cart' : '' ); ?>"
 			>
 				<?php echo esc_html( $product->add_to_cart_text() ); ?>
 			</a>

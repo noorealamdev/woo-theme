@@ -35,24 +35,24 @@ if ( ! $product->is_purchasable() || ! $product->is_in_stock() ) {
 	return;
 }
 ?>
-<div class="tf-sticky-btn-atc">
+<div class="sticky-btn-atc">
 	<div class="container">
-		<div class="tf-height-observer w-100 d-flex align-items-center">
-			<div class="tf-sticky-atc-product d-flex align-items-center">
+		<div class="height-observer w-100 d-flex align-items-center">
+			<div class="sticky-atc-product d-flex align-items-center">
 				<div class="atc-product-side">
 					<div class="prd_img">
 						<?php echo wp_kses_post( $product->get_image( 'thumbnail' ) ); ?>
 					</div>
 					<div class="prd_info d-none d-lg-grid">
 						<p class="name__prd fw-medium lh-24"><?php echo esc_html( $product->get_name() ); ?></p>
-						<p class="distribute__prd text-caption-01 cl-text-3 tf-sticky-atc-variant-desc"></p>
-						<p class="price__prd fw-semibold tf-sticky-atc-price"><?php echo wp_kses_post( $product->get_price_html() ); ?></p>
+						<p class="distribute__prd text-caption-01 cl-text-3 sticky-atc-variant-desc"></p>
+						<p class="price__prd fw-semibold sticky-atc-price"><?php echo wp_kses_post( $product->get_price_html() ); ?></p>
 					</div>
 				</div>
 			</div>
-			<div class="tf-sticky-atc-infos">
-				<form class="tf-sticky-atc-form">
-					<div class="tf-product-info-quantity">
+			<div class="sticky-atc-infos">
+				<form class="sticky-atc-form">
+					<div class="product-info-quantity">
 						<p class="title"><?php esc_html_e( 'Quantity:', 'ecombon' ); ?></p>
 						<div class="wg-quantity style-2 quantity">
 							<button type="button" class="btn-quantity btn-decrease" aria-label="<?php esc_attr_e( 'Decrease quantity', 'ecombon' ); ?>">
@@ -67,7 +67,7 @@ if ( ! $product->is_purchasable() || ! $product->is_in_stock() ) {
 					<button
 						type="submit"
 						form="ecombon-add-to-cart-form"
-						class="tf-btn animate-btn btn-add-to-cart single_add_to_cart_button"
+						class="btn animate-btn btn-add-to-cart single_add_to_cart_button"
 					>
 						<?php echo esc_html( $product->single_add_to_cart_text() ); ?>
 					</button>

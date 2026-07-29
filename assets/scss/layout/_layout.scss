@@ -1,187 +1,187 @@
 /*------------ Component ---------------- */
 /*------------ Layout ---------------- */
 /*--------- Abstracts variable ---------- */
-.tf-grid-layout {
+.grid-layout {
   display: grid;
   column-gap: 16px;
   row-gap: 24px;
 }
-.tf-grid-layout.tf-col-1 {
+.grid-layout.tf-col-1 {
   grid-template-columns: 1fr;
 }
-.tf-grid-layout.tf-col-2 {
+.grid-layout.tf-col-2 {
   grid-template-columns: 1fr 1fr;
 }
-.tf-grid-layout.tf-col-3 {
+.grid-layout.tf-col-3 {
   grid-template-columns: repeat(3, 1fr);
 }
-.tf-grid-layout.tf-col-4 {
+.grid-layout.tf-col-4 {
   grid-template-columns: repeat(4, 1fr);
 }
-.tf-grid-layout.tf-col-5 {
+.grid-layout.tf-col-5 {
   grid-template-columns: repeat(5, 1fr);
 }
-.tf-grid-layout.tf-col-6 {
+.grid-layout.tf-col-6 {
   grid-template-columns: repeat(6, 1fr);
 }
-.tf-grid-layout.tf-col-7 {
+.grid-layout.tf-col-7 {
   grid-template-columns: repeat(7, 1fr);
 }
-.tf-grid-layout .wd-full {
+.grid-layout .wd-full {
   grid-column: 1/-1;
 }
-.tf-grid-layout .wd-2-cols {
+.grid-layout .wd-2-cols {
   grid-column: span 2;
 }
 @media (min-width: 426px) {
-  .tf-grid-layout.ssm-col-2 {
+  .grid-layout.ssm-col-2 {
     grid-template-columns: 1fr 1fr;
   }
-  .tf-grid-layout.ssm-col-3 {
+  .grid-layout.ssm-col-3 {
     grid-template-columns: repeat(3, 1fr);
   }
-  .tf-grid-layout.ssm-col-4 {
+  .grid-layout.ssm-col-4 {
     grid-template-columns: repeat(4, 1fr);
   }
-  .tf-grid-layout.ssm-col-5 {
+  .grid-layout.ssm-col-5 {
     grid-template-columns: repeat(5, 1fr);
   }
-  .tf-grid-layout.ssm-col-6 {
+  .grid-layout.ssm-col-6 {
     grid-template-columns: repeat(6, 1fr);
   }
-  .tf-grid-layout.ssm-col-7 {
+  .grid-layout.ssm-col-7 {
     grid-template-columns: repeat(7, 1fr);
   }
 }
 @media (min-width: 576px) {
-  .tf-grid-layout {
+  .grid-layout {
     column-gap: 24px;
     row-gap: 32px;
   }
-  .tf-grid-layout.sm-col-2 {
+  .grid-layout.sm-col-2 {
     grid-template-columns: 1fr 1fr;
   }
-  .tf-grid-layout.sm-col-3 {
+  .grid-layout.sm-col-3 {
     grid-template-columns: repeat(3, 1fr);
   }
-  .tf-grid-layout.sm-col-4 {
+  .grid-layout.sm-col-4 {
     grid-template-columns: repeat(4, 1fr);
   }
-  .tf-grid-layout.sm-col-5 {
+  .grid-layout.sm-col-5 {
     grid-template-columns: repeat(5, 1fr);
   }
-  .tf-grid-layout.sm-col-6 {
+  .grid-layout.sm-col-6 {
     grid-template-columns: repeat(6, 1fr);
   }
-  .tf-grid-layout.sm-col-7 {
+  .grid-layout.sm-col-7 {
     grid-template-columns: repeat(7, 1fr);
   }
 }
 @media (min-width: 768px) {
-  .tf-grid-layout.md-col-1 {
+  .grid-layout.md-col-1 {
     grid-template-columns: 1fr;
   }
-  .tf-grid-layout.md-col-2 {
+  .grid-layout.md-col-2 {
     grid-template-columns: 1fr 1fr;
   }
-  .tf-grid-layout.md-col-3 {
+  .grid-layout.md-col-3 {
     grid-template-columns: repeat(3, 1fr);
   }
-  .tf-grid-layout.md-col-4 {
+  .grid-layout.md-col-4 {
     grid-template-columns: repeat(4, 1fr);
   }
-  .tf-grid-layout.md-col-5 {
+  .grid-layout.md-col-5 {
     grid-template-columns: repeat(5, 1fr);
   }
-  .tf-grid-layout.md-col-6 {
+  .grid-layout.md-col-6 {
     grid-template-columns: repeat(6, 1fr);
   }
-  .tf-grid-layout.md-col-7 {
+  .grid-layout.md-col-7 {
     grid-template-columns: repeat(7, 1fr);
   }
 }
 @media (min-width: 992px) {
-  .tf-grid-layout.lg-col-1 {
+  .grid-layout.lg-col-1 {
     grid-template-columns: 1fr;
   }
-  .tf-grid-layout.lg-col-2 {
+  .grid-layout.lg-col-2 {
     grid-template-columns: 1fr 1fr;
   }
-  .tf-grid-layout.lg-col-3 {
+  .grid-layout.lg-col-3 {
     grid-template-columns: repeat(3, 1fr);
   }
-  .tf-grid-layout.lg-col-4 {
+  .grid-layout.lg-col-4 {
     grid-template-columns: repeat(4, 1fr);
   }
-  .tf-grid-layout.lg-col-5 {
+  .grid-layout.lg-col-5 {
     grid-template-columns: repeat(5, 1fr);
   }
-  .tf-grid-layout.lg-col-6 {
+  .grid-layout.lg-col-6 {
     grid-template-columns: repeat(6, 1fr);
   }
-  .tf-grid-layout.lg-col-7 {
+  .grid-layout.lg-col-7 {
     grid-template-columns: repeat(7, 1fr);
   }
 }
 @media (min-width: 1200px) {
-  .tf-grid-layout {
+  .grid-layout {
     column-gap: 30px;
     row-gap: 40px;
   }
-  .tf-grid-layout.gap-xl-30 {
+  .grid-layout.gap-xl-30 {
     gap: 30px !important;
   }
-  .tf-grid-layout.cl-gap-xxl-40 {
+  .grid-layout.cl-gap-xxl-40 {
     column-gap: 40px;
   }
-  .tf-grid-layout.cl-xl-gap-38 {
+  .grid-layout.cl-xl-gap-38 {
     column-gap: 38px;
   }
-  .tf-grid-layout.row-xl-gap-40 {
+  .grid-layout.row-xl-gap-40 {
     row-gap: 40px;
   }
-  .tf-grid-layout.row-xl-gap-56 {
+  .grid-layout.row-xl-gap-56 {
     row-gap: 56px;
   }
-  .tf-grid-layout.xl-col-1 {
+  .grid-layout.xl-col-1 {
     grid-template-columns: 1fr;
   }
-  .tf-grid-layout.xl-col-2 {
+  .grid-layout.xl-col-2 {
     grid-template-columns: 1fr 1fr;
   }
-  .tf-grid-layout.xl-col-3 {
+  .grid-layout.xl-col-3 {
     grid-template-columns: repeat(3, 1fr);
   }
-  .tf-grid-layout.xl-col-4 {
+  .grid-layout.xl-col-4 {
     grid-template-columns: repeat(4, 1fr);
   }
-  .tf-grid-layout.xl-col-5 {
+  .grid-layout.xl-col-5 {
     grid-template-columns: repeat(5, 1fr);
   }
-  .tf-grid-layout.xl-col-6 {
+  .grid-layout.xl-col-6 {
     grid-template-columns: repeat(6, 1fr);
   }
-  .tf-grid-layout.xl-col-7 {
+  .grid-layout.xl-col-7 {
     grid-template-columns: repeat(7, 1fr);
   }
 }
 @media (min-width: 1440px) {
-  .tf-grid-layout.xxl-col-2 {
+  .grid-layout.xxl-col-2 {
     grid-template-columns: 1fr 1fr;
   }
-  .tf-grid-layout.xxl-col-3 {
+  .grid-layout.xxl-col-3 {
     grid-template-columns: repeat(3, 1fr);
   }
-  .tf-grid-layout.xxl-col-4 {
+  .grid-layout.xxl-col-4 {
     grid-template-columns: repeat(4, 1fr);
   }
-  .tf-grid-layout.xxl-col-5 {
+  .grid-layout.xxl-col-5 {
     grid-template-columns: repeat(5, 1fr);
   }
-  .tf-grid-layout.xxl-col-6 {
+  .grid-layout.xxl-col-6 {
     grid-template-columns: repeat(6, 1fr);
   }
-  .tf-grid-layout.xxl-col-7 {
+  .grid-layout.xxl-col-7 {
     grid-template-columns: repeat(7, 1fr);
   }
 }

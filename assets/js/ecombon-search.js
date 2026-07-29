@@ -8,7 +8,7 @@
 	$( function () {
 		var $modal   = $( '#search' );
 		var $input   = $modal.find( '.form-search-nav input[name="s"]' );
-		var $results = $modal.find( '.tf-search-live-results' );
+		var $results = $modal.find( '.search-live-results' );
 
 		if ( ! $input.length || ! $results.length || typeof ecombonSearchParams === 'undefined' ) {
 			return;

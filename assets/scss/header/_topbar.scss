@@ -1,11 +1,11 @@
 /*--------- Abstracts variable ---------- */
-.tf-topbar {
+.topbar {
   padding-top: 12px;
   padding-bottom: 12px;
   position: relative;
   z-index: 101;
 }
-.tf-topbar .br-line.fake-class {
+.topbar .br-line.fake-class {
   position: absolute;
   left: 0;
   right: 0;
@@ -33,7 +33,7 @@
   padding-bottom: 9px;
 }
 
-.tf-topbar .tf-dropdown-select.type-currencies > .dropdown-menu {
+.topbar .dropdown-select.type-currencies > .dropdown-menu {
   width: max-content !important;
 }
 

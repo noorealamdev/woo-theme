@@ -89,7 +89,7 @@ $attribute_taxonomies = function_exists( 'wc_get_attribute_taxonomies' ) ? wc_ge
 							<div class="price-val-range" id="price-value-range" data-min="<?php echo esc_attr( (string) $price_min ); ?>" data-max="<?php echo esc_attr( (string) $price_max ); ?>"></div>
 							<input type="hidden" id="price-min-input" name="min_price" value="<?php echo esc_attr( (string) $current_min_price ); ?>">
 							<input type="hidden" id="price-max-input" name="max_price" value="<?php echo esc_attr( (string) $current_max_price ); ?>">
-							<div class="price-box tf-grid-layout tf-col-2">
+							<div class="price-box grid-layout tf-col-2">
 								<div class="box-wrap">
 									<div class="price-val_wrap">
 										<span class="cl-text-2 text-body-1">$</span>
@@ -103,7 +103,7 @@ $attribute_taxonomies = function_exists( 'wc_get_attribute_taxonomies' ) ? wc_ge
 									</div>
 								</div>
 							</div>
-							<button type="submit" class="tf-btn btn-fill w-100 justify-content-center mt-16">
+							<button type="submit" class="btn btn-fill w-100 justify-content-center mt-16">
 								<?php esc_html_e( 'Apply', 'ecombon' ); ?>
 							</button>
 						</form>

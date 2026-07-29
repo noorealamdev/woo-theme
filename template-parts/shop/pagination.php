@@ -1,6 +1,6 @@
 <?php
 /**
- * Shop pagination, styled to match the theme's own `.tf-page-pagination` markup.
+ * Shop pagination, styled to match the theme's own `.page-pagination` markup.
  *
  * @package Ecombon
  */
@@ -35,7 +35,7 @@ if ( empty( $links ) ) {
 }
 ?>
 <div class="wd-full justify-content-center">
-	<div class="tf-page-pagination">
+	<div class="page-pagination">
 		<?php foreach ( $links as $link ) : ?>
 			<?php
 			$is_current = false !== strpos( $link, 'current' );

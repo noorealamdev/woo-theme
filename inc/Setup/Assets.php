@@ -34,15 +34,17 @@ class Assets implements ComponentInterface {
 	 * Enqueues the theme stylesheets.
 	 */
 	public function enqueue_styles(): void {
-		wp_enqueue_style( 'ecombon-bootstrap', ECOMBON_THEME_URI . '/assets/css/bootstrap.min.css', array(), '5.3.3' );
+		// Custom Bootstrap build (assets/scss/bootstrap-custom.scss) — only
+		// the grid, dropdown, offcanvas, modal, nav/tabs, and progress
+		// modules this theme actually uses, not the full ~300KB bundle.
+		wp_enqueue_style( 'ecombon-bootstrap', ECOMBON_THEME_URI . '/assets/css/bootstrap-custom.min.css', array(), '5.3.3' );
 		wp_enqueue_style( 'ecombon-swiper', ECOMBON_THEME_URI . '/assets/css/swiper-bundle.min.css', array(), '11' );
-		wp_enqueue_style( 'ecombon-animate', ECOMBON_THEME_URI . '/assets/css/animate.css', array(), '4' );
 
 		wp_enqueue_style( 'ecombon-style', get_stylesheet_uri(), array(), ECOMBON_VERSION );
 		wp_enqueue_style(
 			'ecombon-main',
 			ECOMBON_THEME_URI . '/assets/css/main.css',
-			array( 'ecombon-bootstrap', 'ecombon-swiper', 'ecombon-animate', 'ecombon-style' ),
+			array( 'ecombon-bootstrap', 'ecombon-swiper', 'ecombon-style' ),
 			ECOMBON_VERSION
 		);
 

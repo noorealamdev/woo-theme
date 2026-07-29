@@ -27,7 +27,7 @@ get_template_part(
 			<div class="col-lg-8">
 				<?php if ( have_posts() ) : ?>
 
-					<div class="tf-grid-layout sm-col-2">
+					<div class="grid-layout sm-col-2">
 						<?php
 						while ( have_posts() ) :
 							the_post();
@@ -36,7 +36,7 @@ get_template_part(
 						?>
 
 						<div class="wd-full">
-							<?php the_posts_pagination( array( 'class' => 'tf-page-pagination' ) ); ?>
+							<?php the_posts_pagination( array( 'class' => 'page-pagination' ) ); ?>
 						</div>
 					</div>
 

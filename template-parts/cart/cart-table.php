@@ -23,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
 
 	<div class="overflow-auto">
 		<?php /* `.woocommerce-cart-form__contents` is required — WooCommerce's own real cart.js (AJAX quantity/coupon updates) checks for that exact class before doing anything. */ ?>
-		<table class="tf-table-page-cart woocommerce-cart-form__contents">
+		<table class="table-page-cart woocommerce-cart-form__contents">
 			<thead>
 				<tr>
 					<th><p class="h6 fw-medium"><?php esc_html_e( 'Products', 'ecombon' ); ?></p></th>
@@ -49,7 +49,7 @@ defined( 'ABSPATH' ) || exit;
 					$product_name       = \Ecombon\WooCommerce\CartItemVariations::get_title( $cart_item );
 					$thumbnail           = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image( array( 100, 133 ) ), $cart_item, $cart_item_key );
 					?>
-					<tr class="tf-cart_item each-prd file-delete <?php echo esc_attr( apply_filters( 'woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key ) ); ?>">
+					<tr class="cart_item each-prd file-delete <?php echo esc_attr( apply_filters( 'woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key ) ); ?>">
 						<td class="cart_product">
 							<?php if ( $product_permalink ) : ?>
 								<a href="<?php echo esc_url( $product_permalink ); ?>" class="img-prd"><?php echo wp_kses_post( $thumbnail ); ?></a>
@@ -74,7 +74,7 @@ defined( 'ABSPATH' ) || exit;
 								echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									'woocommerce_cart_item_remove_link',
 									sprintf(
-										'<a role="button" href="%s" class="cart_remove tf-btn-line-3 type-primary remove_from_cart_button" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s"><span class="text-caption-01 fw-semibold">%s</span></a>',
+										'<a role="button" href="%s" class="cart_remove btn-line-3 type-primary remove_from_cart_button" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s"><span class="text-caption-01 fw-semibold">%s</span></a>',
 										esc_url( wc_get_cart_remove_url( $cart_item_key ) ),
 										esc_attr( sprintf( __( 'Remove %s from cart', 'ecombon' ), wp_strip_all_tags( $product_name ) ) ),
 										esc_attr( $product_id ),
@@ -138,7 +138,7 @@ defined( 'ABSPATH' ) || exit;
 		<div class="ip-discount-code coupon">
 			<label for="coupon_code" class="screen-reader-text"><?php esc_html_e( 'Coupon:', 'ecombon' ); ?></label>
 			<input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="<?php esc_attr_e( 'Add voucher discount', 'ecombon' ); ?>" />
-			<button type="submit" class="tf-btn animate-btn" name="apply_coupon" value="<?php esc_attr_e( 'Apply Code', 'ecombon' ); ?>"><?php esc_html_e( 'Apply Code', 'ecombon' ); ?></button>
+			<button type="submit" class="btn animate-btn" name="apply_coupon" value="<?php esc_attr_e( 'Apply Code', 'ecombon' ); ?>"><?php esc_html_e( 'Apply Code', 'ecombon' ); ?></button>
 			<?php do_action( 'woocommerce_cart_coupon' ); ?>
 		</div>
 	<?php endif; ?>

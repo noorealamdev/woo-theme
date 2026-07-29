@@ -1,7 +1,7 @@
 <?php
 /**
  * Cart page: real cart contents, real quantity/remove/coupon actions,
- * restyled with the theme's own `.tf-table-page-cart` markup.
+ * restyled with the theme's own `.table-page-cart` markup.
  *
  * The form/table itself lives in template-parts/cart/cart-table.php (a
  * separate template-part, not inlined here) so Ecombon\WooCommerce\CartFragments

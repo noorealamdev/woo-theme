@@ -8,6 +8,6 @@
 
 defined( 'ABSPATH' ) || exit;
 ?>
-<a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="action-checkout tf-btn w-100 animate-btn">
+<a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="action-checkout btn w-100 animate-btn">
 	<span class="fw-semibold"><?php esc_html_e( 'Proceed To Checkout', 'ecombon' ); ?></span>
 </a>

@@ -70,10 +70,10 @@ $rating_counts = $product->get_rating_counts();
 			<?php endif; ?>
 
 			<div>
-				<button type="button" class="action btn-comment-review btn-cancel-review tf-btn animate-btn">
+				<button type="button" class="action btn-comment-review btn-cancel-review btn animate-btn">
 					<?php esc_html_e( 'Cancel Review', 'ecombon' ); ?>
 				</button>
-				<button type="button" class="action btn-comment-review btn-write-review tf-btn animate-btn">
+				<button type="button" class="action btn-comment-review btn-write-review btn animate-btn">
 					<?php esc_html_e( 'Write a review', 'ecombon' ); ?>
 				</button>
 			</div>
@@ -147,7 +147,7 @@ $rating_counts = $product->get_rating_counts();
 			$cookie_consent_field = '';
 			if ( has_action( 'set_comment_cookies', 'wp_set_comment_cookies' ) && get_option( 'show_comments_cookies_opt_in' ) ) {
 				$cookie_consent_field = '<div class="checkbox-wrap">
-					<input class="tf-check" type="checkbox" id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" value="yes">
+					<input class="check" type="checkbox" id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" value="yes">
 					<label for="wp-comment-cookies-consent">' . esc_html__( 'Save my name, email, and website in this browser for the next time I comment.', 'ecombon' ) . '</label>
 				</div>';
 			}
@@ -157,19 +157,19 @@ $rating_counts = $product->get_rating_counts();
 					' . $rating_field . '
 				</div>
 				<div class="form-content mb-24">
-					<div class="tf-grid-layout md-col-2">
-						<div class="tf-grid-layout">
-							<fieldset class="tf-field comment-form-author">
-								<label for="author" class="tf-lable fw-medium">' . esc_html__( 'Your Name', 'ecombon' ) . $required_mark . '</label>
+					<div class="grid-layout md-col-2">
+						<div class="grid-layout">
+							<fieldset class="field comment-form-author">
+								<label for="author" class="lable fw-medium">' . esc_html__( 'Your Name', 'ecombon' ) . $required_mark . '</label>
 								<input type="text" id="author" name="author" autocomplete="name" value="' . esc_attr( $commenter['comment_author'] ) . '"' . $required_attr . '>
 							</fieldset>
-							<fieldset class="tf-field comment-form-email">
-								<label for="email" class="tf-lable fw-medium">' . esc_html__( 'Your Email', 'ecombon' ) . $required_mark . '</label>
+							<fieldset class="field comment-form-email">
+								<label for="email" class="lable fw-medium">' . esc_html__( 'Your Email', 'ecombon' ) . $required_mark . '</label>
 								<input type="email" id="email" name="email" autocomplete="email" value="' . esc_attr( $commenter['comment_author_email'] ) . '"' . $required_attr . '>
 							</fieldset>
 						</div>
-						<fieldset class="tf-field d-flex flex-column comment-form-comment">
-							<label for="comment" class="tf-lable fw-medium">' . esc_html__( 'Review', 'ecombon' ) . ' <span class="text-primary">*</span></label>
+						<fieldset class="field d-flex flex-column comment-form-comment">
+							<label for="comment" class="lable fw-medium">' . esc_html__( 'Review', 'ecombon' ) . ' <span class="text-primary">*</span></label>
 							<textarea name="comment" id="comment" cols="45" rows="8" class="h-md-100" required></textarea>
 						</fieldset>
 					</div>
@@ -198,10 +198,10 @@ $rating_counts = $product->get_rating_counts();
 						'title_reply_after'    => '',
 						'class_container'      => 'write-review-wrap box-write-comment',
 						'class_form'           => 'form-rating',
-						'class_submit'         => 'tf-btn animate-btn',
+						'class_submit'         => 'btn animate-btn',
 						'label_submit'         => esc_html__( 'Submit Review', 'ecombon' ),
 						// A real <button> instead of WP core's default
-						// `<input type="submit" value="...">` — `.tf-btn`
+						// `<input type="submit" value="...">` — `.btn`
 						// (the same class every other real button in this
 						// theme uses) is a flex container meant to lay out
 						// child content/icons; browsers don't apply that to

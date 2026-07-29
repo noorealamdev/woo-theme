@@ -18,7 +18,7 @@ if ( function_exists( 'WC' ) && WC()->cart ) {
 	$cart_count = WC()->cart->get_cart_contents_count();
 }
 ?>
-<header class="tf-header">
+<header class="header">
 	<div class="br-line fake-class bottom-0"></div>
 	<div class="container-full">
 		<div class="header-inner">

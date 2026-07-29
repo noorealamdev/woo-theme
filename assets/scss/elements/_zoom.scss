@@ -41,37 +41,37 @@
   text-shadow: 1px 1px 3px #ffffff;
 }
 
-.tf-model-viewer {
+.model-viewer {
   width: 100%;
   height: 100%;
   position: relative;
   background: radial-gradient(circle at 50% 45%, #ffffff 0%, #f7f7f7 30%, #e0e0e0 55%, #bdbdbd 78%, #8a8a8a 100%);
 }
-.tf-model-viewer model-viewer {
+.model-viewer model-viewer {
   display: block;
   position: relative;
   z-index: 5;
   width: 100%;
   height: 100%;
 }
-.tf-model-viewer model-viewer.disabled {
+.model-viewer model-viewer.disabled {
   pointer-events: none;
 }
-.tf-model-viewer.active model-viewer {
+.model-viewer.active model-viewer {
   pointer-events: all;
 }
-.tf-model-viewer.active .wrap-btn-viewer {
+.model-viewer.active .wrap-btn-viewer {
   display: none;
 }
 
-.tf-zoom-main1,
-.tf-zoom-main {
+.zoom-main1,
+.zoom-main {
   position: sticky;
   top: 30px;
   z-index: 50;
 }
-.tf-zoom-main1 .drift-zoom-pane,
-.tf-zoom-main .drift-zoom-pane {
+.zoom-main1 .drift-zoom-pane,
+.zoom-main .drift-zoom-pane {
   top: 0;
   left: 0;
   height: 520px;
@@ -82,8 +82,8 @@
   box-shadow: 0 1px 5px rgba(127, 127, 127, 0.0196078431), 0 5px 18px rgba(127, 127, 127, 0.2);
   z-index: 3;
 }
-.tf-zoom-main1 .drift-zoom-pane img,
-.tf-zoom-main .drift-zoom-pane img {
+.zoom-main1 .drift-zoom-pane img,
+.zoom-main .drift-zoom-pane img {
   object-fit: cover;
 }
 

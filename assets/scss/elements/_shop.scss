@@ -295,7 +295,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 }
 
 /*-- CSS --*/
-.tf-btn-filter {
+.btn-filter {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -307,10 +307,10 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   text-overflow: ellipsis;
   padding: 4px 10px;
 }
-.tf-btn-filter .icon {
+.btn-filter .icon {
   font-size: 20px;
 }
-.tf-btn-filter:hover {
+.btn-filter:hover {
   background: var(--line);
 }
 
@@ -318,7 +318,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   min-width: 93px;
 }
 
-.tf-shop-control {
+.shop-control {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -330,19 +330,19 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   padding-bottom: 8px;
   background: var(--white);
 }
-.tf-shop-control .tf-control-sorting {
+.shop-control .control-sorting {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 12px;
 }
 
-.tf-control-layout {
+.control-layout {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-.tf-control-layout .tf-view-layout-switch {
+.control-layout .view-layout-switch {
   width: 32px;
   height: 32px;
   display: flex;
@@ -358,13 +358,13 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   position: relative;
   border-radius: 4px;
 }
-.tf-control-layout .tf-view-layout-switch:hover, .tf-control-layout .tf-view-layout-switch.active {
+.control-layout .view-layout-switch:hover, .control-layout .view-layout-switch.active {
   background: var(--text);
   color: var(--white);
 }
 
 @media (max-width: 575px) {
-  .tf-view-layout-switch {
+  .view-layout-switch {
     font-size: 14px;
   }
 }
@@ -403,7 +403,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   z-index: 10000;
 }
 @media (min-width: 1200px) {
-  .wrapper-control-shop .tf-grid-layout .wg-pagination {
+  .wrapper-control-shop .grid-layout .wg-pagination {
     margin-top: 16px;
     gap: 40px 20px;
   }
@@ -527,7 +527,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
-.filter-group-check .tf-check {
+.filter-group-check .check {
   min-width: unset;
   aspect-ratio: 1;
 }
@@ -551,16 +551,16 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   transition: all 0.3s ease;
   cursor: pointer;
 }
-.group-check-color .tf-check {
+.group-check-color .check {
   border-radius: 50%;
   width: 24px;
   height: 24px;
   background: transparent;
 }
-.group-check-color .tf-check::before {
+.group-check-color .check::before {
   display: none;
 }
-.group-check-color .tf-check:checked + .color {
+.group-check-color .check:checked + .color {
   width: 18px;
   height: 18px;
 }
@@ -773,12 +773,12 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   gap: 4px;
 }
 
-.tf-list-layout {
+.list-layout {
   display: grid;
   gap: 24px;
 }
 @media (min-width: 1200px) {
-  .tf-list-layout {
+  .list-layout {
     gap: 40px;
   }
 }
@@ -792,7 +792,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   cursor: pointer;
 }
 
-.tf-filter-dropdown,
+.filter-dropdown,
 .meta-dropdown-filter {
   display: flex;
   align-items: center;
@@ -800,26 +800,26 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   flex-wrap: wrap;
 }
 
-.tf-shop-change {
+.shop-change {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
 }
 @media (min-width: 1200px) {
-  .tf-shop-change {
+  .shop-change {
     gap: 32px;
   }
 }
 @media (max-width: 991px) {
-  .tf-shop-change {
+  .shop-change {
     width: 100%;
     justify-content: space-between;
   }
 }
 
 @media (max-width: 1199px) {
-  .tf-group-filter {
+  .group-filter {
     margin-bottom: 32px;
   }
 }
@@ -841,7 +841,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
     box-shadow: 0 0 25px 3px rgba(0, 0, 0, 0.1);
     border-radius: 16px;
   }
-  .filter-drawer-wrap .tf-group-filter {
+  .filter-drawer-wrap .group-filter {
     display: flex;
     flex-direction: column;
     gap: 28px;
@@ -912,7 +912,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 // display: flex but never centers its own items — the justify-content-center
 // Bootstrap utility on its wrapper div does nothing there since that
 // wrapper isn't itself a flex container.
-.tf-page-pagination {
+.page-pagination {
   justify-content: center;
 }
 
@@ -925,7 +925,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 // .wrapper-shop grid (e.g. template-parts/product/related.php's "You May
 // Also Like"), since both reuse the exact same non-responsive classes.
 @media (max-width: 767px) {
-  .wrapper-shop.tf-grid-layout {
+  .wrapper-shop.grid-layout {
     grid-template-columns: repeat(2, 1fr) !important;
   }
 }

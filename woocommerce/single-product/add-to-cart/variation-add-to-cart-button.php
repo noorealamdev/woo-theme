@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
 
 global $product;
 ?>
-<div class="woocommerce-variation-add-to-cart variations_button tf-product-total-quantity">
+<div class="woocommerce-variation-add-to-cart variations_button product-total-quantity">
 	<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
 
 	<p class="mb-0"><?php esc_html_e( 'Quantity:', 'ecombon' ); ?></p>
@@ -36,12 +36,12 @@ global $product;
 		do_action( 'woocommerce_after_add_to_cart_quantity' );
 		?>
 
-		<button type="submit" class="single_add_to_cart_button btn-action-price tf-btn type-xl animate-btn w-100">
+		<button type="submit" class="single_add_to_cart_button btn-action-price btn type-xl animate-btn w-100">
 			<?php echo esc_html( $product->single_add_to_cart_text() ); ?>
 		</button>
 	</div>
 
-	<button type="submit" name="ecombon_buy_now" value="1" class="single_add_to_cart_button tf-btn type-xl btn-primary animate-btn w-100 buy-it-now-button">
+	<button type="submit" name="ecombon_buy_now" value="1" class="single_add_to_cart_button btn type-xl btn-primary animate-btn w-100 buy-it-now-button">
 		<?php esc_html_e( 'Buy It Now', 'ecombon' ); ?>
 	</button>
 

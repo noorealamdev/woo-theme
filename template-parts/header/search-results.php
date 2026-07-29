@@ -23,9 +23,9 @@ $content_query  = isset( $args['content_query'] ) ? $args['content_query'] : nul
 $has_products = $product_query instanceof WP_Query && $product_query->have_posts();
 $has_content  = $content_query instanceof WP_Query && $content_query->have_posts();
 ?>
-<div class="tf-search-results">
+<div class="search-results">
 	<?php if ( ! $has_products && ! $has_content ) : ?>
-		<div class="tf-search-results_empty">
+		<div class="search-results_empty">
 			<?php
 			printf(
 				/* translators: %s: search term. */
@@ -36,9 +36,9 @@ $has_content  = $content_query instanceof WP_Query && $content_query->have_posts
 		</div>
 	<?php else : ?>
 		<?php if ( $has_products ) : ?>
-			<div class="tf-search-results_group">
-				<p class="tf-search-results_label"><?php esc_html_e( 'Products', 'ecombon' ); ?></p>
-				<div class="tf-search-results_list">
+			<div class="search-results_group">
+				<p class="search-results_label"><?php esc_html_e( 'Products', 'ecombon' ); ?></p>
+				<div class="search-results_list">
 					<?php
 					while ( $product_query->have_posts() ) :
 						$product_query->the_post();
@@ -50,13 +50,13 @@ $has_content  = $content_query instanceof WP_Query && $content_query->have_posts
 							continue;
 						}
 						?>
-						<a href="<?php echo esc_url( get_permalink() ); ?>" class="tf-search-result-item">
-							<span class="tf-search-result-image">
+						<a href="<?php echo esc_url( get_permalink() ); ?>" class="search-result-item">
+							<span class="search-result-image">
 								<?php echo wp_kses_post( $product->get_image( 'woocommerce_thumbnail' ) ); ?>
 							</span>
-							<span class="tf-search-result-info">
-								<span class="tf-search-result-name text-line-clamp-1"><?php echo esc_html( get_the_title() ); ?></span>
-								<span class="tf-search-result-price"><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
+							<span class="search-result-info">
+								<span class="search-result-name text-line-clamp-1"><?php echo esc_html( get_the_title() ); ?></span>
+								<span class="search-result-price"><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
 							</span>
 						</a>
 						<?php
@@ -68,15 +68,15 @@ $has_content  = $content_query instanceof WP_Query && $content_query->have_posts
 		<?php endif; ?>
 
 		<?php if ( $has_content ) : ?>
-			<div class="tf-search-results_group">
-				<p class="tf-search-results_label"><?php esc_html_e( 'Pages & Articles', 'ecombon' ); ?></p>
-				<div class="tf-search-results_list tf-search-results_list--compact">
+			<div class="search-results_group">
+				<p class="search-results_label"><?php esc_html_e( 'Pages & Articles', 'ecombon' ); ?></p>
+				<div class="search-results_list search-results_list--compact">
 					<?php
 					while ( $content_query->have_posts() ) :
 						$content_query->the_post();
 						?>
-						<a href="<?php echo esc_url( get_permalink() ); ?>" class="tf-search-result-item tf-search-result-item--compact">
-							<span class="tf-search-result-name text-line-clamp-1"><?php echo esc_html( get_the_title() ); ?></span>
+						<a href="<?php echo esc_url( get_permalink() ); ?>" class="search-result-item search-result-item--compact">
+							<span class="search-result-name text-line-clamp-1"><?php echo esc_html( get_the_title() ); ?></span>
 						</a>
 						<?php
 					endwhile;
@@ -89,7 +89,7 @@ $has_content  = $content_query instanceof WP_Query && $content_query->have_posts
 		<?php if ( $has_products ) : ?>
 			<a
 				href="<?php echo esc_url( add_query_arg( array( 's' => $term, 'post_type' => 'product' ), home_url( '/' ) ) ); ?>"
-				class="tf-search-results_view-all link"
+				class="search-results_view-all link"
 			>
 				<?php
 				printf(

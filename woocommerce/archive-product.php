@@ -22,7 +22,7 @@ get_template_part( 'template-parts/shop/page-title' );
 		<?php get_template_part( 'template-parts/shop/control-bar' ); ?>
 
 		<?php if ( have_posts() ) : ?>
-			<div class="wrapper-shop tf-grid-layout tf-col-4" id="gridLayout">
+			<div class="wrapper-shop grid-layout tf-col-4" id="gridLayout">
 				<?php
 				while ( have_posts() ) :
 					the_post();

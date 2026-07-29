@@ -21,11 +21,11 @@ $rating_count  = $product->get_rating_count();
 $average       = $product->get_average_rating();
 $review_count  = $product->get_review_count();
 ?>
-<div class="tf-product-info-wrap position-relative mt-md-0">
+<div class="product-info-wrap position-relative mt-md-0">
 	<?php /* assets/js/zoom.js renders the hover-zoom pane into this element. */ ?>
-	<div class="tf-zoom-main sticky-top"></div>
-	<div class="tf-product-info-list">
-		<div class="tf-product-info-heading">
+	<div class="zoom-main sticky-top"></div>
+	<div class="product-info-list">
+		<div class="product-info-heading">
 			<?php if ( $category_list ) : ?>
 				<p class="product-infor-cate text-caption-01 mb-4"><?php echo wp_kses_post( $category_list ); ?></p>
 			<?php endif; ?>
@@ -97,7 +97,7 @@ $review_count  = $product->get_review_count();
 
 		<div class="br-line"></div>
 
-		<div class="tf-product-variant">
+		<div class="product-variant">
 			<?php woocommerce_template_single_add_to_cart(); ?>
 		</div>
 
@@ -106,7 +106,7 @@ $review_count  = $product->get_review_count();
 		$return_note   = apply_filters( 'ecombon_product_return_note', '' );
 		if ( $delivery_note || $return_note ) :
 			?>
-			<div class="tf-product-delivery-return">
+			<div class="product-delivery-return">
 				<?php if ( $delivery_note ) : ?>
 					<div class="product-delivery">
 						<?php \Ecombon\Setup\Icons::render( 'Timer' ); ?>
@@ -123,7 +123,7 @@ $review_count  = $product->get_review_count();
 			<div class="br-line"></div>
 		<?php endif; ?>
 
-		<div class="tf-product-trust-seal">
+		<div class="product-trust-seal">
 			<p class="h6 text-seal"><?php esc_html_e( 'Guaranteed Safe Checkout:', 'ecombon' ); ?></p>
 			<?php
 			get_template_part(

@@ -11,7 +11,7 @@
 	// (3) for a variable product, mirrors the real live price/variant
 	// selection into the sticky bar.
 	$( function () {
-		var $stickyBar = $( '.tf-sticky-btn-atc' );
+		var $stickyBar = $( '.sticky-btn-atc' );
 
 		if ( ! $stickyBar.length ) {
 			return;
@@ -54,8 +54,8 @@
 		// "Color, Size" style summary line built from the real swatch/pill
 		// labels it builds — never a second, separate lookup.
 		var $variationsForm  = $( '.variations_form' );
-		var $stickyPrice     = $stickyBar.find( '.tf-sticky-atc-price' );
-		var $stickyVariantDesc = $stickyBar.find( '.tf-sticky-atc-variant-desc' );
+		var $stickyPrice     = $stickyBar.find( '.sticky-atc-price' );
+		var $stickyVariantDesc = $stickyBar.find( '.sticky-atc-variant-desc' );
 		var originalPriceHtml = $stickyPrice.html();
 
 		if ( $variationsForm.length && $stickyPrice.length ) {

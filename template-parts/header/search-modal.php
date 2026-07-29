@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php \Ecombon\Setup\Icons::render( 'MagnifyingGlass' ); ?>
 				</button>
 			</form>
-			<div class="tf-search-live-results" aria-live="polite"></div>
+			<div class="search-live-results" aria-live="polite"></div>
 		</div>
 	</div>
 </div>

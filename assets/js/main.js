@@ -52,8 +52,8 @@
     /* Select Image
     -------------------------------------------------------------------------*/
     var dropdownSelect = function () {
-        if ($(".tf-dropdown-select").length > 0) {
-            const selectIMG = $(".tf-dropdown-select");
+        if ($(".dropdown-select").length > 0) {
+            const selectIMG = $(".dropdown-select");
 
             selectIMG.find("option").each((idx, elem) => {
                 const selectOption = $(elem);
@@ -105,8 +105,8 @@
         function updateTotalPrice() {
             var total = 0;
 
-            $(".list-file-delete .tf-mini-cart-item").each(function () {
-                var priceText = $(this).find(".tf-mini-card-price").text().replace("$", "").replace(",", "").trim();
+            $(".list-file-delete .mini-cart-item").each(function () {
+                var priceText = $(this).find(".mini-card-price").text().replace("$", "").replace(",", "").trim();
                 var price = parseFloat(priceText);
                 if (!isNaN(price)) {
                     total += price;
@@ -114,7 +114,7 @@
             });
 
             var formatted = total.toLocaleString("en-US", { style: "currency", currency: "USD" });
-            $(".tf-totals-total-value").text(formatted);
+            $(".totals-total-value").text(formatted);
         }
 
         function updatePriceEach() {
@@ -164,7 +164,7 @@
                 var $boxEmpty = $listEmpty.find(".box-empty_clear");
                 var $progress = $listEmpty
                     .closest(".popup-shopping-cart")
-                    .find(".tf-progress-bar .value");
+                    .find(".progress-bar .value");
 
 
                 if ($otherChildren.length > 0) {
@@ -328,10 +328,10 @@
         });
 
         $(".btn-add-to-cart").on("click", function () {
-            $(".tf-add-cart-success").addClass("active");
+            $(".add-cart-success").addClass("active");
         });
-        $(".tf-add-cart-success .tf-add-cart-close").on("click", function () {
-            $(".tf-add-cart-success").removeClass("active");
+        $(".add-cart-success .add-cart-close").on("click", function () {
+            $(".add-cart-success").removeClass("active");
         });
 
         $(".btn-add-note, .btn-estimate-shipping, .btn-add-gift").on("click", function (event) {
@@ -348,8 +348,8 @@
             });
         });
 
-        $(".tf-mini-cart-tool-close").on("click", function () {
-            $(".tf-mini-cart-tool-openable").removeClass("open");
+        $(".mini-cart-tool-close").on("click", function () {
+            $(".mini-cart-tool-openable").removeClass("open");
         });
     };
 
@@ -357,7 +357,7 @@
     -------------------------------------------------------------------------*/
     var headerSticky = function () {
         const customHeaderCategory = () => {
-            const header = document.querySelector(".tf-header");
+            const header = document.querySelector(".header");
 
             if (!header || !header.classList.contains("has-by-category")) {
                 return null;
@@ -454,7 +454,7 @@
     /* Total Price Variant
     -------------------------------------------------------------------------*/
     var totalPriceVariant = function () {
-        $(".tf-product-info-wrap").each(function () {
+        $(".product-info-wrap").each(function () {
             var productItem = $(this);
             var priceEl = productItem.find(".price-on-sale");
             var quantityInput = productItem.find(".quantity-product");
@@ -507,13 +507,13 @@
 
         function handleProgressBar(showEvent, hideEvent, target) {
             $(target).on(hideEvent, function () {
-                $(".tf-progress-bar .value").css("width", "0%");
+                $(".progress-bar .value").css("width", "0%");
             });
 
             $(target).on(showEvent, function () {
                 setTimeout(function () {
-                    var progressValue = $(".tf-progress-bar .value").data("progress");
-                    $(".tf-progress-bar .value").css("width", progressValue + "%");
+                    var progressValue = $(".progress-bar .value").data("progress");
+                    $(".progress-bar .value").css("width", progressValue + "%");
                 }, 600);
             });
         }
@@ -807,13 +807,13 @@
 
             if (productCount === 0) {
                 $wishlistInner.append(`
-          <div class="tf-wishlist-empty text-center wd-full">
+          <div class="wishlist-empty text-center wd-full">
             <p class="text-notice cl-text-2 mb-20">No products were added to the wishlist.</p>
-            <a href="index.html" class="tf-btn animate-btn">Back To Shopping</a>
+            <a href="index.html" class="btn animate-btn">Back To Shopping</a>
           </div>
         `);
             } else {
-                $wishlistInner.find(".tf-compare-empty").remove();
+                $wishlistInner.find(".compare-empty").remove();
             }
         }
 
@@ -1198,9 +1198,9 @@
 
         $(window).on("scroll", function () {
             var addToCart = $(".section-product-single .btn-action-price")[0];
-            var myElement = $(".tf-sticky-btn-atc");
+            var myElement = $(".sticky-btn-atc");
             var scrollTopBtn = $(".shopify-section .scroll-top");
-            var toolbar = $(".tf-toolbar");
+            var toolbar = $(".toolbar");
 
             if (!addToCart) return;
 
@@ -1287,8 +1287,8 @@
             var $this = $(this),
                 selectOptions = $(this).children("option").length;
             $this.addClass("hide-select");
-            $this.after('<div class="tf-select-custom"></div>');
-            var $customSelect = $this.next("div.tf-select-custom");
+            $this.after('<div class="select-custom"></div>');
+            var $customSelect = $this.next("div.select-custom");
             $customSelect.text($this.children("option").eq(0).text());
             var $optionlist = $(
                 '<ul class="select-options" /><div class="header-select-option"><span>Select Categories</span><span class="close-option"><i class="icon-X2"></i></div>'
@@ -1315,7 +1315,7 @@
             var $optionlistItems = $optionlist.children("li");
             $customSelect.on("click", function (e) {
                 e.stopPropagation();
-                $("div.tf-select-custom.active")
+                $("div.select-custom.active")
                     .not(this)
                     .each(function () {
                         $(this).removeClass("active").next("ul.select-options").hide();
@@ -1342,7 +1342,7 @@
     /* Hover Pin
     -------------------------------------------------------------------------*/
     var hoverPin = function () {
-        $(".tf-lookbook-hover").each(function () {
+        $(".lookbook-hover").each(function () {
             const $container = $(this);
 
             $container.find(".bundle-pin-item").on("mouseover", function () {
@@ -1498,7 +1498,7 @@
             var totalPrice = 0;
             $bundleItems.each(function () {
                 var $this = $(this);
-                if ($this.find(".tf-check").prop("checked")) {
+                if ($this.find(".check").prop("checked")) {
                     var newPrice = parseFloat($this.find(".quantity-price").text().replace(/[$,]/g, "")) || 0;
 
                     totalPrice += newPrice;
@@ -1510,7 +1510,7 @@
 
         updateBundleTotal();
 
-        $(".tf-check").on("change", function () {
+        $(".check").on("change", function () {
             updateBundleTotal();
         });
     };
@@ -1610,13 +1610,13 @@
     /* Hover Lookbook
     -------------------------------------------------------------------------*/
     var handleHoverLookBook = () => {
-        var $pins = $('.section-lookbook-hover-v03 .tf-pin-btn');
+        var $pins = $('.section-lookbook-hover-v03 .pin-btn');
         var $productWrap = $('.section-lookbook-hover-v03 .wrap-product');
         var $products = $productWrap.find('.card-product');
 
         if ($pins.length === 0 || $productWrap.length === 0 || $products.length === 0) return;
 
-        var swiperEl = document.querySelector('.section-lookbook-hover-v03 .tf-sw-mobile.swiper');
+        var swiperEl = document.querySelector('.section-lookbook-hover-v03 .sw-mobile.swiper');
         var swiper = swiperEl && swiperEl.swiper ? swiperEl.swiper : null;
 
         function isInView($container, $el) {
@@ -1866,9 +1866,9 @@
     /* Popup Product Action
     -------------------------------------------------------------------------*/
     var popupProductVariant = () => {
-        if ($(".tf-quick-prd_variant").length === 0) return;
+        if ($(".quick-prd_variant").length === 0) return;
 
-        $(".tf-quick-prd_variant").each(function () {
+        $(".quick-prd_variant").each(function () {
             var $wrap = $(this);
             var basePrice = 0;
             var $activeSize = $wrap.find(".size_btn.active");
@@ -2080,10 +2080,10 @@
             $("body").addClass("rtl");
             $("#toggle-rtl").text("ltr");
 
-            $(".sub-menu_link,.nav-category_link, .tf-page-pagination").find(".icon").removeClass("icon-CaretRightThin").addClass("icon-CaretLeft");
-            $(".tf-btn-icon,.list-btn-tab-accordion .accordion-title").find(".icon").removeClass("icon-ArrowRight").addClass("icon-ArrowLeft");
+            $(".sub-menu_link,.nav-category_link, .page-pagination").find(".icon").removeClass("icon-CaretRightThin").addClass("icon-CaretLeft");
+            $(".btn-icon,.list-btn-tab-accordion .accordion-title").find(".icon").removeClass("icon-ArrowRight").addClass("icon-ArrowLeft");
 
-            $(".tf-slideshow .icon").each(function () {
+            $(".slideshow .icon").each(function () {
                 const $icon = $(this);
                 if ($icon.hasClass("icon-ArrowLongRight")) {
                     $icon.removeClass("icon-ArrowLongRight").addClass("icon-ArrowLongLeft");
@@ -2091,7 +2091,7 @@
                     $icon.removeClass("icon-ArrowLongLeft").addClass("icon-ArrowLongRight");
                 }
             });
-            $(".tes_thumb .tf-sw-nav-2 .icon, .sect-heading .tf-sw-nav-2 .icon,.tf-slideshow .tf-sw-nav-2 .icon").each(function () {
+            $(".tes_thumb .sw-nav-2 .icon, .sect-heading .sw-nav-2 .icon,.slideshow .sw-nav-2 .icon").each(function () {
                 const $icon = $(this);
                 if ($icon.hasClass("icon-ArrowRight")) {
                     $icon.removeClass("icon-ArrowRight").addClass("icon-ArrowLeft");
@@ -2099,7 +2099,7 @@
                     $icon.removeClass("icon-ArrowLeft").addClass("icon-ArrowRight");
                 }
             });
-            $(".swip-text .icon,.tf-topbar .icon").each(function () {
+            $(".swip-text .icon,.topbar .icon").each(function () {
                 const $icon = $(this);
                 if ($icon.hasClass("icon-CaretRightThin")) {
                     $icon.removeClass("icon-CaretRightThin").addClass("icon-CaretLeft");

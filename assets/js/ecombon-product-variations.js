@@ -59,10 +59,10 @@
 		}
 
 		var variationData = $form.data( 'product_variations' );
-		var fallbackImage = $( '.tf-product-media-main .swiper-slide' ).first().find( 'img' ).attr( 'src' ) || '';
+		var fallbackImage = $( '.product-media-main .swiper-slide' ).first().find( 'img' ).attr( 'src' ) || '';
 
 		// Inserted as direct siblings of `table.variations` (not wrapped in
-		// a container div) so `.tf-product-variant`'s own `gap` (see
+		// a container div) so `.product-variant`'s own `gap` (see
 		// assets/scss/elements/_product.scss) spaces them the same way it
 		// spaces every other real child of that element.
 		var $items = [];
@@ -187,7 +187,7 @@
 	 * already-formatted (currency symbol, decimals, position) price
 	 * string, so this never needs to format a number itself.
 	 *
-	 * Deliberately named `.tf-add-price*`, not the theme's own `.price-add`:
+	 * Deliberately named `.add-price*`, not the theme's own `.price-add`:
 	 * main.js's fake demo variant-price calculator (`totalPriceVariant()`)
 	 * finds any real `.price-add` element unconditionally on page load and
 	 * overwrites it based on a `data-price` attribute this real markup
@@ -197,7 +197,7 @@
 		var $button = $form.find( '.single_add_to_cart_button' ).not( '.buy-it-now-button' );
 
 		function clearPrice() {
-			$button.find( '.tf-add-price-sep, .tf-add-price' ).remove();
+			$button.find( '.add-price-sep, .add-price' ).remove();
 		}
 
 		$form.on( 'found_variation', function ( event, variation ) {
@@ -221,8 +221,8 @@
 			}
 
 			$button
-				.append( '<span class="tf-add-price-sep d-none d-sm-block d-md-none d-lg-block">&nbsp;-&nbsp;</span>' )
-				.append( $( '<span class="tf-add-price d-none d-sm-block d-md-none d-lg-block"></span>' ).text( priceText ) );
+				.append( '<span class="add-price-sep d-none d-sm-block d-md-none d-lg-block">&nbsp;-&nbsp;</span>' )
+				.append( $( '<span class="add-price d-none d-sm-block d-md-none d-lg-block"></span>' ).text( priceText ) );
 		} );
 
 		$form.on( 'reset_data hide_variation', clearPrice );

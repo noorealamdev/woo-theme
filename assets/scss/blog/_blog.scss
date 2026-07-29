@@ -115,13 +115,13 @@
 
 // Real WP pagination (the_posts_pagination(), real `page-numbers`/`current`
 // classes — see get_the_posts_pagination() in wp-includes/link-template.php)
-// wrapped in a real <nav class="navigation tf-page-pagination">; .nav-links
+// wrapped in a real <nav class="navigation page-pagination">; .nav-links
 // is WP's own real inner wrapper.
-.tf-page-pagination .nav-links {
+.page-pagination .nav-links {
   display: flex;
   gap: 8px;
 }
-.tf-page-pagination .page-numbers {
+.page-pagination .page-numbers {
   min-width: 40px;
   height: 40px;
   padding: 0 8px;
@@ -132,13 +132,13 @@
   border: 1px solid var(--line);
   font-weight: 600;
 }
-.tf-page-pagination .page-numbers.current,
-.tf-page-pagination .page-numbers:hover {
+.page-pagination .page-numbers.current,
+.page-pagination .page-numbers:hover {
   border-color: var(--text);
   background: var(--text);
   color: var(--white);
 }
-.tf-page-pagination .page-numbers.dots {
+.page-pagination .page-numbers.dots {
   border-color: transparent;
 }
 
@@ -266,11 +266,11 @@
   gap: 40px;
   margin-bottom: 40px;
 }
-.main-blog-single .blog-content .tf-list li {
+.main-blog-single .blog-content .list li {
   padding-left: 27px;
   position: relative;
 }
-.main-blog-single .blog-content .tf-list li::after {
+.main-blog-single .blog-content .list li::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -332,11 +332,11 @@
   background: var(--primary);
   color: var(--white);
 }
-.main-blog-single .box-social-tag .tf-social-icon-2 a {
+.main-blog-single .box-social-tag .social-icon-2 a {
   width: 32px;
   height: 32px;
 }
-.main-blog-single .box-social-tag .tf-social-icon-2 .icon {
+.main-blog-single .box-social-tag .social-icon-2 .icon {
   font-size: 16px;
 }
 .main-blog-single .group-direc {

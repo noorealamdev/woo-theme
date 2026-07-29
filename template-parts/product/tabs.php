@@ -48,7 +48,7 @@ $active_tab = reset( $tab_keys );
 		<ul class="tab-btn-wrap-v1" role="tablist">
 			<?php foreach ( $tabs as $key => $label ) : ?>
 				<li class="nav-tab-item" role="presentation">
-					<a href="#<?php echo esc_attr( $key ); ?>" data-bs-toggle="tab" class="tf-btn-tab<?php echo esc_attr( $key === $active_tab ? ' active' : '' ); ?>" role="tab">
+					<a href="#<?php echo esc_attr( $key ); ?>" data-bs-toggle="tab" class="btn-tab<?php echo esc_attr( $key === $active_tab ? ' active' : '' ); ?>" role="tab">
 						<span class="h5 fw-medium"><?php echo esc_html( $label ); ?></span>
 					</a>
 				</li>

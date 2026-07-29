@@ -415,7 +415,7 @@ form.woocommerce-checkout .woocommerce-input-wrapper {
 
 /* Real checkboxes (create-account, ship-to-different-address, terms) all
    render as plain unstyled native checkboxes by default — give them the
-   same custom checkmark look as the theme's own .tf-check element
+   same custom checkmark look as the theme's own .check element
    (assets/scss/elements/_form.scss) without needing that class in markup. */
 form.woocommerce-checkout input[type="checkbox"] {
   position: relative;
@@ -440,7 +440,7 @@ form.woocommerce-checkout input[type="checkbox"]:checked {
   background: var(--black);
   border-color: var(--black);
 }
-// Real icon-check glyph, same real path/technique as .tf-check::before in
+// Real icon-check glyph, same real path/technique as .check::before in
 // _form.scss — see that rule's comment for why this uses mask-image
 // instead of a DOM <svg> (a real <input type="checkbox"> can't have children).
 form.woocommerce-checkout input[type="checkbox"]::before {
