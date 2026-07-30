@@ -30,7 +30,8 @@ $review_count  = $product->get_review_count();
 				<p class="product-infor-cate text-caption-01 mb-4"><?php echo wp_kses_post( $category_list ); ?></p>
 			<?php endif; ?>
 
-			<h3 class="product-infor-name mb-12"><?php echo wp_kses_post( $product->get_name() ); ?></h3>
+			<?php // Real <h1> — the product's main heading; its own font-size is set directly in main.css (26px, not the shared .h3 clamp). ?>
+			<h1 class="product-infor-name mb-12"><?php echo wp_kses_post( $product->get_name() ); ?></h1>
 
 			<div class="product-infor-meta mb-20">
 				<?php if ( $rating_count > 0 ) : ?>
@@ -67,7 +68,7 @@ $review_count  = $product->get_review_count();
 			// price fields (which are empty; each variation has its own).
 			// Those fall back to WooCommerce's own real get_price_html()
 			// output below, already restyled to match in
-			// assets/scss/elements/_product.scss.
+			// assets/css/main.css.
 			$regular_price = $product->get_regular_price();
 			$sale_price    = $product->get_sale_price();
 			$show_badge    = $product->is_on_sale() && '' !== $regular_price && '' !== $sale_price && (float) $regular_price > 0;

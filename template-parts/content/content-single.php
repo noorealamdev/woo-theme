@@ -42,7 +42,8 @@ $next_post         = get_next_post();
 								</a>
 							<?php endif; ?>
 
-							<?php the_title( '<h3 class="entry-title">', '</h3>' ); ?>
+							<?php // Real <h1> — the post's main heading; .h3 keeps the existing visual size (see main.css). ?>
+							<?php the_title( '<h1 class="entry-title h3">', '</h1>' ); ?>
 
 							<div class="entry-meta">
 								<div class="meta-item meta-date">

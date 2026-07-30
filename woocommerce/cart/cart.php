@@ -8,6 +8,7 @@
  * can render the exact same markup as a real AJAX fragment.
  *
  * @package Ecombon
+ * @version 10.8.0
  */
 
 defined( 'ABSPATH' ) || exit;

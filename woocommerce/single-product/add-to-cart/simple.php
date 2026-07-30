@@ -4,6 +4,7 @@
  * template, plus a real "Buy It Now" button.
  *
  * @package Ecombon
+ * @version 10.2.0
  */
 
 defined( 'ABSPATH' ) || exit;

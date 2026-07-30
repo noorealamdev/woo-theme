@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ECOMBON_VERSION', '0.1.0' );
+define( 'ECOMBON_VERSION', '0.1.1' );
 define( 'ECOMBON_MIN_PHP', '8.0' );
 define( 'ECOMBON_THEME_DIR', get_template_directory() );
 define( 'ECOMBON_THEME_URI', get_template_directory_uri() );

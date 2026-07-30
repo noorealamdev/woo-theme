@@ -63,7 +63,7 @@
 
 		// Inserted as direct siblings of `table.variations` (not wrapped in
 		// a container div) so `.product-variant`'s own `gap` (see
-		// assets/scss/elements/_product.scss) spaces them the same way it
+		// assets/css/main.css) spaces them the same way it
 		// spaces every other real child of that element.
 		var $items = [];
 
@@ -108,7 +108,7 @@
 					$btn.find( 'img' ).attr( { src: imgSrc, alt: text } );
 					$btn.find( '.tooltip' ).text( text );
 				} else {
-					// `.style-nor` (see assets/scss/elements/_product.scss)
+					// `.style-nor` (see assets/css/main.css)
 					// auto-sizes to its padding + text instead of the base
 					// `.size-btn`'s fixed 44x44 box, which only really fits
 					// single-letter sizes (S/M/L) — real WC attribute values

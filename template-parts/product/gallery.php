@@ -71,7 +71,7 @@ if ( empty( $image_ids ) ) {
 		/**
 		 * `data-preview="auto"` (Swiper's `slidesPerView: 'auto'`) sizes
 		 * each thumbnail by its own real CSS size (see the square
-		 * `aspect-ratio` rule in assets/scss/elements/_product.scss)
+		 * `aspect-ratio` rule in assets/css/main.css)
 		 * instead of dividing the rail's rendered height evenly by a fixed
 		 * slide count, which stretched real thumbnails into tall,
 		 * distorted rectangles whenever a product had fewer images than

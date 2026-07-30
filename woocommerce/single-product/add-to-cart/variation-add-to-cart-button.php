@@ -10,6 +10,7 @@
  * "no selection yet" / "unavailable" guard for free, no extra JS needed.
  *
  * @package Ecombon
+ * @version 10.5.2
  */
 
 defined( 'ABSPATH' ) || exit;

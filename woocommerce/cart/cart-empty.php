@@ -3,6 +3,7 @@
  * Empty cart page.
  *
  * @package Ecombon
+ * @version 7.0.1
  */
 
 defined( 'ABSPATH' ) || exit;

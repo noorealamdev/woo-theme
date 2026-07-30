@@ -6,6 +6,7 @@
  * of WooCommerce's default review template.
  *
  * @package Ecombon
+ * @version 9.7.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -83,11 +84,12 @@ $rating_counts = $product->get_rating_counts();
 			<div class="head">
 				<h4>
 					<?php
-					printf(
+					$reviews_title = sprintf(
 						/* translators: %d: number of reviews. */
 						esc_html( _n( '%d Review', '%d Reviews', $review_count, 'ecombon' ) ),
 						(int) $review_count
 					);
+					echo wp_kses_post( apply_filters( 'woocommerce_reviews_title', $reviews_title, $review_count, $product ) );
 					?>
 				</h4>
 			</div>

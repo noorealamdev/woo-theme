@@ -4,6 +4,7 @@
  * buttons (same classes as the cart drawer's "Check Out" button).
  *
  * @package Ecombon
+ * @version 7.0.1
  */
 
 defined( 'ABSPATH' ) || exit;

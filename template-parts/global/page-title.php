@@ -38,7 +38,18 @@ if ( '' === $title ) {
 				<?php \Ecombon\Setup\Icons::render( 'CaretRightThin', 'cl-text-3' ); ?>
 				<p class="text-caption-01"><?php echo esc_html( $title ); ?></p>
 			</div>
-			<h3><?php echo esc_html( $title ); ?></h3>
+			<?php
+			/*
+			 * Real <h1> — this banner is the main heading on every page
+			 * type that uses it (shop, archives, cart, checkout, account,
+			 * static pages, search, 404); single posts/products own their
+			 * own separate <h1> instead (see single.php/content-single.php,
+			 * content-single-product.php) and never render this template
+			 * part, so there's no risk of two <h1>s on the same page.
+			 * `.h3` keeps the existing visual size — see main.css.
+			 */
+			?>
+			<h1 class="h3"><?php echo esc_html( $title ); ?></h1>
 			<?php if ( $subtitle ) : ?>
 				<p class="text-body-1 cl-text-2"><?php echo wp_kses_post( $subtitle ); ?></p>
 			<?php endif; ?>

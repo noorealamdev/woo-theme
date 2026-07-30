@@ -71,6 +71,17 @@ defined( 'ABSPATH' ) || exit;
 								<?php endforeach; ?>
 
 								<?php
+								/**
+								 * Real hook — no default callback (the theme
+								 * shows variation data via CartItemVariations
+								 * above, not this hook), kept open for
+								 * extensions (e.g. a subscription-details or
+								 * backorder-notice plugin).
+								 */
+								do_action( 'woocommerce_after_cart_item_name', $cart_item, $cart_item_key );
+								?>
+
+								<?php
 								echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									'woocommerce_cart_item_remove_link',
 									sprintf(

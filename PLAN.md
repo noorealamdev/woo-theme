@@ -554,3 +554,102 @@ Forget about Customizer.
 Forget about admin pages.
 
 Just build the frontend.
+
+====================================================
+
+Phase 1 — STATUS: COMPLETE
+
+The Ecombon theme is a real, working, hardened WooCommerce theme.
+
+Shop, product, cart, checkout, account, blog, search, 404 — all real
+WordPress/WooCommerce data, no placeholder content.
+
+WooCommerce compatibility hooks restored (shop loop, single product
+summary, cart, reviews) so third-party WooCommerce extensions integrate
+correctly.
+
+Real SEO fundamentals in place: correct <h1> hierarchy sitewide, meta
+description, Open Graph / Twitter Card tags, Organization/WebSite +
+BreadcrumbList structured data, real Product structured data.
+
+Performance pass done: dead CSS removed, WordPress <head> bloat
+stripped, Bootstrap trimmed to only the modules actually used.
+
+No build step. assets/css/main.css and assets/css/bootstrap-custom.css
+are plain hand-maintained CSS — the SCSS toolchain was removed entirely.
+
+====================================================
+
+Phase 2 — Core Plugin, Settings, Header/Footer Builder
+
+Ecombon Core will NOT be built from scratch.
+
+It will be built on top of an existing, real plugin: NoorPDP.
+
+NoorPDP today (c:\wamp64\www\noorblocks\wp-content\plugins\noorpdp):
+
+29 real registered Gutenberg blocks, auto-discovered from block.json
+(includes/Blocks/Manager.php) — generic content blocks (container,
+heading, button, tabs, accordion, feature-cards, icon-list,
+comparison-table, trust-badges, urgency, hero) plus WooCommerce
+single-product-page blocks (product-add-to-cart, product-gallery-carousel,
+product-tabs, related-products, sticky-add-to-cart, and more).
+
+Modern build tooling already in place — @wordpress/scripts, src/ → build/.
+
+PSR-4-style autoloader, NoorPDP\ namespace.
+
+A classic (non-React) admin settings page already exists
+(includes/Admin/Dashboard.php) — block enable/disable, default layout.
+
+A real Layouts system (includes/Layouts/: Post_Type, Resolver, Meta_Box,
+Template_Override, Duplicate, Preview) — currently scoped to the single
+product page only.
+
+Mature engineering: CI, PHPCS/WPCS, git history, WordPress.org-track
+docs, a companion noorpdp-pro add-on with Freemius licensing wired in.
+
+Currently product-page-only in scope — not yet general-purpose site
+sections.
+
+--- Three concrete Phase 2 workstreams ---
+
+1. Modern settings panel
+
+Replace/extend NoorPDP's classic Admin\Dashboard.php with a real React
+(@wordpress/components) admin UI.
+
+Scope: the settings the Ecombon theme already anticipates via its own
+filters and has zero UI for today —
+
+ecombon_contact_phone / ecombon_contact_email / ecombon_contact_address
+(footer.php, mobile-menu.php)
+
+ecombon_social_links (footer.php, also feeds SEO.php's Organization
+JSON-LD sameAs)
+
+Plus new: Google Fonts selection (explicitly deferred to "theme
+settings panel" during theme build), and brand colors (the theme's
+:root CSS custom properties in assets/css/main.css, currently
+hardcoded).
+
+The theme's own filter-consuming code stays untouched — Core Plugin
+becomes the real settings source behind those existing filters.
+
+2. Header Builder + Footer Builder
+
+New capability. Modeled on NoorPDP's existing Layouts pattern
+(Post_Type + Resolver + Meta_Box + Template_Override), generalized to
+header/footer placement instead of single-product content only.
+
+3. General-purpose blocks
+
+Extend the block library beyond product-page-only blocks to real
+homepage/site-building sections, reusing the same auto-registration
+mechanism (Blocks/Manager.php).
+
+--- Open decision, not yet made ---
+
+How NoorPDP physically joins the Ecombon platform — copied/renamed into
+the Ecombon site's wp-content/plugins/, or kept as a separate dependency
+plugin. Decide this before starting implementation.

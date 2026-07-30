@@ -5,11 +5,11 @@
 	// No add-to-cart logic lives here — the sticky button is a real
 	// `<button form="ecombon-add-to-cart-form">`, natively associated with
 	// the real `form.cart` below regardless of where it sits in the DOM, so
-	// clicking it submits that real form exactly like the real button would.
-	// This script only: (1) makes sure the real form actually has that id,
-	// (2) keeps the sticky quantity input in sync with the real one, and
-	// (3) for a variable product, mirrors the real live price/variant
-	// selection into the sticky bar.
+	// clicking it submits that real form (with whatever quantity the
+	// shopper already set in the real buy-box above) exactly like the real
+	// button would. This script only: (1) makes sure the real form
+	// actually has that id, and (2) for a variable product, mirrors the
+	// real live price/variant selection into the sticky bar.
 	$( function () {
 		var $stickyBar = $( '.sticky-btn-atc' );
 
@@ -22,31 +22,6 @@
 		if ( $realForm.length && ! $realForm.attr( 'id' ) ) {
 			$realForm.attr( 'id', 'ecombon-add-to-cart-form' );
 		}
-
-		var $realQty   = $realForm.find( '.qty' ).first();
-		var $stickyQty = $stickyBar.find( '.qty' ).first();
-
-		// Two-way sync: whichever input the shopper actually used (its own
-		// +/- buttons, already generically handled by the `.btn-quantity`
-		// delegated handler in ecombon-cart.js via `.closest('.quantity')`,
-		// or direct typing) pushes its value onto the other one. The value
-		// check avoids the two inputs bouncing a change event back and forth.
-		function syncQty( $source, $target ) {
-			if ( ! $source.length || ! $target.length ) {
-				return;
-			}
-
-			$source.on( 'change input', function () {
-				var value = $source.val();
-
-				if ( $target.val() !== value ) {
-					$target.val( value ).trigger( 'change' );
-				}
-			} );
-		}
-
-		syncQty( $realQty, $stickyQty );
-		syncQty( $stickyQty, $realQty );
 
 		// Variable products only: mirror the real, already-matched variation
 		// (see assets/js/ecombon-product-variations.js, which fires this

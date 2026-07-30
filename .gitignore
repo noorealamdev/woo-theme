@@ -2,9 +2,6 @@
 # running theme.
 Ecombon-HTML/
 
-# Node tooling (SCSS build)
-node_modules/
-
 # OS/editor cruft
 .DS_Store
 Thumbs.db

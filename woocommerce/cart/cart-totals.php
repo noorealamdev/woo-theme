@@ -12,6 +12,7 @@
  * break that.
  *
  * @package Ecombon
+ * @version 2.3.6
  */
 
 defined( 'ABSPATH' ) || exit;

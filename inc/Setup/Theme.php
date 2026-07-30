@@ -51,6 +51,7 @@ final class Theme {
 		$this->components = array(
 			new ThemeSupport(),
 			new Performance(),
+			new SEO(),
 			new Assets(),
 			new Icons(),
 			new NavMenus(),

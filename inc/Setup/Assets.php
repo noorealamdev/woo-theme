@@ -10,9 +10,9 @@ namespace Ecombon\Setup;
 /**
  * Registers and conditionally enqueues the theme's CSS and JS.
  *
- * The design system (fonts, icon font, vendor libraries, compiled SCSS,
- * and the vendor carousel/menu/offcanvas scripts) is the theme's own; see
- * assets/scss and assets/js for the source.
+ * The design system (fonts, icon font, vendor libraries, main.css, and the
+ * vendor carousel/menu/offcanvas scripts) is the theme's own; see
+ * assets/css/main.css and assets/js for the source.
  */
 class Assets implements ComponentInterface {
 
@@ -34,10 +34,10 @@ class Assets implements ComponentInterface {
 	 * Enqueues the theme stylesheets.
 	 */
 	public function enqueue_styles(): void {
-		// Custom Bootstrap build (assets/scss/bootstrap-custom.scss) — only
-		// the grid, dropdown, offcanvas, modal, nav/tabs, and progress
-		// modules this theme actually uses, not the full ~300KB bundle.
-		wp_enqueue_style( 'ecombon-bootstrap', ECOMBON_THEME_URI . '/assets/css/bootstrap-custom.min.css', array(), '5.3.3' );
+		// Custom Bootstrap build (grid, dropdown, offcanvas, modal,
+		// nav/tabs, progress, and utilities only, not the full bundle) —
+		// plain hand-maintained CSS now, no build step.
+		wp_enqueue_style( 'ecombon-bootstrap', ECOMBON_THEME_URI . '/assets/css/bootstrap-custom.css', array(), '5.3.3' );
 		wp_enqueue_style( 'ecombon-swiper', ECOMBON_THEME_URI . '/assets/css/swiper-bundle.min.css', array(), '11' );
 
 		wp_enqueue_style( 'ecombon-style', get_stylesheet_uri(), array(), ECOMBON_VERSION );

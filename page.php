@@ -15,7 +15,7 @@ get_header();
  * Cart, checkout and my account are real WP Pages too (routed through this
  * same template), but each already renders its own complete, self-boxed
  * structure (cart.php/checkout.php's own real .container sections, the
- * account .woocommerce wrapper styled in _myaccount.scss) — wrapping any of
+ * account .woocommerce wrapper styled in main.css) — wrapping any of
  * them in the plain-page .content-area boxed container below would nest one
  * boxed-width container inside another. Same reasoning for the page-title
  * banner: it must render as a true top-level section, a direct sibling of
