@@ -92,7 +92,7 @@ if ( $product->is_type( 'variable' ) ) {
 	</div>
 
 	<div class="card-product_info">
-		<a href="<?php echo esc_url( get_permalink( $product->get_id() ) ); ?>" class="name-product lh-24 fw-medium link-underline-text">
+		<a href="<?php echo esc_url( get_permalink( $product->get_id() ) ); ?>" class="name-product lh-24 link-underline-text">
 			<?php echo wp_kses_post( $product->get_name() ); ?>
 		</a>
 

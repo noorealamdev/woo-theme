@@ -93,6 +93,7 @@ class Admin_Page implements ComponentInterface {
 					'shop'        => array(
 						'gridColumns'     => Layout::grid_columns_choices(),
 						'productsPerPage' => Layout::products_per_page_choices(),
+						'fontWeight'      => Layout::font_weight_choices(),
 					),
 				),
 				'defaults'    => array(

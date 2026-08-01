@@ -253,6 +253,51 @@ class Layout {
 	}
 
 	/**
+	 * The product card title's real original font size — it has no
+	 * `font-size` rule of its own today (`.name-product` only sets
+	 * `font-family`), so it just inherits the body default (16px). Shared
+	 * by every real `card-product.php` instance (shop grid, related
+	 * products, …), not just the /shop/ page — one product card component,
+	 * one typography setting.
+	 */
+	const SHOP_TITLE_FONT_SIZE_DEFAULT = 16;
+	const SHOP_TITLE_FONT_SIZE_MIN     = 12;
+	const SHOP_TITLE_FONT_SIZE_MAX     = 24;
+
+	/**
+	 * The product card's current-price text (`.price-new`) real original
+	 * font size — like the title, it has no `font-size` rule of its own,
+	 * so it just inherits the body default (16px). The crossed-out
+	 * original price (`.price-old`) is deliberately NOT included — it
+	 * uses the shared `.text-caption-01` utility class (14px) elsewhere
+	 * on the site and stays untouched.
+	 */
+	const SHOP_META_FONT_SIZE_DEFAULT = 16;
+	const SHOP_META_FONT_SIZE_MIN     = 12;
+	const SHOP_META_FONT_SIZE_MAX     = 22;
+
+	/**
+	 * The product card title's real original font weight — the theme's own
+	 * markup applied this via Bootstrap's real `.fw-medium` utility class
+	 * (`!important`, so it never adapted to anything); removed from
+	 * `template-parts/product/card-product.php` in favor of this real,
+	 * overridable setting, which still falls back to the exact same 500.
+	 */
+	const SHOP_TITLE_FONT_WEIGHT_DEFAULT = '500';
+
+	/**
+	 * @return array<string, string>
+	 */
+	public static function font_weight_choices(): array {
+		return array(
+			'400' => __( 'Normal', 'ecombon' ),
+			'500' => __( 'Medium', 'ecombon' ),
+			'600' => __( 'Semibold', 'ecombon' ),
+			'700' => __( 'Bold', 'ecombon' ),
+		);
+	}
+
+	/**
 	 * Real stored site width — 'boxed' (the theme's original, unchanged
 	 * fixed-max-width containers) or 'full-width' (containers stretch to
 	 * fill the actual browser viewport). Falls back to 'boxed' for any

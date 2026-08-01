@@ -1186,6 +1186,11 @@
 		var perPageOptions = Object.keys( DATA.choices.shop.productsPerPage ).map( function ( value ) {
 			return { value: value, label: DATA.choices.shop.productsPerPage[ value ] };
 		} );
+		var titleFontBounds = DATA.fieldBounds.shop_title_font_size;
+		var metaFontBounds = DATA.fieldBounds.shop_meta_font_size;
+		var fontWeightOptions = Object.keys( DATA.choices.shop.fontWeight ).map( function ( value ) {
+			return { value: value, label: DATA.choices.shop.fontWeight[ value ] };
+		} );
 
 		return el(
 			c.Card,
@@ -1207,6 +1212,31 @@
 					path: 'shop.products_per_page',
 					label: __( 'Products Per Page', 'ecombon' ),
 					options: perPageOptions,
+					onChange: onChange,
+				} ),
+				el( 'h3', { className: 'ecombon-subheading' }, __( 'Product Card Typography', 'ecombon' ) ),
+				el( RangeField, {
+					settings: settings,
+					path: 'shop.title_font_size',
+					label: __( 'Product Title Font Size', 'ecombon' ),
+					min: titleFontBounds.min,
+					max: titleFontBounds.max,
+					onChange: onChange,
+				} ),
+				el( SelectField, {
+					settings: settings,
+					path: 'shop.title_font_weight',
+					label: __( 'Product Title Font Weight', 'ecombon' ),
+					options: fontWeightOptions,
+					onChange: onChange,
+				} ),
+				el( RangeField, {
+					settings: settings,
+					path: 'shop.meta_font_size',
+					label: __( 'Product Meta (Price) Font Size', 'ecombon' ),
+					help: __( 'The current price shown on each product card. The crossed-out original price stays its own smaller size.', 'ecombon' ),
+					min: metaFontBounds.min,
+					max: metaFontBounds.max,
 					onChange: onChange,
 				} )
 			)

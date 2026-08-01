@@ -10178,6 +10178,8 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
      otherwise. Falls back to `inherit` (the body font) when Heading Font
      is left unset, matching every other typography override's default. */
   font-family: var(--font-heading, inherit);
+  font-size: var(--ecombon-shop-title-font-size, inherit);
+  font-weight: var(--ecombon-shop-title-font-weight, 500);
 }
 
 .price-wrap {
@@ -10185,6 +10187,13 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+/* The crossed-out original price (.price-old) deliberately keeps its own
+   shared .text-caption-01 size (14px) — only the current price follows the
+   Shop settings' Meta Font Size. */
+.price-wrap .price-new {
+  font-size: var(--ecombon-shop-meta-font-size, inherit);
 }
 
 .price-wrap .price-old {
