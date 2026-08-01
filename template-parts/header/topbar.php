@@ -2,9 +2,8 @@
 /**
  * Announcement bar shown above the header.
  *
- * Static text — no slider. The message is filterable for now; a future
- * Core Plugin module (Header Builder) will make it editable without
- * touching the theme.
+ * Static text — no slider. Real on/off toggle + message text, both
+ * configurable via Appearance > Theme Settings > Topbar.
  *
  * @package Ecombon
  */
@@ -13,10 +12,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$message = apply_filters(
-	'ecombon_topbar_message',
-	__( 'Midseason Sale: 20% Off — Auto Applied at Checkout — Limited Time Only', 'ecombon' )
-);
+$topbar = \Ecombon\Settings\Layout::all()['topbar'];
+
+if ( empty( $topbar['enabled'] ) ) {
+	return;
+}
+
+$message = apply_filters( 'ecombon_topbar_message', $topbar['message'] );
 
 if ( empty( $message ) ) {
 	return;
@@ -25,7 +27,7 @@ if ( empty( $message ) ) {
 <div class="topbar bg-dark">
 	<div class="container">
 		<div class="text-center">
-			<p class="text-white text-line-clamp-1"><?php echo esc_html( $message ); ?></p>
+			<p class="text-line-clamp-1"><?php echo wp_kses_post( $message ); ?></p>
 		</div>
 	</div>
 </div>

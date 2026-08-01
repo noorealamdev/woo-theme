@@ -53,7 +53,7 @@ do_action( 'woocommerce_shop_loop_header' );
 		?>
 
 		<?php if ( have_posts() ) : ?>
-			<div class="wrapper-shop grid-layout tf-col-4" id="gridLayout">
+			<div class="wrapper-shop grid-layout tf-col-<?php echo esc_attr( ecombon_settings()['shop_grid_columns'] ); ?>" id="gridLayout">
 				<?php
 				while ( have_posts() ) :
 					the_post();

@@ -1,7 +1,7 @@
 <?php
 /**
- * Shop control bar: filter trigger, grid column switch, real sort links,
- * result count and active-filter chips.
+ * Shop control bar: filter trigger, real sort links, result count and
+ * active-filter chips.
  *
  * @package Ecombon
  */
@@ -63,17 +63,6 @@ foreach ( array_keys( $active_chips ) as $query_var ) {
 		<?php \Ecombon\Setup\Icons::render( 'filter' ); ?>
 		<span class="text"><?php esc_html_e( 'Show Filters', 'ecombon' ); ?></span>
 	</a>
-	<ul class="control-layout">
-		<li class="view-layout-switch active" data-value-layout="tf-col-4">
-			<?php \Ecombon\Setup\Icons::render( 'grid-4' ); ?>
-		</li>
-		<li class="view-layout-switch" data-value-layout="tf-col-3">
-			<?php \Ecombon\Setup\Icons::render( 'grid-3' ); ?>
-		</li>
-		<li class="view-layout-switch" data-value-layout="tf-col-2">
-			<?php \Ecombon\Setup\Icons::render( 'grid-2' ); ?>
-		</li>
-	</ul>
 	<div class="control-sorting">
 		<div class="dropdown-sort">
 			<div class="btn-select" data-bs-toggle="dropdown" aria-expanded="false">

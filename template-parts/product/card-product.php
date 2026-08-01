@@ -23,7 +23,6 @@ if ( empty( $product ) || ! $product instanceof \WC_Product ) {
 $gallery_ids = $product->get_gallery_image_ids();
 $hover_id    = ! empty( $gallery_ids ) ? $gallery_ids[0] : 0;
 
-$is_new  = ( time() - get_post_time( 'U', true, $product->get_id() ) ) < 14 * DAY_IN_SECONDS;
 $is_sale = $product->is_on_sale();
 
 $rating_count = $product->get_rating_count();
@@ -69,18 +68,14 @@ if ( $product->is_type( 'variable' ) ) {
 			<?php endif; ?>
 		</a>
 
-		<?php if ( $is_new || $is_sale ) : ?>
+		<?php if ( $is_sale && $product->get_regular_price() ) : ?>
 			<ul class="product-badge_list">
-				<?php if ( $is_sale && $product->get_regular_price() ) : ?>
-					<?php
-					$percent = round( ( ( (float) $product->get_regular_price() - (float) $product->get_sale_price() ) / (float) $product->get_regular_price() ) * 100 );
-					?>
-					<li class="product-badge_item text-caption-01 sale">
-						<?php echo esc_html( sprintf( '-%d%%', $percent ) ); ?>
-					</li>
-				<?php elseif ( $is_new ) : ?>
-					<li class="product-badge_item text-caption-01 new"><?php esc_html_e( 'NEW', 'ecombon' ); ?></li>
-				<?php endif; ?>
+				<?php
+				$percent = round( ( ( (float) $product->get_regular_price() - (float) $product->get_sale_price() ) / (float) $product->get_regular_price() ) * 100 );
+				?>
+				<li class="product-badge_item text-caption-01 sale">
+					<?php echo esc_html( sprintf( '-%d%%', $percent ) ); ?>
+				</li>
 			</ul>
 		<?php endif; ?>
 

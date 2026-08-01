@@ -2,6 +2,13 @@
 /**
  * Main site header: mobile menu trigger, primary nav, logo, account/cart icons.
  *
+ * A real 3-zone (left/center/right) builder — any of the 5 header modules
+ * (logo/navigation/search/account/cart) can be freely placed in any zone,
+ * in any order, including mixed zones — see Ecombon\Settings\Layout and
+ * the class docblock there for why this is safe (a plain flex row with no
+ * module-specific positioning). Every default here matches the theme's
+ * original hardcoded layout exactly.
+ *
  * @package Ecombon
  */
 
@@ -9,73 +16,86 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$account_url = function_exists( 'wc_get_page_permalink' )
-	? wc_get_page_permalink( 'myaccount' )
-	: wp_login_url();
+use Ecombon\Settings\Layout;
 
-$cart_count = 0;
-if ( function_exists( 'WC' ) && WC()->cart ) {
-	$cart_count = WC()->cart->get_cart_contents_count();
-}
+$module_partials = array(
+	'logo'       => 'template-parts/header/logo',
+	'navigation' => 'template-parts/header/navigation',
+	'search'     => 'template-parts/header/search',
+	'account'    => 'template-parts/header/account',
+	'cart'       => 'template-parts/header/cart',
+);
+
+$icon_modules = array( 'search', 'account', 'cart' );
+
+// Real, default-off setting — when on, the hamburger trigger stays visible
+// (and the inline desktop nav stays hidden) at every width, not just below
+// the `xl` breakpoint. See Layout::force_mobile_menu().
+$force_mobile_menu   = Layout::force_mobile_menu();
+$mobile_trigger_class = $force_mobile_menu ? '' : 'd-xl-none';
+$desktop_nav_class    = $force_mobile_menu ? 'd-none' : 'd-none d-xl-block';
 ?>
 <header class="header">
-	<div class="br-line fake-class bottom-0"></div>
 	<div class="container-full">
 		<div class="header-inner">
-			<div class="box-open-menu-mobile d-xl-none">
+			<div class="box-open-menu-mobile <?php echo esc_attr( $mobile_trigger_class ); ?>">
 				<a href="#mobileMenu" data-bs-toggle="offcanvas" class="btn-open-menu">
-					<?php \Ecombon\Setup\Icons::render( 'List' ); ?>
+					<?php \Ecombon\Setup\Icons::render( 'ListBold' ); ?>
 				</a>
 			</div>
 
-			<div class="header-left">
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo-site">
-					<?php if ( has_custom_logo() ) : ?>
-						<?php the_custom_logo(); ?>
-					<?php else : ?>
-						<?php bloginfo( 'name' ); ?>
-					<?php endif; ?>
-				</a>
-			</div>
-
-			<div class="header-center d-none d-xl-block">
-				<nav class="box-navigation">
+			<?php
+			foreach ( array( 'left', 'center', 'right' ) as $zone ) :
+				$items = Layout::header_zone_items( $zone );
+				if ( empty( $items ) ) {
+					continue;
+				}
+				?>
+				<div class="header-zone header-zone--<?php echo esc_attr( $zone ); ?>">
 					<?php
-					if ( has_nav_menu( 'primary' ) ) {
-						wp_nav_menu(
-							array(
-								'theme_location' => 'primary',
-								'container'      => false,
-								'items_wrap'     => '<ul class="box-nav-menu">%3$s</ul>',
-								'walker'         => new \Ecombon\Navigation\MegaMenuWalker(),
-								'depth'          => 3,
-							)
-						);
+					$pending_icons = array();
+					foreach ( $items as $module ) {
+						if ( ! isset( $module_partials[ $module ] ) ) {
+							continue;
+						}
+
+						// Consecutive icon-type modules share one <ul>, matching
+						// the real markup their partials already expect (each
+						// one renders a bare <li>) — icons aren't valid outside
+						// a list, and this keeps the existing partials untouched.
+						if ( in_array( $module, $icon_modules, true ) ) {
+							$pending_icons[] = $module;
+							continue;
+						}
+
+						if ( $pending_icons ) {
+							echo '<ul class="nav-icon-list">';
+							foreach ( $pending_icons as $icon_module ) {
+								get_template_part( $module_partials[ $icon_module ] );
+							}
+							echo '</ul>';
+							$pending_icons = array();
+						}
+
+						if ( 'navigation' === $module ) {
+							echo '<div class="' . esc_attr( $desktop_nav_class ) . '">';
+							get_template_part( $module_partials['navigation'] );
+							echo '</div>';
+						} else {
+							get_template_part( $module_partials[ $module ] );
+						}
+					}
+
+					if ( $pending_icons ) {
+						echo '<ul class="nav-icon-list">';
+						foreach ( $pending_icons as $icon_module ) {
+							get_template_part( $module_partials[ $icon_module ] );
+						}
+						echo '</ul>';
 					}
 					?>
-				</nav>
-			</div>
-
-			<div class="header-right">
-				<ul class="nav-icon-list">
-					<li class="d-none d-sm-block">
-						<a href="#search" data-bs-toggle="modal" class="nav-icon-item link">
-							<?php \Ecombon\Setup\Icons::render( 'MagnifyingGlass' ); ?>
-						</a>
-					</li>
-					<li>
-						<a href="<?php echo esc_url( $account_url ); ?>" class="nav-icon-item link">
-							<?php \Ecombon\Setup\Icons::render( 'User' ); ?>
-						</a>
-					</li>
-					<li>
-						<a href="#shoppingCart" data-bs-toggle="offcanvas" class="nav-icon-item link shop-cart">
-							<?php \Ecombon\Setup\Icons::render( 'Handbag' ); ?>
-							<span class="count"><?php echo esc_html( (string) $cart_count ); ?></span>
-						</a>
-					</li>
-				</ul>
-			</div>
+				</div>
+			<?php endforeach; ?>
 		</div>
 	</div>
 </header>

@@ -7,8 +7,8 @@
   --secondary: #70857A;
   --third: #FFEB8A;
   --text: #101010;
-  --text-2: #696E73;
-  --text-3: #B1B2B7;
+  --text-2: #4A4E53;
+  --text-3: #6E7075;
   --bg: #F7F7F7;
   --bg-2: #F6F4F3;
   --bg-3: #2C2762;
@@ -156,12 +156,15 @@ html {
 }
 
 body {
-  font-family: "DM Sans", sans-serif;
+  font-family: var(--font-main, "DM Sans"), sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  font-size: var(--font-size-base, 16px);
   line-height: 26px;
   color: var(--text);
-  background: var(--white);
+  /* Deliberately its own scoped variable, not an override of --white —
+     that token is shared by ~110 other rules across this file (buttons,
+     cards, borders, text-on-dark, …) and must stay untouched. */
+  background: var(--ecombon-body-bg, var(--white));
 }
 
 body::-webkit-scrollbar {
@@ -591,6 +594,10 @@ h6 {
   font-weight: 500;
   margin-bottom: 0;
   letter-spacing: 0;
+  /* Falls back to `inherit` (the body font) when the Typography setting's
+     Heading Font is left unset, so an untouched install renders exactly
+     as it always has — no rule existed here before. */
+  font-family: var(--font-heading, inherit);
 }
 
 .h1,
@@ -603,6 +610,7 @@ h6 {
   font-weight: 500;
   margin-bottom: 0;
   letter-spacing: 0;
+  font-family: var(--font-heading, inherit);
 }
 
 h1,
@@ -2018,7 +2026,7 @@ h6,
   margin-right: auto;
   padding-right: 15px;
   padding-left: 15px;
-  width: 1440px;
+  width: var(--ecombon-container-width, 1440px);
   max-width: 100%;
 }
 
@@ -2075,7 +2083,19 @@ body:not(.single-product) .content-area {
   margin-right: auto;
   padding-right: 15px;
   padding-left: 15px;
-  width: 1800px;
+  width: var(--ecombon-container-full-width, 1800px);
+  max-width: 100%;
+}
+
+/* Full-width layout mode (Ecombon > Layout > Site Width). Stretches the
+   theme's fixed-max-width containers — including the plain-page boxed
+   wrapper further below — to fill the actual browser viewport instead of
+   capping at their original px width. Boxed (no body class) is the
+   theme's original, unchanged default; this rule never applies then. */
+body.ecombon-full-width .container,
+body.ecombon-full-width .container-full,
+body.ecombon-full-width:not(.single-product) .content-area {
+  width: 100%;
   max-width: 100%;
 }
 
@@ -2253,6 +2273,7 @@ body:not(.single-product) .content-area {
 header {
   position: sticky;
   z-index: 100;
+  background: var(--ecombon-header-bg, transparent);
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
@@ -2261,7 +2282,7 @@ header {
 }
 
 header.header-sticky:not(.header-s5, .header-abs) {
-  background: var(--white);
+  background: var(--ecombon-header-bg, var(--white));
 }
 
 header.header-sticky.scr-box-shadow {
@@ -2323,9 +2344,17 @@ header.header-sticky.header-landing {
   .header .header-inner {
     align-items: center;
   }
-  .header .header-inner .header-left {
+  .header .header-inner .header-zone--left {
     flex: unset;
   }
+}
+/* "Always use the mobile menu" setting (Layout::force_mobile_menu()) makes
+   .box-open-menu-mobile visible above the 1199px breakpoint too — it needs
+   the exact same .header-zone--left flex reset the block above already
+   gives it below 1199px, or the zone's own flex:1 fights the hamburger's
+   flex:1 for the same space and pushes the logo off-center. */
+body.ecombon-force-mobile-menu .header .header-inner .header-zone--left {
+  flex: unset;
 }
 .header .dropdown-select.type-currencies > .dropdown-menu {
   width: max-content !important;
@@ -2748,13 +2777,25 @@ header.header-sticky.header-landing {
   justify-content: space-between;
 }
 
-.header-inner .header-left,
-.header-inner .header-right {
+/* Generic 3-zone builder slots — a zone renders whatever real header
+   modules (logo/navigation/search/account/cart) are assigned to it, so
+   alignment is per-zone (left/center/right), not tied to any module. */
+.header-inner .header-zone {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.header-inner .header-zone--left,
+.header-inner .header-zone--right {
   flex: 1;
 }
 
-.header-inner .header-right {
-  display: flex;
+.header-inner .header-zone--center {
+  justify-content: center;
+}
+
+.header-inner .header-zone--right {
   justify-content: flex-end;
 }
 
@@ -2766,6 +2807,10 @@ header.header-sticky.header-landing {
 
 .nav-icon-list .nav-icon-item {
   display: flex;
+  /* Same resting-color override as .item-link (nav menu text) — falls back
+     to inherit when the Header Builder's Menu Color is left unset. Hover
+     stays untouched (.link:hover already wins via !important). */
+  color: var(--ecombon-menu-color, inherit);
 }
 
 .nav-icon-list .nav-icon-item .icon {
@@ -2828,11 +2873,20 @@ header.header-sticky.header-landing {
 .item-link {
   display: flex;
   align-items: center;
-  font-weight: 500;
   gap: 4px;
   padding-top: 27px;
   padding-bottom: 27px;
   position: relative;
+  /* All fall back to their real original value when the matching Header
+     Builder setting is left unset — this is the only real source of nav
+     menu item links (MegaMenuWalker), desktop and mobile (JS-cloned)
+     alike. The hover color (--primary) is untouched, only the resting
+     color is overridden. */
+  font-family: var(--font-menu, inherit);
+  color: var(--ecombon-menu-color, inherit);
+  font-size: var(--ecombon-menu-font-size, inherit);
+  font-weight: var(--ecombon-menu-weight, 500);
+  text-transform: var(--ecombon-menu-transform, none);
 }
 
 .item-link::after {
@@ -3239,7 +3293,7 @@ header.header-sticky.header-landing {
 
 /* -- Nav Mobile -- */
 .btn-open-menu {
-  font-size: 24px;
+  font-size: 32px;
   display: inline-flex;
 }
 
@@ -3671,6 +3725,25 @@ header.header-sticky.header-landing {
   padding-bottom: 12px;
   position: relative;
   z-index: 101;
+}
+
+/* Scoped to .topbar.bg-dark specifically (not the shared .bg-dark utility
+   used elsewhere) so the Topbar Background Color setting never affects
+   any other element that happens to use the same class. !important is
+   required here to win against .bg-dark's own `!important` rule above. */
+.topbar.bg-dark {
+  background-color: var(--ecombon-topbar-bg, #101010) !important;
+}
+
+/* The topbar message has no font-size rule of its own (inherits body's),
+   so this is a fresh, safe addition — falls back to 16px, matching the
+   theme's original inherited default exactly. Color used to come from
+   Bootstrap's own `.text-white` utility (bootstrap-custom.css, !important)
+   — removed from the template in favor of this real, overridable
+   declaration, which still falls back to the exact same #fff. */
+.topbar p {
+  font-size: var(--ecombon-topbar-font-size, 16px);
+  color: var(--ecombon-topbar-text, #fff);
 }
 
 .topbar .br-line.fake-class {
@@ -9346,7 +9419,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   flex-wrap: wrap;
   padding-top: 8px;
   padding-bottom: 8px;
-  background: var(--white);
+  background: transparent;
 }
 
 .shop-control .control-sorting {
@@ -10099,6 +10172,12 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   -webkit-box-orient: vertical;
   display: -webkit-box;
   overflow: hidden;
+  /* Product titles are real `<a>` tags, not `<h*>`/`.h*` elements, so they
+     don't pick up the heading font-family rule automatically — the plain
+     `a { font-family: "DM Sans" }` rule further up the file would win
+     otherwise. Falls back to `inherit` (the body font) when Heading Font
+     is left unset, matching every other typography override's default. */
+  font-family: var(--font-heading, inherit);
 }
 
 .price-wrap {
@@ -10282,7 +10361,6 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 
 .product-thumbs-slider .product-media-main {
   border-radius: 16px;
-  border: 1px solid var(--line);
   overflow: hidden;
 }
 
@@ -10840,6 +10918,10 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 
 .product-info-wrap .product-trust-seal .card-item img {
   aspect-ratio: 1.5625;
+}
+
+.product-info-wrap .product-trust-seal .card-item.payment-list-image img {
+  aspect-ratio: auto;
 }
 
 .product-info-wrap .product-more-option {
@@ -14208,7 +14290,43 @@ a.woocommerce-Button.button.pay {
 /*------------ Footer ---------------- */
 /*--------- Abstracts variable ---------- */
 .footer {
-  padding-top: 60px;
+  padding-top: 20px;
+  margin-top: 60px;
+  background: var(--ecombon-footer-bg, transparent);
+  /* `color` is inherited, so this alone covers every footer heading and
+     icon (`.icon` fills with currentColor) that doesn't set its own
+     explicit color. `<a>` always sets its own explicit `color: var(--text)`
+     (see the global `a {}` rule), and `.cl-text-2`/`.cl-text-3` set theirs
+     with `!important` — both need their own direct overrides below since
+     neither one inherits. */
+  color: var(--ecombon-footer-fg, inherit);
+}
+
+.footer a {
+  color: var(--ecombon-footer-fg, var(--text));
+}
+
+/* `!important` is required here to win against .cl-text-2/.cl-text-3's own
+   `!important` rules — same reasoning as .topbar.bg-dark above. Equal
+   specificity to .link:hover (both 2 selectors + !important), so without
+   the :hover rule below, source order alone would make THIS win even on
+   hover, breaking the existing hover-to-primary-color effect. */
+.footer .cl-text-2 {
+  color: var(--ecombon-footer-fg, var(--text-2)) !important;
+}
+
+.footer .cl-text-3 {
+  color: var(--ecombon-footer-fg, var(--text-3)) !important;
+}
+
+.footer .cl-text-2:hover,
+.footer .cl-text-3:hover,
+.footer a:hover {
+  color: var(--primary) !important;
+}
+
+.footer .social-icon-2 a {
+  border-color: var(--ecombon-footer-fg, var(--line));
 }
 
 .footer .br-line.fake-class {
@@ -14280,6 +14398,17 @@ a.woocommerce-Button.button.pay {
   margin-bottom: 28px;
 }
 
+.footer-logo-custom {
+  max-width: 160px;
+  max-height: 56px;
+  width: auto;
+  height: auto;
+}
+
+.footer-infor-desc {
+  margin-bottom: 16px;
+}
+
 .footer-bottom {
   position: relative;
 }
@@ -14297,6 +14426,14 @@ a.woocommerce-Button.button.pay {
 .footer-bottom .payment-list {
   gap: 8px;
   justify-content: flex-end;
+}
+
+.payment-list-image img {
+  max-width: 220px;
+  max-height: 32px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
 }
 
 .footer-bottom .list {
@@ -14343,7 +14480,7 @@ a.woocommerce-Button.button.pay {
     transform: translateY(-50%);
     width: 12px;
     height: 1px;
-    background-color: var(--text);
+    background-color: var(--ecombon-footer-fg, var(--text));
     transition: 0.25s ease-in-out;
   }
   .footer-heading-mobile::before {
@@ -14354,7 +14491,7 @@ a.woocommerce-Button.button.pay {
     transform: translate(-50%, -50%);
     width: 1px;
     height: 12px;
-    background-color: var(--text);
+    background-color: var(--ecombon-footer-fg, var(--text));
     transition: 0.25s ease-in-out;
   }
   .inner-right .footer-col-block .collapse-content {
@@ -14369,7 +14506,7 @@ a.woocommerce-Button.button.pay {
   .footer-col-block {
     margin-bottom: 16px;
     padding-bottom: 16px;
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--ecombon-footer-fg, var(--line));
   }
   .footer-col-block.open .footer-heading-mobile {
     margin-bottom: 12px;

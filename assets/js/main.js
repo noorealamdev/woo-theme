@@ -356,6 +356,10 @@
     /* Header Sticky
     -------------------------------------------------------------------------*/
     var headerSticky = function () {
+        if (document.body.classList.contains("ecombon-no-sticky-header")) {
+            return;
+        }
+
         const customHeaderCategory = () => {
             const header = document.querySelector(".header");
 

@@ -58,6 +58,9 @@ final class Theme {
 			new NavMenuAdminUi(),
 			new \Ecombon\Hooks\TemplateHooks(),
 			new \Ecombon\Search\LiveSearch(),
+			new \Ecombon\Settings\Admin_Page(),
+			new \Ecombon\Settings\Rest_Controller(),
+			new \Ecombon\Settings\Frontend_Output(),
 		);
 
 		if ( class_exists( 'WooCommerce' ) ) {

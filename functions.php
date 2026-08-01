@@ -25,5 +25,6 @@ if ( version_compare( PHP_VERSION, ECOMBON_MIN_PHP, '<' ) ) {
 
 require ECOMBON_THEME_DIR . '/inc/Setup/ComponentInterface.php';
 require ECOMBON_THEME_DIR . '/inc/Setup/Theme.php';
+require ECOMBON_THEME_DIR . '/inc/Settings/helpers.php';
 
 Ecombon\Setup\Theme::instance()->initialize();
