@@ -33,15 +33,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<ul class="nav-ul-mb" id="wrapper-menu-navigation"></ul>
 		</div>
 		<?php
-		$phone = apply_filters( 'noorifa_contact_phone', '' );
-		$email = apply_filters( 'noorifa_contact_email', get_option( 'admin_email' ) );
-		$address = apply_filters( 'noorifa_contact_address', '' );
-		if ( $phone || $email || $address ) :
+		$phone           = apply_filters( 'noorifa_contact_phone', '' );
+		$email           = apply_filters( 'noorifa_contact_email', get_option( 'admin_email' ) );
+		$address         = apply_filters( 'noorifa_contact_address', '' );
+		$whatsapp_raw    = \Noorifa\Settings\Layout::all()['header']['whatsapp_number'] ?? '';
+		$whatsapp_digits = preg_replace( '/[^0-9]/', '', $whatsapp_raw );
+		if ( $whatsapp_digits || $phone || $email || $address ) :
 			?>
 			<div class="need-help-wrap">
 				<p class="nd-title h6 fw-medium mb-16"><?php esc_html_e( 'Need Help?', 'noorifa' ); ?></p>
 				<?php if ( $address ) : ?>
 					<p class="lh-26 cl-text-2 mb-4"><?php echo esc_html( $address ); ?></p>
+				<?php endif; ?>
+				<?php if ( $whatsapp_digits ) : ?>
+					<a href="<?php echo esc_url( 'https://wa.me/' . $whatsapp_digits ); ?>" target="_blank" rel="noopener noreferrer" class="cl-text-2 link fw-bold mb-8"><?php echo esc_html( $whatsapp_raw ); ?></a>
 				<?php endif; ?>
 				<?php if ( $email ) : ?>
 					<a href="mailto:<?php echo esc_attr( $email ); ?>" class="cl-text-2 link mb-8"><?php echo esc_html( $email ); ?></a>

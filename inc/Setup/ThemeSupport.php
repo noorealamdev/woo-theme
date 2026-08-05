@@ -53,6 +53,18 @@ class ThemeSupport implements ComponentInterface {
 		// here, which throws (see template-parts/product/gallery.php).
 		add_theme_support( 'woocommerce' );
 
+		// A translation file placed inside the theme's OWN /languages
+		// folder (as opposed to the global WP_LANG_DIR) must be named just
+		// `{locale}.mo` — e.g. `bn_BD.mo` for Bengali — with NO `noorifa-`
+		// domain prefix. WordPress's own _load_textdomain_just_in_time()
+		// only adds the domain prefix for files living outside the
+		// template/stylesheet directory (see wp-includes/l10n.php);
+		// getting this backwards (e.g. `noorifa-bn_BD.mo`) silently fails
+		// with zero error — every __()/_e() call just falls through to a
+		// NOOP_Translations instance and keeps showing English. Verified
+		// this exact failure mode directly against this install's real
+		// WP 7.0.2 core before landing on the correct filename. See
+		// languages/README.txt for the translator-facing instructions.
 		load_theme_textdomain( 'noorifa', NOORIFA_THEME_DIR . '/languages' );
 	}
 

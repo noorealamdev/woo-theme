@@ -59,9 +59,22 @@ class Performance implements ComponentInterface {
 		// of *this* site's content either.
 		add_action( 'wp_enqueue_scripts', array( $this, 'dequeue_embed_script' ), 100 );
 
-		// Real, admin-configurable settings (Appearance/Noorifa > Performance)
-		// — both default off, since each is a genuine trade-off a site owner
-		// should choose, not an unambiguous win to force on everyone.
+		// Deferred to `init`: `Theme::initialize()` runs this whole class's
+		// `initialize()` synchronously while the theme's functions.php is
+		// still being required — before `after_setup_theme`, let alone
+		// `init` — so reading real settings here (which resolves each
+		// field's translatable default text) would call `__()` before
+		// `load_theme_textdomain()` has run, triggering a real
+		// `_load_textdomain_just_in_time` "too early" notice on every page.
+		add_action( 'init', array( $this, 'apply_settings' ) );
+	}
+
+	/**
+	 * Real, admin-configurable settings (Appearance/Noorifa > Performance)
+	 * — both default off, since each is a genuine trade-off a site owner
+	 * should choose, not an unambiguous win to force on everyone.
+	 */
+	public function apply_settings(): void {
 		$settings = \Noorifa\Settings\Layout::all()['performance'] ?? array();
 
 		if ( ! empty( $settings['disable_xmlrpc'] ) ) {

@@ -449,6 +449,12 @@ class Schema {
 				'default' => false,
 			),
 			array(
+				'path'    => 'header.whatsapp_number',
+				'flat'    => 'header_whatsapp_number',
+				'type'    => 'text',
+				'default' => '',
+			),
+			array(
 				'path'    => 'header.background_color_enabled',
 				'flat'    => 'header_background_color_enabled',
 				'type'    => 'bool',

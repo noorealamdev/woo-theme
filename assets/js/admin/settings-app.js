@@ -83,12 +83,13 @@
 		);
 	}
 
-	function TextField( { settings, path, label, type, help, onChange } ) {
+	function TextField( { settings, path, label, type, placeholder, help, onChange } ) {
 		return el(
 			Field,
 			{ label: label, help: help },
 			el( c.TextControl, {
 				type: type || 'text',
+				placeholder: placeholder,
 				value: getPath( settings, path ) || '',
 				onChange: function ( value ) {
 					onChange( setPath( settings, path, value ) );
@@ -1022,6 +1023,15 @@
 					settings: settings,
 					path: 'header.force_mobile_menu',
 					label: __( 'Always use the mobile menu, even on desktop', 'noorifa' ),
+					onChange: onChange,
+				} ),
+				el( 'h3', { className: 'noorifa-subheading' }, __( 'Mobile Menu', 'noorifa' ) ),
+				el( TextField, {
+					settings: settings,
+					path: 'header.whatsapp_number',
+					label: __( 'WhatsApp Number', 'noorifa' ),
+					placeholder: __( 'e.g. 8801XXXXXXXXX', 'noorifa' ),
+					help: __( 'Shown in bold in the mobile menu’s "Need Help?" box and links straight to a WhatsApp chat. Include the country code, digits only — no spaces, dashes, or a leading +.', 'noorifa' ),
 					onChange: onChange,
 				} )
 			)

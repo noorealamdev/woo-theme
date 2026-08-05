@@ -2062,12 +2062,21 @@ body:not(.single-product) .content-area {
 }
 
 @media (min-width: 992px) {
-  body:not(.single-product) .content-area:not(.content-area--single) {
+  body:not(.single-product) .content-area:not(.content-area--single):not(.content-area--full-width) {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 340px;
     column-gap: 40px;
     align-items: start;
   }
+}
+
+/* Full Width page template (template-full-width.php) — same padding as
+   the boxed .content-area above, just without its max-width cap or the
+   sidebar grid, so content stretches to fill the actual viewport. Needs
+   the extra `.content-area` in the selector to match the base rule's own
+   specificity (body:not() + .content-area), or `max-width` would lose. */
+body:not(.single-product) .content-area.content-area--full-width {
+  max-width: none;
 }
 .container-2 {
   margin-left: auto;

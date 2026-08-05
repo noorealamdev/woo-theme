@@ -1,0 +1,763 @@
+# Copyright (C) 2026 Noorifa
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Noorifa 0.1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-05 19:42+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2026-08-05 19:42+0000\n"
+"Language-Team: \n"
+"X-Domain: noorifa\n"
+
+#: 404.php:18
+#: inc/Setup/SEO.php:296
+msgid "Page not found"
+msgstr ""
+
+#: 404.php:19
+msgid "The page you were looking for could not be found. It might have been moved or no longer exists."
+msgstr ""
+
+#: 404.php:32
+msgid "Back to homepage"
+msgstr ""
+
+#: comments.php:101
+msgid "Leave A Comment"
+msgstr ""
+
+#: comments.php:111
+msgid "Post Comment"
+msgstr ""
+
+#: comments.php:31
+#. translators: %s: number of comments.
+msgid "%s Comment"
+msgid_plural "%s Comments"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:53
+msgid "Comments are closed."
+msgstr ""
+
+#: comments.php:67
+#: woocommerce/single-product-reviews.php:153
+msgid "Save my name, email, and website in this browser for the next time I comment."
+msgstr ""
+
+#: comments.php:74
+#: comments.php:75
+#: woocommerce/single-product-reviews.php:165
+msgid "Your Name"
+msgstr ""
+
+#: comments.php:78
+#: woocommerce/single-product-reviews.php:169
+msgid "Your Email"
+msgstr ""
+
+#: comments.php:79
+msgid "Your email (private)"
+msgstr ""
+
+#: comments.php:83
+msgid "Your Message"
+msgstr ""
+
+#: comments.php:84
+msgid "Write your comment"
+msgstr ""
+
+#: header.php:23
+msgid "Skip to content"
+msgstr ""
+
+#: inc/Blog/CommentTemplate.php:31
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: inc/Settings/Admin_Page.php:36
+msgid "Noorifa Theme Settings"
+msgstr ""
+
+#: inc/Settings/Admin_Page.php:37
+#: style.css:2
+msgid "Noorifa"
+msgstr ""
+
+#: inc/Settings/Layout.php:101
+msgid "Theme Default Form"
+msgstr ""
+
+#: inc/Settings/Layout.php:102
+msgid "Custom Embed Code (Mailchimp, MailerLite, etc.)"
+msgstr ""
+
+#: inc/Settings/Layout.php:204
+msgid "Boxed"
+msgstr ""
+
+#: inc/Settings/Layout.php:205
+msgid "Full Width"
+msgstr ""
+
+#: inc/Settings/Layout.php:223
+#: inc/Settings/Layout.php:314
+msgid "2 Columns"
+msgstr ""
+
+#: inc/Settings/Layout.php:224
+#: inc/Settings/Layout.php:315
+msgid "3 Columns"
+msgstr ""
+
+#: inc/Settings/Layout.php:225
+msgid "4 Columns"
+msgstr ""
+
+#: inc/Settings/Layout.php:226
+msgid "5 Columns"
+msgstr ""
+
+#: inc/Settings/Layout.php:227
+msgid "6 Columns"
+msgstr ""
+
+#: inc/Settings/Layout.php:293
+msgid "Normal"
+msgstr ""
+
+#: inc/Settings/Layout.php:294
+msgid "Medium"
+msgstr ""
+
+#: inc/Settings/Layout.php:295
+msgid "Semibold"
+msgstr ""
+
+#: inc/Settings/Layout.php:296
+msgid "Bold"
+msgstr ""
+
+#: inc/Settings/Layout.php:351
+msgid "Related Posts"
+msgstr ""
+
+#: inc/Settings/Layout.php:355
+msgid "Discover more stories worth reading."
+msgstr ""
+
+#: inc/Settings/Layout.php:382
+msgid "Rounded Pill"
+msgstr ""
+
+#: inc/Settings/Layout.php:383
+msgid "Rounded Rectangle"
+msgstr ""
+
+#: inc/Settings/Layout.php:384
+msgid "Sharp Corners"
+msgstr ""
+
+#: inc/Settings/Layout.php:385
+msgid "Outline"
+msgstr ""
+
+#: inc/Settings/Layout.php:386
+msgid "Elevated"
+msgstr ""
+
+#: inc/Settings/Layout.php:405
+msgid "Center"
+msgstr ""
+
+#: inc/Settings/Layout.php:406
+msgid "Left"
+msgstr ""
+
+#: inc/Settings/Layout.php:469
+msgid "Facebook"
+msgstr ""
+
+#: inc/Settings/Layout.php:470
+msgid "X (Twitter)"
+msgstr ""
+
+#: inc/Settings/Layout.php:471
+msgid "Instagram"
+msgstr ""
+
+#: inc/Settings/Layout.php:472
+msgid "TikTok"
+msgstr ""
+
+#: inc/Settings/Layout.php:473
+msgid "Snapchat"
+msgstr ""
+
+#: inc/Settings/Layout.php:474
+msgid "Pinterest"
+msgstr ""
+
+#: inc/Settings/Layout.php:475
+msgid "YouTube"
+msgstr ""
+
+#: inc/Settings/Layout.php:501
+msgid "Logo"
+msgstr ""
+
+#: inc/Settings/Layout.php:502
+msgid "Navigation Menu"
+msgstr ""
+
+#: inc/Settings/Layout.php:503
+msgid "Search Icon"
+msgstr ""
+
+#: inc/Settings/Layout.php:504
+msgid "Account Icon"
+msgstr ""
+
+#: inc/Settings/Layout.php:505
+msgid "Cart Icon"
+msgstr ""
+
+#: inc/Settings/Layout.php:529
+msgid "Info Card & Social"
+msgstr ""
+
+#: inc/Settings/Layout.php:530
+msgid "Company Menu"
+msgstr ""
+
+#: inc/Settings/Layout.php:531
+msgid "Customer Care Menu"
+msgstr ""
+
+#: inc/Settings/Layout.php:532
+msgid "Newsletter Signup"
+msgstr ""
+
+#: inc/Settings/Layout.php:548
+msgid "Copyright Text"
+msgstr ""
+
+#: inc/Settings/Layout.php:549
+msgid "Payment Icons"
+msgstr ""
+
+#: inc/Settings/Layout.php:565
+msgid "Newsletter"
+msgstr ""
+
+#: inc/Settings/Layout.php:569
+msgid "Subscribe for store updates and discounts."
+msgstr ""
+
+#: inc/Settings/Layout.php:573
+msgid "Company"
+msgstr ""
+
+#: inc/Settings/Layout.php:577
+msgid "Customer Care"
+msgstr ""
+
+#: inc/Settings/Layout.php:609
+msgid "©{year} {site_name}. All Rights Reserved."
+msgstr ""
+
+#: inc/Settings/Layout.php:82
+msgid "Midseason Sale: 20% Off — Auto Applied at Checkout — Limited Time Only"
+msgstr ""
+
+#: inc/Setup/NavMenus.php:28
+msgid "Primary Menu"
+msgstr ""
+
+#: inc/Setup/NavMenus.php:29
+msgid "Footer — Company"
+msgstr ""
+
+#: inc/Setup/NavMenus.php:30
+msgid "Footer — Customer Care"
+msgstr ""
+
+#: inc/Setup/SEO.php:268
+#: template-parts/blog/breadcrumb-nav.php:30
+#: template-parts/global/page-title.php:38
+msgid "Home"
+msgstr ""
+
+#: inc/Setup/SEO.php:271
+#: template-parts/shop/page-title.php:17
+msgid "Shop"
+msgstr ""
+
+#: inc/Setup/SEO.php:294
+#: search.php:19
+#. translators: %s: search query.
+msgid "Search results for: %s"
+msgstr ""
+
+#: inc/WooCommerce/QuantityStepper.php:33
+msgid "Decrease quantity"
+msgstr ""
+
+#: inc/WooCommerce/QuantityStepper.php:40
+msgid "Increase quantity"
+msgstr ""
+
+#: searchform.php:16
+msgid "Search for:"
+msgstr ""
+
+#: searchform.php:23
+msgid "Search…"
+msgstr ""
+
+#: searchform.php:30
+#: template-parts/header/search-modal.php:21
+msgid "Search"
+msgstr ""
+
+#: sidebar.php:15
+msgid "Blog sidebar"
+msgstr ""
+
+#: style.css:6
+msgid "A traditional, high-performance WordPress + WooCommerce theme built as the presentation layer of the Noorifa Commerce Platform. No business logic lives here."
+msgstr ""
+
+#: template-parts/account/page-title.php:16
+msgid "My Account"
+msgstr ""
+
+#: template-parts/account/page-title.php:17
+msgid "Manage your profile, track orders, and easily update your personal details anytime, all in one convenient place."
+msgstr ""
+
+#: template-parts/blog/breadcrumb-nav.php:40
+msgid "Previous post"
+msgstr ""
+
+#: template-parts/blog/breadcrumb-nav.php:44
+msgid "All posts"
+msgstr ""
+
+#: template-parts/blog/breadcrumb-nav.php:48
+msgid "Next post"
+msgstr ""
+
+#: template-parts/blog/sidebar.php:47
+msgid "Categories"
+msgstr ""
+
+#: template-parts/blog/sidebar.php:63
+msgid "Recent Posts"
+msgstr ""
+
+#: template-parts/blog/sidebar.php:86
+msgid "Popular Tag"
+msgstr ""
+
+#: template-parts/cart/cart-table.php:150
+msgid "Coupon:"
+msgstr ""
+
+#: template-parts/cart/cart-table.php:151
+msgid "Add voucher discount"
+msgstr ""
+
+#: template-parts/cart/cart-table.php:152
+msgid "Apply Code"
+msgstr ""
+
+#: template-parts/cart/cart-table.php:157
+msgid "Update cart"
+msgstr ""
+
+#: template-parts/cart/cart-table.php:29
+#: template-parts/header/search-results.php:40
+msgid "Products"
+msgstr ""
+
+#: template-parts/cart/cart-table.php:102
+#: template-parts/cart/cart-table.php:30
+msgid "Price"
+msgstr ""
+
+#: template-parts/cart/cart-table.php:106
+#: template-parts/cart/cart-table.php:31
+msgid "Quantity"
+msgstr ""
+
+#: template-parts/cart/cart-table.php:32
+msgid "Total Price"
+msgstr ""
+
+#: template-parts/cart/cart-table.php:90
+#: template-parts/header/cart-drawer.php:108
+msgid "Remove %s from cart"
+msgstr ""
+
+#: template-parts/cart/cart-table.php:94
+#: template-parts/header/cart-drawer.php:113
+msgid "Remove"
+msgstr ""
+
+#: template-parts/cart/empty-content.php:16
+#: template-parts/header/cart-drawer.php:68
+msgid "Your cart is empty"
+msgstr ""
+
+#: template-parts/cart/empty-content.php:32
+msgid "Return to shop"
+msgstr ""
+
+#: template-parts/cart/empty-content.php:35
+#: template-parts/header/cart-drawer.php:75
+msgid "Back to home"
+msgstr ""
+
+#: template-parts/cart/page-title.php:16
+#: template-parts/header/cart-drawer.php:27
+msgid "Shopping Cart"
+msgstr ""
+
+#: template-parts/cart/page-title.php:17
+msgid "Review your selected items, update quantities, and get ready for a smooth and easy checkout experience."
+msgstr ""
+
+#: template-parts/checkout/page-title.php:16
+#: template-parts/header/cart-drawer.php:142
+msgid "Check Out"
+msgstr ""
+
+#: template-parts/checkout/page-title.php:17
+msgid "Review your order details carefully and complete your purchase securely and easily for a smooth shopping experience."
+msgstr ""
+
+#: template-parts/content/content-none.php:22
+msgid "Nothing found"
+msgstr ""
+
+#: template-parts/content/content-none.php:25
+msgid "Sorry, nothing matched your search. Try again with a different term."
+msgstr ""
+
+#: template-parts/content/content-none.php:28
+msgid "It looks like there is nothing here yet."
+msgstr ""
+
+#: template-parts/content/content-page.php:28
+#: template-parts/content/content-single.php:63
+msgid "Pages:"
+msgstr ""
+
+#: template-parts/content/content-single.php:100
+msgid "Share on Pinterest"
+msgstr ""
+
+#: template-parts/content/content-single.php:114
+msgid "Previous"
+msgstr ""
+
+#: template-parts/content/content-single.php:125
+msgid "Next"
+msgstr ""
+
+#: template-parts/content/content-single.php:73
+msgid "Tags:"
+msgstr ""
+
+#: template-parts/content/content-single.php:82
+msgid "Share this post:"
+msgstr ""
+
+#: template-parts/content/content-single.php:86
+msgid "Share on Facebook"
+msgstr ""
+
+#: template-parts/content/content-single.php:93
+msgid "Share on X"
+msgstr ""
+
+#: template-parts/footer/newsletter-form.php:17
+msgid "Enter your e-mail"
+msgstr ""
+
+#: template-parts/footer/payment-icons.php:32
+msgid "Accepted payment methods"
+msgstr ""
+
+#: template-parts/header/cart-drawer.php:132
+#: woocommerce/cart/cart-totals.php:57
+msgid "Subtotal"
+msgstr ""
+
+#: template-parts/header/cart-drawer.php:139
+msgid "View cart"
+msgstr ""
+
+#: template-parts/header/cart-drawer.php:147
+#: woocommerce/cart/cart-totals.php:134
+msgid "Or Continue Shopping"
+msgstr ""
+
+#: template-parts/header/cart-drawer.php:43
+#: woocommerce/cart/cart-totals.php:38
+#. translators: %s: remaining amount to reach free shipping.
+msgid "Buy %s more to get free shipping"
+msgstr ""
+
+#: template-parts/header/cart-drawer.php:49
+#: woocommerce/cart/cart-totals.php:44
+msgid "You've unlocked free shipping!"
+msgstr ""
+
+#: template-parts/header/cart-drawer.php:69
+msgid "Your cart is currently empty. Let us help you find the right product."
+msgstr ""
+
+#: template-parts/header/cart-drawer.php:73
+msgid "Shopping"
+msgstr ""
+
+#: template-parts/header/mobile-menu.php:24
+msgid "What are you looking for?"
+msgstr ""
+
+#: template-parts/header/mobile-menu.php:42
+msgid "Need Help?"
+msgstr ""
+
+#: template-parts/header/search-modal.php:28
+msgid "Searching…"
+msgstr ""
+
+#: template-parts/header/search-results.php:32
+#. translators: %s: search term.
+msgid "No results found for \"%s\"."
+msgstr ""
+
+#: template-parts/header/search-results.php:72
+msgid "Pages & Articles"
+msgstr ""
+
+#: template-parts/header/search-results.php:97
+#. translators: 1: number of matching products, 2: search term.
+msgid "View %1$d result for \"%2$s\""
+msgid_plural "View all %1$d results for \"%2$s\""
+msgstr[0] ""
+msgstr[1] ""
+
+#: template-parts/product/related.php:24
+msgid "You May Also Like"
+msgstr ""
+
+#: template-parts/product/summary.php:128
+msgid "Guaranteed Safe Checkout:"
+msgstr ""
+
+#: template-parts/product/summary.php:48
+#. translators: %d: number of reviews.
+msgid "(%d review)"
+msgid_plural "(%d reviews)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: template-parts/product/summary.php:58
+msgid "SKU:"
+msgstr ""
+
+#: template-parts/product/tabs.php:22
+msgid "Description"
+msgstr ""
+
+#: template-parts/product/tabs.php:26
+msgid "Additional Information"
+msgstr ""
+
+#: template-parts/product/tabs.php:31
+#. translators: %d: number of reviews.
+msgid "Reviews (%d)"
+msgstr ""
+
+#: template-parts/product/tabs.php:36
+msgid "Shipping & Returns"
+msgstr ""
+
+#: template-parts/shop/control-bar.php:105
+msgid "Clear all"
+msgstr ""
+
+#: template-parts/shop/control-bar.php:20
+msgid "Default sorting"
+msgstr ""
+
+#: template-parts/shop/control-bar.php:21
+msgid "Best Selling"
+msgstr ""
+
+#: template-parts/shop/control-bar.php:22
+msgid "Average Rating"
+msgstr ""
+
+#: template-parts/shop/control-bar.php:23
+msgid "Latest"
+msgstr ""
+
+#: template-parts/shop/control-bar.php:24
+msgid "Price, low to high"
+msgstr ""
+
+#: template-parts/shop/control-bar.php:25
+msgid "Price, high to low"
+msgstr ""
+
+#: template-parts/shop/control-bar.php:26
+msgid "Alphabetically, A-Z"
+msgstr ""
+
+#: template-parts/shop/control-bar.php:27
+msgid "Alphabetically, Z-A"
+msgstr ""
+
+#: template-parts/shop/control-bar.php:39
+#. translators: 1: min price, 2: max price.
+msgid "Price: $%1$s–$%2$s"
+msgstr ""
+
+#: template-parts/shop/control-bar.php:64
+msgid "Show Filters"
+msgstr ""
+
+#: template-parts/shop/control-bar.php:88
+#. translators: %d: number of products.
+msgid "%d Product"
+msgid_plural "%d Products"
+msgstr[0] ""
+msgstr[1] ""
+
+#: template-parts/shop/filter-panel.php:107
+msgid "Apply"
+msgstr ""
+
+#: template-parts/shop/filter-panel.php:51
+msgid "Filters"
+msgstr ""
+
+#: template-parts/shop/filter-panel.php:59
+msgid "Product Categories"
+msgstr ""
+
+#: template-parts/shop/filter-panel.php:81
+msgid "Filter By Price"
+msgstr ""
+
+#: woocommerce/cart/cart-totals.php:118
+msgid "Total"
+msgstr ""
+
+#: woocommerce/cart/cart-totals.php:54
+msgid "Order Summary"
+msgstr ""
+
+#: woocommerce/cart/cart-totals.php:70
+#: woocommerce/cart/cart-totals.php:81
+msgid "Shipping"
+msgstr ""
+
+#: woocommerce/cart/proceed-to-checkout-button.php:13
+msgid "Proceed To Checkout"
+msgstr ""
+
+#: woocommerce/single-product-reviews.php:120
+msgid "There are no reviews yet."
+msgstr ""
+
+#: woocommerce/single-product-reviews.php:137
+msgid "Your rating"
+msgstr ""
+
+#: woocommerce/single-product-reviews.php:139
+msgid "Rate&hellip;"
+msgstr ""
+
+#: woocommerce/single-product-reviews.php:140
+msgid "Perfect"
+msgstr ""
+
+#: woocommerce/single-product-reviews.php:141
+msgid "Good"
+msgstr ""
+
+#: woocommerce/single-product-reviews.php:142
+msgid "Average"
+msgstr ""
+
+#: woocommerce/single-product-reviews.php:143
+msgid "Not that bad"
+msgstr ""
+
+#: woocommerce/single-product-reviews.php:144
+msgid "Very poor"
+msgstr ""
+
+#: woocommerce/single-product-reviews.php:158
+msgid "Write a review:"
+msgstr ""
+
+#: woocommerce/single-product-reviews.php:174
+msgid "Review"
+msgstr ""
+
+#: woocommerce/single-product-reviews.php:204
+msgid "Submit Review"
+msgstr ""
+
+#: woocommerce/single-product-reviews.php:219
+msgid "Only logged in customers who have purchased this product may leave a review."
+msgstr ""
+
+#: woocommerce/single-product-reviews.php:47
+#. translators: %d: number of ratings.
+msgid "(%d Rating)"
+msgid_plural "(%d Ratings)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: woocommerce/single-product-reviews.php:75
+msgid "Cancel Review"
+msgstr ""
+
+#: woocommerce/single-product-reviews.php:78
+msgid "Write a review"
+msgstr ""
+
+#: woocommerce/single-product-reviews.php:89
+#. translators: %d: number of reviews.
+msgid "%d Review"
+msgid_plural "%d Reviews"
+msgstr[0] ""
+msgstr[1] ""
+
+#: woocommerce/single-product/add-to-cart/simple.php:28
+#: woocommerce/single-product/add-to-cart/variation-add-to-cart-button.php:23
+msgid "Quantity:"
+msgstr ""
+
+#: woocommerce/single-product/add-to-cart/simple.php:54
+#: woocommerce/single-product/add-to-cart/variation-add-to-cart-button.php:46
+msgid "Buy It Now"
+msgstr ""
+
+#: woocommerce/single-product/review.php:37
+msgid "Your review is awaiting approval"
+msgstr ""
+
