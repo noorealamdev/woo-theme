@@ -3,14 +3,14 @@
  * Accepted payment method icons — either a single site-owner-uploaded
  * image (a combined icon strip), or the theme's own real bundled icon set.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$custom_image = apply_filters( 'ecombon_payment_icons_image', '' );
+$custom_image = apply_filters( 'noorifa_payment_icons_image', '' );
 $icons        = array( 'visa', 'master-card', 'amex', 'paypal', 'water', 'discover' );
 
 // `footer_context` is only ever passed by footer.php's own bottom-bar loop
@@ -29,12 +29,12 @@ $order      = $is_footer_context ? (string) ( $args['order'] ?? 0 ) : null;
 <ul class="<?php echo esc_attr( $list_class ); ?>"<?php echo null !== $order ? ' style="order: ' . esc_attr( $order ) . ';"' : ''; ?>>
 	<?php if ( $custom_image ) : ?>
 		<li class="<?php echo esc_attr( $item_class ); ?> payment-list-image">
-			<img loading="lazy" src="<?php echo esc_url( $custom_image ); ?>" alt="<?php esc_attr_e( 'Accepted payment methods', 'ecombon' ); ?>">
+			<img loading="lazy" src="<?php echo esc_url( $custom_image ); ?>" alt="<?php esc_attr_e( 'Accepted payment methods', 'noorifa' ); ?>">
 		</li>
 	<?php else : ?>
 		<?php foreach ( $icons as $icon ) : ?>
 			<li class="<?php echo esc_attr( $item_class ); ?>">
-				<img loading="lazy" width="38" height="24" src="<?php echo esc_url( ECOMBON_THEME_URI . '/assets/images/payment/' . $icon . '.svg' ); ?>" alt="<?php echo esc_attr( ucwords( str_replace( '-', ' ', $icon ) ) ); ?>">
+				<img loading="lazy" width="38" height="24" src="<?php echo esc_url( NOORIFA_THEME_URI . '/assets/images/payment/' . $icon . '.svg' ); ?>" alt="<?php echo esc_attr( ucwords( str_replace( '-', ' ', $icon ) ) ); ?>">
 			</li>
 		<?php endforeach; ?>
 	<?php endif; ?>

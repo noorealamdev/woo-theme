@@ -4,7 +4,7 @@
  * category + author + date, real body content, real tags + share links,
  * real prev/next post navigation, then real comments.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,9 +13,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_template_part( 'template-parts/blog/breadcrumb-nav' );
 
-$categories      = get_the_category();
-$primary_category = ! empty( $categories ) ? $categories[0] : null;
-$post_tags        = get_the_tags();
+$settings          = noorifa_settings();
+$categories        = get_the_category();
+$primary_category  = ! empty( $categories ) ? $categories[0] : null;
+$post_tags         = get_the_tags();
 $share_url         = rawurlencode( get_permalink() );
 $share_title       = rawurlencode( get_the_title() );
 $previous_post     = get_previous_post();
@@ -26,7 +27,7 @@ $next_post         = get_next_post();
 		<div class="container">
 			<div class="row">
 				<?php if ( has_post_thumbnail() ) : ?>
-					<div class="col-lg-12">
+					<div class="col-lg-8 mx-auto">
 						<div class="blog-image">
 							<?php the_post_thumbnail( 'large' ); ?>
 						</div>
@@ -47,18 +48,8 @@ $next_post         = get_next_post();
 
 							<div class="entry-meta">
 								<div class="meta-item meta-date">
-									<?php \Ecombon\Setup\Icons::render( 'CalendarBlank' ); ?>
+									<?php \Noorifa\Setup\Icons::render( 'CalendarBlank' ); ?>
 									<span class="text-body-1"><?php echo esc_html( get_the_date() ); ?></span>
-								</div>
-								<div class="br-line type-vertical"></div>
-								<div class="meta-item meta-author">
-									<?php \Ecombon\Setup\Icons::render( 'User' ); ?>
-									<span class="text-body-1">
-										<?php
-										/* translators: %s: post author display name. */
-										printf( esc_html__( 'by %s', 'ecombon' ), esc_html( get_the_author() ) );
-										?>
-									</span>
 								</div>
 							</div>
 						</div>
@@ -69,7 +60,7 @@ $next_post         = get_next_post();
 
 							wp_link_pages(
 								array(
-									'before' => '<nav class="page-links">' . esc_html__( 'Pages:', 'ecombon' ),
+									'before' => '<nav class="page-links">' . esc_html__( 'Pages:', 'noorifa' ),
 									'after'  => '</nav>',
 								)
 							);
@@ -79,40 +70,48 @@ $next_post         = get_next_post();
 						<div class="box-social-tag">
 							<?php if ( $post_tags ) : ?>
 								<div class="tags-right d-flex align-items-center flex-wrap gap-8">
-									<p><?php esc_html_e( 'Tags:', 'ecombon' ); ?></p>
+									<p><?php esc_html_e( 'Tags:', 'noorifa' ); ?></p>
 									<?php foreach ( $post_tags as $tag ) : ?>
 										<a href="<?php echo esc_url( get_tag_link( $tag ) ); ?>" class="tag-item text-caption-01"><?php echo esc_html( $tag->name ); ?></a>
 									<?php endforeach; ?>
 								</div>
 							<?php endif; ?>
 
-							<div class="social-left">
-								<p><?php esc_html_e( 'Share this post:', 'ecombon' ); ?></p>
-								<ul class="social-icon-2">
-									<li>
-										<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo esc_attr( $share_url ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Share on Facebook', 'ecombon' ); ?>">
-											<?php \Ecombon\Setup\Icons::render( 'FacebookLogo' ); ?>
-										</a>
-									</li>
-									<li>
-										<a href="https://x.com/intent/tweet?url=<?php echo esc_attr( $share_url ); ?>&text=<?php echo esc_attr( $share_title ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Share on X', 'ecombon' ); ?>">
-											<?php \Ecombon\Setup\Icons::render( 'XLogo' ); ?>
-										</a>
-									</li>
-									<li>
-										<a href="https://www.pinterest.com/pin/create/button/?url=<?php echo esc_attr( $share_url ); ?>&description=<?php echo esc_attr( $share_title ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Share on Pinterest', 'ecombon' ); ?>">
-											<?php \Ecombon\Setup\Icons::render( 'ShareNetwork' ); ?>
-										</a>
-									</li>
-								</ul>
-							</div>
+							<?php if ( $settings['blog_share_buttons_enabled'] ) : ?>
+								<div class="social-left">
+									<p><?php esc_html_e( 'Share this post:', 'noorifa' ); ?></p>
+									<ul class="social-icon-2">
+										<?php if ( $settings['blog_share_facebook'] ) : ?>
+											<li>
+												<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo esc_attr( $share_url ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Share on Facebook', 'noorifa' ); ?>">
+													<?php \Noorifa\Setup\Icons::render( 'FacebookLogo' ); ?>
+												</a>
+											</li>
+										<?php endif; ?>
+										<?php if ( $settings['blog_share_x'] ) : ?>
+											<li>
+												<a href="https://x.com/intent/tweet?url=<?php echo esc_attr( $share_url ); ?>&text=<?php echo esc_attr( $share_title ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Share on X', 'noorifa' ); ?>">
+													<?php \Noorifa\Setup\Icons::render( 'XLogo' ); ?>
+												</a>
+											</li>
+										<?php endif; ?>
+										<?php if ( $settings['blog_share_pinterest'] ) : ?>
+											<li>
+												<a href="https://www.pinterest.com/pin/create/button/?url=<?php echo esc_attr( $share_url ); ?>&description=<?php echo esc_attr( $share_title ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Share on Pinterest', 'noorifa' ); ?>">
+													<?php \Noorifa\Setup\Icons::render( 'ShareNetwork' ); ?>
+												</a>
+											</li>
+										<?php endif; ?>
+									</ul>
+								</div>
+							<?php endif; ?>
 						</div>
 
 						<?php if ( $previous_post || $next_post ) : ?>
 							<div class="group-direc">
 								<?php if ( $previous_post ) : ?>
 									<a href="<?php echo esc_url( get_permalink( $previous_post ) ); ?>" class="btn-direc prev link">
-										<p class="fw-semibold text-decoration-underline"><?php esc_html_e( 'Previous', 'ecombon' ); ?></p>
+										<p class="fw-semibold text-decoration-underline"><?php esc_html_e( 'Previous', 'noorifa' ); ?></p>
 										<p class="name-post h6 fw-medium"><?php echo esc_html( get_the_title( $previous_post ) ); ?></p>
 									</a>
 								<?php else : ?>
@@ -123,7 +122,7 @@ $next_post         = get_next_post();
 
 								<?php if ( $next_post ) : ?>
 									<a href="<?php echo esc_url( get_permalink( $next_post ) ); ?>" class="btn-direc next link">
-										<p class="fw-semibold text-decoration-underline"><?php esc_html_e( 'Next', 'ecombon' ); ?></p>
+										<p class="fw-semibold text-decoration-underline"><?php esc_html_e( 'Next', 'noorifa' ); ?></p>
 										<p class="name-post h6 fw-medium"><?php echo esc_html( get_the_title( $next_post ) ); ?></p>
 									</a>
 								<?php endif; ?>

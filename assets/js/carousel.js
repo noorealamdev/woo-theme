@@ -1,5 +1,5 @@
 $(window).on("load", function () {
-    $(".tf-swiper").each(function (index, element) {
+    $(".mk-swiper").each(function (index, element) {
         var $this = $(element);
         var laptop = $this.data("laptop") || 1;
         var preview = $this.data("preview") || 1;
@@ -144,15 +144,15 @@ $(window).on("load", function () {
                 var slideIndex = $(this).data("slide");
                 swiperT.slideTo(slideIndex, 500, false);
 
-                $(".tf-swiper .card-product").removeClass("active");
-                $(".tf-swiper .card-product").eq(slideIndex).addClass("active");
+                $(".mk-swiper .card-product").removeClass("active");
+                $(".mk-swiper .card-product").eq(slideIndex).addClass("active");
             })
             .on("mouseleave", function () {
-                $(".tf-swiper .card-product").removeClass("active");
+                $(".mk-swiper .card-product").removeClass("active");
             })
             .on("click", function () {
                 var slideIndex = $(this).data("slide");
-                $(".tf-swiper .card-product").eq(slideIndex).toggleClass("clicked");
+                $(".mk-swiper .card-product").eq(slideIndex).toggleClass("clicked");
             });
     });
 });

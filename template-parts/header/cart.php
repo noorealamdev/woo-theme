@@ -2,7 +2,7 @@
 /**
  * Header builder element: cart icon + real cart contents count.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -16,7 +16,7 @@ if ( function_exists( 'WC' ) && WC()->cart ) {
 ?>
 <li>
 	<a href="#shoppingCart" data-bs-toggle="offcanvas" class="nav-icon-item link shop-cart">
-		<?php \Ecombon\Setup\Icons::render( 'Handbag' ); ?>
+		<?php \Noorifa\Setup\Icons::render( 'Handbag' ); ?>
 		<span class="count"><?php echo esc_html( (string) $cart_count ); ?></span>
 	</a>
 </li>

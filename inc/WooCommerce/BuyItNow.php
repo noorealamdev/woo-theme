@@ -2,12 +2,12 @@
 /**
  * BuyItNow component.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\WooCommerce;
+namespace Noorifa\WooCommerce;
 
-use Ecombon\Setup\ComponentInterface;
+use Noorifa\Setup\ComponentInterface;
 
 /**
  * Real "Buy It Now": redirects straight to checkout after a successful
@@ -19,7 +19,7 @@ use Ecombon\Setup\ComponentInterface;
  * carrying the same `.single_add_to_cart_button` class so WooCommerce's
  * own variation-selection guard already covers it — this only changes
  * *where the customer lands* after WooCommerce's real add-to-cart handler
- * runs. It works even without JavaScript; assets/js/ecombon-cart.js
+ * runs. It works even without JavaScript; assets/js/noorifa-cart.js
  * progressively enhances it into an AJAX call that skips the page reload.
  */
 class BuyItNow implements ComponentInterface {
@@ -38,7 +38,7 @@ class BuyItNow implements ComponentInterface {
 	 * @param string $url Default redirect URL.
 	 */
 	public function maybe_redirect_to_checkout( string $url ): string {
-		if ( isset( $_REQUEST['ecombon_buy_now'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( isset( $_REQUEST['noorifa_buy_now'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			return wc_get_checkout_url();
 		}
 

@@ -2,12 +2,12 @@
 /**
  * CheckoutFields component.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\WooCommerce;
+namespace Noorifa\WooCommerce;
 
-use Ecombon\Setup\ComponentInterface;
+use Noorifa\Setup\ComponentInterface;
 
 /**
  * Restyles WooCommerce's own real checkout fields (still rendered by the

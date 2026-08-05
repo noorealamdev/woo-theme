@@ -5,7 +5,7 @@
  * Regenerate by re-fetching that endpoint and re-running the extraction
  * script if a refresh is ever needed; do not hand-edit this list.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 return array (

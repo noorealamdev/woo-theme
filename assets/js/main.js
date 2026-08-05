@@ -356,7 +356,7 @@
     /* Header Sticky
     -------------------------------------------------------------------------*/
     var headerSticky = function () {
-        if (document.body.classList.contains("ecombon-no-sticky-header")) {
+        if (document.body.classList.contains("noorifa-no-sticky-header")) {
             return;
         }
 

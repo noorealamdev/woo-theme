@@ -2,10 +2,10 @@
 /**
  * SEO component.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\Setup;
+namespace Noorifa\Setup;
 
 /**
  * Outputs the meta description, Open Graph / Twitter Card tags, and
@@ -13,11 +13,17 @@ namespace Ecombon\Setup;
  * real, already-existing data (post/product content, the real custom logo,
  * the real social links footer.php already renders). Product structured
  * data itself is WooCommerce's own real `WC_Structured_Data::generate_product_data()`
- * (see Ecombon\Hooks\TemplateHooks, which keeps that default callback on
+ * (see Noorifa\Hooks\TemplateHooks, which keeps that default callback on
  * `woocommerce_single_product_summary`), not duplicated here.
  *
- * No settings UI, no per-page overrides — that belongs in the future
- * Ecombon Core plugin, not the theme.
+ * A handful of real, site-wide settings (Appearance/Noorifa > SEO) — a
+ * fallback description/image for pages with no real per-page content to
+ * derive one from (e.g. the Shop archive, which has none of its own),
+ * `twitter:site`/`fb:app_id`, and search-engine verification meta tags —
+ * all default empty/unset, so an untouched install prints exactly what it
+ * always has. Per-page overrides (a specific product's own meta
+ * description, say) are still out of scope here — that's real per-content
+ * business data, which belongs in the future Noorifa Core plugin.
  */
 class SEO implements ComponentInterface {
 
@@ -71,6 +77,25 @@ class SEO implements ComponentInterface {
 		if ( $image ) {
 			printf( '<meta name="twitter:image" content="%s">' . "\n", esc_url( $image ) );
 		}
+
+		$settings = \Noorifa\Settings\Layout::all()['seo'] ?? array();
+
+		if ( ! empty( $settings['twitter_username'] ) ) {
+			$handle = ltrim( trim( (string) $settings['twitter_username'] ), '@' );
+			printf( '<meta name="twitter:site" content="@%s">' . "\n", esc_attr( $handle ) );
+		}
+
+		if ( ! empty( $settings['facebook_app_id'] ) ) {
+			printf( '<meta property="fb:app_id" content="%s">' . "\n", esc_attr( $settings['facebook_app_id'] ) );
+		}
+
+		if ( ! empty( $settings['google_verification'] ) ) {
+			printf( '<meta name="google-site-verification" content="%s">' . "\n", esc_attr( $settings['google_verification'] ) );
+		}
+
+		if ( ! empty( $settings['bing_verification'] ) ) {
+			printf( '<meta name="msvalidate.01" content="%s">' . "\n", esc_attr( $settings['bing_verification'] ) );
+		}
 	}
 
 	/**
@@ -92,9 +117,12 @@ class SEO implements ComponentInterface {
 	}
 
 	/**
-	 * Real, content-derived meta description for the current request.
-	 * Returns an empty string (no tag printed) when there's no real text to
-	 * summarize, rather than fabricating one.
+	 * Real, content-derived meta description for the current request. Falls
+	 * back to the real stored `seo.default_description` setting (e.g. for
+	 * the Shop archive, which has no excerpt/content/term-description of
+	 * its own) when there's no real per-page text to summarize, rather
+	 * than fabricating one — returns an empty string (no tag printed) only
+	 * if that fallback is itself unset.
 	 */
 	private function get_description(): string {
 		if ( function_exists( 'is_product' ) && is_product() ) {
@@ -113,12 +141,17 @@ class SEO implements ComponentInterface {
 
 		$text = wp_strip_all_tags( strip_shortcodes( (string) $text ) );
 
+		if ( ! $text ) {
+			$text = \Noorifa\Settings\Layout::all()['seo']['default_description'] ?? '';
+		}
+
 		return $text ? wp_trim_words( $text, 30, '…' ) : '';
 	}
 
 	/**
 	 * Real representative image for the current request — product image,
-	 * post featured image, or the real custom logo as a last resort.
+	 * post featured image, the real custom logo, or (last resort) the real
+	 * stored `seo.default_image` setting.
 	 */
 	private function get_image(): string {
 		if ( function_exists( 'is_product' ) && is_product() ) {
@@ -147,6 +180,11 @@ class SEO implements ComponentInterface {
 			if ( $url ) {
 				return $url;
 			}
+		}
+
+		$default_image = \Noorifa\Settings\Layout::all()['seo']['default_image'] ?? '';
+		if ( $default_image ) {
+			return $default_image;
 		}
 
 		return '';
@@ -188,9 +226,9 @@ class SEO implements ComponentInterface {
 		}
 
 		// Same real, filterable social links footer.php already renders —
-		// see footer.php's own `ecombon_social_links` filter. Empty by
+		// see footer.php's own `noorifa_social_links` filter. Empty by
 		// default until a site owner actually configures real accounts.
-		$socials = apply_filters( 'ecombon_social_links', array() );
+		$socials = apply_filters( 'noorifa_social_links', array() );
 		$same_as = array_values( array_filter( array_map( 'esc_url_raw', $socials ) ) );
 		if ( $same_as ) {
 			$data['sameAs'] = $same_as;
@@ -215,10 +253,11 @@ class SEO implements ComponentInterface {
 	 * Real BreadcrumbList data, built from the same real WP/WC context
 	 * (product categories, post categories, queried terms/pages) the
 	 * theme's own visible breadcrumb templates use — see
-	 * template-parts/product/breadcrumb-nav.php, blog/breadcrumb-nav.php,
-	 * and global/page-title.php for the matching visible markup. Returns
-	 * an empty array (no tag printed) on the front page, where no
-	 * breadcrumb is shown at all.
+	 * blog/breadcrumb-nav.php and global/page-title.php for the matching
+	 * visible markup (single product pages have no visible breadcrumb, but
+	 * still get this structured data for search engines). Returns an empty
+	 * array (no tag printed) on the front page, where no breadcrumb is
+	 * shown at all.
 	 */
 	private function get_breadcrumb_data(): array {
 		if ( is_front_page() ) {
@@ -226,10 +265,10 @@ class SEO implements ComponentInterface {
 		}
 
 		$crumbs   = array();
-		$crumbs[] = array( __( 'Home', 'ecombon' ), home_url( '/' ) );
+		$crumbs[] = array( __( 'Home', 'noorifa' ), home_url( '/' ) );
 
 		if ( function_exists( 'is_product' ) && is_product() ) {
-			$crumbs[] = array( __( 'Shop', 'ecombon' ), wc_get_page_permalink( 'shop' ) );
+			$crumbs[] = array( __( 'Shop', 'noorifa' ), wc_get_page_permalink( 'shop' ) );
 
 			$terms = get_the_terms( get_the_ID(), 'product_cat' );
 			$term  = ( $terms && ! is_wp_error( $terms ) ) ? reset( $terms ) : null;
@@ -252,9 +291,9 @@ class SEO implements ComponentInterface {
 			$crumbs[] = array( single_term_title( '', false ), get_term_link( get_queried_object() ) );
 		} elseif ( is_search() ) {
 			/* translators: %s: search query. */
-			$crumbs[] = array( sprintf( __( 'Search results for: %s', 'ecombon' ), get_search_query() ), '' );
+			$crumbs[] = array( sprintf( __( 'Search results for: %s', 'noorifa' ), get_search_query() ), '' );
 		} elseif ( is_404() ) {
-			$crumbs[] = array( __( 'Page not found', 'ecombon' ), '' );
+			$crumbs[] = array( __( 'Page not found', 'noorifa' ), '' );
 		} elseif ( is_singular() ) {
 			$crumbs[] = array( get_the_title(), get_permalink() );
 		} else {

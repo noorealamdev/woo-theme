@@ -5,11 +5,11 @@
  * Full override of WooCommerce's default archive-product.php to match the
  * theme's own shop layout (page-title banner, filter/sort control bar, grid).
  *
- * Kept in sync with WC core's own hooks (see Ecombon\Hooks\TemplateHooks
+ * Kept in sync with WC core's own hooks (see Noorifa\Hooks\TemplateHooks
  * for the default-callback removals that keep this override's own UI from
  * duplicating what those hooks would otherwise render).
  *
- * @package Ecombon
+ * @package Noorifa
  * @version 8.6.0
  */
 
@@ -22,7 +22,7 @@ get_header();
 /**
  * Real hook — WC_Structured_Data::generate_website_data() (SEO JSON-LD) is
  * the only default callback left on it (the wrapper-div and breadcrumb
- * callbacks are removed in Ecombon\Hooks\TemplateHooks, since this page has
+ * callbacks are removed in Noorifa\Hooks\TemplateHooks, since this page has
  * its own wrapper markup and breadcrumb already) — kept so extensions that
  * hook here for anything else (banners, notices) still work.
  */
@@ -32,7 +32,7 @@ get_template_part( 'template-parts/shop/page-title' );
 
 /**
  * Real hook — its only default callback (the taxonomy archive description)
- * is removed in Ecombon\Hooks\TemplateHooks since page-title.php above
+ * is removed in Noorifa\Hooks\TemplateHooks since page-title.php above
  * already shows it; kept open for extensions.
  */
 do_action( 'woocommerce_shop_loop_header' );
@@ -45,7 +45,7 @@ do_action( 'woocommerce_shop_loop_header' );
 		<?php
 		/**
 		 * Real hook — its result-count/ordering-dropdown default callbacks
-		 * are removed in Ecombon\Hooks\TemplateHooks since control-bar.php
+		 * are removed in Noorifa\Hooks\TemplateHooks since control-bar.php
 		 * above already provides that UI; woocommerce_output_all_notices
 		 * is kept, since nothing else on this page shows WC notices.
 		 */
@@ -53,7 +53,7 @@ do_action( 'woocommerce_shop_loop_header' );
 		?>
 
 		<?php if ( have_posts() ) : ?>
-			<div class="wrapper-shop grid-layout tf-col-<?php echo esc_attr( ecombon_settings()['shop_grid_columns'] ); ?>" id="gridLayout">
+			<div class="wrapper-shop grid-layout mk-col-<?php echo esc_attr( noorifa_settings()['shop_grid_columns'] ); ?>" id="gridLayout">
 				<?php
 				while ( have_posts() ) :
 					the_post();
@@ -71,7 +71,7 @@ do_action( 'woocommerce_shop_loop_header' );
 
 			/**
 			 * Real hook — its default "no products found" message callback
-			 * is removed in Ecombon\Hooks\TemplateHooks since content-none.php
+			 * is removed in Noorifa\Hooks\TemplateHooks since content-none.php
 			 * above already shows one; kept open for extensions.
 			 */
 			do_action( 'woocommerce_no_products_found' );
@@ -81,7 +81,7 @@ do_action( 'woocommerce_shop_loop_header' );
 		<?php
 		/**
 		 * Real hook — its default pagination callback is removed in
-		 * Ecombon\Hooks\TemplateHooks since pagination.php above already
+		 * Noorifa\Hooks\TemplateHooks since pagination.php above already
 		 * provides that UI; kept open for extensions.
 		 */
 		do_action( 'woocommerce_after_shop_loop' );

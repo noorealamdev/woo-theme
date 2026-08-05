@@ -2,17 +2,17 @@
 /**
  * Frontend_Output component.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\Settings;
+namespace Noorifa\Settings;
 
-use Ecombon\Setup\ComponentInterface;
+use Noorifa\Setup\ComponentInterface;
 
 /**
  * Wires the real stored settings into the theme's frontend.
  *
- * For social links, this hooks the *same* `ecombon_social_links` filter
+ * For social links, this hooks the *same* `noorifa_social_links` filter
  * `template-parts/footer/info.php` already calls — that file needs zero
  * changes, it just starts receiving real stored values instead of always
  * falling back to its hardcoded default (empty array).
@@ -23,8 +23,8 @@ class Frontend_Output implements ComponentInterface {
 	 * {@inheritDoc}
 	 */
 	public function initialize(): void {
-		add_filter( 'ecombon_social_links', array( $this, 'social_links' ) );
-		add_filter( 'ecombon_payment_icons_image', array( $this, 'payment_icons_image' ) );
+		add_filter( 'noorifa_social_links', array( $this, 'social_links' ) );
+		add_filter( 'noorifa_payment_icons_image', array( $this, 'payment_icons_image' ) );
 
 		add_action( 'wp_head', array( $this, 'print_brand_overrides' ) );
 		add_filter( 'body_class', array( $this, 'site_width_body_class' ) );
@@ -41,13 +41,17 @@ class Frontend_Output implements ComponentInterface {
 	 */
 	public function site_width_body_class( array $classes ): array {
 		if ( 'full-width' === Layout::site_width() ) {
-			$classes[] = 'ecombon-full-width';
+			$classes[] = 'noorifa-full-width';
 		}
 		if ( ! Layout::header_sticky() ) {
-			$classes[] = 'ecombon-no-sticky-header';
+			$classes[] = 'noorifa-no-sticky-header';
 		}
 		if ( Layout::force_mobile_menu() ) {
-			$classes[] = 'ecombon-force-mobile-menu';
+			$classes[] = 'noorifa-force-mobile-menu';
+		}
+		$button_style = Layout::all()['buttons']['style'] ?? Layout::BUTTON_STYLE_DEFAULT;
+		if ( Layout::BUTTON_STYLE_DEFAULT !== $button_style ) {
+			$classes[] = 'noorifa-btn-style-' . $button_style;
 		}
 		return $classes;
 	}
@@ -121,9 +125,9 @@ class Frontend_Output implements ComponentInterface {
 				$query[] = 'family=' . rawurlencode( $family ) . ':wght@400;500;600;700';
 			}
 			$url = 'https://fonts.googleapis.com/css2?' . implode( '&', $query ) . '&display=swap';
-			wp_enqueue_style( 'ecombon-google-font', $url, array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
+			wp_enqueue_style( 'noorifa-google-font', $url, array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 		}
 
-		echo '<style id="ecombon-brand-overrides">:root{' . implode( '', $result['declarations'] ) . '}</style>' . "\n";
+		echo '<style id="noorifa-brand-overrides">:root{' . implode( '', $result['declarations'] ) . '}</style>' . "\n";
 	}
 }

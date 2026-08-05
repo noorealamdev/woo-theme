@@ -164,7 +164,7 @@ body {
   /* Deliberately its own scoped variable, not an override of --white —
      that token is shared by ~110 other rules across this file (buttons,
      cards, borders, text-on-dark, …) and must stay untouched. */
-  background: var(--ecombon-body-bg, var(--white));
+  background: var(--noorifa-body-bg, var(--white));
 }
 
 body::-webkit-scrollbar {
@@ -494,11 +494,11 @@ p {
   background-color: var(--primary);
 }
 
-.tf-swiper .swiper-slide {
+.mk-swiper .swiper-slide {
   height: auto;
 }
 
-.tf-swiper .swiper-slide > * {
+.mk-swiper .swiper-slide > * {
   height: 100%;
 }
 
@@ -1783,31 +1783,31 @@ h6,
   row-gap: 24px;
 }
 
-.grid-layout.tf-col-1 {
+.grid-layout.mk-col-1 {
   grid-template-columns: 1fr;
 }
 
-.grid-layout.tf-col-2 {
+.grid-layout.mk-col-2 {
   grid-template-columns: 1fr 1fr;
 }
 
-.grid-layout.tf-col-3 {
+.grid-layout.mk-col-3 {
   grid-template-columns: repeat(3, 1fr);
 }
 
-.grid-layout.tf-col-4 {
+.grid-layout.mk-col-4 {
   grid-template-columns: repeat(4, 1fr);
 }
 
-.grid-layout.tf-col-5 {
+.grid-layout.mk-col-5 {
   grid-template-columns: repeat(5, 1fr);
 }
 
-.grid-layout.tf-col-6 {
+.grid-layout.mk-col-6 {
   grid-template-columns: repeat(6, 1fr);
 }
 
-.grid-layout.tf-col-7 {
+.grid-layout.mk-col-7 {
   grid-template-columns: repeat(7, 1fr);
 }
 
@@ -2026,7 +2026,7 @@ h6,
   margin-right: auto;
   padding-right: 15px;
   padding-left: 15px;
-  width: var(--ecombon-container-width, 1440px);
+  width: var(--noorifa-container-width, 1440px);
   max-width: 100%;
 }
 
@@ -2050,7 +2050,7 @@ h6,
    real product layout lives entirely inside
    woocommerce/content-single-product.php's own .container. */
 body:not(.single-product) .content-area {
-  max-width: 1440px;
+  max-width: var(--noorifa-container-width, 1440px);
   width: 100%;
   margin: 0 auto;
   padding: 40px 15px 100px;
@@ -2083,18 +2083,18 @@ body:not(.single-product) .content-area {
   margin-right: auto;
   padding-right: 15px;
   padding-left: 15px;
-  width: var(--ecombon-container-full-width, 1800px);
+  width: var(--noorifa-container-full-width, 1800px);
   max-width: 100%;
 }
 
-/* Full-width layout mode (Ecombon > Layout > Site Width). Stretches the
+/* Full-width layout mode (Noorifa > Layout > Site Width). Stretches the
    theme's fixed-max-width containers — including the plain-page boxed
    wrapper further below — to fill the actual browser viewport instead of
    capping at their original px width. Boxed (no body class) is the
    theme's original, unchanged default; this rule never applies then. */
-body.ecombon-full-width .container,
-body.ecombon-full-width .container-full,
-body.ecombon-full-width:not(.single-product) .content-area {
+body.noorifa-full-width .container,
+body.noorifa-full-width .container-full,
+body.noorifa-full-width:not(.single-product) .content-area {
   width: 100%;
   max-width: 100%;
 }
@@ -2273,7 +2273,7 @@ body.ecombon-full-width:not(.single-product) .content-area {
 header {
   position: sticky;
   z-index: 100;
-  background: var(--ecombon-header-bg, transparent);
+  background: var(--noorifa-header-bg, transparent);
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
@@ -2282,7 +2282,7 @@ header {
 }
 
 header.header-sticky:not(.header-s5, .header-abs) {
-  background: var(--ecombon-header-bg, var(--white));
+  background: var(--noorifa-header-bg, var(--white));
 }
 
 header.header-sticky.scr-box-shadow {
@@ -2353,7 +2353,7 @@ header.header-sticky.header-landing {
    the exact same .header-zone--left flex reset the block above already
    gives it below 1199px, or the zone's own flex:1 fights the hamburger's
    flex:1 for the same space and pushes the logo off-center. */
-body.ecombon-force-mobile-menu .header .header-inner .header-zone--left {
+body.noorifa-force-mobile-menu .header .header-inner .header-zone--left {
   flex: unset;
 }
 .header .dropdown-select.type-currencies > .dropdown-menu {
@@ -2810,7 +2810,7 @@ body.ecombon-force-mobile-menu .header .header-inner .header-zone--left {
   /* Same resting-color override as .item-link (nav menu text) — falls back
      to inherit when the Header Builder's Menu Color is left unset. Hover
      stays untouched (.link:hover already wins via !important). */
-  color: var(--ecombon-menu-color, inherit);
+  color: var(--noorifa-menu-color, inherit);
 }
 
 .nav-icon-list .nav-icon-item .icon {
@@ -2883,10 +2883,10 @@ body.ecombon-force-mobile-menu .header .header-inner .header-zone--left {
      alike. The hover color (--primary) is untouched, only the resting
      color is overridden. */
   font-family: var(--font-menu, inherit);
-  color: var(--ecombon-menu-color, inherit);
-  font-size: var(--ecombon-menu-font-size, inherit);
-  font-weight: var(--ecombon-menu-weight, 500);
-  text-transform: var(--ecombon-menu-transform, none);
+  color: var(--noorifa-menu-color, inherit);
+  font-size: var(--noorifa-menu-font-size, inherit);
+  font-weight: var(--noorifa-menu-weight, 700);
+  text-transform: var(--noorifa-menu-transform, none);
 }
 
 .item-link::after {
@@ -3732,7 +3732,7 @@ body.ecombon-force-mobile-menu .header .header-inner .header-zone--left {
    any other element that happens to use the same class. !important is
    required here to win against .bg-dark's own `!important` rule above. */
 .topbar.bg-dark {
-  background-color: var(--ecombon-topbar-bg, #101010) !important;
+  background-color: var(--noorifa-topbar-bg, #101010) !important;
 }
 
 /* The topbar message has no font-size rule of its own (inherits body's),
@@ -3742,8 +3742,8 @@ body.ecombon-force-mobile-menu .header .header-inner .header-zone--left {
    — removed from the template in favor of this real, overridable
    declaration, which still falls back to the exact same #fff. */
 .topbar p {
-  font-size: var(--ecombon-topbar-font-size, 16px);
-  color: var(--ecombon-topbar-text, #fff);
+  font-size: var(--noorifa-topbar-font-size, 16px);
+  color: var(--noorifa-topbar-text, #fff);
 }
 
 .topbar .br-line.fake-class {
@@ -4062,13 +4062,18 @@ body.ecombon-force-mobile-menu .header .header-inner .header-zone--left {
   border-radius: 16px;
   overflow: hidden;
   margin-bottom: 60px;
+  /* `img { height: 100% }` below only means anything once this container
+     has a real height of its own — without one, the image just rendered
+     at its own natural aspect ratio stretched to the full content width,
+     which for a wide/landscape photo meant an oversized, sometimes
+     600-1000px-tall banner dominating the page above the title. */
+  height: 500px;
 }
 
 .main-blog-single .blog-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  min-height: 350px;
 }
 
 .main-blog-single .blog-content {
@@ -4193,6 +4198,7 @@ body.ecombon-force-mobile-menu .header .header-inner .header-zone--left {
   }
   .main-blog-single .blog-image {
     margin-bottom: 40px;
+    height: 360px;
   }
   .main-blog-single .blog-content {
     gap: 30px;
@@ -8494,6 +8500,96 @@ select.select-3:focus {
     padding-right: 32px;
   }
 }
+/* Real site-wide button style setting (Buttons > Style) — a body class
+   (see Frontend_Output::button_style_body_class()) that's simply never
+   added while the default ("Rounded Pill", the theme's real original
+   .btn look above) is selected, so an untouched install is unaffected.
+   Each variant only changes shape/fill/hover treatment, reusing the same
+   --text/--white color tokens every other button color already does, so
+   it stays on-brand automatically with whatever Colors are set. */
+body.noorifa-btn-style-2 .btn {
+  border-radius: 12px;
+}
+
+body.noorifa-btn-style-3 .btn {
+  border-radius: 0;
+}
+
+body.noorifa-btn-style-4 .btn:not(.btn-white, .btn-stroke, .btn-stroke-2) {
+  background: transparent;
+  color: var(--text);
+  border: 2px solid var(--text);
+}
+
+body.noorifa-btn-style-4 .btn:not(.btn-white, .btn-stroke, .btn-stroke-2):hover {
+  background: var(--text);
+  color: var(--white);
+}
+
+body.noorifa-btn-style-5 .btn {
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(16, 16, 16, 0.18);
+}
+
+body.noorifa-btn-style-5 .btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(16, 16, 16, 0.24);
+}
+
+/* The sticky add-to-cart bar's button (template-parts/product/sticky-add-
+   -to-cart.php) has its own separate `.btn-add-to-cart` rule (not `.btn`),
+   since it needs its own fixed pill shape regardless of Buttons > Style —
+   the same style variants apply here too, matching the real .btn ones. */
+body.noorifa-btn-style-2 .sticky-btn-atc .btn-add-to-cart {
+  border-radius: 12px;
+}
+
+body.noorifa-btn-style-3 .sticky-btn-atc .btn-add-to-cart {
+  border-radius: 0;
+}
+
+body.noorifa-btn-style-4 .sticky-btn-atc .btn-add-to-cart {
+  background: transparent;
+  color: var(--text);
+  border: 2px solid var(--text);
+}
+
+body.noorifa-btn-style-5 .sticky-btn-atc .btn-add-to-cart {
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(16, 16, 16, 0.18);
+}
+
+body.noorifa-btn-style-5 .sticky-btn-atc .btn-add-to-cart:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(16, 16, 16, 0.24);
+}
+
+/* The single product page's size-option picker (assets/js/noorifa-product-
+   -variations.js's `.size-btn`) is its own small "chip" button, separate
+   from `.btn` — same style-driven shape language, scaled to fit a compact
+   swatch. Color swatches (`.color-btn`) deliberately stay circular at
+   every style — that's a fixed swatch convention, not a button shape. */
+body.noorifa-btn-style-2 .product-info-wrap .variant-size .size-btn:not(.select-item, .style-radio) {
+  border-radius: 10px;
+}
+
+body.noorifa-btn-style-3 .product-info-wrap .variant-size .size-btn:not(.select-item, .style-radio) {
+  border-radius: 0;
+}
+
+body.noorifa-btn-style-4 .product-info-wrap .variant-size .size-btn:not(.select-item, .style-radio) {
+  border-width: 2px;
+}
+
+body.noorifa-btn-style-5 .product-info-wrap .variant-size .size-btn:not(.select-item, .style-radio) {
+  border-radius: 10px;
+}
+
+body.noorifa-btn-style-5 .product-info-wrap .variant-size .size-btn:not(.select-item, .style-radio):hover {
+  box-shadow: 0 6px 14px rgba(16, 16, 16, 0.16);
+  transform: translateY(-2px);
+}
+
 .animate-btn {
   position: relative;
   overflow: hidden;
@@ -8531,27 +8627,27 @@ button.animate-btn::after,
   background-image: linear-gradient(90deg, transparent, rgb(220, 70, 70), transparent);
 }
 
-.tf-loading {
+.mk-loading {
   min-width: 150px;
 }
 
-.tf-loading.loadmore .spinner-circle {
+.mk-loading.loadmore .spinner-circle {
   display: none;
 }
 
-.tf-loading.loadmore.loading .spinner-circle {
+.mk-loading.loadmore.loading .spinner-circle {
   display: block;
 }
 
-.tf-loading.loadmore.loading .text {
+.mk-loading.loadmore.loading .text {
   display: none;
 }
 
-.tf-loading.loadmore:hover .spinner-child::before {
+.mk-loading.loadmore:hover .spinner-child::before {
   background-color: var(--white);
 }
 
-.tf-loading.loadmore .spinner-child::before {
+.mk-loading.loadmore .spinner-child::before {
   background-color: var(--bg);
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
@@ -8561,7 +8657,7 @@ button.animate-btn::after,
 }
 
 @media (max-width: 1199px) {
-  .tf-loading {
+  .mk-loading {
     min-width: 130px;
   }
 }
@@ -8921,7 +9017,7 @@ button.animate-btn::after,
 }
 
 /*------------ Slider (layout/structure real classes only) ---------------- */
-.tf-swiper .sw-pagination:not(.swiper-pagination-lock) {
+.mk-swiper .sw-pagination:not(.swiper-pagination-lock) {
   margin-top: 20px;
 }
 
@@ -10178,8 +10274,8 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
      otherwise. Falls back to `inherit` (the body font) when Heading Font
      is left unset, matching every other typography override's default. */
   font-family: var(--font-heading, inherit);
-  font-size: var(--ecombon-shop-title-font-size, inherit);
-  font-weight: var(--ecombon-shop-title-font-weight, 500);
+  font-size: var(--noorifa-shop-title-font-size, inherit);
+  font-weight: var(--noorifa-shop-title-font-weight, 500);
 }
 
 .price-wrap {
@@ -10193,7 +10289,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
    shared .text-caption-01 size (14px) — only the current price follows the
    Shop settings' Meta Font Size. */
 .price-wrap .price-new {
-  font-size: var(--ecombon-shop-meta-font-size, inherit);
+  font-size: var(--noorifa-shop-meta-font-size, inherit);
 }
 
 .price-wrap .price-old {
@@ -11651,7 +11747,14 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 }
 
 @media (max-width: 767px) {
-  .cart_item {
+  /* Scoped to the real Cart page's own table (.table-page-cart, see
+     template-parts/cart/cart-table.php) — WITHOUT this scope, these rules
+     also match the Checkout page's order-review table, since WooCommerce
+     reuses the same `.cart_item` row class on both tables. Unscoped, they
+     forced every review-order `<td>` into `display: flex`, which breaks
+     out of the `table-layout: fixed` column-width algorithm and squeezed
+     the product-name column into a sliver on mobile checkout. */
+  .table-page-cart .cart_item {
     margin-bottom: 15px;
     padding-inline-start: 94px;
     min-height: 140px;
@@ -11659,11 +11762,11 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
     font-weight: 500;
     position: relative;
   }
-  .cart_item .wg-quantity {
+  .table-page-cart .cart_item .wg-quantity {
     min-width: 110px;
     padding: 6px 10px;
   }
-  .cart_item .img-prd {
+  .table-page-cart .cart_item .img-prd {
     position: absolute;
     top: 0;
     left: 0;
@@ -11675,12 +11778,12 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
     flex-shrink: 0;
     border: 1px solid var(--line);
   }
-  .cart_item .img-prd img {
+  .table-page-cart .cart_item .img-prd img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  .cart_item td {
+  .table-page-cart .cart_item td {
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -11688,10 +11791,10 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
     padding: 10px 0;
     margin: 0;
   }
-  .cart_item td:not(:last-child) {
+  .table-page-cart .cart_item td:not(:last-child) {
     border-bottom: 1px solid var(--line);
   }
-  .cart_item td[data-cart-title]:before {
+  .table-page-cart .cart_item td[data-cart-title]:before {
     content: attr(data-cart-title);
     color: var(--black);
     text-align: start;
@@ -12762,7 +12865,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
    applying to <body> itself, dragging the header/offcanvas drawers/footer
    into the grid alongside the checkout form. */
 form.woocommerce-checkout {
-  max-width: 1440px;
+  max-width: var(--noorifa-container-width, 1440px);
   width: 100%;
   margin: 0 auto;
   padding: 0 15px 100px;
@@ -13037,8 +13140,20 @@ form.woocommerce-checkout .woocommerce-input-wrapper {
   color: var(--text);
 }
 
+/* `table-layout: fixed` needs an explicit width on at least one column to
+   size deterministically — without it, browsers fall back to sizing
+   columns from each cell's own content, and the nowrap Subtotal column
+   below was winning that fight, squeezing product-name down to a sliver
+   and wrapping long product names into a single narrow word per line
+   (worst on mobile, where the whole table is already narrow). */
+.woocommerce-checkout-review-order-table th.product-name,
+.woocommerce-checkout-review-order-table td.product-name {
+  width: 70%;
+}
+
 .woocommerce-checkout-review-order-table th.product-total,
 .woocommerce-checkout-review-order-table td.product-total {
+  width: 30%;
   text-align: right;
   white-space: nowrap;
 }
@@ -13073,7 +13188,7 @@ form.woocommerce-checkout .woocommerce-input-wrapper {
    width/padding as the form below so the two line up. */
 .woocommerce-form-coupon-toggle,
 .woocommerce-form-coupon {
-  max-width: 1440px;
+  max-width: var(--noorifa-container-width, 1440px);
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -13304,7 +13419,7 @@ form.woocommerce-checkout input[type=checkbox]:checked::before {
    *container* rule needs repeating per real wrapper class below, since
    these forms don't share checkout's wrapper element. */
 body.woocommerce-account .woocommerce {
-  max-width: 1440px;
+  max-width: var(--noorifa-container-width, 1440px);
   width: 100%;
   margin: 0 auto;
   padding: 0 15px 100px;
@@ -13992,11 +14107,43 @@ a.woocommerce-Button.button.pay {
   display: grid;
 }
 
+.section-page-title {
+  background: var(--noorifa-page-title-bg, transparent);
+  /* `color` is inherited, so this alone covers the <h1> and icons
+     (`.icon` fills with currentColor) that don't set their own explicit
+     color. `.cl-text-2`/`.cl-text-3` set theirs with `!important` — same
+     reasoning as .footer above — so they need their own direct overrides
+     below since they don't inherit. */
+  color: var(--noorifa-page-title-fg, inherit);
+}
+
+.section-page-title .cl-text-2 {
+  color: var(--noorifa-page-title-fg, var(--text-2)) !important;
+}
+
+.section-page-title .cl-text-3 {
+  color: var(--noorifa-page-title-fg, var(--text-3)) !important;
+}
+
+/* Equal specificity to .cl-text-2/.cl-text-3 above (both 2 selectors +
+   !important) — without this, the breadcrumb links' existing hover-to-
+   primary-color effect (.link:hover) would be permanently overridden by
+   source order alone, same bug already fixed for .footer above. */
+.section-page-title .cl-text-2:hover,
+.section-page-title .cl-text-3:hover,
+.section-page-title a:hover {
+  color: var(--primary) !important;
+}
+
 .section-page-title .breadcrumbs {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
+}
+
+.section-page-title.text-start .breadcrumbs {
+  justify-content: flex-start;
 }
 
 .section-page-title .breadcrumbs .icon {
@@ -14301,18 +14448,18 @@ a.woocommerce-Button.button.pay {
 .footer {
   padding-top: 20px;
   margin-top: 60px;
-  background: var(--ecombon-footer-bg, transparent);
+  background: var(--noorifa-footer-bg, transparent);
   /* `color` is inherited, so this alone covers every footer heading and
      icon (`.icon` fills with currentColor) that doesn't set its own
      explicit color. `<a>` always sets its own explicit `color: var(--text)`
      (see the global `a {}` rule), and `.cl-text-2`/`.cl-text-3` set theirs
      with `!important` — both need their own direct overrides below since
      neither one inherits. */
-  color: var(--ecombon-footer-fg, inherit);
+  color: var(--noorifa-footer-fg, inherit);
 }
 
 .footer a {
-  color: var(--ecombon-footer-fg, var(--text));
+  color: var(--noorifa-footer-fg, var(--text));
 }
 
 /* `!important` is required here to win against .cl-text-2/.cl-text-3's own
@@ -14321,11 +14468,11 @@ a.woocommerce-Button.button.pay {
    the :hover rule below, source order alone would make THIS win even on
    hover, breaking the existing hover-to-primary-color effect. */
 .footer .cl-text-2 {
-  color: var(--ecombon-footer-fg, var(--text-2)) !important;
+  color: var(--noorifa-footer-fg, var(--text-2)) !important;
 }
 
 .footer .cl-text-3 {
-  color: var(--ecombon-footer-fg, var(--text-3)) !important;
+  color: var(--noorifa-footer-fg, var(--text-3)) !important;
 }
 
 .footer .cl-text-2:hover,
@@ -14335,7 +14482,7 @@ a.woocommerce-Button.button.pay {
 }
 
 .footer .social-icon-2 a {
-  border-color: var(--ecombon-footer-fg, var(--line));
+  border-color: var(--noorifa-footer-fg, var(--line));
 }
 
 .footer .br-line.fake-class {
@@ -14489,7 +14636,7 @@ a.woocommerce-Button.button.pay {
     transform: translateY(-50%);
     width: 12px;
     height: 1px;
-    background-color: var(--ecombon-footer-fg, var(--text));
+    background-color: var(--noorifa-footer-fg, var(--text));
     transition: 0.25s ease-in-out;
   }
   .footer-heading-mobile::before {
@@ -14500,7 +14647,7 @@ a.woocommerce-Button.button.pay {
     transform: translate(-50%, -50%);
     width: 1px;
     height: 12px;
-    background-color: var(--ecombon-footer-fg, var(--text));
+    background-color: var(--noorifa-footer-fg, var(--text));
     transition: 0.25s ease-in-out;
   }
   .inner-right .footer-col-block .collapse-content {
@@ -14515,7 +14662,7 @@ a.woocommerce-Button.button.pay {
   .footer-col-block {
     margin-bottom: 16px;
     padding-bottom: 16px;
-    border-bottom: 1px solid var(--ecombon-footer-fg, var(--line));
+    border-bottom: 1px solid var(--noorifa-footer-fg, var(--line));
   }
   .footer-col-block.open .footer-heading-mobile {
     margin-bottom: 12px;

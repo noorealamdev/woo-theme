@@ -2,7 +2,7 @@
 /**
  * Footer builder element: copyright text.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $copyright_text = str_replace(
 	array( '{year}', '{site_name}' ),
 	array( gmdate( 'Y' ), get_bloginfo( 'name' ) ),
-	ecombon_settings()['footer_copyright_text']
+	noorifa_settings()['footer_copyright_text']
 );
 ?>
 <p class="text-nocopy cl-text-2" style="order: <?php echo esc_attr( (string) ( $args['order'] ?? 0 ) ); ?>;">

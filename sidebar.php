@@ -5,13 +5,13 @@
  * matching the reference) lives on the .col-lg-4 wrapper in archive.php/
  * search.php, not here, since this template-part is just the <aside> itself.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<aside id="secondary" class="site-sidebar" aria-label="<?php esc_attr_e( 'Blog sidebar', 'ecombon' ); ?>">
+<aside id="secondary" class="site-sidebar" aria-label="<?php esc_attr_e( 'Blog sidebar', 'noorifa' ); ?>">
 	<?php get_template_part( 'template-parts/blog/sidebar' ); ?>
 </aside>

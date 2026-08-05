@@ -1,9 +1,16 @@
 <?php
 /**
- * The default fallback template: blog index and any query not matched by a
- * more specific template.
+ * The template for the blog index (Posts page) — and, per WP's own
+ * template-fallback order, anything not matched by a more specific
+ * template (archive.php covers category/tag/date/author archives,
+ * search.php covers search results).
  *
- * @package Ecombon
+ * Real page-title banner + grid, same real markup archive.php already
+ * uses, so /blog/ matches every other archive instead of the bare
+ * WP-starter-theme markup (`.content-area`/`.archive-header`/`.entry-list`)
+ * this file used before — those classes had no real styling of their own.
+ *
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -11,38 +18,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 get_header();
+
+if ( is_home() && ! is_front_page() ) {
+	get_template_part(
+		'template-parts/global/page-title',
+		null,
+		array( 'title' => wp_strip_all_tags( single_post_title( '', false ) ) )
+	);
+}
 ?>
 
-<div id="primary" class="site-main">
-	<div class="content-area">
-		<div class="content-area__main">
-			<?php if ( have_posts() ) : ?>
-
-				<?php if ( is_home() && ! is_front_page() ) : ?>
-					<header class="archive-header">
-						<h1 class="archive-header__title"><?php single_post_title(); ?></h1>
-					</header>
-				<?php endif; ?>
-
-				<div class="entry-list">
-					<?php
-					while ( have_posts() ) :
-						the_post();
-						get_template_part( 'template-parts/content/content' );
-					endwhile;
-					?>
-				</div>
-
-				<?php the_posts_pagination(); ?>
-
-			<?php else : ?>
-				<?php get_template_part( 'template-parts/content/content-none' ); ?>
-			<?php endif; ?>
-		</div>
-
-		<?php get_sidebar(); ?>
-	</div>
-</div>
+<?php get_template_part( 'template-parts/blog/post-grid' ); ?>
 
 <?php
 get_footer();

@@ -2,7 +2,7 @@
 /**
  * The template for category, tag, author and date archives.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,36 +21,7 @@ get_template_part(
 );
 ?>
 
-<section class="section-blog flat-spacing">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-8">
-				<?php if ( have_posts() ) : ?>
-
-					<div class="grid-layout sm-col-2">
-						<?php
-						while ( have_posts() ) :
-							the_post();
-							get_template_part( 'template-parts/content/content' );
-						endwhile;
-						?>
-
-						<div class="wd-full">
-							<?php the_posts_pagination( array( 'class' => 'page-pagination' ) ); ?>
-						</div>
-					</div>
-
-				<?php else : ?>
-					<?php get_template_part( 'template-parts/content/content-none' ); ?>
-				<?php endif; ?>
-			</div>
-
-			<div class="col-lg-4 d-none d-lg-block">
-				<?php get_sidebar(); ?>
-			</div>
-		</div>
-	</div>
-</section>
+<?php get_template_part( 'template-parts/blog/post-grid' ); ?>
 
 <?php
 get_footer();

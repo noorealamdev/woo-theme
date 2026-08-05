@@ -2,7 +2,7 @@
 /**
  * The header for the theme.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'ecombon' ); ?></a>
+<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'noorifa' ); ?></a>
 
 <div class="preload preload-container" id="preload">
 	<div class="preload-logo">

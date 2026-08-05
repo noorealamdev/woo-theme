@@ -2,20 +2,20 @@
 /**
  * Schema component.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\Settings;
+namespace Noorifa\Settings;
 
 /**
  * The single field registry every real theme setting is declared in —
  * one entry per field, each covering its own default value, its storage
  * path inside the nested settings array, its flat key for
- * `ecombon_settings()`, and (via `type`) how it's sanitized on save.
+ * `noorifa_settings()`, and (via `type`) how it's sanitized on save.
  *
  * Adding or removing a field here is enough to change what `Layout::all()`
  * defaults to, what `Rest_Controller::save_settings()` accepts, and what
- * `ecombon_settings()` exposes — those three call into `defaults()`,
+ * `noorifa_settings()` exposes — those three call into `defaults()`,
  * `sanitize()` and `flatten()` below instead of each re-declaring the
  * field by hand. The React admin form itself is still built by hand
  * per section (assets/js/admin/settings-app.js) — this registry only
@@ -29,7 +29,7 @@ class Schema {
 	 * Each entry: `path` (dot-path into the nested settings array),
 	 * `type` (drives sanitization — text/email/textarea/html/raw_html/url/
 	 * image/bool/hex_color/select/range/order/zones/subset_order/
-	 * social_links), `default`, `flat` (the `ecombon_settings()` key), and, only for
+	 * social_links), `default`, `flat` (the `noorifa_settings()` key), and, only for
 	 * select/range/order/zones/subset_order/social_links, whatever extra
 	 * shape that type needs (`choices`/`min`/`max`/`modules`). `order`,
 	 * `zones`, `subset_order` and `social_links` fields additionally take
@@ -59,7 +59,7 @@ class Schema {
 				'flat'    => 'topbar_background_color',
 				'type'    => 'hex_color',
 				'default' => Layout::TOPBAR_BG_DEFAULT,
-				'css'     => array( 'var' => '--ecombon-topbar-bg' ),
+				'css'     => array( 'var' => '--noorifa-topbar-bg' ),
 			),
 			array(
 				'path'    => 'topbar.font_size',
@@ -68,14 +68,14 @@ class Schema {
 				'default' => Layout::TOPBAR_FONT_SIZE_DEFAULT,
 				'min'     => Layout::TOPBAR_FONT_SIZE_MIN,
 				'max'     => Layout::TOPBAR_FONT_SIZE_MAX,
-				'css'     => array( 'var' => '--ecombon-topbar-font-size', 'unit' => 'px' ),
+				'css'     => array( 'var' => '--noorifa-topbar-font-size', 'unit' => 'px' ),
 			),
 			array(
 				'path'    => 'topbar.text_color',
 				'flat'    => 'topbar_text_color',
 				'type'    => 'hex_color',
 				'default' => Layout::TOPBAR_TEXT_DEFAULT,
-				'css'     => array( 'var' => '--ecombon-topbar-text' ),
+				'css'     => array( 'var' => '--noorifa-topbar-text' ),
 			),
 			array(
 				'path'    => 'branding.color_primary',
@@ -96,7 +96,7 @@ class Schema {
 				'flat'    => 'body_background_color',
 				'type'    => 'hex_color',
 				'default' => Layout::BODY_BG_DEFAULT,
-				'css'     => array( 'var' => '--ecombon-body-bg' ),
+				'css'     => array( 'var' => '--noorifa-body-bg' ),
 			),
 			array(
 				'path'    => 'typography.font_body',
@@ -162,7 +162,7 @@ class Schema {
 				'default' => Layout::SHOP_TITLE_FONT_SIZE_DEFAULT,
 				'min'     => Layout::SHOP_TITLE_FONT_SIZE_MIN,
 				'max'     => Layout::SHOP_TITLE_FONT_SIZE_MAX,
-				'css'     => array( 'var' => '--ecombon-shop-title-font-size', 'unit' => 'px' ),
+				'css'     => array( 'var' => '--noorifa-shop-title-font-size', 'unit' => 'px' ),
 			),
 			array(
 				'path'    => 'shop.meta_font_size',
@@ -171,7 +171,7 @@ class Schema {
 				'default' => Layout::SHOP_META_FONT_SIZE_DEFAULT,
 				'min'     => Layout::SHOP_META_FONT_SIZE_MIN,
 				'max'     => Layout::SHOP_META_FONT_SIZE_MAX,
-				'css'     => array( 'var' => '--ecombon-shop-meta-font-size', 'unit' => 'px' ),
+				'css'     => array( 'var' => '--noorifa-shop-meta-font-size', 'unit' => 'px' ),
 			),
 			array(
 				'path'    => 'shop.title_font_weight',
@@ -179,7 +179,214 @@ class Schema {
 				'type'    => 'select',
 				'default' => Layout::SHOP_TITLE_FONT_WEIGHT_DEFAULT,
 				'choices' => array_keys( Layout::font_weight_choices() ),
-				'css'     => array( 'var' => '--ecombon-shop-title-font-weight' ),
+				'css'     => array( 'var' => '--noorifa-shop-title-font-weight' ),
+			),
+			array(
+				'path'    => 'blog.grid_columns',
+				'flat'    => 'blog_grid_columns',
+				'type'    => 'select',
+				'default' => Layout::BLOG_GRID_COLUMNS_DEFAULT,
+				'choices' => array_keys( Layout::blog_grid_columns_choices() ),
+			),
+			array(
+				'path'    => 'blog.excerpt_length',
+				'flat'    => 'blog_excerpt_length',
+				'type'    => 'range',
+				'default' => Layout::BLOG_EXCERPT_LENGTH_DEFAULT,
+				'min'     => Layout::BLOG_EXCERPT_LENGTH_MIN,
+				'max'     => Layout::BLOG_EXCERPT_LENGTH_MAX,
+			),
+			array(
+				'path'    => 'blog.sidebar_enabled',
+				'flat'    => 'blog_sidebar_enabled',
+				'type'    => 'bool',
+				'default' => true,
+			),
+			array(
+				'path'    => 'blog.sidebar_categories',
+				'flat'    => 'blog_sidebar_categories',
+				'type'    => 'bool',
+				'default' => true,
+			),
+			array(
+				'path'    => 'blog.sidebar_recent_posts',
+				'flat'    => 'blog_sidebar_recent_posts',
+				'type'    => 'bool',
+				'default' => true,
+			),
+			array(
+				'path'    => 'blog.sidebar_recent_posts_count',
+				'flat'    => 'blog_sidebar_recent_posts_count',
+				'type'    => 'range',
+				'default' => Layout::BLOG_SIDEBAR_RECENT_COUNT_DEFAULT,
+				'min'     => Layout::BLOG_SIDEBAR_RECENT_COUNT_MIN,
+				'max'     => Layout::BLOG_SIDEBAR_RECENT_COUNT_MAX,
+			),
+			array(
+				'path'    => 'blog.sidebar_tags',
+				'flat'    => 'blog_sidebar_tags',
+				'type'    => 'bool',
+				'default' => true,
+			),
+			array(
+				'path'    => 'blog.sidebar_tags_count',
+				'flat'    => 'blog_sidebar_tags_count',
+				'type'    => 'range',
+				'default' => Layout::BLOG_SIDEBAR_TAGS_COUNT_DEFAULT,
+				'min'     => Layout::BLOG_SIDEBAR_TAGS_COUNT_MIN,
+				'max'     => Layout::BLOG_SIDEBAR_TAGS_COUNT_MAX,
+			),
+			array(
+				'path'    => 'blog.related_posts_enabled',
+				'flat'    => 'blog_related_posts_enabled',
+				'type'    => 'bool',
+				'default' => true,
+			),
+			array(
+				'path'    => 'blog.related_posts_heading',
+				'flat'    => 'blog_related_posts_heading',
+				'type'    => 'text',
+				'default' => Layout::blog_related_heading_default(),
+			),
+			array(
+				'path'    => 'blog.related_posts_subtitle',
+				'flat'    => 'blog_related_posts_subtitle',
+				'type'    => 'text',
+				'default' => Layout::blog_related_subtitle_default(),
+			),
+			array(
+				'path'    => 'blog.related_posts_count',
+				'flat'    => 'blog_related_posts_count',
+				'type'    => 'range',
+				'default' => Layout::BLOG_RELATED_COUNT_DEFAULT,
+				'min'     => Layout::BLOG_RELATED_COUNT_MIN,
+				'max'     => Layout::BLOG_RELATED_COUNT_MAX,
+			),
+			array(
+				'path'    => 'blog.share_buttons_enabled',
+				'flat'    => 'blog_share_buttons_enabled',
+				'type'    => 'bool',
+				'default' => true,
+			),
+			array(
+				'path'    => 'blog.share_facebook',
+				'flat'    => 'blog_share_facebook',
+				'type'    => 'bool',
+				'default' => true,
+			),
+			array(
+				'path'    => 'blog.share_x',
+				'flat'    => 'blog_share_x',
+				'type'    => 'bool',
+				'default' => true,
+			),
+			array(
+				'path'    => 'blog.share_pinterest',
+				'flat'    => 'blog_share_pinterest',
+				'type'    => 'bool',
+				'default' => true,
+			),
+			array(
+				'path'    => 'buttons.style',
+				'flat'    => 'buttons_style',
+				'type'    => 'select',
+				'default' => Layout::BUTTON_STYLE_DEFAULT,
+				'choices' => array_keys( Layout::button_style_choices() ),
+			),
+			array(
+				'path'    => 'performance.disable_xmlrpc',
+				'flat'    => 'performance_disable_xmlrpc',
+				'type'    => 'bool',
+				'default' => false,
+			),
+			array(
+				'path'    => 'performance.remove_version_strings',
+				'flat'    => 'performance_remove_version_strings',
+				'type'    => 'bool',
+				'default' => false,
+			),
+			array(
+				'path'    => 'seo.default_description',
+				'flat'    => 'seo_default_description',
+				'type'    => 'textarea',
+				'default' => '',
+			),
+			array(
+				'path'    => 'seo.default_image',
+				'flat'    => 'seo_default_image',
+				'type'    => 'image',
+				'default' => '',
+			),
+			array(
+				'path'    => 'seo.twitter_username',
+				'flat'    => 'seo_twitter_username',
+				'type'    => 'text',
+				'default' => '',
+			),
+			array(
+				'path'    => 'seo.facebook_app_id',
+				'flat'    => 'seo_facebook_app_id',
+				'type'    => 'text',
+				'default' => '',
+			),
+			array(
+				'path'    => 'seo.google_verification',
+				'flat'    => 'seo_google_verification',
+				'type'    => 'text',
+				'default' => '',
+			),
+			array(
+				'path'    => 'seo.bing_verification',
+				'flat'    => 'seo_bing_verification',
+				'type'    => 'text',
+				'default' => '',
+			),
+			array(
+				'path'    => 'integrations.google_analytics_code',
+				'flat'    => 'integrations_google_analytics_code',
+				'type'    => 'raw_html',
+				'default' => '',
+			),
+			array(
+				'path'    => 'integrations.facebook_pixel_code',
+				'flat'    => 'integrations_facebook_pixel_code',
+				'type'    => 'raw_html',
+				'default' => '',
+			),
+			array(
+				'path'    => 'page_header.breadcrumbs_enabled',
+				'flat'    => 'page_header_breadcrumbs_enabled',
+				'type'    => 'bool',
+				'default' => true,
+			),
+			array(
+				'path'    => 'page_header.alignment',
+				'flat'    => 'page_header_alignment',
+				'type'    => 'select',
+				'default' => Layout::PAGE_HEADER_ALIGNMENT_DEFAULT,
+				'choices' => array_keys( Layout::page_header_alignment_choices() ),
+			),
+			array(
+				'path'    => 'page_header.background_enabled',
+				'flat'    => 'page_header_background_enabled',
+				'type'    => 'bool',
+				'default' => false,
+			),
+			array(
+				'path'     => 'page_header.background_color',
+				'flat'     => 'page_header_background_color',
+				'type'     => 'hex_color',
+				'default'  => Layout::PAGE_HEADER_BG_DEFAULT,
+				'requires' => 'page_header.background_enabled',
+				'css'      => array( 'var' => '--noorifa-page-title-bg' ),
+			),
+			array(
+				'path'     => 'page_header.text_color',
+				'flat'     => 'page_header_text_color',
+				'type'     => 'hex_color',
+				'default'  => Layout::PAGE_HEADER_TEXT_DEFAULT,
+				'requires' => 'page_header.background_enabled',
+				'css'      => array( 'var' => '--noorifa-page-title-fg' ),
 			),
 			array(
 				'path'    => 'layout.container_width',
@@ -188,7 +395,7 @@ class Schema {
 				'default' => Layout::CONTAINER_WIDTH_DEFAULT,
 				'min'     => Layout::CONTAINER_WIDTH_MIN,
 				'max'     => Layout::CONTAINER_WIDTH_MAX,
-				'css'     => array( 'var' => '--ecombon-container-width', 'unit' => 'px' ),
+				'css'     => array( 'var' => '--noorifa-container-width', 'unit' => 'px' ),
 			),
 			array(
 				'path'    => 'header.container_width',
@@ -197,14 +404,14 @@ class Schema {
 				'default' => Layout::HEADER_CONTAINER_WIDTH_DEFAULT,
 				'min'     => Layout::HEADER_CONTAINER_WIDTH_MIN,
 				'max'     => Layout::HEADER_CONTAINER_WIDTH_MAX,
-				'css'     => array( 'var' => '--ecombon-container-full-width', 'unit' => 'px' ),
+				'css'     => array( 'var' => '--noorifa-container-full-width', 'unit' => 'px' ),
 			),
 			array(
 				'path'    => 'header.menu_color',
 				'flat'    => 'header_menu_color',
 				'type'    => 'hex_color',
 				'default' => Layout::MENU_COLOR_DEFAULT,
-				'css'     => array( 'var' => '--ecombon-menu-color' ),
+				'css'     => array( 'var' => '--noorifa-menu-color' ),
 			),
 			array(
 				'path'    => 'header.menu_font_size',
@@ -213,27 +420,27 @@ class Schema {
 				'default' => Layout::MENU_FONT_SIZE_DEFAULT,
 				'min'     => Layout::MENU_FONT_SIZE_MIN,
 				'max'     => Layout::MENU_FONT_SIZE_MAX,
-				'css'     => array( 'var' => '--ecombon-menu-font-size', 'unit' => 'px' ),
+				'css'     => array( 'var' => '--noorifa-menu-font-size', 'unit' => 'px' ),
 			),
 			array(
 				'path'    => 'header.menu_uppercase',
 				'flat'    => 'header_menu_uppercase',
 				'type'    => 'bool',
 				'default' => false,
-				'css'     => array( 'var' => '--ecombon-menu-transform', 'true_value' => 'uppercase' ),
+				'css'     => array( 'var' => '--noorifa-menu-transform', 'true_value' => 'uppercase' ),
 			),
 			array(
 				'path'    => 'header.menu_bold',
 				'flat'    => 'header_menu_bold',
 				'type'    => 'bool',
-				'default' => false,
-				'css'     => array( 'var' => '--ecombon-menu-weight', 'true_value' => '700' ),
+				'default' => true,
+				'css'     => array( 'var' => '--noorifa-menu-weight', 'true_value' => '700', 'false_value' => '500' ),
 			),
 			array(
 				'path'    => 'header.sticky',
 				'flat'    => 'header_sticky',
 				'type'    => 'bool',
-				'default' => true,
+				'default' => false,
 			),
 			array(
 				'path'    => 'header.force_mobile_menu',
@@ -253,7 +460,7 @@ class Schema {
 				'type'     => 'hex_color',
 				'default'  => Layout::HEADER_BG_DEFAULT,
 				'requires' => 'header.background_color_enabled',
-				'css'      => array( 'var' => '--ecombon-header-bg' ),
+				'css'      => array( 'var' => '--noorifa-header-bg' ),
 			),
 			array(
 				'path'    => 'header.zones',
@@ -275,7 +482,7 @@ class Schema {
 				'type'     => 'hex_color',
 				'default'  => Layout::FOOTER_BG_DEFAULT,
 				'requires' => 'footer.background_color_enabled',
-				'css'      => array( 'var' => '--ecombon-footer-bg' ),
+				'css'      => array( 'var' => '--noorifa-footer-bg' ),
 			),
 			array(
 				'path'     => 'footer.text_color',
@@ -283,7 +490,7 @@ class Schema {
 				'type'     => 'hex_color',
 				'default'  => Layout::FOOTER_TEXT_DEFAULT,
 				'requires' => 'footer.background_color_enabled',
-				'css'      => array( 'var' => '--ecombon-footer-fg' ),
+				'css'      => array( 'var' => '--noorifa-footer-fg' ),
 			),
 			array(
 				'path'    => 'footer.top',
@@ -431,7 +638,7 @@ class Schema {
 	}
 
 	/**
-	 * The flat, single-level array `ecombon_settings()` returns.
+	 * The flat, single-level array `noorifa_settings()` returns.
 	 *
 	 * @param array $settings A real, already-merged settings array (i.e. `Layout::all()`).
 	 */
@@ -501,8 +708,13 @@ class Schema {
 				if ( 'bool' === $field['type'] && isset( $output['true_value'] ) ) {
 					// A bool field's stored value (true/false) isn't itself a
 					// usable CSS value — print the literal string this output
-					// stands for instead (e.g. "uppercase", "700").
-					$final = $output['true_value'];
+					// stands for instead (e.g. "uppercase", "700"). Fields
+					// whose *default* is false never reach here with $value
+					// false (the gating check above already skipped them),
+					// so `true_value` alone is a safe fallback for them —
+					// only a field whose default is true (e.g. menu_bold)
+					// needs `false_value` too, for when it's switched off.
+					$final = $value ? $output['true_value'] : ( $output['false_value'] ?? $output['true_value'] );
 				} elseif ( isset( $output['transform'] ) ) {
 					$final = call_user_func( $output['transform'], $value );
 				} else {

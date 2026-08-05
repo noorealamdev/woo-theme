@@ -6,7 +6,7 @@
  * with Core Plugin blocks in the editor — is rendered as-is, with no
  * title or wrapper chrome imposed by the theme.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

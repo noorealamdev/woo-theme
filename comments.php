@@ -1,7 +1,7 @@
 <?php
 /**
  * The comments template — real comment count, real threaded `.box-comment`
- * list (see Ecombon\Blog\CommentTemplate), real comment form restyled to
+ * list (see Noorifa\Blog\CommentTemplate), real comment form restyled to
  * the theme's own `.wg-leave-comment` markup. Same real approach as
  * woocommerce/single-product-reviews.php uses for product reviews: the
  * whole field set (author/email/comment/cookie-consent) is built as one
@@ -10,7 +10,7 @@
  * wholesale rather than merging into it, which is what suppresses the
  * default (unstyled, duplicate) author/email/url fields.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -28,7 +28,7 @@ if ( post_password_required() ) {
 			$comment_count = get_comments_number();
 			printf(
 				/* translators: %s: number of comments. */
-				esc_html( _n( '%s Comment', '%s Comments', $comment_count, 'ecombon' ) ),
+				esc_html( _n( '%s Comment', '%s Comments', $comment_count, 'noorifa' ) ),
 				esc_html( number_format_i18n( $comment_count ) )
 			);
 			?>
@@ -39,7 +39,7 @@ if ( post_password_required() ) {
 			wp_list_comments(
 				array(
 					'style'    => 'ol',
-					'callback' => array( '\Ecombon\Blog\CommentTemplate', 'render' ),
+					'callback' => array( '\Noorifa\Blog\CommentTemplate', 'render' ),
 				)
 			);
 			?>
@@ -50,7 +50,7 @@ if ( post_password_required() ) {
 <?php endif; ?>
 
 <?php if ( ! comments_open() && get_comments_number() ) : ?>
-	<p class="comments-area__closed"><?php esc_html_e( 'Comments are closed.', 'ecombon' ); ?></p>
+	<p class="comments-area__closed"><?php esc_html_e( 'Comments are closed.', 'noorifa' ); ?></p>
 <?php endif; ?>
 
 <?php if ( comments_open() ) : ?>
@@ -64,24 +64,24 @@ if ( post_password_required() ) {
 	if ( has_action( 'set_comment_cookies', 'wp_set_comment_cookies' ) && get_option( 'show_comments_cookies_opt_in' ) ) {
 		$cookie_consent_field = '<div class="checkbox-wrap">
 			<input class="check" type="checkbox" id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" value="yes">
-			<label for="wp-comment-cookies-consent">' . esc_html__( 'Save my name, email, and website in this browser for the next time I comment.', 'ecombon' ) . '</label>
+			<label for="wp-comment-cookies-consent">' . esc_html__( 'Save my name, email, and website in this browser for the next time I comment.', 'noorifa' ) . '</label>
 		</div>';
 	}
 
 	$comment_field = '<div class="form-content">
 			<div class="grid-layout sm-col-2">
 				<fieldset class="field">
-					<label for="author" class="lable fw-medium">' . esc_html__( 'Your Name', 'ecombon' ) . $required_mark . '</label>
-					<input id="author" name="author" type="text" placeholder="' . esc_attr__( 'Your Name', 'ecombon' ) . '" value="' . esc_attr( $commenter['comment_author'] ) . '"' . $required_attr . '>
+					<label for="author" class="lable fw-medium">' . esc_html__( 'Your Name', 'noorifa' ) . $required_mark . '</label>
+					<input id="author" name="author" type="text" placeholder="' . esc_attr__( 'Your Name', 'noorifa' ) . '" value="' . esc_attr( $commenter['comment_author'] ) . '"' . $required_attr . '>
 				</fieldset>
 				<fieldset class="field">
-					<label for="email" class="lable fw-medium">' . esc_html__( 'Your Email', 'ecombon' ) . $required_mark . '</label>
-					<input id="email" name="email" type="email" placeholder="' . esc_attr__( 'Your email (private)', 'ecombon' ) . '" value="' . esc_attr( $commenter['comment_author_email'] ) . '"' . $required_attr . '>
+					<label for="email" class="lable fw-medium">' . esc_html__( 'Your Email', 'noorifa' ) . $required_mark . '</label>
+					<input id="email" name="email" type="email" placeholder="' . esc_attr__( 'Your email (private)', 'noorifa' ) . '" value="' . esc_attr( $commenter['comment_author_email'] ) . '"' . $required_attr . '>
 				</fieldset>
 			</div>
 			<fieldset class="field">
-				<label for="comment" class="lable fw-medium">' . esc_html__( 'Your Message', 'ecombon' ) . ' <span class="text-primary">*</span></label>
-				<textarea id="comment" name="comment" placeholder="' . esc_attr__( 'Write your comment', 'ecombon' ) . '" cols="45" rows="8" required></textarea>
+				<label for="comment" class="lable fw-medium">' . esc_html__( 'Your Message', 'noorifa' ) . ' <span class="text-primary">*</span></label>
+				<textarea id="comment" name="comment" placeholder="' . esc_attr__( 'Write your comment', 'noorifa' ) . '" cols="45" rows="8" required></textarea>
 			</fieldset>
 		</div>';
 
@@ -98,7 +98,7 @@ if ( post_password_required() ) {
 
 	comment_form(
 		array(
-			'title_reply'          => __( 'Leave A Comment', 'ecombon' ),
+			'title_reply'          => __( 'Leave A Comment', 'noorifa' ),
 			'title_reply_before'   => '<h4 class="title">',
 			'title_reply_after'    => '</h4>',
 			'comment_notes_before' => '',
@@ -108,7 +108,7 @@ if ( post_password_required() ) {
 			'class_container'      => 'wg-leave-comment',
 			'class_form'           => 'form-leave-comment',
 			'id_form'              => 'commentform',
-			'label_submit'         => __( 'Post Comment', 'ecombon' ),
+			'label_submit'         => __( 'Post Comment', 'noorifa' ),
 			'submit_button'        => '<button name="%1$s" type="submit" id="%2$s" class="%3$s"><span class="btn-text">%4$s</span></button>',
 			'class_submit'         => 'btn animate-btn',
 		)

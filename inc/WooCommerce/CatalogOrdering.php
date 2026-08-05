@@ -2,12 +2,12 @@
 /**
  * CatalogOrdering component.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\WooCommerce;
+namespace Noorifa\WooCommerce;
 
-use Ecombon\Setup\ComponentInterface;
+use Noorifa\Setup\ComponentInterface;
 
 /**
  * Adds alphabetical sort options to WooCommerce's catalog ordering, so the

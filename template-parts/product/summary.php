@@ -7,7 +7,7 @@
  * (via woocommerce_template_single_add_to_cart()) — real stock/price/
  * variation matching, just restyled to match the theme.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -38,14 +38,14 @@ $review_count  = $product->get_review_count();
 					<div class="meta_rate">
 						<div class="star-wrap normal d-flex align-items-center">
 							<?php for ( $star = 1; $star <= 5; $star++ ) : ?>
-								<?php \Ecombon\Setup\Icons::render( $star <= round( $average ) ? 'Star' : 'Star-thin' ); ?>
+								<?php \Noorifa\Setup\Icons::render( $star <= round( $average ) ? 'Star' : 'Star-thin' ); ?>
 							<?php endfor; ?>
 						</div>
 						<span class="text-caption-01 cl-text-2">
 							<?php
 							printf(
 								/* translators: %d: number of reviews. */
-								esc_html( _n( '(%d review)', '(%d reviews)', $review_count, 'ecombon' ) ),
+								esc_html( _n( '(%d review)', '(%d reviews)', $review_count, 'noorifa' ) ),
 								(int) $review_count
 							);
 							?>
@@ -55,7 +55,7 @@ $review_count  = $product->get_review_count();
 				<?php endif; ?>
 				<?php if ( $product->get_sku() ) : ?>
 					<div class="meta_prd_code text-caption-01">
-						<span class="cl-text-2"><?php esc_html_e( 'SKU:', 'ecombon' ); ?></span>
+						<span class="cl-text-2"><?php esc_html_e( 'SKU:', 'noorifa' ); ?></span>
 						<span><?php echo esc_html( $product->get_sku() ); ?></span>
 					</div>
 				<?php endif; ?>
@@ -103,20 +103,20 @@ $review_count  = $product->get_review_count();
 		</div>
 
 		<?php
-		$delivery_note = apply_filters( 'ecombon_product_delivery_note', '' );
-		$return_note   = apply_filters( 'ecombon_product_return_note', '' );
+		$delivery_note = apply_filters( 'noorifa_product_delivery_note', '' );
+		$return_note   = apply_filters( 'noorifa_product_return_note', '' );
 		if ( $delivery_note || $return_note ) :
 			?>
 			<div class="product-delivery-return">
 				<?php if ( $delivery_note ) : ?>
 					<div class="product-delivery">
-						<?php \Ecombon\Setup\Icons::render( 'Timer' ); ?>
+						<?php \Noorifa\Setup\Icons::render( 'Timer' ); ?>
 						<p><?php echo wp_kses_post( $delivery_note ); ?></p>
 					</div>
 				<?php endif; ?>
 				<?php if ( $return_note ) : ?>
 					<div class="product-delivery return">
-						<?php \Ecombon\Setup\Icons::render( 'ArrowClockwise' ); ?>
+						<?php \Noorifa\Setup\Icons::render( 'ArrowClockwise' ); ?>
 						<p><?php echo wp_kses_post( $return_note ); ?></p>
 					</div>
 				<?php endif; ?>
@@ -125,7 +125,7 @@ $review_count  = $product->get_review_count();
 		<?php endif; ?>
 
 		<div class="product-trust-seal">
-			<p class="h6 text-seal"><?php esc_html_e( 'Guaranteed Safe Checkout:', 'ecombon' ); ?></p>
+			<p class="h6 text-seal"><?php esc_html_e( 'Guaranteed Safe Checkout:', 'noorifa' ); ?></p>
 			<?php
 			get_template_part(
 				'template-parts/footer/payment-icons',

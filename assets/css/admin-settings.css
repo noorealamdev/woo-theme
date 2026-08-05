@@ -2,11 +2,11 @@
 	padding-left: 0;
 }
 
-.ecombon-settings-app {
+.noorifa-settings-app {
 	margin: -10px 0 0 -20px;
 }
 
-.ecombon-settings-shell {
+.noorifa-settings-shell {
 	display: flex;
 	align-items: stretch;
 	background: #f4f5f7;
@@ -15,7 +15,7 @@
 
 /* Sidebar */
 
-.ecombon-settings-nav {
+.noorifa-settings-nav {
 	width: 240px;
 	flex-shrink: 0;
 	background: #14152b;
@@ -23,7 +23,7 @@
 	flex-direction: column;
 }
 
-.ecombon-settings-nav__brand {
+.noorifa-settings-nav__brand {
 	display: flex;
 	align-items: center;
 	gap: 10px;
@@ -31,7 +31,7 @@
 	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.ecombon-settings-nav__brand-icon {
+.noorifa-settings-nav__brand-icon {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -43,26 +43,26 @@
 	flex-shrink: 0;
 }
 
-.ecombon-settings-nav__brand-title {
+.noorifa-settings-nav__brand-title {
 	color: #fff;
 	font-size: 15px;
 	font-weight: 700;
 	line-height: 1.3;
 }
 
-.ecombon-settings-nav__brand-subtitle {
+.noorifa-settings-nav__brand-subtitle {
 	color: #8b8da8;
 	font-size: 11px;
 	line-height: 1.3;
 }
 
-.ecombon-settings-nav__items {
+.noorifa-settings-nav__items {
 	flex: 1;
 	overflow-y: auto;
 	padding: 12px;
 }
 
-.ecombon-settings-nav__item {
+.noorifa-settings-nav__item {
 	display: flex;
 	align-items: center;
 	gap: 10px;
@@ -79,23 +79,23 @@
 	cursor: pointer;
 }
 
-.ecombon-settings-nav__item:hover {
+.noorifa-settings-nav__item:hover {
 	color: #fff;
 	background: rgba(255, 255, 255, 0.06);
 }
 
-.ecombon-settings-nav__item.is-active {
+.noorifa-settings-nav__item.is-active {
 	color: #fff;
 	background: #6366f1;
 	box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
 }
 
-.ecombon-settings-nav__item svg {
+.noorifa-settings-nav__item svg {
 	fill: currentColor;
 	flex-shrink: 0;
 }
 
-.ecombon-settings-nav__empty {
+.noorifa-settings-nav__empty {
 	color: #8b8da8;
 	font-size: 13px;
 	padding: 8px 12px;
@@ -103,14 +103,14 @@
 
 /* Right column */
 
-.ecombon-settings-right {
+.noorifa-settings-right {
 	flex: 1;
 	min-width: 0;
 	display: flex;
 	flex-direction: column;
 }
 
-.ecombon-settings-topbar {
+.noorifa-settings-topbar {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -120,7 +120,7 @@
 	border-bottom: 1px solid #e5e7eb;
 }
 
-.ecombon-settings-search {
+.noorifa-settings-search {
 	display: flex;
 	align-items: center;
 	gap: 8px;
@@ -133,12 +133,12 @@
 	color: #6b7280;
 }
 
-.ecombon-settings-search svg {
+.noorifa-settings-search svg {
 	fill: #9ca3af;
 	flex-shrink: 0;
 }
 
-.ecombon-settings-search input {
+.noorifa-settings-search input {
 	flex: 1;
 	border: 0;
 	background: none;
@@ -148,72 +148,72 @@
 	box-shadow: none;
 }
 
-.ecombon-settings-search input:focus {
+.noorifa-settings-search input:focus {
 	outline: none;
 	box-shadow: none;
 }
 
-.ecombon-settings-topbar__actions {
+.noorifa-settings-topbar__actions {
 	display: flex;
 	align-items: center;
 	gap: 14px;
 	flex-shrink: 0;
 }
 
-.ecombon-settings-topbar .components-button.is-primary {
+.noorifa-settings-topbar .components-button.is-primary {
 	background: #6366f1;
 	border-radius: 7px;
 }
 
-.ecombon-settings-topbar .components-button.is-primary:hover {
+.noorifa-settings-topbar .components-button.is-primary:hover {
 	background: #4f46e5;
 }
 
-.ecombon-save-status {
+.noorifa-save-status {
 	font-size: 13px;
 	font-weight: 500;
 	padding: 4px 10px;
 	border-radius: 999px;
 }
 
-.ecombon-save-status.is-success {
+.noorifa-save-status.is-success {
 	background: rgba(34, 197, 94, 0.12);
 	color: #16a34a;
 }
 
-.ecombon-save-status.is-error {
+.noorifa-save-status.is-error {
 	background: rgba(239, 68, 68, 0.12);
 	color: #dc2626;
 }
 
 /* Content */
 
-.ecombon-settings-content {
+.noorifa-settings-content {
 	flex: 1;
 	padding: 28px;
 	max-width: 760px;
 }
 
-.ecombon-settings-content .components-card {
+.noorifa-settings-content .components-card {
 	border-radius: 12px;
 	border-color: #e5e7eb;
 	box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
 }
 
-.ecombon-settings-content .components-card-header h2 {
+.noorifa-settings-content .components-card-header h2 {
 	margin: 0;
 	font-size: 16px;
 	font-weight: 600;
 	color: #111827;
 }
 
-.ecombon-section-intro {
+.noorifa-section-intro {
 	color: #6b7280;
 	margin-top: 0;
 	font-size: 13px;
 }
 
-.ecombon-subheading {
+.noorifa-subheading {
 	font-size: 12px;
 	font-weight: 600;
 	text-transform: uppercase;
@@ -222,11 +222,11 @@
 	margin: 24px 0 10px;
 }
 
-.ecombon-field {
+.noorifa-field {
 	margin-bottom: 18px;
 }
 
-.ecombon-field__label {
+.noorifa-field__label {
 	display: block;
 	font-weight: 600;
 	font-size: 13px;
@@ -234,13 +234,13 @@
 	margin-bottom: 6px;
 }
 
-.ecombon-field__help {
+.noorifa-field__help {
 	color: #6b7280;
 	font-size: 12px;
 	margin: 4px 0 0;
 }
 
-.ecombon-branding-colors {
+.noorifa-branding-colors {
 	display: flex;
 	gap: 32px;
 	flex-wrap: wrap;
@@ -249,7 +249,7 @@
 
 /* Compact color swatch trigger, matching reference's swatch + hex pairing */
 
-.ecombon-color-swatch-trigger {
+.noorifa-color-swatch-trigger {
 	display: flex;
 	align-items: center;
 	gap: 8px;
@@ -260,11 +260,11 @@
 	cursor: pointer;
 }
 
-.ecombon-color-swatch-trigger:hover {
+.noorifa-color-swatch-trigger:hover {
 	border-color: #c7c9f5;
 }
 
-.ecombon-color-swatch {
+.noorifa-color-swatch {
 	width: 22px;
 	height: 22px;
 	border-radius: 5px;
@@ -272,14 +272,14 @@
 	flex-shrink: 0;
 }
 
-.ecombon-color-swatch__hex {
+.noorifa-color-swatch__hex {
 	font-size: 12px;
 	font-weight: 500;
 	color: #374151;
 	text-transform: uppercase;
 }
 
-.ecombon-coming-soon {
+.noorifa-coming-soon {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -289,17 +289,17 @@
 	color: #6b7280;
 }
 
-.ecombon-coming-soon svg {
+.noorifa-coming-soon svg {
 	fill: #c7c9f5;
 	margin-bottom: 10px;
 }
 
-.ecombon-coming-soon p {
+.noorifa-coming-soon p {
 	margin: 2px 0;
 }
 
 
-.ecombon-font-preview {
+.noorifa-font-preview {
 	margin: -8px 0 18px;
 	padding: 12px 14px;
 	background: #f9fafb;
@@ -311,11 +311,11 @@
 
 /* Header 3-zone drag-and-drop builder */
 
-.ecombon-zone-builder {
+.noorifa-zone-builder {
 	margin-bottom: 8px;
 }
 
-.ecombon-zone-pool {
+.noorifa-zone-pool {
 	padding: 14px;
 	margin-bottom: 16px;
 	background: #f5f5ff;
@@ -323,28 +323,28 @@
 	border-radius: 10px;
 }
 
-.ecombon-zone-pool.is-empty {
+.noorifa-zone-pool.is-empty {
 	background: #f9fafb;
 	border-color: #e5e7eb;
 }
 
-.ecombon-zone-pool__items {
+.noorifa-zone-pool__items {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 8px;
 }
 
-.ecombon-zone-columns {
+.noorifa-zone-columns {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 14px;
 }
 
-.ecombon-zone-columns--single {
+.noorifa-zone-columns--single {
 	grid-template-columns: 1fr;
 }
 
-.ecombon-zone-column__title {
+.noorifa-zone-column__title {
 	font-size: 12px;
 	font-weight: 600;
 	text-transform: uppercase;
@@ -353,7 +353,7 @@
 	margin: 0 0 8px;
 }
 
-.ecombon-zone-column__drop {
+.noorifa-zone-column__drop {
 	display: flex;
 	flex-direction: column;
 	gap: 8px;
@@ -364,14 +364,14 @@
 	border-radius: 10px;
 }
 
-.ecombon-zone-column__drop.is-empty {
+.noorifa-zone-column__drop.is-empty {
 	align-items: center;
 	justify-content: center;
 	background: #f9fafb;
 	border-style: dashed;
 }
 
-.ecombon-zone-column__placeholder {
+.noorifa-zone-column__placeholder {
 	margin: 0;
 	padding: 6px 0;
 	font-size: 12px;
@@ -379,7 +379,7 @@
 	text-align: center;
 }
 
-.ecombon-zone-chip {
+.noorifa-zone-chip {
 	display: flex;
 	align-items: center;
 	gap: 8px;
@@ -393,24 +393,24 @@
 	color: #374151;
 }
 
-.ecombon-zone-pool .ecombon-zone-chip {
+.noorifa-zone-pool .noorifa-zone-chip {
 	background: #fff;
 }
 
-.ecombon-zone-chip.is-dragging {
+.noorifa-zone-chip.is-dragging {
 	opacity: 0.4;
 }
 
-.ecombon-zone-chip__handle {
+.noorifa-zone-chip__handle {
 	color: #9ca3af;
 	line-height: 1;
 }
 
-.ecombon-zone-chip__label {
+.noorifa-zone-chip__label {
 	flex: 1;
 }
 
-.ecombon-zone-chip__remove {
+.noorifa-zone-chip__remove {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -426,20 +426,20 @@
 	cursor: pointer;
 }
 
-.ecombon-zone-chip__remove:hover {
+.noorifa-zone-chip__remove:hover {
 	background: #fee2e2;
 	color: #dc2626;
 }
 
 @media (max-width: 782px) {
-	.ecombon-zone-columns {
+	.noorifa-zone-columns {
 		grid-template-columns: 1fr;
 	}
 }
 
 /* Image field (footer Info Card avatar picker) */
 
-.ecombon-image-field__preview {
+.noorifa-image-field__preview {
 	display: block;
 	width: 64px;
 	height: 64px;
@@ -449,14 +449,14 @@
 	margin-bottom: 8px;
 }
 
-.ecombon-image-field__actions {
+.noorifa-image-field__actions {
 	display: flex;
 	gap: 8px;
 }
 
 /* Repeatable-field list (footer Info Card's social links) */
 
-.ecombon-repeater__row {
+.noorifa-repeater__row {
 	display: grid;
 	grid-template-columns: 160px 1fr auto;
 	align-items: center;
@@ -464,7 +464,7 @@
 	margin-bottom: 8px;
 }
 
-.ecombon-repeater__remove {
+.noorifa-repeater__remove {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -480,14 +480,127 @@
 	cursor: pointer;
 }
 
-.ecombon-repeater__remove:hover {
+.noorifa-repeater__remove:hover {
 	background: #fee2e2;
 	border-color: #fecaca;
 	color: #dc2626;
 }
 
 @media (max-width: 480px) {
-	.ecombon-repeater__row {
+	.noorifa-repeater__row {
 		grid-template-columns: 1fr;
 	}
+}
+
+/* Button style picker (Buttons > Style) — a small self-contained preview
+   of each real frontend variant (see the `body.noorifa-btn-style-{n}`
+   rules in main.css), not a shared stylesheet with the frontend, since
+   loading all of main.css here just for 5 button previews would be a real
+   waste — this reproduces just the shape/fill/shadow language directly. */
+
+.noorifa-btn-style-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+	gap: 12px;
+	margin-bottom: 8px;
+}
+
+.noorifa-btn-style-option {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+	padding: 18px 12px;
+	background: #fff;
+	border: 2px solid #e5e7eb;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.noorifa-btn-style-option:hover {
+	border-color: #c7c9f5;
+}
+
+.noorifa-btn-style-option.is-selected {
+	border-color: #6366f1;
+	background: #f5f5ff;
+}
+
+.noorifa-btn-style-option__label {
+	font-size: 12px;
+	font-weight: 600;
+	color: #374151;
+	text-align: center;
+}
+
+.noorifa-btn-swatch {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	height: 36px;
+	padding: 0 20px;
+	background: #101010;
+	color: #fff;
+	font-size: 13px;
+	font-weight: 600;
+	border-radius: 60px;
+	border: 2px solid transparent;
+	pointer-events: none;
+}
+
+.noorifa-btn-swatch.style-2 {
+	border-radius: 10px;
+}
+
+.noorifa-btn-swatch.style-3 {
+	border-radius: 0;
+}
+
+.noorifa-btn-swatch.style-4 {
+	background: transparent;
+	color: #101010;
+	border-color: #101010;
+}
+
+/* Performance section's "Always Active" status list */
+
+.noorifa-performance-list {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin: 0 0 20px;
+	padding: 0;
+	list-style: none;
+}
+
+.noorifa-performance-list__item {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	font-size: 13px;
+	color: #374151;
+}
+
+.noorifa-performance-list__item svg {
+	fill: #16a34a;
+	flex-shrink: 0;
+	margin-top: 1px;
+}
+
+.noorifa-btn-swatch.style-5 {
+	border-radius: 10px;
+	box-shadow: 0 6px 14px rgba(16, 16, 16, 0.22);
+}
+
+/* Import / Export */
+
+.noorifa-import-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.noorifa-field__help--error {
+	color: #dc2626;
 }

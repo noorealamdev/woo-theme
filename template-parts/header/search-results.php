@@ -1,14 +1,14 @@
 <?php
 /**
  * Real-time search results panel, rendered inside the header search modal.
- * Only ever called from Ecombon\Search\LiveSearch's AJAX handler, which
- * `ob_start()`s this same way Ecombon\WooCommerce\CartFragments does for
+ * Only ever called from Noorifa\Search\LiveSearch's AJAX handler, which
+ * `ob_start()`s this same way Noorifa\WooCommerce\CartFragments does for
  * the mini-cart drawer. $args keys must be read explicitly (this WP
  * install doesn't extract() get_template_part()'s $args): 'term',
  * 'product_query' (WP_Query|null), 'product_total' (int),
  * 'content_query' (WP_Query).
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -29,7 +29,7 @@ $has_content  = $content_query instanceof WP_Query && $content_query->have_posts
 			<?php
 			printf(
 				/* translators: %s: search term. */
-				esc_html__( 'No results found for "%s".', 'ecombon' ),
+				esc_html__( 'No results found for "%s".', 'noorifa' ),
 				esc_html( $term )
 			);
 			?>
@@ -37,7 +37,7 @@ $has_content  = $content_query instanceof WP_Query && $content_query->have_posts
 	<?php else : ?>
 		<?php if ( $has_products ) : ?>
 			<div class="search-results_group">
-				<p class="search-results_label"><?php esc_html_e( 'Products', 'ecombon' ); ?></p>
+				<p class="search-results_label"><?php esc_html_e( 'Products', 'noorifa' ); ?></p>
 				<div class="search-results_list">
 					<?php
 					while ( $product_query->have_posts() ) :
@@ -69,7 +69,7 @@ $has_content  = $content_query instanceof WP_Query && $content_query->have_posts
 
 		<?php if ( $has_content ) : ?>
 			<div class="search-results_group">
-				<p class="search-results_label"><?php esc_html_e( 'Pages & Articles', 'ecombon' ); ?></p>
+				<p class="search-results_label"><?php esc_html_e( 'Pages & Articles', 'noorifa' ); ?></p>
 				<div class="search-results_list search-results_list--compact">
 					<?php
 					while ( $content_query->have_posts() ) :
@@ -94,7 +94,7 @@ $has_content  = $content_query instanceof WP_Query && $content_query->have_posts
 				<?php
 				printf(
 					/* translators: 1: number of matching products, 2: search term. */
-					esc_html( _n( 'View %1$d result for "%2$s"', 'View all %1$d results for "%2$s"', $product_total, 'ecombon' ) ),
+					esc_html( _n( 'View %1$d result for "%2$s"', 'View all %1$d results for "%2$s"', $product_total, 'noorifa' ) ),
 					(int) $product_total,
 					esc_html( $term )
 				);

@@ -4,17 +4,17 @@
  *
  * Column order (top row) and the copyright/payment-icons order (bottom
  * bar) are real and configurable via the Footer Builder (Customize >
- * Footer) — see Ecombon\Settings\Layout. Every default here matches
+ * Footer) — see Noorifa\Settings\Layout. Every default here matches
  * the theme's original hardcoded layout exactly.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use Ecombon\Settings\Layout;
+use Noorifa\Settings\Layout;
 
 $top_partials = array(
 	'info'         => 'template-parts/footer/info',

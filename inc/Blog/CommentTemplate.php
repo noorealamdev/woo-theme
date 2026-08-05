@@ -2,10 +2,10 @@
 /**
  * CommentTemplate component.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\Blog;
+namespace Noorifa\Blog;
 
 /**
  * Real `wp_list_comments()` callback rendering the theme's own `.box-comment`
@@ -28,7 +28,7 @@ class CommentTemplate {
 			<div id="comment-<?php comment_ID(); ?>" class="comment_container">
 				<?php if ( '0' === $comment->comment_approved ) : ?>
 					<p class="meta">
-						<em><?php esc_html_e( 'Your comment is awaiting moderation.', 'ecombon' ); ?></em>
+						<em><?php esc_html_e( 'Your comment is awaiting moderation.', 'noorifa' ); ?></em>
 					</p>
 				<?php else : ?>
 					<div class="comment_info">

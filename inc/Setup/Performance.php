@@ -2,16 +2,20 @@
 /**
  * Performance component.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\Setup;
+namespace Noorifa\Setup;
 
 /**
- * Strips WordPress core's default <head> output down to what this theme's
- * frontend actually needs — none of this disables real functionality
- * (emoji, REST API, oEmbed all keep working), it only removes the
- * auto-discovery markup/scripts nothing here relies on.
+ * Strips WordPress core's default <head>/enqueue output down to what this
+ * theme's frontend actually needs. The unconditional part (always active,
+ * no setting) disables no real functionality — emoji, REST API, oEmbed all
+ * keep working, it only removes auto-discovery markup/scripts nothing here
+ * relies on. Two further, genuinely optional trade-offs (disabling XML-RPC
+ * entirely, stripping `?ver=` cache-busting strings) are real settings
+ * fields (Appearance/Noorifa > Performance) — default off, since each has
+ * a real downside for some sites, not an unambiguous win for every site.
  */
 class Performance implements ComponentInterface {
 
@@ -48,6 +52,45 @@ class Performance implements ComponentInterface {
 		// WordPress version number — no functional purpose on the frontend,
 		// only makes the install's version trivially fingerprintable.
 		remove_action( 'wp_head', 'wp_generator' );
+
+		// oEmbed's client-side responsive-iframe-resize script — the
+		// discovery <link> tags are already removed above, and nothing on
+		// this frontend needs the JS that resizes *other* sites' embeds
+		// of *this* site's content either.
+		add_action( 'wp_enqueue_scripts', array( $this, 'dequeue_embed_script' ), 100 );
+
+		// Real, admin-configurable settings (Appearance/Noorifa > Performance)
+		// — both default off, since each is a genuine trade-off a site owner
+		// should choose, not an unambiguous win to force on everyone.
+		$settings = \Noorifa\Settings\Layout::all()['performance'] ?? array();
+
+		if ( ! empty( $settings['disable_xmlrpc'] ) ) {
+			add_filter( 'xmlrpc_enabled', '__return_false' );
+		}
+
+		if ( ! empty( $settings['remove_version_strings'] ) && ! is_admin() ) {
+			add_filter( 'script_loader_src', array( $this, 'remove_version_query_string' ) );
+			add_filter( 'style_loader_src', array( $this, 'remove_version_query_string' ) );
+		}
+	}
+
+	/**
+	 * Drops the `?ver=` cache-busting query string WP core appends to every
+	 * enqueued script/style URL — some CDN/proxy caching layers cache a
+	 * URL with query string less effectively, at the cost of needing a
+	 * real cache purge (not just a version bump) after a theme update.
+	 *
+	 * @param string $src Real enqueued script/style URL.
+	 */
+	public function remove_version_query_string( string $src ): string {
+		return $src ? remove_query_arg( 'ver', $src ) : $src;
+	}
+
+	/**
+	 * Deregisters WP core's own `wp-embed` script.
+	 */
+	public function dequeue_embed_script(): void {
+		wp_deregister_script( 'wp-embed' );
 	}
 
 	/**

@@ -2,10 +2,10 @@
 /**
  * ThemeSupport component.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\Setup;
+namespace Noorifa\Setup;
 
 /**
  * Declares core WordPress and WooCommerce theme support.
@@ -53,13 +53,13 @@ class ThemeSupport implements ComponentInterface {
 		// here, which throws (see template-parts/product/gallery.php).
 		add_theme_support( 'woocommerce' );
 
-		load_theme_textdomain( 'ecombon', ECOMBON_THEME_DIR . '/languages' );
+		load_theme_textdomain( 'noorifa', NOORIFA_THEME_DIR . '/languages' );
 	}
 
 	/**
 	 * Sets the default content width used by embeds and oEmbed markup.
 	 */
 	public function set_content_width(): void {
-		$GLOBALS['content_width'] = apply_filters( 'ecombon_content_width', 1200 );
+		$GLOBALS['content_width'] = apply_filters( 'noorifa_content_width', 1200 );
 	}
 }

@@ -7,7 +7,7 @@
  * up its own accordion behaviour, so the same WordPress nav menu drives
  * both.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -17,14 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="offcanvas offcanvas-start canvas-mb" id="mobileMenu">
 	<div class="canvas-header">
 		<span class="icon-close-popup" data-bs-dismiss="offcanvas">
-			<?php \Ecombon\Setup\Icons::render( 'X2' ); ?>
+			<?php \Noorifa\Setup\Icons::render( 'X2' ); ?>
 		</span>
 		<form class="form-search-nav" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 			<fieldset>
-				<input type="text" name="s" placeholder="<?php esc_attr_e( 'What are you looking for?', 'ecombon' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>" required>
+				<input type="text" name="s" placeholder="<?php esc_attr_e( 'What are you looking for?', 'noorifa' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>" required>
 			</fieldset>
 			<button type="submit" class="btn-action">
-				<?php \Ecombon\Setup\Icons::render( 'MagnifyingGlass' ); ?>
+				<?php \Noorifa\Setup\Icons::render( 'MagnifyingGlass' ); ?>
 			</button>
 		</form>
 	</div>
@@ -33,13 +33,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<ul class="nav-ul-mb" id="wrapper-menu-navigation"></ul>
 		</div>
 		<?php
-		$phone = apply_filters( 'ecombon_contact_phone', '' );
-		$email = apply_filters( 'ecombon_contact_email', get_option( 'admin_email' ) );
-		$address = apply_filters( 'ecombon_contact_address', '' );
+		$phone = apply_filters( 'noorifa_contact_phone', '' );
+		$email = apply_filters( 'noorifa_contact_email', get_option( 'admin_email' ) );
+		$address = apply_filters( 'noorifa_contact_address', '' );
 		if ( $phone || $email || $address ) :
 			?>
 			<div class="need-help-wrap">
-				<p class="nd-title h6 fw-medium mb-16"><?php esc_html_e( 'Need Help?', 'ecombon' ); ?></p>
+				<p class="nd-title h6 fw-medium mb-16"><?php esc_html_e( 'Need Help?', 'noorifa' ); ?></p>
 				<?php if ( $address ) : ?>
 					<p class="lh-26 cl-text-2 mb-4"><?php echo esc_html( $address ); ?></p>
 				<?php endif; ?>

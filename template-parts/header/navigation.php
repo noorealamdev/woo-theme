@@ -2,7 +2,7 @@
 /**
  * Header builder element: primary navigation menu.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -20,7 +20,7 @@ if ( ! has_nav_menu( 'primary' ) ) {
 			'theme_location' => 'primary',
 			'container'      => false,
 			'items_wrap'     => '<ul class="box-nav-menu">%3$s</ul>',
-			'walker'         => new \Ecombon\Navigation\MegaMenuWalker(),
+			'walker'         => new \Noorifa\Navigation\MegaMenuWalker(),
 			'depth'          => 3,
 		)
 	);

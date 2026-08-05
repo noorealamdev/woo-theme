@@ -2,7 +2,7 @@
 /**
  * Empty cart page.
  *
- * @package Ecombon
+ * @package Noorifa
  * @version 7.0.1
  */
 

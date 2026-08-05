@@ -2,14 +2,14 @@
 /**
  * Layout component.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\Settings;
+namespace Noorifa\Settings;
 
 /**
  * Real read/write access to the theme settings — one option
- * (`ecombon_settings`, a single associative array) holding everything
+ * (`noorifa_settings`, a single associative array) holding everything
  * the admin settings page controls: the footer Info Card (logo/description/
  * social links), topbar, branding, and the header/footer builder's
  * zone/order lists.
@@ -37,7 +37,7 @@ namespace Ecombon\Settings;
  *   with one another. The `info` column itself is a logo/description/
  *   social-links card (see `info_logo_default()` etc. and
  *   `template-parts/footer/info.php`), not a store contact block —
- *   `ecombon_contact_*` (phone/email/address) has no settings-page field
+ *   `noorifa_contact_*` (phone/email/address) has no settings-page field
  *   backing it here; it's left for a future Core Plugin to fill in. Social
  *   links are their own repeatable-field list (`footer_social_links_items()`)
  *   — an empty list is itself "hidden", not a separate toggle.
@@ -48,7 +48,7 @@ namespace Ecombon\Settings;
  */
 class Layout {
 
-	const OPTION = 'ecombon_settings';
+	const OPTION = 'noorifa_settings';
 
 	/**
 	 * The full real settings array, merged with defaults so every real
@@ -67,7 +67,7 @@ class Layout {
 	 * output exactly. Built from the single field registry in Schema.php,
 	 * so a field only needs to be declared once to get a default here,
 	 * a validated sanitizer in Rest_Controller, and a flat key in
-	 * `ecombon_settings()`.
+	 * `noorifa_settings()`.
 	 */
 	public static function defaults(): array {
 		return Schema::defaults();
@@ -79,7 +79,7 @@ class Layout {
 	 * Schema.php calls this for the `topbar.message` field's default.
 	 */
 	public static function topbar_message_default(): string {
-		return __( 'Midseason Sale: 20% Off — Auto Applied at Checkout — Limited Time Only', 'ecombon' );
+		return __( 'Midseason Sale: 20% Off — Auto Applied at Checkout — Limited Time Only', 'noorifa' );
 	}
 
 	const COLOR_PRIMARY_DEFAULT   = '#DC4646';
@@ -98,8 +98,8 @@ class Layout {
 	 */
 	public static function newsletter_provider_choices(): array {
 		return array(
-			'theme'  => __( 'Theme Default Form', 'ecombon' ),
-			'custom' => __( 'Custom Embed Code (Mailchimp, MailerLite, etc.)', 'ecombon' ),
+			'theme'  => __( 'Theme Default Form', 'noorifa' ),
+			'custom' => __( 'Custom Embed Code (Mailchimp, MailerLite, etc.)', 'noorifa' ),
 		);
 	}
 
@@ -109,7 +109,7 @@ class Layout {
 	 * NOT stored as an override of `--white` itself, which is a pervasive
 	 * general-purpose token used in ~110 other places across main.css
 	 * (buttons, cards, borders, text-on-dark, …) — this gets its own
-	 * scoped `--ecombon-body-bg` variable instead.
+	 * scoped `--noorifa-body-bg` variable instead.
 	 */
 	const BODY_BG_DEFAULT = '#ffffff';
 
@@ -151,7 +151,7 @@ class Layout {
 	 * Header/footer background color overrides — both start disabled, so
 	 * an untouched install keeps its real original look (header/footer
 	 * have no background of their own, they just show the body background
-	 * — `--ecombon-body-bg` — through). These defaults are only what the
+	 * — `--noorifa-body-bg` — through). These defaults are only what the
 	 * color picker opens on before a site owner ever turns the toggle on;
 	 * they never apply on their own.
 	 */
@@ -193,7 +193,7 @@ class Layout {
 	 * width — independently adjustable from the main content container.
 	 */
 	const HEADER_CONTAINER_WIDTH_DEFAULT = 1800;
-	const HEADER_CONTAINER_WIDTH_MIN     = 1200;
+	const HEADER_CONTAINER_WIDTH_MIN     = 1140;
 	const HEADER_CONTAINER_WIDTH_MAX     = 2000;
 
 	/**
@@ -201,16 +201,16 @@ class Layout {
 	 */
 	public static function site_width_choices(): array {
 		return array(
-			'boxed'      => __( 'Boxed', 'ecombon' ),
-			'full-width' => __( 'Full Width', 'ecombon' ),
+			'boxed'      => __( 'Boxed', 'noorifa' ),
+			'full-width' => __( 'Full Width', 'noorifa' ),
 		);
 	}
 
 	/**
 	 * The shop grid's real original column count — matches the hardcoded
-	 * `tf-col-4` class `woocommerce/archive-product.php` always rendered
-	 * before this setting existed. Every other choice here (`tf-col-2`
-	 * through `tf-col-6`) is a real, already-shipped CSS class — no new
+	 * `mk-col-4` class `woocommerce/archive-product.php` always rendered
+	 * before this setting existed. Every other choice here (`mk-col-2`
+	 * through `mk-col-6`) is a real, already-shipped CSS class — no new
 	 * CSS needed for this field at all.
 	 */
 	const GRID_COLUMNS_DEFAULT = '4';
@@ -220,11 +220,11 @@ class Layout {
 	 */
 	public static function grid_columns_choices(): array {
 		return array(
-			'2' => __( '2 Columns', 'ecombon' ),
-			'3' => __( '3 Columns', 'ecombon' ),
-			'4' => __( '4 Columns', 'ecombon' ),
-			'5' => __( '5 Columns', 'ecombon' ),
-			'6' => __( '6 Columns', 'ecombon' ),
+			'2' => __( '2 Columns', 'noorifa' ),
+			'3' => __( '3 Columns', 'noorifa' ),
+			'4' => __( '4 Columns', 'noorifa' ),
+			'5' => __( '5 Columns', 'noorifa' ),
+			'6' => __( '6 Columns', 'noorifa' ),
 		);
 	}
 
@@ -290,12 +290,139 @@ class Layout {
 	 */
 	public static function font_weight_choices(): array {
 		return array(
-			'400' => __( 'Normal', 'ecombon' ),
-			'500' => __( 'Medium', 'ecombon' ),
-			'600' => __( 'Semibold', 'ecombon' ),
-			'700' => __( 'Bold', 'ecombon' ),
+			'400' => __( 'Normal', 'noorifa' ),
+			'500' => __( 'Medium', 'noorifa' ),
+			'600' => __( 'Semibold', 'noorifa' ),
+			'700' => __( 'Bold', 'noorifa' ),
 		);
 	}
+
+	/**
+	 * The blog listing's real original grid column count — matches the
+	 * hardcoded `sm-col-2` class `index.php`/`archive.php`/`search.php` all
+	 * share. Only 2–3 are offered (unlike Shop's 2–6) since the blog grid
+	 * always shares its row with a real sidebar (`col-lg-8`, not the full
+	 * 12 columns), so anything wider would cramp real post cards.
+	 */
+	const BLOG_GRID_COLUMNS_DEFAULT = '2';
+
+	/**
+	 * @return array<string, string>
+	 */
+	public static function blog_grid_columns_choices(): array {
+		return array(
+			'2' => __( '2 Columns', 'noorifa' ),
+			'3' => __( '3 Columns', 'noorifa' ),
+		);
+	}
+
+	/**
+	 * The blog post card's real original excerpt length, in words —
+	 * matches the hardcoded `wp_trim_words( get_the_excerpt(), 18 )` call
+	 * in `template-parts/content/content.php`.
+	 */
+	const BLOG_EXCERPT_LENGTH_DEFAULT = 18;
+	const BLOG_EXCERPT_LENGTH_MIN     = 10;
+	const BLOG_EXCERPT_LENGTH_MAX     = 40;
+
+	/**
+	 * The blog sidebar's real original Recent Posts count — matches
+	 * `template-parts/blog/sidebar.php`'s hardcoded `'numberposts' => 4`.
+	 */
+	const BLOG_SIDEBAR_RECENT_COUNT_DEFAULT = 4;
+	const BLOG_SIDEBAR_RECENT_COUNT_MIN     = 2;
+	const BLOG_SIDEBAR_RECENT_COUNT_MAX     = 10;
+
+	/**
+	 * The blog sidebar's real original Popular Tag count — matches
+	 * `sidebar.php`'s hardcoded `'number' => 12`.
+	 */
+	const BLOG_SIDEBAR_TAGS_COUNT_DEFAULT = 12;
+	const BLOG_SIDEBAR_TAGS_COUNT_MIN     = 5;
+	const BLOG_SIDEBAR_TAGS_COUNT_MAX     = 30;
+
+	/**
+	 * The single post's real original Related Posts heading/description —
+	 * methods (not class constants) because `__()` can't run inside a
+	 * constant expression — matches `template-parts/blog/related-posts.php`'s
+	 * hardcoded text.
+	 */
+	public static function blog_related_heading_default(): string {
+		return __( 'Related Posts', 'noorifa' );
+	}
+
+	public static function blog_related_subtitle_default(): string {
+		return __( 'Discover more stories worth reading.', 'noorifa' );
+	}
+
+	/**
+	 * The single post's real original Related Posts count — matches
+	 * `related-posts.php`'s hardcoded `'posts_per_page' => 6`.
+	 */
+	const BLOG_RELATED_COUNT_DEFAULT = 6;
+	const BLOG_RELATED_COUNT_MIN     = 2;
+	const BLOG_RELATED_COUNT_MAX     = 12;
+
+	/**
+	 * The site's real original button shape/treatment — a solid-filled,
+	 * fully rounded pill with the existing shine-sweep hover animation
+	 * (untouched `.btn` rule in main.css). Every other style below is
+	 * applied via a real `noorifa-btn-style-{n}` body class (see
+	 * `Frontend_Output::button_style_body_class()`) that's simply never
+	 * added while this default is selected, so an untouched install's
+	 * buttons render byte-for-byte the same as before this setting existed.
+	 */
+	const BUTTON_STYLE_DEFAULT = '1';
+
+	/**
+	 * @return array<string, string>
+	 */
+	public static function button_style_choices(): array {
+		return array(
+			'1' => __( 'Rounded Pill', 'noorifa' ),
+			'2' => __( 'Rounded Rectangle', 'noorifa' ),
+			'3' => __( 'Sharp Corners', 'noorifa' ),
+			'4' => __( 'Outline', 'noorifa' ),
+			'5' => __( 'Elevated', 'noorifa' ),
+		);
+	}
+
+	/**
+	 * The page-title banner's real original alignment — every instance
+	 * (`template-parts/global/page-title.php`, shared by Shop/Cart/Checkout/
+	 * Account/Pages/Posts/Archive/Search/404) has always hardcoded
+	 * Bootstrap's `text-center` on the section. 'left' swaps that for
+	 * `text-start` in the template itself (`text-center`'s `!important` in
+	 * bootstrap-custom.css would otherwise block any CSS-var override).
+	 */
+	const PAGE_HEADER_ALIGNMENT_DEFAULT = 'center';
+
+	/**
+	 * @return array<string, string>
+	 */
+	public static function page_header_alignment_choices(): array {
+		return array(
+			'center' => __( 'Center', 'noorifa' ),
+			'left'   => __( 'Left', 'noorifa' ),
+		);
+	}
+
+	/**
+	 * Same real white the header/footer background-color toggles already
+	 * default to — the page-title banner has no background of its own
+	 * today (transparent, inherits the body background).
+	 */
+	const PAGE_HEADER_BG_DEFAULT = '#ffffff';
+
+	/**
+	 * The page-title banner's text/breadcrumb/icon color override — gated
+	 * by the SAME `page_header.background_enabled` toggle as
+	 * `PAGE_HEADER_BG_DEFAULT` (see the `requires` field in
+	 * `Schema::fields()`), same reasoning as `FOOTER_TEXT_DEFAULT`: keeps
+	 * the banner's content readable once a site owner picks a custom
+	 * (e.g. dark) background for it.
+	 */
+	const PAGE_HEADER_TEXT_DEFAULT = '#ffffff';
 
 	/**
 	 * Real stored site width — 'boxed' (the theme's original, unchanged
@@ -339,13 +466,13 @@ class Layout {
 	 */
 	public static function social_networks(): array {
 		return array(
-			'facebook'  => __( 'Facebook', 'ecombon' ),
-			'x'         => __( 'X (Twitter)', 'ecombon' ),
-			'instagram' => __( 'Instagram', 'ecombon' ),
-			'tiktok'    => __( 'TikTok', 'ecombon' ),
-			'snapchat'  => __( 'Snapchat', 'ecombon' ),
-			'pinterest' => __( 'Pinterest', 'ecombon' ),
-			'youtube'   => __( 'YouTube', 'ecombon' ),
+			'facebook'  => __( 'Facebook', 'noorifa' ),
+			'x'         => __( 'X (Twitter)', 'noorifa' ),
+			'instagram' => __( 'Instagram', 'noorifa' ),
+			'tiktok'    => __( 'TikTok', 'noorifa' ),
+			'snapchat'  => __( 'Snapchat', 'noorifa' ),
+			'pinterest' => __( 'Pinterest', 'noorifa' ),
+			'youtube'   => __( 'YouTube', 'noorifa' ),
 		);
 	}
 
@@ -371,11 +498,11 @@ class Layout {
 	 */
 	public static function header_toggleable(): array {
 		return array(
-			'logo'       => __( 'Logo', 'ecombon' ),
-			'navigation' => __( 'Navigation Menu', 'ecombon' ),
-			'search'     => __( 'Search Icon', 'ecombon' ),
-			'account'    => __( 'Account Icon', 'ecombon' ),
-			'cart'       => __( 'Cart Icon', 'ecombon' ),
+			'logo'       => __( 'Logo', 'noorifa' ),
+			'navigation' => __( 'Navigation Menu', 'noorifa' ),
+			'search'     => __( 'Search Icon', 'noorifa' ),
+			'account'    => __( 'Account Icon', 'noorifa' ),
+			'cart'       => __( 'Cart Icon', 'noorifa' ),
 		);
 	}
 
@@ -399,10 +526,10 @@ class Layout {
 	 */
 	public static function footer_top_elements(): array {
 		return array(
-			'info'         => __( 'Info Card & Social', 'ecombon' ),
-			'nav-company'  => __( 'Company Menu', 'ecombon' ),
-			'nav-customer' => __( 'Customer Care Menu', 'ecombon' ),
-			'newsletter'   => __( 'Newsletter Signup', 'ecombon' ),
+			'info'         => __( 'Info Card & Social', 'noorifa' ),
+			'nav-company'  => __( 'Company Menu', 'noorifa' ),
+			'nav-customer' => __( 'Customer Care Menu', 'noorifa' ),
+			'newsletter'   => __( 'Newsletter Signup', 'noorifa' ),
 		);
 	}
 
@@ -418,8 +545,8 @@ class Layout {
 	 */
 	public static function footer_bottom_elements(): array {
 		return array(
-			'copyright'     => __( 'Copyright Text', 'ecombon' ),
-			'payment-icons' => __( 'Payment Icons', 'ecombon' ),
+			'copyright'     => __( 'Copyright Text', 'noorifa' ),
+			'payment-icons' => __( 'Payment Icons', 'noorifa' ),
 		);
 	}
 
@@ -435,19 +562,19 @@ class Layout {
 	 * because `__()` can't run inside a constant expression.
 	 */
 	public static function newsletter_heading_default(): string {
-		return __( 'Newsletter', 'ecombon' );
+		return __( 'Newsletter', 'noorifa' );
 	}
 
 	public static function newsletter_description_default(): string {
-		return __( 'Subscribe for store updates and discounts.', 'ecombon' );
+		return __( 'Subscribe for store updates and discounts.', 'noorifa' );
 	}
 
 	public static function company_heading_default(): string {
-		return __( 'Company', 'ecombon' );
+		return __( 'Company', 'noorifa' );
 	}
 
 	public static function customer_heading_default(): string {
-		return __( 'Customer Care', 'ecombon' );
+		return __( 'Customer Care', 'noorifa' );
 	}
 
 	/**
@@ -479,7 +606,7 @@ class Layout {
 	 * `template-parts/footer/copyright.php`.
 	 */
 	public static function copyright_text_default(): string {
-		return __( '©{year} {site_name}. All Rights Reserved.', 'ecombon' );
+		return __( '©{year} {site_name}. All Rights Reserved.', 'noorifa' );
 	}
 
 	/**

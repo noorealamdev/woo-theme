@@ -2,15 +2,15 @@
 /**
  * Admin_Page component.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\Settings;
+namespace Noorifa\Settings;
 
-use Ecombon\Setup\ComponentInterface;
+use Noorifa\Setup\ComponentInterface;
 
 /**
- * Real standalone "Ecombon" top-level dashboard menu item (its own icon
+ * Real standalone "Noorifa" top-level dashboard menu item (its own icon
  * in the admin sidebar, not nested under Appearance) — a React app (built
  * with WordPress core's own bundled `wp-element`/`wp-components`, no
  * npm/build step) that reads and saves through the real REST endpoint
@@ -18,7 +18,7 @@ use Ecombon\Setup\ComponentInterface;
  */
 class Admin_Page implements ComponentInterface {
 
-	const PAGE_HOOK = 'toplevel_page_ecombon-settings';
+	const PAGE_HOOK = 'toplevel_page_noorifa-settings';
 
 	/**
 	 * {@inheritDoc}
@@ -33,10 +33,10 @@ class Admin_Page implements ComponentInterface {
 	 */
 	public function register_page(): void {
 		add_menu_page(
-			__( 'Ecombon Theme Settings', 'ecombon' ),
-			__( 'Ecombon', 'ecombon' ),
+			__( 'Noorifa Theme Settings', 'noorifa' ),
+			__( 'Noorifa', 'noorifa' ),
 			'manage_options',
-			'ecombon-settings',
+			'noorifa-settings',
 			array( $this, 'render' ),
 			'dashicons-layout',
 			59
@@ -54,23 +54,23 @@ class Admin_Page implements ComponentInterface {
 		}
 
 		wp_enqueue_style( 'wp-components' );
-		wp_enqueue_style( 'ecombon-admin-settings', ECOMBON_THEME_URI . '/assets/css/admin-settings.css', array( 'wp-components' ), ECOMBON_VERSION );
+		wp_enqueue_style( 'noorifa-admin-settings', NOORIFA_THEME_URI . '/assets/css/admin-settings.css', array( 'wp-components' ), NOORIFA_VERSION );
 
 		wp_enqueue_media(); // Backs the footer Info Card's avatar picker (ImageField in settings-app.js).
 
 		wp_enqueue_script(
-			'ecombon-admin-settings',
-			ECOMBON_THEME_URI . '/assets/js/admin/settings-app.js',
+			'noorifa-admin-settings',
+			NOORIFA_THEME_URI . '/assets/js/admin/settings-app.js',
 			array( 'wp-element', 'wp-components', 'wp-api-fetch', 'wp-i18n', 'media-editor' ),
-			ECOMBON_VERSION,
+			NOORIFA_VERSION,
 			true
 		);
 
 		wp_localize_script(
-			'ecombon-admin-settings',
-			'ecombonSettingsData',
+			'noorifa-admin-settings',
+			'noorifaSettingsData',
 			array(
-				'restUrl'  => esc_url_raw( rest_url( 'ecombon/v1/settings' ) ),
+				'restUrl'  => esc_url_raw( rest_url( 'noorifa/v1/settings' ) ),
 				'nonce'    => wp_create_nonce( 'wp_rest' ),
 				'settings'    => Layout::all(),
 				'fieldBounds' => Schema::range_bounds(),
@@ -95,6 +95,15 @@ class Admin_Page implements ComponentInterface {
 						'productsPerPage' => Layout::products_per_page_choices(),
 						'fontWeight'      => Layout::font_weight_choices(),
 					),
+					'blog'        => array(
+						'gridColumns' => Layout::blog_grid_columns_choices(),
+					),
+					'buttons'     => array(
+						'style' => Layout::button_style_choices(),
+					),
+					'pageHeader'  => array(
+						'alignment' => Layout::page_header_alignment_choices(),
+					),
 				),
 				'defaults'    => array(
 					'colorPrimary'   => Layout::COLOR_PRIMARY_DEFAULT,
@@ -111,6 +120,6 @@ class Admin_Page implements ComponentInterface {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
-		echo '<div id="ecombon-settings-app" class="ecombon-settings-app"></div>';
+		echo '<div id="noorifa-settings-app" class="noorifa-settings-app"></div>';
 	}
 }

@@ -2,7 +2,7 @@
 /**
  * Shop pagination, styled to match the theme's own `.page-pagination` markup.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -24,8 +24,8 @@ $links = paginate_links(
 		'total'     => $total,
 		'current'   => $current,
 		'prev_next' => true,
-		'prev_text' => \Ecombon\Setup\Icons::html( 'CaretLeft' ),
-		'next_text' => \Ecombon\Setup\Icons::html( 'CaretRightThin' ),
+		'prev_text' => \Noorifa\Setup\Icons::html( 'CaretLeft' ),
+		'next_text' => \Noorifa\Setup\Icons::html( 'CaretRightThin' ),
 		'type'      => 'array',
 	)
 );

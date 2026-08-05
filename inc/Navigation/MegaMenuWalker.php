@@ -2,10 +2,10 @@
 /**
  * MegaMenuWalker class.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\Navigation;
+namespace Noorifa\Navigation;
 
 /**
  * Renders the primary nav menu using the theme's own header markup.
@@ -80,7 +80,7 @@ class MegaMenuWalker extends \Walker_Nav_Menu {
 			$output .= '<a href="' . esc_url( $url ) . '" class="item-link">';
 			$output .= '<span class="text cus-text">' . esc_html( $title ) . '</span>';
 			if ( $has_children ) {
-				$output .= \Ecombon\Setup\Icons::html( 'CaretDown' );
+				$output .= \Noorifa\Setup\Icons::html( 'CaretDown' );
 			}
 			$output .= '</a>';
 			return;
@@ -98,7 +98,7 @@ class MegaMenuWalker extends \Walker_Nav_Menu {
 			$output .= '<li class="has-menu-lv2">';
 			$output .= '<a href="#" class="menu-heading-lv2 sub-menu_link has-text">';
 			$output .= '<span class="cus-text">' . esc_html( $title ) . '</span>';
-			$output .= \Ecombon\Setup\Icons::html( 'CaretRightThin' );
+			$output .= \Noorifa\Setup\Icons::html( 'CaretRightThin' );
 			$output .= '</a>';
 			return;
 		}

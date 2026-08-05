@@ -1,30 +1,30 @@
 <?php
 /**
- * Ecombon theme bootstrap.
+ * Noorifa theme bootstrap.
  *
  * This file wires up the autoloader and boots the theme's setup
  * components. It must never contain business logic — that lives in the
- * Ecombon Core plugin. This file only prepares the presentation layer.
+ * Noorifa Core plugin. This file only prepares the presentation layer.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ECOMBON_VERSION', '0.1.1' );
-define( 'ECOMBON_MIN_PHP', '8.0' );
-define( 'ECOMBON_THEME_DIR', get_template_directory() );
-define( 'ECOMBON_THEME_URI', get_template_directory_uri() );
+define( 'NOORIFA_VERSION', '0.1.1' );
+define( 'NOORIFA_MIN_PHP', '8.0' );
+define( 'NOORIFA_THEME_DIR', get_template_directory() );
+define( 'NOORIFA_THEME_URI', get_template_directory_uri() );
 
-if ( version_compare( PHP_VERSION, ECOMBON_MIN_PHP, '<' ) ) {
-	require ECOMBON_THEME_DIR . '/inc/back-compat.php';
+if ( version_compare( PHP_VERSION, NOORIFA_MIN_PHP, '<' ) ) {
+	require NOORIFA_THEME_DIR . '/inc/back-compat.php';
 	return;
 }
 
-require ECOMBON_THEME_DIR . '/inc/Setup/ComponentInterface.php';
-require ECOMBON_THEME_DIR . '/inc/Setup/Theme.php';
-require ECOMBON_THEME_DIR . '/inc/Settings/helpers.php';
+require NOORIFA_THEME_DIR . '/inc/Setup/ComponentInterface.php';
+require NOORIFA_THEME_DIR . '/inc/Setup/Theme.php';
+require NOORIFA_THEME_DIR . '/inc/Settings/helpers.php';
 
-Ecombon\Setup\Theme::instance()->initialize();
+Noorifa\Setup\Theme::instance()->initialize();

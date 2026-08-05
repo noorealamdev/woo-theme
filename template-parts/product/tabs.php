@@ -7,7 +7,7 @@
  * template callbacks (content, attributes table, and the real WP comments
  * loop + review form) — only the tab chrome around them is custom.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -19,21 +19,21 @@ global $product, $post;
 $tabs = array();
 
 if ( $post->post_content ) {
-	$tabs['description'] = __( 'Description', 'ecombon' );
+	$tabs['description'] = __( 'Description', 'noorifa' );
 }
 
 if ( $product->has_attributes() ) {
-	$tabs['additional_information'] = __( 'Additional Information', 'ecombon' );
+	$tabs['additional_information'] = __( 'Additional Information', 'noorifa' );
 }
 
 if ( comments_open() ) {
 	/* translators: %d: number of reviews. */
-	$tabs['reviews'] = sprintf( __( 'Reviews (%d)', 'ecombon' ), $product->get_review_count() );
+	$tabs['reviews'] = sprintf( __( 'Reviews (%d)', 'noorifa' ), $product->get_review_count() );
 }
 
-$shipping_return_note = apply_filters( 'ecombon_product_shipping_returns_content', '' );
+$shipping_return_note = apply_filters( 'noorifa_product_shipping_returns_content', '' );
 if ( $shipping_return_note ) {
-	$tabs['shipping-returns'] = __( 'Shipping & Returns', 'ecombon' );
+	$tabs['shipping-returns'] = __( 'Shipping & Returns', 'noorifa' );
 }
 
 if ( empty( $tabs ) ) {

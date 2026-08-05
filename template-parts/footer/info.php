@@ -2,17 +2,17 @@
 /**
  * Footer builder element: a logo/description info card, plus social links.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$settings    = ecombon_settings();
+$settings    = noorifa_settings();
 $logo        = $settings['footer_info_logo'];
 $description = $settings['footer_info_description'];
-$socials     = apply_filters( 'ecombon_social_links', array() );
+$socials     = apply_filters( 'noorifa_social_links', array() );
 
 $social_icons = array(
 	'facebook'  => 'FacebookLogo',
@@ -46,7 +46,7 @@ $social_icons = array(
 				<?php if ( empty( $social_icons[ $network ] ) ) { continue; } ?>
 				<li>
 					<a href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener">
-						<?php \Ecombon\Setup\Icons::render( $social_icons[ $network ] ); ?>
+						<?php \Noorifa\Setup\Icons::render( $social_icons[ $network ] ); ?>
 					</a>
 				</li>
 			<?php endforeach; ?>

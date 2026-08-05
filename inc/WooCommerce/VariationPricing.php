@@ -2,12 +2,12 @@
 /**
  * VariationPricing component.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\WooCommerce;
+namespace Noorifa\WooCommerce;
 
-use Ecombon\Setup\ComponentInterface;
+use Noorifa\Setup\ComponentInterface;
 
 /**
  * Always sends each variation's real price to the front end.
@@ -16,7 +16,7 @@ use Ecombon\Setup\ComponentInterface;
  * when a variation's price matches the others (see
  * WC_Product_Variable::get_available_variation()) — a reasonable
  * de-duplication for its own default template, but the theme's swatch
- * picker (assets/js/ecombon-product-variations.js) always shows the
+ * picker (assets/js/noorifa-product-variations.js) always shows the
  * selected variation's price on the Add To Cart button itself, so it
  * needs that real, already-formatted price string every time.
  */

@@ -7,7 +7,7 @@
  * attribute checkboxes toggle WooCommerce's own `filter_{attribute}` query
  * vars — no client-side fake filtering.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -48,16 +48,16 @@ $attribute_taxonomies = function_exists( 'wc_get_attribute_taxonomies' ) ? wc_ge
 <div class="offcanvas offcanvas-start canvas-filter" id="filterShop">
 	<div class="canvas-wrapper">
 		<div class="canvas-header">
-			<div class="h5 title"><?php esc_html_e( 'Filters', 'ecombon' ); ?></div>
-			<span class="icon-close-popup" data-bs-dismiss="offcanvas"><?php \Ecombon\Setup\Icons::render( 'X2', 'fs-24 link' ); ?></span>
+			<div class="h5 title"><?php esc_html_e( 'Filters', 'noorifa' ); ?></div>
+			<span class="icon-close-popup" data-bs-dismiss="offcanvas"><?php \Noorifa\Setup\Icons::render( 'X2', 'fs-24 link' ); ?></span>
 		</div>
 		<div class="canvas-body">
 
 			<?php if ( ! empty( $product_categories ) && ! is_wp_error( $product_categories ) ) : ?>
 				<div class="widget-facet">
 					<div class="facet-title" data-bs-target="#facet-category" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="facet-category">
-						<h6><?php esc_html_e( 'Product Categories', 'ecombon' ); ?></h6>
-						<?php \Ecombon\Setup\Icons::render( 'CaretDown' ); ?>
+						<h6><?php esc_html_e( 'Product Categories', 'noorifa' ); ?></h6>
+						<?php \Noorifa\Setup\Icons::render( 'CaretDown' ); ?>
 					</div>
 					<div id="facet-category" class="collapse show">
 						<ul class="collapse-body filter-group-check group-category">
@@ -78,8 +78,8 @@ $attribute_taxonomies = function_exists( 'wc_get_attribute_taxonomies' ) ? wc_ge
 			<?php if ( $price_max > $price_min ) : ?>
 				<div class="widget-facet">
 					<div class="facet-title" data-bs-target="#facet-price" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="facet-price">
-						<h6><?php esc_html_e( 'Filter By Price', 'ecombon' ); ?></h6>
-						<?php \Ecombon\Setup\Icons::render( 'CaretDown' ); ?>
+						<h6><?php esc_html_e( 'Filter By Price', 'noorifa' ); ?></h6>
+						<?php \Noorifa\Setup\Icons::render( 'CaretDown' ); ?>
 					</div>
 					<div id="facet-price" class="collapse show">
 						<form class="collapse-body widget-price filter-price" method="get" action="<?php echo esc_url( strtok( wp_unslash( $_SERVER['REQUEST_URI'] ), '?' ) ); ?>">
@@ -89,7 +89,7 @@ $attribute_taxonomies = function_exists( 'wc_get_attribute_taxonomies' ) ? wc_ge
 							<div class="price-val-range" id="price-value-range" data-min="<?php echo esc_attr( (string) $price_min ); ?>" data-max="<?php echo esc_attr( (string) $price_max ); ?>"></div>
 							<input type="hidden" id="price-min-input" name="min_price" value="<?php echo esc_attr( (string) $current_min_price ); ?>">
 							<input type="hidden" id="price-max-input" name="max_price" value="<?php echo esc_attr( (string) $current_max_price ); ?>">
-							<div class="price-box grid-layout tf-col-2">
+							<div class="price-box grid-layout mk-col-2">
 								<div class="box-wrap">
 									<div class="price-val_wrap">
 										<span class="cl-text-2 text-body-1">$</span>
@@ -104,7 +104,7 @@ $attribute_taxonomies = function_exists( 'wc_get_attribute_taxonomies' ) ? wc_ge
 								</div>
 							</div>
 							<button type="submit" class="btn btn-fill w-100 justify-content-center mt-16">
-								<?php esc_html_e( 'Apply', 'ecombon' ); ?>
+								<?php esc_html_e( 'Apply', 'noorifa' ); ?>
 							</button>
 						</form>
 					</div>
@@ -127,13 +127,13 @@ $attribute_taxonomies = function_exists( 'wc_get_attribute_taxonomies' ) ? wc_ge
 				<div class="widget-facet">
 					<div class="facet-title" data-bs-target="#facet-<?php echo esc_attr( $attribute->attribute_name ); ?>" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="facet-<?php echo esc_attr( $attribute->attribute_name ); ?>">
 						<h6><?php echo esc_html( $attribute->attribute_label ); ?></h6>
-						<?php \Ecombon\Setup\Icons::render( 'CaretDown' ); ?>
+						<?php \Noorifa\Setup\Icons::render( 'CaretDown' ); ?>
 					</div>
 					<div id="facet-<?php echo esc_attr( $attribute->attribute_name ); ?>" class="collapse show">
 						<ul class="collapse-body filter-group-check">
 							<?php foreach ( $terms as $term ) : ?>
 								<li class="list-item">
-									<a href="<?php echo esc_url( \Ecombon\WooCommerce\ShopFilters::toggle_attribute_url( $taxonomy, $term->slug, $chosen_terms ) ); ?>" class="label link <?php echo in_array( $term->slug, $chosen_terms, true ) ? 'active' : ''; ?>">
+									<a href="<?php echo esc_url( \Noorifa\WooCommerce\ShopFilters::toggle_attribute_url( $taxonomy, $term->slug, $chosen_terms ) ); ?>" class="label link <?php echo in_array( $term->slug, $chosen_terms, true ) ? 'active' : ''; ?>">
 										<span class="cate-text"><?php echo esc_html( $term->name ); ?></span>
 										<span class="count">(<?php echo esc_html( (string) $term->count ); ?>)</span>
 									</a>

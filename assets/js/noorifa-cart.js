@@ -3,7 +3,7 @@
 
 	// WooCommerce's own add-to-cart.js also listens for these events and
 	// replaces #shoppingCart with fresh markup (see
-	// Ecombon\WooCommerce\CartFragments) — but jQuery doesn't guarantee
+	// Noorifa\WooCommerce\CartFragments) — but jQuery doesn't guarantee
 	// that handler runs before this one just because its script loads
 	// first. Deferring to the next tick lets every same-event handler
 	// finish first, so we always grab the fragment-replaced node.
@@ -30,7 +30,7 @@
 			}
 
 			// WooCommerce's fragment swap replaces #shoppingCart's whole
-			// DOM node (see Ecombon\WooCommerce\CartFragments), so the
+			// DOM node (see Noorifa\WooCommerce\CartFragments), so the
 			// Offcanvas instance that was open on the OLD node gets
 			// orphaned rather than closed: the old node is simply gone,
 			// with nothing left to call .hide() on. That leaves two
@@ -55,7 +55,7 @@
 	} );
 
 	// +/- buttons around WooCommerce's own real `.qty` input (see
-	// Ecombon\WooCommerce\QuantityStepper) — only ever touches that one
+	// Noorifa\WooCommerce\QuantityStepper) — only ever touches that one
 	// real input's value, respecting its actual min/max/step attributes.
 	$( document ).on( 'click', '.btn-quantity', function () {
 		var $qty = $( this ).closest( '.quantity' ).find( '.qty' );
@@ -99,15 +99,15 @@
 	// form itself — only archive/loop "Add to cart" buttons.
 	//
 	// The form also carries a second real submit button — "Buy It Now"
-	// (name="ecombon_buy_now") — for a real add-to-cart-then-redirect flow
-	// that works with no JS at all via Ecombon\WooCommerce\BuyItNow's
+	// (name="noorifa_buy_now") — for a real add-to-cart-then-redirect flow
+	// that works with no JS at all via Noorifa\WooCommerce\BuyItNow's
 	// `woocommerce_add_to_cart_redirect` filter. `event.originalEvent.submitter`
 	// (standard, evergreen-browser API) tells us which button actually
 	// triggered this submit, since both share `.single_add_to_cart_button`.
 	$( document ).on( 'submit', 'form.cart', function ( e ) {
 		var $form = $( this );
 		var submitter = e.originalEvent && e.originalEvent.submitter;
-		var isBuyNow = !! submitter && 'ecombon_buy_now' === submitter.name;
+		var isBuyNow = !! submitter && 'noorifa_buy_now' === submitter.name;
 		var $button = submitter ? $( submitter ) : $form.find( '.single_add_to_cart_button' ).first();
 
 		// Grouped-product forms have one quantity input per child product;
@@ -146,10 +146,10 @@
 
 		// `$form[0].submit()` (the fallback below) doesn't carry a clicked
 		// button's name/value — restore it manually so the no-JS
-		// `ecombon_buy_now` redirect still fires after a fallback submit.
+		// `noorifa_buy_now` redirect still fires after a fallback submit.
 		function fallbackSubmit() {
-			if ( isBuyNow && ! $form.find( 'input[name="ecombon_buy_now"]' ).length ) {
-				$form.append( '<input type="hidden" name="ecombon_buy_now" value="1">' );
+			if ( isBuyNow && ! $form.find( 'input[name="noorifa_buy_now"]' ).length ) {
+				$form.append( '<input type="hidden" name="noorifa_buy_now" value="1">' );
 			}
 			$form[ 0 ].submit();
 		}
@@ -173,7 +173,7 @@
 				}
 
 				if ( isBuyNow ) {
-					window.location.href = ecombonCartParams.checkoutUrl;
+					window.location.href = noorifaCartParams.checkoutUrl;
 					return;
 				}
 

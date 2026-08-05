@@ -2,10 +2,10 @@
 /**
  * Component_Interface.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\Setup;
+namespace Noorifa\Setup;
 
 /**
  * Contract every theme setup component must implement.

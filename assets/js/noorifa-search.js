@@ -2,7 +2,7 @@
 	'use strict';
 
 	// Real-time AJAX search for the header search modal (#search) — see
-	// Ecombon\Search\LiveSearch. Debounced, and any still-in-flight request
+	// Noorifa\Search\LiveSearch. Debounced, and any still-in-flight request
 	// is aborted before a new one starts so a slow early response can never
 	// overwrite a later, more relevant one.
 	$( function () {
@@ -10,7 +10,7 @@
 		var $input   = $modal.find( '.form-search-nav input[name="s"]' );
 		var $results = $modal.find( '.search-live-results' );
 
-		if ( ! $input.length || ! $results.length || typeof ecombonSearchParams === 'undefined' ) {
+		if ( ! $input.length || ! $results.length || typeof noorifaSearchParams === 'undefined' ) {
 			return;
 		}
 
@@ -34,12 +34,12 @@
 			$modal.addClass( 'is-searching' );
 
 			currentRequest = $.ajax( {
-				url: ecombonSearchParams.ajaxUrl,
+				url: noorifaSearchParams.ajaxUrl,
 				method: 'GET',
 				dataType: 'json',
 				data: {
-					action: 'ecombon_live_search',
-					nonce: ecombonSearchParams.nonce,
+					action: 'noorifa_live_search',
+					nonce: noorifaSearchParams.nonce,
 					term: term,
 				},
 				success: function ( response ) {
@@ -61,7 +61,7 @@
 
 			window.clearTimeout( debounceTimer );
 
-			if ( term.length < ecombonSearchParams.minChars ) {
+			if ( term.length < noorifaSearchParams.minChars ) {
 				clearResults();
 				return;
 			}

@@ -3,7 +3,7 @@
 
 	// Real sticky add-to-cart bar (template-parts/product/sticky-add-to-cart.php).
 	// No add-to-cart logic lives here — the sticky button is a real
-	// `<button form="ecombon-add-to-cart-form">`, natively associated with
+	// `<button form="noorifa-add-to-cart-form">`, natively associated with
 	// the real `form.cart` below regardless of where it sits in the DOM, so
 	// clicking it submits that real form (with whatever quantity the
 	// shopper already set in the real buy-box above) exactly like the real
@@ -20,11 +20,11 @@
 		var $realForm = $( 'form.cart' ).first();
 
 		if ( $realForm.length && ! $realForm.attr( 'id' ) ) {
-			$realForm.attr( 'id', 'ecombon-add-to-cart-form' );
+			$realForm.attr( 'id', 'noorifa-add-to-cart-form' );
 		}
 
 		// Variable products only: mirror the real, already-matched variation
-		// (see assets/js/ecombon-product-variations.js, which fires this
+		// (see assets/js/noorifa-product-variations.js, which fires this
 		// same real WooCommerce event) into the sticky price and a
 		// "Color, Size" style summary line built from the real swatch/pill
 		// labels it builds — never a second, separate lookup.

@@ -2,12 +2,12 @@
 /**
  * CartFragments component.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\WooCommerce;
+namespace Noorifa\WooCommerce;
 
-use Ecombon\Setup\ComponentInterface;
+use Noorifa\Setup\ComponentInterface;
 
 /**
  * Registers real WooCommerce cart fragments for the theme's own markup.

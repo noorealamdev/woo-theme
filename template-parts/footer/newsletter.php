@@ -5,14 +5,14 @@
  * simply whether 'newsletter' is present in that list, so there's no
  * separate visibility check needed here.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$settings   = ecombon_settings();
+$settings   = noorifa_settings();
 $provider   = $settings['newsletter_provider'];
 $embed_code = $settings['newsletter_embed_code'];
 ?>

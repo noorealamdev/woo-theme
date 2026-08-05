@@ -1,7 +1,7 @@
 <?php
 /**
  * The real cart form + item table — a standalone template-part (not inlined
- * into woocommerce/cart/cart.php) so `Ecombon\WooCommerce\CartFragments` can
+ * into woocommerce/cart/cart.php) so `Noorifa\WooCommerce\CartFragments` can
  * render the exact same markup as a real AJAX fragment for the
  * `.woocommerce-cart-form` selector WooCommerce's own cart.js swaps in
  * after a quantity/coupon update — without it, those real AJAX updates
@@ -13,7 +13,7 @@
  * existing cart line" action, so an editable-looking control there would be
  * fake.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -26,10 +26,10 @@ defined( 'ABSPATH' ) || exit;
 		<table class="table-page-cart woocommerce-cart-form__contents">
 			<thead>
 				<tr>
-					<th><p class="h6 fw-medium"><?php esc_html_e( 'Products', 'ecombon' ); ?></p></th>
-					<th><p class="h6 fw-medium"><?php esc_html_e( 'Price', 'ecombon' ); ?></p></th>
-					<th><p class="h6 fw-medium"><?php esc_html_e( 'Quantity', 'ecombon' ); ?></p></th>
-					<th class="text-end"><p class="h6 fw-medium"><?php esc_html_e( 'Total Price', 'ecombon' ); ?></p></th>
+					<th><p class="h6 fw-medium"><?php esc_html_e( 'Products', 'noorifa' ); ?></p></th>
+					<th><p class="h6 fw-medium"><?php esc_html_e( 'Price', 'noorifa' ); ?></p></th>
+					<th><p class="h6 fw-medium"><?php esc_html_e( 'Quantity', 'noorifa' ); ?></p></th>
+					<th class="text-end"><p class="h6 fw-medium"><?php esc_html_e( 'Total Price', 'noorifa' ); ?></p></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -46,7 +46,7 @@ defined( 'ABSPATH' ) || exit;
 					}
 
 					$product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
-					$product_name       = \Ecombon\WooCommerce\CartItemVariations::get_title( $cart_item );
+					$product_name       = \Noorifa\WooCommerce\CartItemVariations::get_title( $cart_item );
 					$thumbnail           = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image( array( 100, 133 ) ), $cart_item, $cart_item_key );
 					?>
 					<tr class="cart_item each-prd file-delete <?php echo esc_attr( apply_filters( 'woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key ) ); ?>">
@@ -63,7 +63,7 @@ defined( 'ABSPATH' ) || exit;
 									<p class="prd_name fw-medium lh-24"><?php echo esc_html( $product_name ); ?></p>
 								<?php endif; ?>
 
-								<?php foreach ( \Ecombon\WooCommerce\CartItemVariations::get_rows( $cart_item ) as $variation_row ) : ?>
+								<?php foreach ( \Noorifa\WooCommerce\CartItemVariations::get_rows( $cart_item ) as $variation_row ) : ?>
 									<div class="prd_select text-caption-01">
 										<span class="type-text cl-text-3"><?php echo esc_html( $variation_row['label'] ); ?>:&nbsp;</span>
 										<span class="cl-text-2"><?php echo wp_kses_post( $variation_row['value'] ); ?></span>
@@ -87,11 +87,11 @@ defined( 'ABSPATH' ) || exit;
 									sprintf(
 										'<a role="button" href="%s" class="cart_remove btn-line-3 type-primary remove_from_cart_button" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s"><span class="text-caption-01 fw-semibold">%s</span></a>',
 										esc_url( wc_get_cart_remove_url( $cart_item_key ) ),
-										esc_attr( sprintf( __( 'Remove %s from cart', 'ecombon' ), wp_strip_all_tags( $product_name ) ) ),
+										esc_attr( sprintf( __( 'Remove %s from cart', 'noorifa' ), wp_strip_all_tags( $product_name ) ) ),
 										esc_attr( $product_id ),
 										esc_attr( $cart_item_key ),
 										esc_attr( $_product->get_sku() ),
-										esc_html__( 'Remove', 'ecombon' )
+										esc_html__( 'Remove', 'noorifa' )
 									),
 									$cart_item_key
 								);
@@ -99,11 +99,11 @@ defined( 'ABSPATH' ) || exit;
 							</div>
 						</td>
 
-						<td class="cart_price each-price fw-semibold text-primary" data-cart-title="<?php esc_attr_e( 'Price', 'ecombon' ); ?>">
+						<td class="cart_price each-price fw-semibold text-primary" data-cart-title="<?php esc_attr_e( 'Price', 'noorifa' ); ?>">
 							<?php echo apply_filters( 'woocommerce_cart_item_price', WC()->cart->get_product_price( $_product ), $cart_item, $cart_item_key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 						</td>
 
-						<td class="cart_quantity" data-cart-title="<?php esc_attr_e( 'Quantity', 'ecombon' ); ?>">
+						<td class="cart_quantity" data-cart-title="<?php esc_attr_e( 'Quantity', 'noorifa' ); ?>">
 							<?php
 							if ( $_product->is_sold_individually() ) {
 								$min_quantity = 1;
@@ -147,14 +147,14 @@ defined( 'ABSPATH' ) || exit;
 	<?php if ( wc_coupons_enabled() ) : ?>
 		<?php /* Real class `coupon` (alongside the theme's own) is required — WooCommerce's real cart.js looks for a `.coupon` ancestor to show a real invalid-coupon error message; without it, the error is silently dropped. */ ?>
 		<div class="ip-discount-code coupon">
-			<label for="coupon_code" class="screen-reader-text"><?php esc_html_e( 'Coupon:', 'ecombon' ); ?></label>
-			<input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="<?php esc_attr_e( 'Add voucher discount', 'ecombon' ); ?>" />
-			<button type="submit" class="btn animate-btn" name="apply_coupon" value="<?php esc_attr_e( 'Apply Code', 'ecombon' ); ?>"><?php esc_html_e( 'Apply Code', 'ecombon' ); ?></button>
+			<label for="coupon_code" class="screen-reader-text"><?php esc_html_e( 'Coupon:', 'noorifa' ); ?></label>
+			<input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="<?php esc_attr_e( 'Add voucher discount', 'noorifa' ); ?>" />
+			<button type="submit" class="btn animate-btn" name="apply_coupon" value="<?php esc_attr_e( 'Apply Code', 'noorifa' ); ?>"><?php esc_html_e( 'Apply Code', 'noorifa' ); ?></button>
 			<?php do_action( 'woocommerce_cart_coupon' ); ?>
 		</div>
 	<?php endif; ?>
 
-	<button type="submit" class="d-none" name="update_cart" value="<?php esc_attr_e( 'Update cart', 'ecombon' ); ?>"><?php esc_html_e( 'Update cart', 'ecombon' ); ?></button>
+	<button type="submit" class="d-none" name="update_cart" value="<?php esc_attr_e( 'Update cart', 'noorifa' ); ?>"><?php esc_html_e( 'Update cart', 'noorifa' ); ?></button>
 
 	<?php do_action( 'woocommerce_cart_actions' ); ?>
 	<?php wp_nonce_field( 'woocommerce-cart', 'woocommerce-cart-nonce' ); ?>

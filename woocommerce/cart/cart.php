@@ -4,10 +4,10 @@
  * restyled with the theme's own `.table-page-cart` markup.
  *
  * The form/table itself lives in template-parts/cart/cart-table.php (a
- * separate template-part, not inlined here) so Ecombon\WooCommerce\CartFragments
+ * separate template-part, not inlined here) so Noorifa\WooCommerce\CartFragments
  * can render the exact same markup as a real AJAX fragment.
  *
- * @package Ecombon
+ * @package Noorifa
  * @version 10.8.0
  */
 

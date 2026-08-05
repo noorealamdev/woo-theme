@@ -2,10 +2,10 @@
 /**
  * Icons component.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\Setup;
+namespace Noorifa\Setup;
 
 /**
  * Real inline SVG icons — replaces the theme's old icomoon icon font.
@@ -30,7 +30,7 @@ class Icons implements ComponentInterface {
 	 * Inlines the real SVG sprite once, right after <body> opens.
 	 */
 	public function render_sprite(): void {
-		$sprite_path = ECOMBON_THEME_DIR . '/assets/icon/svg/sprite.svg';
+		$sprite_path = NOORIFA_THEME_DIR . '/assets/icon/svg/sprite.svg';
 
 		if ( ! file_exists( $sprite_path ) ) {
 			return;

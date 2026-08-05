@@ -2,10 +2,10 @@
 /**
  * Shipping helper.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\WooCommerce;
+namespace Noorifa\WooCommerce;
 
 /**
  * Real shipping-zone data lookups shared by the cart drawer and the full

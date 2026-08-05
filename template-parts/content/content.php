@@ -2,7 +2,7 @@
 /**
  * Post card used on the blog index, archives and search results.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -24,6 +24,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 			'</a></h5>'
 		);
 		?>
-		<p class="entry-desc cl-text-2"><?php echo esc_html( wp_trim_words( get_the_excerpt(), 18 ) ); ?></p>
+		<p class="entry-desc cl-text-2"><?php echo esc_html( wp_trim_words( get_the_excerpt(), (int) noorifa_settings()['blog_excerpt_length'] ) ); ?></p>
 	</div>
 </article>

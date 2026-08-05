@@ -6,7 +6,7 @@
  * (photoswipe) and zoom (drift) are wired by assets/js/zoom.js, enqueued
  * only on single product pages.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

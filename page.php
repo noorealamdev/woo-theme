@@ -2,7 +2,7 @@
 /**
  * The template for standard WordPress pages.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

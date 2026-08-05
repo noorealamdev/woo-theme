@@ -2,10 +2,10 @@
 /**
  * ShopFilters helper.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\WooCommerce;
+namespace Noorifa\WooCommerce;
 
 /**
  * Small stateless helpers for building real (non-JS-faked) shop filter URLs.

@@ -2,7 +2,7 @@
 /**
  * Shop / product archive page-title banner.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,7 +14,7 @@ if ( is_product_taxonomy() ) {
 	$title       = $term->name;
 	$description = $term->description;
 } else {
-	$title       = wc_get_page_permalink( 'shop' ) ? get_the_title( wc_get_page_id( 'shop' ) ) : __( 'Shop', 'ecombon' );
+	$title       = wc_get_page_permalink( 'shop' ) ? get_the_title( wc_get_page_id( 'shop' ) ) : __( 'Shop', 'noorifa' );
 	$description = '';
 }
 

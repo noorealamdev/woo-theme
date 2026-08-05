@@ -2,10 +2,10 @@
 /**
  * NavMenuAdminUi component.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\Setup;
+namespace Noorifa\Setup;
 
 /**
  * Hides the "Menu Order" numeric-position dropdown in the real WordPress

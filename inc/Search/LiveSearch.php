@@ -2,12 +2,12 @@
 /**
  * LiveSearch component.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\Search;
+namespace Noorifa\Search;
 
-use Ecombon\Setup\ComponentInterface;
+use Noorifa\Setup\ComponentInterface;
 use WP_Query;
 
 /**
@@ -17,7 +17,7 @@ use WP_Query;
  * WooCommerce is active) and pages/posts as the user types, and renders
  * the result through a normal template part — the same
  * ob_start()/get_template_part()/ob_get_clean() approach already used by
- * Ecombon\WooCommerce\CartFragments — so there is exactly one place
+ * Noorifa\WooCommerce\CartFragments — so there is exactly one place
  * (template-parts/header/search-results.php) that owns the markup.
  */
 class LiveSearch implements ComponentInterface {
@@ -37,15 +37,15 @@ class LiveSearch implements ComponentInterface {
 	 * {@inheritDoc}
 	 */
 	public function initialize(): void {
-		add_action( 'wp_ajax_ecombon_live_search', array( $this, 'handle_request' ) );
-		add_action( 'wp_ajax_nopriv_ecombon_live_search', array( $this, 'handle_request' ) );
+		add_action( 'wp_ajax_noorifa_live_search', array( $this, 'handle_request' ) );
+		add_action( 'wp_ajax_nopriv_noorifa_live_search', array( $this, 'handle_request' ) );
 	}
 
 	/**
-	 * Handles the `ecombon_live_search` AJAX request.
+	 * Handles the `noorifa_live_search` AJAX request.
 	 */
 	public function handle_request(): void {
-		check_ajax_referer( 'ecombon_live_search', 'nonce' );
+		check_ajax_referer( 'noorifa_live_search', 'nonce' );
 
 		$term = isset( $_GET['term'] ) ? sanitize_text_field( wp_unslash( $_GET['term'] ) ) : '';
 

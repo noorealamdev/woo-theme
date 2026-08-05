@@ -2,7 +2,7 @@
 /**
  * Header builder element: site logo.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

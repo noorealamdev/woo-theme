@@ -2,10 +2,10 @@
 /**
  * NavMenus component.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\Setup;
+namespace Noorifa\Setup;
 
 /**
  * Registers the theme's navigation menu locations.
@@ -25,9 +25,9 @@ class NavMenus implements ComponentInterface {
 	public function register_menus(): void {
 		register_nav_menus(
 			array(
-				'primary'        => __( 'Primary Menu', 'ecombon' ),
-				'footer_company' => __( 'Footer — Company', 'ecombon' ),
-				'footer_customer' => __( 'Footer — Customer Care', 'ecombon' ),
+				'primary'        => __( 'Primary Menu', 'noorifa' ),
+				'footer_company' => __( 'Footer — Company', 'noorifa' ),
+				'footer_customer' => __( 'Footer — Customer Care', 'noorifa' ),
 			)
 		);
 	}

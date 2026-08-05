@@ -5,7 +5,7 @@
  * all restyled with the theme's own `.product-desc_review` markup instead
  * of WooCommerce's default review template.
  *
- * @package Ecombon
+ * @package Noorifa
  * @version 9.7.0
  */
 
@@ -37,14 +37,14 @@ $rating_counts = $product->get_rating_counts();
 				<p class="text-display fw-medium"><?php echo esc_html( number_format( (float) $average, 1 ) ); ?></p>
 				<div class="star-wrap normal d-flex align-items-center">
 					<?php for ( $star = 1; $star <= 5; $star++ ) : ?>
-						<?php \Ecombon\Setup\Icons::render( $star <= round( $average ) ? 'Star' : 'Star-thin', 'fs-24' ); ?>
+						<?php \Noorifa\Setup\Icons::render( $star <= round( $average ) ? 'Star' : 'Star-thin', 'fs-24' ); ?>
 					<?php endfor; ?>
 				</div>
 				<p class="rate-number">
 					<?php
 					printf(
 						/* translators: %d: number of ratings. */
-						esc_html( _n( '(%d Rating)', '(%d Ratings)', $review_count, 'ecombon' ) ),
+						esc_html( _n( '(%d Rating)', '(%d Ratings)', $review_count, 'noorifa' ) ),
 						(int) $review_count
 					);
 					?>
@@ -60,7 +60,7 @@ $rating_counts = $product->get_rating_counts();
 						?>
 						<div class="rate-progress-star fw-medium">
 							<span class="number-star"><?php echo (int) $star; ?></span>
-							<?php \Ecombon\Setup\Icons::render( 'Star', 'fs-20 cl-text-yellow' ); ?>
+							<?php \Noorifa\Setup\Icons::render( 'Star', 'fs-20 cl-text-yellow' ); ?>
 							<div class="progress" role="progressbar" aria-label="<?php echo esc_attr( $star ); ?> star ratings" aria-valuenow="<?php echo esc_attr( $percent ); ?>" aria-valuemin="0" aria-valuemax="100">
 								<div class="progress-bar" style="width: <?php echo esc_attr( $percent ); ?>%;"></div>
 							</div>
@@ -72,10 +72,10 @@ $rating_counts = $product->get_rating_counts();
 
 			<div>
 				<button type="button" class="action btn-comment-review btn-cancel-review btn animate-btn">
-					<?php esc_html_e( 'Cancel Review', 'ecombon' ); ?>
+					<?php esc_html_e( 'Cancel Review', 'noorifa' ); ?>
 				</button>
 				<button type="button" class="action btn-comment-review btn-write-review btn animate-btn">
-					<?php esc_html_e( 'Write a review', 'ecombon' ); ?>
+					<?php esc_html_e( 'Write a review', 'noorifa' ); ?>
 				</button>
 			</div>
 		</div>
@@ -86,7 +86,7 @@ $rating_counts = $product->get_rating_counts();
 					<?php
 					$reviews_title = sprintf(
 						/* translators: %d: number of reviews. */
-						esc_html( _n( '%d Review', '%d Reviews', $review_count, 'ecombon' ) ),
+						esc_html( _n( '%d Review', '%d Reviews', $review_count, 'noorifa' ) ),
 						(int) $review_count
 					);
 					echo wp_kses_post( apply_filters( 'woocommerce_reviews_title', $reviews_title, $review_count, $product ) );
@@ -117,7 +117,7 @@ $rating_counts = $product->get_rating_counts();
 						</nav>
 					<?php endif; ?>
 				<?php else : ?>
-					<p class="woocommerce-noreviews"><?php esc_html_e( 'There are no reviews yet.', 'ecombon' ); ?></p>
+					<p class="woocommerce-noreviews"><?php esc_html_e( 'There are no reviews yet.', 'noorifa' ); ?></p>
 				<?php endif; ?>
 			</div>
 		</div>
@@ -134,14 +134,14 @@ $rating_counts = $product->get_rating_counts();
 			$rating_field = '';
 			if ( $rating_enabled ) {
 				$rating_field = '<div class="comment-form-rating">
-					<label for="rating" id="comment-form-rating-label" class="screen-reader-text">' . esc_html__( 'Your rating', 'ecombon' ) . '</label>
+					<label for="rating" id="comment-form-rating-label" class="screen-reader-text">' . esc_html__( 'Your rating', 'noorifa' ) . '</label>
 					<select name="rating" id="rating"' . $rating_required_attr . '>
-						<option value="">' . esc_html__( 'Rate&hellip;', 'ecombon' ) . '</option>
-						<option value="5">' . esc_html__( 'Perfect', 'ecombon' ) . '</option>
-						<option value="4">' . esc_html__( 'Good', 'ecombon' ) . '</option>
-						<option value="3">' . esc_html__( 'Average', 'ecombon' ) . '</option>
-						<option value="2">' . esc_html__( 'Not that bad', 'ecombon' ) . '</option>
-						<option value="1">' . esc_html__( 'Very poor', 'ecombon' ) . '</option>
+						<option value="">' . esc_html__( 'Rate&hellip;', 'noorifa' ) . '</option>
+						<option value="5">' . esc_html__( 'Perfect', 'noorifa' ) . '</option>
+						<option value="4">' . esc_html__( 'Good', 'noorifa' ) . '</option>
+						<option value="3">' . esc_html__( 'Average', 'noorifa' ) . '</option>
+						<option value="2">' . esc_html__( 'Not that bad', 'noorifa' ) . '</option>
+						<option value="1">' . esc_html__( 'Very poor', 'noorifa' ) . '</option>
 					</select>
 				</div>';
 			}
@@ -150,28 +150,28 @@ $rating_counts = $product->get_rating_counts();
 			if ( has_action( 'set_comment_cookies', 'wp_set_comment_cookies' ) && get_option( 'show_comments_cookies_opt_in' ) ) {
 				$cookie_consent_field = '<div class="checkbox-wrap">
 					<input class="check" type="checkbox" id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" value="yes">
-					<label for="wp-comment-cookies-consent">' . esc_html__( 'Save my name, email, and website in this browser for the next time I comment.', 'ecombon' ) . '</label>
+					<label for="wp-comment-cookies-consent">' . esc_html__( 'Save my name, email, and website in this browser for the next time I comment.', 'noorifa' ) . '</label>
 				</div>';
 			}
 
 			$comment_field = '<div class="head">
-					<h5>' . esc_html__( 'Write a review:', 'ecombon' ) . '</h5>
+					<h5>' . esc_html__( 'Write a review:', 'noorifa' ) . '</h5>
 					' . $rating_field . '
 				</div>
 				<div class="form-content mb-24">
 					<div class="grid-layout md-col-2">
 						<div class="grid-layout">
 							<fieldset class="field comment-form-author">
-								<label for="author" class="lable fw-medium">' . esc_html__( 'Your Name', 'ecombon' ) . $required_mark . '</label>
+								<label for="author" class="lable fw-medium">' . esc_html__( 'Your Name', 'noorifa' ) . $required_mark . '</label>
 								<input type="text" id="author" name="author" autocomplete="name" value="' . esc_attr( $commenter['comment_author'] ) . '"' . $required_attr . '>
 							</fieldset>
 							<fieldset class="field comment-form-email">
-								<label for="email" class="lable fw-medium">' . esc_html__( 'Your Email', 'ecombon' ) . $required_mark . '</label>
+								<label for="email" class="lable fw-medium">' . esc_html__( 'Your Email', 'noorifa' ) . $required_mark . '</label>
 								<input type="email" id="email" name="email" autocomplete="email" value="' . esc_attr( $commenter['comment_author_email'] ) . '"' . $required_attr . '>
 							</fieldset>
 						</div>
 						<fieldset class="field d-flex flex-column comment-form-comment">
-							<label for="comment" class="lable fw-medium">' . esc_html__( 'Review', 'ecombon' ) . ' <span class="text-primary">*</span></label>
+							<label for="comment" class="lable fw-medium">' . esc_html__( 'Review', 'noorifa' ) . ' <span class="text-primary">*</span></label>
 							<textarea name="comment" id="comment" cols="45" rows="8" class="h-md-100" required></textarea>
 						</fieldset>
 					</div>
@@ -201,7 +201,7 @@ $rating_counts = $product->get_rating_counts();
 						'class_container'      => 'write-review-wrap box-write-comment',
 						'class_form'           => 'form-rating',
 						'class_submit'         => 'btn animate-btn',
-						'label_submit'         => esc_html__( 'Submit Review', 'ecombon' ),
+						'label_submit'         => esc_html__( 'Submit Review', 'noorifa' ),
 						// A real <button> instead of WP core's default
 						// `<input type="submit" value="...">` — `.btn`
 						// (the same class every other real button in this
@@ -216,7 +216,7 @@ $rating_counts = $product->get_rating_counts();
 			);
 			?>
 		<?php else : ?>
-			<p class="woocommerce-verification-required"><?php esc_html_e( 'Only logged in customers who have purchased this product may leave a review.', 'ecombon' ); ?></p>
+			<p class="woocommerce-verification-required"><?php esc_html_e( 'Only logged in customers who have purchased this product may leave a review.', 'noorifa' ); ?></p>
 		<?php endif; ?>
 	</div>
 </div>

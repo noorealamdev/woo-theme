@@ -2,17 +2,17 @@
 /**
  * Theme bootstrap class.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\Setup;
+namespace Noorifa\Setup;
 
 /**
  * Boots the theme's presentation-layer setup components.
  *
  * This is deliberately lightweight: it only wires up markup, assets, menus
  * and template behaviour. Anything resembling business logic (settings
- * storage, REST endpoints, data processing) belongs in the Ecombon Core
+ * storage, REST endpoints, data processing) belongs in the Noorifa Core
  * plugin, not here.
  */
 final class Theme {
@@ -52,24 +52,25 @@ final class Theme {
 			new ThemeSupport(),
 			new Performance(),
 			new SEO(),
+			new Integrations(),
 			new Assets(),
 			new Icons(),
 			new NavMenus(),
 			new NavMenuAdminUi(),
-			new \Ecombon\Hooks\TemplateHooks(),
-			new \Ecombon\Search\LiveSearch(),
-			new \Ecombon\Settings\Admin_Page(),
-			new \Ecombon\Settings\Rest_Controller(),
-			new \Ecombon\Settings\Frontend_Output(),
+			new \Noorifa\Hooks\TemplateHooks(),
+			new \Noorifa\Search\LiveSearch(),
+			new \Noorifa\Settings\Admin_Page(),
+			new \Noorifa\Settings\Rest_Controller(),
+			new \Noorifa\Settings\Frontend_Output(),
 		);
 
 		if ( class_exists( 'WooCommerce' ) ) {
-			$this->components[] = new \Ecombon\WooCommerce\CatalogOrdering();
-			$this->components[] = new \Ecombon\WooCommerce\CartFragments();
-			$this->components[] = new \Ecombon\WooCommerce\QuantityStepper();
-			$this->components[] = new \Ecombon\WooCommerce\BuyItNow();
-			$this->components[] = new \Ecombon\WooCommerce\VariationPricing();
-			$this->components[] = new \Ecombon\WooCommerce\CheckoutFields();
+			$this->components[] = new \Noorifa\WooCommerce\CatalogOrdering();
+			$this->components[] = new \Noorifa\WooCommerce\CartFragments();
+			$this->components[] = new \Noorifa\WooCommerce\QuantityStepper();
+			$this->components[] = new \Noorifa\WooCommerce\BuyItNow();
+			$this->components[] = new \Noorifa\WooCommerce\VariationPricing();
+			$this->components[] = new \Noorifa\WooCommerce\CheckoutFields();
 		}
 	}
 
@@ -83,19 +84,19 @@ final class Theme {
 	}
 
 	/**
-	 * Maps `Ecombon\{Namespace}\{Class}` to `inc/{Namespace}/{Class}.php`.
+	 * Maps `Noorifa\{Namespace}\{Class}` to `inc/{Namespace}/{Class}.php`.
 	 *
 	 * @param string $class_name Fully qualified class name being requested.
 	 */
 	private function autoload( string $class_name ): bool {
-		$prefix = 'Ecombon\\';
+		$prefix = 'Noorifa\\';
 
 		if ( 0 !== strpos( $class_name, $prefix ) ) {
 			return false;
 		}
 
 		$relative_path = str_replace( '\\', '/', substr( $class_name, strlen( $prefix ) ) );
-		$file          = ECOMBON_THEME_DIR . '/inc/' . $relative_path . '.php';
+		$file          = NOORIFA_THEME_DIR . '/inc/' . $relative_path . '.php';
 
 		if ( ! file_exists( $file ) ) {
 			return false;

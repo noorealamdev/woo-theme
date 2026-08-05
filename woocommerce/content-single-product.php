@@ -6,11 +6,11 @@
  * attributes table, and reviews reuse WooCommerce's own real templates/
  * functions — see template-parts/product/*.php.
  *
- * Kept in sync with WC core's own hooks (see Ecombon\Hooks\TemplateHooks
+ * Kept in sync with WC core's own hooks (see Noorifa\Hooks\TemplateHooks
  * for the default-callback removals that keep gallery.php/summary.php/
  * tabs.php/related.php from being duplicated by them).
  *
- * @package Ecombon
+ * @package Noorifa
  * @version 3.6.0
  */
 
@@ -26,8 +26,6 @@ if ( post_password_required() ) {
 }
 
 do_action( 'woocommerce_before_single_product' );
-
-get_template_part( 'template-parts/product/breadcrumb-nav' );
 ?>
 
 <section class="section-product-single main-product section-image-zoom">
@@ -37,7 +35,7 @@ get_template_part( 'template-parts/product/breadcrumb-nav' );
 				<?php
 				/**
 				 * Real hook — its default sale-flash/gallery callbacks are
-				 * removed in Ecombon\Hooks\TemplateHooks since gallery.php
+				 * removed in Noorifa\Hooks\TemplateHooks since gallery.php
 				 * below is a full custom replacement of WC's own product
 				 * gallery (see ThemeSupport's deliberate non-support of
 				 * wc-product-gallery-*); kept open for extensions (e.g. a
@@ -55,7 +53,7 @@ get_template_part( 'template-parts/product/breadcrumb-nav' );
 				/**
 				 * Real hook — every default callback that would render
 				 * title/rating/price/excerpt/add-to-cart/meta/sharing is
-				 * removed in Ecombon\Hooks\TemplateHooks, since
+				 * removed in Noorifa\Hooks\TemplateHooks, since
 				 * summary.php above is a full custom replacement of all
 				 * of it — except WC_Structured_Data::generate_product_data()
 				 * (priority 60), which is real SEO JSON-LD output with no
@@ -79,7 +77,7 @@ get_template_part( 'template-parts/product/related' );
 
 /**
  * Real hook — its default tabs/upsell/related-products callbacks are
- * removed in Ecombon\Hooks\TemplateHooks since tabs.php/related.php above
+ * removed in Noorifa\Hooks\TemplateHooks since tabs.php/related.php above
  * are full custom replacements of all three; kept open for extensions
  * (e.g. "recently viewed", "trust badges", "size guide" plugins commonly
  * hook in here).

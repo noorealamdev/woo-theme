@@ -5,20 +5,20 @@
  * Static text — no slider. Real on/off toggle + message text, both
  * configurable via Appearance > Theme Settings > Topbar.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$topbar = \Ecombon\Settings\Layout::all()['topbar'];
+$topbar = \Noorifa\Settings\Layout::all()['topbar'];
 
 if ( empty( $topbar['enabled'] ) ) {
 	return;
 }
 
-$message = apply_filters( 'ecombon_topbar_message', $topbar['message'] );
+$message = apply_filters( 'noorifa_topbar_message', $topbar['message'] );
 
 if ( empty( $message ) ) {
 	return;

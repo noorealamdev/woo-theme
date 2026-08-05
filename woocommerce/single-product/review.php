@@ -9,11 +9,11 @@
  * before doing so; see the `.children` rule in assets/css/main.css
  * for how those get the same indent/border treatment as any other reply).
  *
- * Kept in sync with WC core's own review hooks (see Ecombon\Hooks\TemplateHooks
+ * Kept in sync with WC core's own review hooks (see Noorifa\Hooks\TemplateHooks
  * for the default-callback removals that keep this file's own avatar/
  * rating/meta/text markup from being duplicated by them).
  *
- * @package Ecombon
+ * @package Noorifa
  * @version 2.6.0
  */
 
@@ -34,7 +34,7 @@ $rating = (int) get_comment_meta( $comment->comment_ID, 'rating', true );
 		?>
 		<?php if ( '0' === $comment->comment_approved ) : ?>
 			<p class="meta">
-				<em><?php esc_html_e( 'Your review is awaiting approval', 'ecombon' ); ?></em>
+				<em><?php esc_html_e( 'Your review is awaiting approval', 'noorifa' ); ?></em>
 			</p>
 		<?php else : ?>
 			<?php do_action( 'woocommerce_review_before_comment_meta', $comment ); ?>
@@ -58,7 +58,7 @@ $rating = (int) get_comment_meta( $comment->comment_ID, 'rating', true );
 			<?php if ( $rating && wc_review_ratings_enabled() ) : ?>
 				<div class="star-wrap normal d-flex align-items-center mb-8">
 					<?php for ( $star = 1; $star <= 5; $star++ ) : ?>
-						<?php \Ecombon\Setup\Icons::render( $star <= $rating ? 'Star' : 'Star-thin' ); ?>
+						<?php \Noorifa\Setup\Icons::render( $star <= $rating ? 'Star' : 'Star-thin' ); ?>
 					<?php endfor; ?>
 				</div>
 			<?php endif; ?>

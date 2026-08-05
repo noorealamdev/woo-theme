@@ -4,11 +4,9 @@
  *
  * Full-width, no #primary/.content-area boxed wrapper and no sidebar —
  * content-single.php owns its own complete real layout (breadcrumb-nav +
- * .section-blog-single > .main-blog-single > .container), matching how
- * woocommerce/content-single-product.php already does the same for
- * products (see template-parts/product/breadcrumb-nav.php).
+ * .section-blog-single > .main-blog-single > .container).
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

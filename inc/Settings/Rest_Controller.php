@@ -2,21 +2,21 @@
 /**
  * Rest_Controller component.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\Settings;
+namespace Noorifa\Settings;
 
-use Ecombon\Setup\ComponentInterface;
+use Noorifa\Setup\ComponentInterface;
 
 /**
- * Real `ecombon/v1/settings` REST route the React settings app reads
+ * Real `noorifa/v1/settings` REST route the React settings app reads
  * from and saves to via `wp.apiFetch` — same real, modern persistence
  * mechanism Gutenberg/Site Editor itself uses, not an admin-post form.
  */
 class Rest_Controller implements ComponentInterface {
 
-	const NAMESPACE_URI = 'ecombon/v1';
+	const NAMESPACE_URI = 'noorifa/v1';
 	const ROUTE          = '/settings';
 
 	/**

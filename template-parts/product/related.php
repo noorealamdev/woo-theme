@@ -3,7 +3,7 @@
  * "You May Also Like" — real related products (same category/tags),
  * falling back to WooCommerce's own relatedness algorithm.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,9 +21,9 @@ if ( empty( $related_ids ) ) {
 <section class="flat-spacing-25">
 	<div class="container">
 		<div class="sect-heading type-2 text-center">
-			<h3 class="s-title"><?php esc_html_e( 'You May Also Like', 'ecombon' ); ?></h3>
+			<h3 class="s-title"><?php esc_html_e( 'You May Also Like', 'noorifa' ); ?></h3>
 		</div>
-		<div class="wrapper-shop grid-layout tf-col-4">
+		<div class="wrapper-shop grid-layout mk-col-4">
 			<?php foreach ( $related_ids as $related_id ) : ?>
 				<?php
 				$related_product = wc_get_product( $related_id );

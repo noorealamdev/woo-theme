@@ -11,14 +11,14 @@
  * submits that real form (including its real hidden `add-to-cart`/
  * `variation_id`/quantity fields, whatever the shopper already set in the
  * real buy-box above) exactly as if the real button had been clicked, so
- * Ecombon\WooCommerce\BuyItNow/CartFragments and the real AJAX handler in
- * assets/js/ecombon-cart.js all keep working unmodified. For a variable
+ * Noorifa\WooCommerce\BuyItNow/CartFragments and the real AJAX handler in
+ * assets/js/noorifa-cart.js all keep working unmodified. For a variable
  * product, the price and variant summary text are mirrored live from the
  * real variation-matching events already fired by
- * assets/js/ecombon-product-variations.js (see
- * assets/js/ecombon-sticky-add-to-cart.js).
+ * assets/js/noorifa-product-variations.js (see
+ * assets/js/noorifa-sticky-add-to-cart.js).
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -51,10 +51,10 @@ if ( ! $product->is_purchasable() || ! $product->is_in_stock() ) {
 				<p class="price__prd fw-semibold sticky-atc-price"><?php echo wp_kses_post( $product->get_price_html() ); ?></p>
 				<button
 					type="submit"
-					form="ecombon-add-to-cart-form"
+					form="noorifa-add-to-cart-form"
 					class="btn-add-to-cart single_add_to_cart_button"
 				>
-					<?php \Ecombon\Setup\Icons::render( 'Handbag' ); ?>
+					<?php \Noorifa\Setup\Icons::render( 'Handbag' ); ?>
 					<span><?php echo esc_html( $product->single_add_to_cart_text() ); ?></span>
 				</button>
 			</div>

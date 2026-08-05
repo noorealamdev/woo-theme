@@ -2,10 +2,10 @@
 /**
  * Assets component.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\Setup;
+namespace Noorifa\Setup;
 
 /**
  * Registers and conditionally enqueues the theme's CSS and JS.
@@ -37,20 +37,20 @@ class Assets implements ComponentInterface {
 		// Custom Bootstrap build (grid, dropdown, offcanvas, modal,
 		// nav/tabs, progress, and utilities only, not the full bundle) —
 		// plain hand-maintained CSS now, no build step.
-		wp_enqueue_style( 'ecombon-bootstrap', ECOMBON_THEME_URI . '/assets/css/bootstrap-custom.css', array(), '5.3.3' );
-		wp_enqueue_style( 'ecombon-swiper', ECOMBON_THEME_URI . '/assets/css/swiper-bundle.min.css', array(), '11' );
+		wp_enqueue_style( 'noorifa-bootstrap', NOORIFA_THEME_URI . '/assets/css/bootstrap-custom.css', array(), '5.3.3' );
+		wp_enqueue_style( 'noorifa-swiper', NOORIFA_THEME_URI . '/assets/css/swiper-bundle.min.css', array(), '11' );
 
-		wp_enqueue_style( 'ecombon-style', get_stylesheet_uri(), array(), ECOMBON_VERSION );
+		wp_enqueue_style( 'noorifa-style', get_stylesheet_uri(), array(), NOORIFA_VERSION );
 		wp_enqueue_style(
-			'ecombon-main',
-			ECOMBON_THEME_URI . '/assets/css/main.css',
-			array( 'ecombon-bootstrap', 'ecombon-swiper', 'ecombon-style' ),
-			ECOMBON_VERSION
+			'noorifa-main',
+			NOORIFA_THEME_URI . '/assets/css/main.css',
+			array( 'noorifa-bootstrap', 'noorifa-swiper', 'noorifa-style' ),
+			NOORIFA_VERSION
 		);
 
 		if ( $this->is_product_gallery_context() ) {
-			wp_enqueue_style( 'ecombon-drift', ECOMBON_THEME_URI . '/assets/css/drift-basic.min.css', array(), '1.5' );
-			wp_enqueue_style( 'ecombon-photoswipe', ECOMBON_THEME_URI . '/assets/css/photoswipe.css', array(), '5' );
+			wp_enqueue_style( 'noorifa-drift', NOORIFA_THEME_URI . '/assets/css/drift-basic.min.css', array(), '1.5' );
+			wp_enqueue_style( 'noorifa-photoswipe', NOORIFA_THEME_URI . '/assets/css/photoswipe.css', array(), '5' );
 		}
 	}
 
@@ -58,7 +58,7 @@ class Assets implements ComponentInterface {
 	 * Enqueues the theme scripts.
 	 */
 	public function enqueue_scripts(): void {
-		$plugin_uri = ECOMBON_THEME_URI . '/assets/js/plugin';
+		$plugin_uri = NOORIFA_THEME_URI . '/assets/js/plugin';
 		$footer     = array(
 			'in_footer' => true,
 			'strategy'  => 'defer',
@@ -69,55 +69,55 @@ class Assets implements ComponentInterface {
 		// zoom.js) doesn't exist unless we restore it.
 		wp_add_inline_script( 'jquery', 'window.$ = window.jQuery;' );
 
-		wp_enqueue_script( 'ecombon-bootstrap-js', "{$plugin_uri}/bootstrap.min.js", array(), '5.3.3', $footer );
-		wp_enqueue_script( 'ecombon-swiper-js', "{$plugin_uri}/swiper-bundle.min.js", array(), '11', $footer );
+		wp_enqueue_script( 'noorifa-bootstrap-js', "{$plugin_uri}/bootstrap.min.js", array(), '5.3.3', $footer );
+		wp_enqueue_script( 'noorifa-swiper-js', "{$plugin_uri}/swiper-bundle.min.js", array(), '11', $footer );
 
 		wp_enqueue_script(
-			'ecombon-carousel',
-			ECOMBON_THEME_URI . '/assets/js/carousel.js',
-			array( 'jquery', 'ecombon-swiper-js' ),
-			ECOMBON_VERSION,
+			'noorifa-carousel',
+			NOORIFA_THEME_URI . '/assets/js/carousel.js',
+			array( 'jquery', 'noorifa-swiper-js' ),
+			NOORIFA_VERSION,
 			$footer
 		);
 		wp_enqueue_script(
-			'ecombon-main-js',
-			ECOMBON_THEME_URI . '/assets/js/main.js',
-			array( 'jquery', 'ecombon-bootstrap-js', 'ecombon-swiper-js' ),
-			ECOMBON_VERSION,
+			'noorifa-main-js',
+			NOORIFA_THEME_URI . '/assets/js/main.js',
+			array( 'jquery', 'noorifa-bootstrap-js', 'noorifa-swiper-js' ),
+			NOORIFA_VERSION,
 			$footer
 		);
 
 		// Real-time results in the header search modal — see
-		// Ecombon\Search\LiveSearch. The modal (template-parts/header/
+		// Noorifa\Search\LiveSearch. The modal (template-parts/header/
 		// search-modal.php) is rendered on every page via footer.php, so
 		// this loads unconditionally too.
 		wp_enqueue_script(
-			'ecombon-search',
-			ECOMBON_THEME_URI . '/assets/js/ecombon-search.js',
-			array( 'jquery', 'ecombon-bootstrap-js' ),
-			ECOMBON_VERSION,
+			'noorifa-search',
+			NOORIFA_THEME_URI . '/assets/js/noorifa-search.js',
+			array( 'jquery', 'noorifa-bootstrap-js' ),
+			NOORIFA_VERSION,
 			$footer
 		);
 		wp_localize_script(
-			'ecombon-search',
-			'ecombonSearchParams',
+			'noorifa-search',
+			'noorifaSearchParams',
 			array(
 				'ajaxUrl'  => admin_url( 'admin-ajax.php' ),
-				'nonce'    => wp_create_nonce( 'ecombon_live_search' ),
-				'minChars' => \Ecombon\Search\LiveSearch::MIN_CHARS,
+				'nonce'    => wp_create_nonce( 'noorifa_live_search' ),
+				'minChars' => \Noorifa\Search\LiveSearch::MIN_CHARS,
 			)
 		);
 
 		if ( $this->is_shop_context() ) {
-			wp_enqueue_script( 'ecombon-nouislider', "{$plugin_uri}/nouislider.min.js", array(), '15', $footer );
-			wp_enqueue_script( 'ecombon-shop', ECOMBON_THEME_URI . '/assets/js/ecombon-shop.js', array( 'jquery', 'ecombon-nouislider' ), ECOMBON_VERSION, $footer );
+			wp_enqueue_script( 'noorifa-nouislider', "{$plugin_uri}/nouislider.min.js", array(), '15', $footer );
+			wp_enqueue_script( 'noorifa-shop', NOORIFA_THEME_URI . '/assets/js/noorifa-shop.js', array( 'jquery', 'noorifa-nouislider' ), NOORIFA_VERSION, $footer );
 		}
 
 		if ( $this->is_product_gallery_context() ) {
-			wp_enqueue_script( 'ecombon-drift-js', "{$plugin_uri}/drift.min.js", array(), '1.5', $footer );
-			wp_enqueue_script( 'ecombon-photoswipe-js', "{$plugin_uri}/photoswipe.umd.min.js", array(), '5', $footer );
-			wp_enqueue_script( 'ecombon-photoswipe-lightbox-js', "{$plugin_uri}/photoswipe-lightbox.umd.min.js", array( 'ecombon-photoswipe-js' ), '5', $footer );
-			wp_enqueue_script( 'ecombon-zoom-js', ECOMBON_THEME_URI . '/assets/js/zoom.js', array( 'jquery', 'ecombon-drift-js' ), ECOMBON_VERSION, $footer );
+			wp_enqueue_script( 'noorifa-drift-js', "{$plugin_uri}/drift.min.js", array(), '1.5', $footer );
+			wp_enqueue_script( 'noorifa-photoswipe-js', "{$plugin_uri}/photoswipe.umd.min.js", array(), '5', $footer );
+			wp_enqueue_script( 'noorifa-photoswipe-lightbox-js', "{$plugin_uri}/photoswipe-lightbox.umd.min.js", array( 'noorifa-photoswipe-js' ), '5', $footer );
+			wp_enqueue_script( 'noorifa-zoom-js', NOORIFA_THEME_URI . '/assets/js/zoom.js', array( 'jquery', 'noorifa-drift-js' ), NOORIFA_VERSION, $footer );
 
 			// Only depends on jQuery, not WooCommerce's own
 			// 'wc-add-to-cart-variation' handle: that script is enqueued
@@ -128,9 +128,9 @@ class Assets implements ComponentInterface {
 			// instead, which works regardless of load order — and simply
 			// never fires on a simple-product page where that event never
 			// happens.
-			wp_enqueue_script( 'ecombon-product-variations', ECOMBON_THEME_URI . '/assets/js/ecombon-product-variations.js', array( 'jquery' ), ECOMBON_VERSION, $footer );
-			wp_enqueue_script( 'ecombon-product-tabs', ECOMBON_THEME_URI . '/assets/js/ecombon-product-tabs.js', array( 'jquery', 'ecombon-bootstrap-js' ), ECOMBON_VERSION, $footer );
-			wp_enqueue_script( 'ecombon-sticky-add-to-cart', ECOMBON_THEME_URI . '/assets/js/ecombon-sticky-add-to-cart.js', array( 'jquery', 'ecombon-product-variations' ), ECOMBON_VERSION, $footer );
+			wp_enqueue_script( 'noorifa-product-variations', NOORIFA_THEME_URI . '/assets/js/noorifa-product-variations.js', array( 'jquery' ), NOORIFA_VERSION, $footer );
+			wp_enqueue_script( 'noorifa-product-tabs', NOORIFA_THEME_URI . '/assets/js/noorifa-product-tabs.js', array( 'jquery', 'noorifa-bootstrap-js' ), NOORIFA_VERSION, $footer );
+			wp_enqueue_script( 'noorifa-sticky-add-to-cart', NOORIFA_THEME_URI . '/assets/js/noorifa-sticky-add-to-cart.js', array( 'jquery', 'noorifa-product-variations' ), NOORIFA_VERSION, $footer );
 		}
 
 		if ( class_exists( 'WooCommerce' ) ) {
@@ -139,17 +139,17 @@ class Assets implements ComponentInterface {
 			// on the actual Cart page and calls `window.location.reload()`
 			// when `.woocommerce-cart-form` isn't found — which is every
 			// other page, including this drawer. The shipping-calculator
-			// and coupon panels get their own toggle in ecombon-cart.js, and
+			// and coupon panels get their own toggle in noorifa-cart.js, and
 			// both forms are plain POSTs that WooCommerce's global
 			// `wp_loaded` cart-action handler processes either way.
-			$cart_deps = array( 'jquery', 'ecombon-bootstrap-js' );
+			$cart_deps = array( 'jquery', 'noorifa-bootstrap-js' );
 			if ( 'yes' === get_option( 'woocommerce_enable_ajax_add_to_cart' ) ) {
 				$cart_deps[] = 'wc-add-to-cart';
 			}
-			wp_enqueue_script( 'ecombon-cart', ECOMBON_THEME_URI . '/assets/js/ecombon-cart.js', $cart_deps, ECOMBON_VERSION, $footer );
+			wp_enqueue_script( 'noorifa-cart', NOORIFA_THEME_URI . '/assets/js/noorifa-cart.js', $cart_deps, NOORIFA_VERSION, $footer );
 			wp_localize_script(
-				'ecombon-cart',
-				'ecombonCartParams',
+				'noorifa-cart',
+				'noorifaCartParams',
 				array( 'checkoutUrl' => wc_get_checkout_url() )
 			);
 

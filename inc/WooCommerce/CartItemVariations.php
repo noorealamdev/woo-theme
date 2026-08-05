@@ -2,10 +2,10 @@
 /**
  * CartItemVariations helper.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
-namespace Ecombon\WooCommerce;
+namespace Noorifa\WooCommerce;
 
 /**
  * Resolves a cart item's chosen variation attributes into display-ready

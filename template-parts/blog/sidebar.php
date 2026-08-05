@@ -7,31 +7,33 @@
  * related.php) — every section here reflects the site's actual real content,
  * never placeholder data.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$categories = get_categories( array( 'hide_empty' => true ) );
+$settings = noorifa_settings();
 
-$recent_posts = get_posts(
+$categories = $settings['blog_sidebar_categories'] ? get_categories( array( 'hide_empty' => true ) ) : array();
+
+$recent_posts = $settings['blog_sidebar_recent_posts'] ? get_posts(
 	array(
-		'numberposts'         => 4,
+		'numberposts'         => (int) $settings['blog_sidebar_recent_posts_count'],
 		'post__not_in'        => is_singular( 'post' ) ? array( get_the_ID() ) : array(),
 		'ignore_sticky_posts' => true,
 		'no_found_rows'       => true,
 	)
-);
+) : array();
 
-$tags = get_tags(
+$tags = $settings['blog_sidebar_tags'] ? get_tags(
 	array(
-		'number'  => 12,
+		'number'  => (int) $settings['blog_sidebar_tags_count'],
 		'orderby' => 'count',
 		'order'   => 'DESC',
 	)
-);
+) : array();
 ?>
 <div class="blog-sidebar sidebar-content-wrap sticky-top">
 	<div class="sidebar-item">
@@ -42,7 +44,7 @@ $tags = get_tags(
 
 	<?php if ( $categories ) : ?>
 		<div class="sidebar-item">
-			<h5 class="sb-title"><?php esc_html_e( 'Categories', 'ecombon' ); ?></h5>
+			<h5 class="sb-title"><?php esc_html_e( 'Categories', 'noorifa' ); ?></h5>
 			<ul class="sb-category">
 				<?php foreach ( $categories as $category ) : ?>
 					<li>
@@ -58,7 +60,7 @@ $tags = get_tags(
 
 	<?php if ( $recent_posts ) : ?>
 		<div class="sidebar-item">
-			<h5 class="sb-title"><?php esc_html_e( 'Recent Posts', 'ecombon' ); ?></h5>
+			<h5 class="sb-title"><?php esc_html_e( 'Recent Posts', 'noorifa' ); ?></h5>
 			<ul class="sb-recent">
 				<?php foreach ( $recent_posts as $recent_post ) : ?>
 					<li class="recent-item">
@@ -81,7 +83,7 @@ $tags = get_tags(
 
 	<?php if ( $tags ) : ?>
 		<div class="sidebar-item">
-			<h5 class="sb-title"><?php esc_html_e( 'Popular Tag', 'ecombon' ); ?></h5>
+			<h5 class="sb-title"><?php esc_html_e( 'Popular Tag', 'noorifa' ); ?></h5>
 			<ul class="sb-tag">
 				<?php foreach ( $tags as $tag ) : ?>
 					<li>

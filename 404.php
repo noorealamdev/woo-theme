@@ -2,7 +2,7 @@
 /**
  * The template for 404 (not found) responses.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,8 +15,8 @@ get_template_part(
 	'template-parts/global/page-title',
 	null,
 	array(
-		'title'    => __( 'Page not found', 'ecombon' ),
-		'subtitle' => __( 'The page you were looking for could not be found. It might have been moved or no longer exists.', 'ecombon' ),
+		'title'    => __( 'Page not found', 'noorifa' ),
+		'subtitle' => __( 'The page you were looking for could not be found. It might have been moved or no longer exists.', 'noorifa' ),
 	)
 );
 ?>
@@ -29,7 +29,7 @@ get_template_part(
 
 				<p>
 					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="error-404__home-link">
-						<?php esc_html_e( 'Back to homepage', 'ecombon' ); ?>
+						<?php esc_html_e( 'Back to homepage', 'noorifa' ); ?>
 					</a>
 				</p>
 			</section>

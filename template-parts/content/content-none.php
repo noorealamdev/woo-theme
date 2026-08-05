@@ -2,7 +2,7 @@
 /**
  * Shown when a query returns no results.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -19,12 +19,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	 * main.css).
 	 */
 	?>
-	<h2 class="no-results__title h1"><?php esc_html_e( 'Nothing found', 'ecombon' ); ?></h2>
+	<h2 class="no-results__title h1"><?php esc_html_e( 'Nothing found', 'noorifa' ); ?></h2>
 
 	<?php if ( is_search() ) : ?>
-		<p><?php esc_html_e( 'Sorry, nothing matched your search. Try again with a different term.', 'ecombon' ); ?></p>
+		<p><?php esc_html_e( 'Sorry, nothing matched your search. Try again with a different term.', 'noorifa' ); ?></p>
 		<?php get_search_form(); ?>
 	<?php else : ?>
-		<p><?php esc_html_e( 'It looks like there is nothing here yet.', 'ecombon' ); ?></p>
+		<p><?php esc_html_e( 'It looks like there is nothing here yet.', 'noorifa' ); ?></p>
 	<?php endif; ?>
 </section>

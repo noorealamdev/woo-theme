@@ -5,7 +5,7 @@
  * template entirely, since each already renders its own complete, self-
  * boxed structure.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		wp_link_pages(
 			array(
-				'before' => '<nav class="page-links">' . esc_html__( 'Pages:', 'ecombon' ),
+				'before' => '<nav class="page-links">' . esc_html__( 'Pages:', 'noorifa' ),
 				'after'  => '</nav>',
 			)
 		);

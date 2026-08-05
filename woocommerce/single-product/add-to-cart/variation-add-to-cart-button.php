@@ -9,7 +9,7 @@
  * buy-it-now button carries that same class so it gets the exact same
  * "no selection yet" / "unavailable" guard for free, no extra JS needed.
  *
- * @package Ecombon
+ * @package Noorifa
  * @version 10.5.2
  */
 
@@ -20,7 +20,7 @@ global $product;
 <div class="woocommerce-variation-add-to-cart variations_button product-total-quantity">
 	<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
 
-	<p class="mb-0"><?php esc_html_e( 'Quantity:', 'ecombon' ); ?></p>
+	<p class="mb-0"><?php esc_html_e( 'Quantity:', 'noorifa' ); ?></p>
 
 	<div class="group-action">
 		<?php
@@ -42,8 +42,8 @@ global $product;
 		</button>
 	</div>
 
-	<button type="submit" name="ecombon_buy_now" value="1" class="single_add_to_cart_button btn type-xl btn-primary animate-btn w-100 buy-it-now-button">
-		<?php esc_html_e( 'Buy It Now', 'ecombon' ); ?>
+	<button type="submit" name="noorifa_buy_now" value="1" class="single_add_to_cart_button btn type-xl btn-primary animate-btn w-100 buy-it-now-button">
+		<?php esc_html_e( 'Buy It Now', 'noorifa' ); ?>
 	</button>
 
 	<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>

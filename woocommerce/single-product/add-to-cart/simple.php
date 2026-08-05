@@ -3,7 +3,7 @@
  * Simple product add to cart: same quantity/action markup as the variable
  * template, plus a real "Buy It Now" button.
  *
- * @package Ecombon
+ * @package Noorifa
  * @version 10.2.0
  */
 
@@ -25,7 +25,7 @@ if ( $product->is_in_stock() ) :
 		<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
 
 		<div class="product-total-quantity">
-			<p class="mb-0"><?php esc_html_e( 'Quantity:', 'ecombon' ); ?></p>
+			<p class="mb-0"><?php esc_html_e( 'Quantity:', 'noorifa' ); ?></p>
 
 			<div class="group-action">
 				<?php
@@ -50,8 +50,8 @@ if ( $product->is_in_stock() ) :
 				</button>
 			</div>
 
-			<button type="submit" name="ecombon_buy_now" value="1" class="single_add_to_cart_button btn type-xl btn-primary animate-btn w-100 buy-it-now-button">
-				<?php esc_html_e( 'Buy It Now', 'ecombon' ); ?>
+			<button type="submit" name="noorifa_buy_now" value="1" class="single_add_to_cart_button btn type-xl btn-primary animate-btn w-100 buy-it-now-button">
+				<?php esc_html_e( 'Buy It Now', 'noorifa' ); ?>
 			</button>
 		</div>
 

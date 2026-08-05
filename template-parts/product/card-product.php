@@ -5,7 +5,7 @@
  * Expects a `$product` (WC_Product) passed via get_template_part()'s
  * $args.
  *
- * @package Ecombon
+ * @package Noorifa
  *
  * @var WC_Product $product
  */
@@ -99,7 +99,7 @@ if ( $product->is_type( 'variable' ) ) {
 		<?php if ( $rating_count > 0 ) : ?>
 			<div class="star-wrap d-flex align-items-center">
 				<?php for ( $star = 1; $star <= 5; $star++ ) : ?>
-					<?php \Ecombon\Setup\Icons::render( $star <= round( $average ) ? 'Star' : 'Star-thin' ); ?>
+					<?php \Noorifa\Setup\Icons::render( $star <= round( $average ) ? 'Star' : 'Star-thin' ); ?>
 				<?php endfor; ?>
 			</div>
 		<?php endif; ?>

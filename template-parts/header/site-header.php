@@ -4,19 +4,19 @@
  *
  * A real 3-zone (left/center/right) builder — any of the 5 header modules
  * (logo/navigation/search/account/cart) can be freely placed in any zone,
- * in any order, including mixed zones — see Ecombon\Settings\Layout and
+ * in any order, including mixed zones — see Noorifa\Settings\Layout and
  * the class docblock there for why this is safe (a plain flex row with no
  * module-specific positioning). Every default here matches the theme's
  * original hardcoded layout exactly.
  *
- * @package Ecombon
+ * @package Noorifa
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use Ecombon\Settings\Layout;
+use Noorifa\Settings\Layout;
 
 $module_partials = array(
 	'logo'       => 'template-parts/header/logo',
@@ -40,7 +40,7 @@ $desktop_nav_class    = $force_mobile_menu ? 'd-none' : 'd-none d-xl-block';
 		<div class="header-inner">
 			<div class="box-open-menu-mobile <?php echo esc_attr( $mobile_trigger_class ); ?>">
 				<a href="#mobileMenu" data-bs-toggle="offcanvas" class="btn-open-menu">
-					<?php \Ecombon\Setup\Icons::render( 'ListBold' ); ?>
+					<?php \Noorifa\Setup\Icons::render( 'ListBold' ); ?>
 				</a>
 			</div>
 
