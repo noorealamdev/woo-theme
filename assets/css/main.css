@@ -8662,6 +8662,56 @@ body.noorifa-btn-style-5 .wp-block-noorifa-core-button a.noorifa-core-button__li
   box-shadow: 0 12px 24px rgba(16, 16, 16, 0.24);
 }
 
+/* WooCommerce's own `wc_get_rating_html()` — used by the Noorifa Core
+   plugin's Review Carousel block (and any other real WC/plugin markup
+   that calls it) — renders `.star-rating > span[style="width:X%"]`, real
+   text content included, and relies entirely on WC's own dequeued CSS
+   (Assets::enqueue_styles() drops woocommerce_enqueue_styles site-wide,
+   see inc/Setup/Assets.php) to turn it into actual stars. This theme
+   never replaced that specific fallback — its own real single-product
+   reviews use SVG icons via a completely different render path
+   (woocommerce/single-product/review.php), which never touches this
+   class at all. Real star glyphs via Unicode, not WC's icon font (this
+   theme dropped icon fonts entirely — see the SVG icon migration), same
+   overlapping-clip technique WC's own CSS uses: an empty 5-star row
+   underneath, a `width:X%`-clipped filled 5-star row on top. */
+.star-rating {
+  overflow: hidden;
+  position: relative;
+  height: 1em;
+  line-height: 1em;
+  width: 5.4em;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+.star-rating::before {
+  content: "\2605\2605\2605\2605\2605";
+  color: var(--line);
+  float: left;
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
+.star-rating span {
+  overflow: hidden;
+  float: left;
+  top: 0;
+  left: 0;
+  position: absolute;
+  padding-top: 1.5em;
+  height: 0;
+}
+
+.star-rating span::before {
+  content: "\2605\2605\2605\2605\2605";
+  top: 0;
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+}
+
 .animate-btn {
   position: relative;
   overflow: hidden;
