@@ -54,6 +54,14 @@ class ThemeSupport implements ComponentInterface {
 		// this only unlocks editor UI + the matching inline style output,
 		// which stays empty unless a site owner actually sets a value.
 		add_theme_support( 'appearance-tools' );
+		// `appearance-tools` alone left Padding out of the Dimensions
+		// panel (Margin/Block Spacing/Border showed correctly) — on a
+		// classic theme, `enableCustomSpacing` (the flag that actually
+		// gates the Padding control) falls back to this older, separate
+		// `custom-spacing` support (see wp-includes/block-editor.php,
+		// `get_theme_support( 'custom-spacing' )`) rather than reliably
+		// inheriting from `appearance-tools`. Same zero-cost reasoning.
+		add_theme_support( 'custom-spacing' );
 		// Deliberately NOT declaring wc-product-gallery-zoom/lightbox/slider:
 		// the single product gallery is a full custom replacement (the
 		// theme's own swiper + zoom.js + photoswipe), not WooCommerce's
