@@ -53,6 +53,7 @@ final class Theme {
 			new Performance(),
 			new SEO(),
 			new Integrations(),
+			new CustomCode(),
 			new Assets(),
 			new Icons(),
 			new NavMenus(),

@@ -583,6 +583,18 @@ class Schema {
 				'type'    => 'image',
 				'default' => Layout::payment_icons_image_default(),
 			),
+			array(
+				'path'    => 'custom_code.css',
+				'flat'    => 'custom_code_css',
+				'type'    => 'raw_html',
+				'default' => '',
+			),
+			array(
+				'path'    => 'custom_code.js',
+				'flat'    => 'custom_code_js',
+				'type'    => 'raw_html',
+				'default' => '',
+			),
 		);
 
 		return $fields;

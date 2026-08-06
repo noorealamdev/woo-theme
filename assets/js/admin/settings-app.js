@@ -43,6 +43,7 @@
 		{ id: 'performance', label: __( 'Performance', 'noorifa' ), icon: 'performance', real: true },
 		{ id: 'seo', label: __( 'SEO', 'noorifa' ), icon: 'tag', real: true },
 		{ id: 'integrations', label: __( 'Integrations', 'noorifa' ), icon: 'admin-plugins', real: true },
+		{ id: 'custom-code', label: __( 'Custom CSS/JS', 'noorifa' ), icon: 'editor-code', real: true },
 		{ id: 'import-export', label: __( 'Import / Export', 'noorifa' ), icon: 'migrate', real: true },
 		{ id: 'license', label: __( 'License', 'noorifa' ), icon: 'awards' },
 		{ id: 'updates', label: __( 'Updates', 'noorifa' ), icon: 'update' },
@@ -1650,6 +1651,37 @@
 		);
 	}
 
+	function CustomCodeSection( { settings, onChange } ) {
+		return el(
+			c.Card,
+			null,
+			el( c.CardHeader, null, el( 'h2', null, __( 'Custom CSS/JS', 'noorifa' ) ) ),
+			el(
+				c.CardBody,
+				null,
+				el(
+					'p',
+					{ className: 'noorifa-section-intro' },
+					__( 'Plain code only — no <style> or <script> tags, the theme adds those for you. Prints on every page, only once something is written below.', 'noorifa' )
+				),
+				el( TextareaField, {
+					settings: settings,
+					path: 'custom_code.css',
+					label: __( 'Custom CSS', 'noorifa' ),
+					help: __( 'Printed in <head>, after every other stylesheet, so it can override the theme’s own CSS.', 'noorifa' ),
+					onChange: onChange,
+				} ),
+				el( TextareaField, {
+					settings: settings,
+					path: 'custom_code.js',
+					label: __( 'Custom JS', 'noorifa' ),
+					help: __( 'Printed just before </body>, same as every other theme script, so the page isn’t blocked waiting on it.', 'noorifa' ),
+					onChange: onChange,
+				} )
+			)
+		);
+	}
+
 	/**
 	 * Export downloads the real, already-loaded `settings` state as a JSON
 	 * file — no extra API call needed. Import reads a file client-side and
@@ -1775,6 +1807,7 @@
 		performance: PerformanceSection,
 		seo: SEOSection,
 		integrations: IntegrationsSection,
+		'custom-code': CustomCodeSection,
 		'import-export': ImportExportSection,
 	};
 
