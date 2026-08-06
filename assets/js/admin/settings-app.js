@@ -299,7 +299,7 @@
 		);
 	}
 
-	function ColorField( { settings, path, label, onChange } ) {
+	function ColorField( { settings, path, label, onChange, enableAlpha } ) {
 		var value = getPath( settings, path ) || '#000000';
 		return el(
 			Field,
@@ -328,7 +328,7 @@
 							onChange: function ( next ) {
 								onChange( setPath( settings, path, next ) );
 							},
-							enableAlpha: false,
+							enableAlpha: !! enableAlpha,
 						} );
 					},
 				}
@@ -845,7 +845,7 @@
 					{ className: 'noorifa-branding-colors' },
 					el( ColorField, { settings: settings, path: 'branding.color_primary', label: __( 'Primary Color', 'noorifa' ), onChange: onChange } ),
 					el( ColorField, { settings: settings, path: 'branding.color_secondary', label: __( 'Secondary Color', 'noorifa' ), onChange: onChange } ),
-					el( ColorField, { settings: settings, path: 'branding.body_background_color', label: __( 'Body Background', 'noorifa' ), onChange: onChange } )
+					el( ColorField, { settings: settings, path: 'branding.body_background_color', label: __( 'Body Background', 'noorifa' ), onChange: onChange, enableAlpha: true } )
 				)
 			)
 		);

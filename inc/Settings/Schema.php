@@ -28,8 +28,8 @@ class Schema {
 	 *
 	 * Each entry: `path` (dot-path into the nested settings array),
 	 * `type` (drives sanitization — text/email/textarea/html/raw_html/url/
-	 * image/bool/hex_color/select/range/order/zones/subset_order/
-	 * social_links), `default`, `flat` (the `noorifa_settings()` key), and, only for
+	 * image/bool/hex_color/hex_color_alpha/select/range/order/zones/
+	 * subset_order/social_links), `default`, `flat` (the `noorifa_settings()` key), and, only for
 	 * select/range/order/zones/subset_order/social_links, whatever extra
 	 * shape that type needs (`choices`/`min`/`max`/`modules`). `order`,
 	 * `zones`, `subset_order` and `social_links` fields additionally take
@@ -94,7 +94,7 @@ class Schema {
 			array(
 				'path'    => 'branding.body_background_color',
 				'flat'    => 'body_background_color',
-				'type'    => 'hex_color',
+				'type'    => 'hex_color_alpha',
 				'default' => Layout::BODY_BG_DEFAULT,
 				'css'     => array( 'var' => '--noorifa-body-bg' ),
 			),
@@ -813,6 +813,16 @@ class Schema {
 
 			case 'hex_color':
 				return sanitize_hex_color( (string) ( $raw ?? '' ) ) ?: $field['default'];
+
+			case 'hex_color_alpha':
+				// `sanitize_hex_color()` only accepts strict 3/6-digit hex —
+				// this field's real ColorPicker has enableAlpha on, which
+				// hands back an 8-digit #RRGGBBAA once opacity < 100%, so a
+				// dedicated (still strict, just longer) pattern is needed.
+				$raw = (string) ( $raw ?? '' );
+				return preg_match( '/^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/', $raw )
+					? $raw
+					: $field['default'];
 
 			case 'select':
 				$value = is_string( $raw ) ? sanitize_text_field( $raw ) : '';
