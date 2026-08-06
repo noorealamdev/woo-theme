@@ -8599,6 +8599,69 @@ body.noorifa-btn-style-5 .product-info-wrap .variant-size .size-btn:not(.select-
   transform: translateY(-2px);
 }
 
+/* The Noorifa Core plugin's own Button block (used by its Hero block, see
+   the homepage) ships its own hardcoded blue default, independent of this
+   theme's real .btn look — override it to match instead, `a` added to the
+   selector so this reliably wins regardless of which stylesheet the
+   browser happens to load second. Same Buttons > Style variants as .btn
+   below, so it stays consistent with whatever a site owner picks there. */
+.wp-block-noorifa-core-button a.noorifa-core-button__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding-left: 24px;
+  padding-right: 24px;
+  background: var(--text);
+  color: var(--white);
+  border-radius: 60px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.wp-block-noorifa-core-button a.noorifa-core-button__link:hover,
+.wp-block-noorifa-core-button a.noorifa-core-button__link:focus {
+  color: var(--white);
+  opacity: 0.85;
+}
+
+@media (min-width: 1200px) {
+  .wp-block-noorifa-core-button a.noorifa-core-button__link {
+    height: 58px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+body.noorifa-btn-style-2 .wp-block-noorifa-core-button a.noorifa-core-button__link {
+  border-radius: 12px;
+}
+
+body.noorifa-btn-style-3 .wp-block-noorifa-core-button a.noorifa-core-button__link {
+  border-radius: 0;
+}
+
+body.noorifa-btn-style-4 .wp-block-noorifa-core-button a.noorifa-core-button__link {
+  background: transparent;
+  color: var(--text);
+  border: 2px solid var(--text);
+}
+
+body.noorifa-btn-style-4 .wp-block-noorifa-core-button a.noorifa-core-button__link:hover {
+  background: var(--text);
+  color: var(--white);
+}
+
+body.noorifa-btn-style-5 .wp-block-noorifa-core-button a.noorifa-core-button__link {
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(16, 16, 16, 0.18);
+}
+
+body.noorifa-btn-style-5 .wp-block-noorifa-core-button a.noorifa-core-button__link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(16, 16, 16, 0.24);
+}
+
 .animate-btn {
   position: relative;
   overflow: hidden;
