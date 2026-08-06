@@ -44,6 +44,16 @@ class ThemeSupport implements ComponentInterface {
 			'navigation-widgets',
 		) );
 		add_theme_support( 'customize-selective-refresh-widgets' );
+		// Without this, the block editor hides the Dimensions (padding/
+		// margin)/Border/Shadow controls in the Styles sidebar for EVERY
+		// block — including WordPress's own core blocks, not just the
+		// Noorifa Core plugin's — regardless of what each block's own
+		// block.json `supports` declares. This is a classic (non-block)
+		// theme with no theme.json, and WordPress only surfaces those
+		// controls once a theme explicitly opts in. Zero cost when unused:
+		// this only unlocks editor UI + the matching inline style output,
+		// which stays empty unless a site owner actually sets a value.
+		add_theme_support( 'appearance-tools' );
 		// Deliberately NOT declaring wc-product-gallery-zoom/lightbox/slider:
 		// the single product gallery is a full custom replacement (the
 		// theme's own swiper + zoom.js + photoswipe), not WooCommerce's
