@@ -62,6 +62,14 @@ class ThemeSupport implements ComponentInterface {
 		// `get_theme_support( 'custom-spacing' )`) rather than reliably
 		// inheriting from `appearance-tools`. Same zero-cost reasoning.
 		add_theme_support( 'custom-spacing' );
+		// Without this, the editor canvas never lets a block actually
+		// reach "wide"/"full" width — blocks that declare
+		// `"align": ["wide", "full"]` (e.g. the Noorifa Core plugin's Hero)
+		// stay capped at the narrow default content column in the editor
+		// even though their own CSS renders them correctly full-bleed on
+		// the real frontend. Purely an editor-canvas concern; this theme's
+		// blocks handle their own real frontend width already.
+		add_theme_support( 'align-wide' );
 		// Deliberately NOT declaring wc-product-gallery-zoom/lightbox/slider:
 		// the single product gallery is a full custom replacement (the
 		// theme's own swiper + zoom.js + photoswipe), not WooCommerce's
