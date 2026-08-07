@@ -14106,6 +14106,12 @@ a.woocommerce-Button.button.pay {
    order-details/customer-details styling reused on the My Account view-order
    page. The green here is a semantic success color, deliberately independent
    of the brand --primary (a red brand color would read as an error). */
+.woocommerce-order-received .woocommerce-order {
+  max-width: 1200px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .woocommerce-order-received .noorifa-thankyou-hero {
   margin: 0 0 24px;
   padding: 48px 24px;
@@ -14188,14 +14194,6 @@ a.woocommerce-Button.button.pay {
   color: var(--text);
   font-size: 16px;
   font-weight: 600;
-}
-
-/* The target design shows only Date / Total / Payment method; hide the order
-   number and email lines WooCommerce also outputs. The `li` qualifier keeps
-   this above the `.woocommerce-order-overview li { display: flex }` rule. */
-.woocommerce-order-received .woocommerce-order-overview li.woocommerce-order-overview__order,
-.woocommerce-order-received .woocommerce-order-overview li.woocommerce-order-overview__email {
-  display: none;
 }
 
 @media (max-width: 767px) {

@@ -14,19 +14,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Filters the thank-you hero heading.
- *
- * @param string $title Default heading.
- */
-$title = apply_filters( 'noorifa/thankyou_hero_title', __( 'Thank you', 'noorifa' ) );
+$checkout_settings = \Noorifa\Settings\Layout::all()['checkout'] ?? array();
 
 /**
- * Filters the thank-you hero subtitle.
+ * Filters the thank-you hero heading. Defaults to the admin Settings value
+ * (Theme Settings → Cart & Checkout), which itself defaults to "Thank you".
  *
- * @param string $subtitle Default subtitle.
+ * @param string $title Heading from settings.
  */
-$subtitle = apply_filters( 'noorifa/thankyou_hero_subtitle', __( 'Your order has been placed successfully.', 'noorifa' ) );
+$title = apply_filters( 'noorifa/thankyou_hero_title', $checkout_settings['thankyou_hero_title'] ?? '' );
+
+/**
+ * Filters the thank-you hero subtitle. Defaults to the admin Settings value.
+ *
+ * @param string $subtitle Subtitle from settings.
+ */
+$subtitle = apply_filters( 'noorifa/thankyou_hero_subtitle', $checkout_settings['thankyou_hero_subtitle'] ?? '' );
 ?>
 <section class="noorifa-thankyou-hero">
 	<span class="noorifa-thankyou-hero__icon" aria-hidden="true">

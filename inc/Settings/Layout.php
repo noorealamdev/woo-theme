@@ -82,6 +82,22 @@ class Layout {
 		return __( 'Midseason Sale: 20% Off — Auto Applied at Checkout — Limited Time Only', 'noorifa' );
 	}
 
+	/**
+	 * Default heading for the order-received / thank-you page hero banner.
+	 * A method (not a constant) because `__()` can't run in a constant
+	 * expression — Schema.php calls this for the field's default.
+	 */
+	public static function thankyou_hero_title_default(): string {
+		return __( 'Thank you', 'noorifa' );
+	}
+
+	/**
+	 * Default subtitle for the thank-you page hero banner.
+	 */
+	public static function thankyou_hero_subtitle_default(): string {
+		return __( 'Your order has been placed successfully.', 'noorifa' );
+	}
+
 	const COLOR_PRIMARY_DEFAULT   = '#DC4646';
 	const COLOR_SECONDARY_DEFAULT = '#70857A';
 	const SITE_WIDTH_DEFAULT      = 'boxed';

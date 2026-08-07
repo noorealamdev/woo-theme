@@ -354,6 +354,18 @@ class Schema {
 				'default' => '',
 			),
 			array(
+				'path'    => 'checkout.thankyou_hero_title',
+				'flat'    => 'checkout_thankyou_hero_title',
+				'type'    => 'text',
+				'default' => Layout::thankyou_hero_title_default(),
+			),
+			array(
+				'path'    => 'checkout.thankyou_hero_subtitle',
+				'flat'    => 'checkout_thankyou_hero_subtitle',
+				'type'    => 'text',
+				'default' => Layout::thankyou_hero_subtitle_default(),
+			),
+			array(
 				'path'    => 'page_header.breadcrumbs_enabled',
 				'flat'    => 'page_header_breadcrumbs_enabled',
 				'type'    => 'bool',

@@ -36,7 +36,7 @@
 		{ id: 'newsletter', label: __( 'Newsletter', 'noorifa' ), icon: 'email', real: true },
 		{ id: 'shop', label: __( 'Shop', 'noorifa' ), icon: 'store', real: true },
 		{ id: 'product', label: __( 'Product Page', 'noorifa' ), icon: 'products' },
-		{ id: 'cart-checkout', label: __( 'Cart & Checkout', 'noorifa' ), icon: 'cart' },
+		{ id: 'cart-checkout', label: __( 'Cart & Checkout', 'noorifa' ), icon: 'cart', real: true },
 		{ id: 'blog', label: __( 'Blog', 'noorifa' ), icon: 'welcome-write-blog', real: true },
 		{ id: 'page-header', label: __( 'Page Header', 'noorifa' ), icon: 'excerpt-view', real: true },
 		{ id: 'buttons', label: __( 'Buttons', 'noorifa' ), icon: 'button', real: true },
@@ -1438,6 +1438,38 @@
 		);
 	}
 
+	function CartCheckoutSection( { settings, onChange } ) {
+		return el(
+			c.Card,
+			null,
+			el( c.CardHeader, null, el( 'h2', null, __( 'Cart & Checkout', 'noorifa' ) ) ),
+			el(
+				c.CardBody,
+				null,
+				el( 'h3', { className: 'noorifa-subheading' }, __( 'Thank-you page', 'noorifa' ) ),
+				el(
+					'p',
+					{ className: 'noorifa-section-intro' },
+					__( 'The success banner shown at the top of the order-received page after a customer places an order.', 'noorifa' )
+				),
+				el( TextField, {
+					settings: settings,
+					path: 'checkout.thankyou_hero_title',
+					label: __( 'Hero heading', 'noorifa' ),
+					help: __( 'Leave empty to hide the heading.', 'noorifa' ),
+					onChange: onChange,
+				} ),
+				el( TextField, {
+					settings: settings,
+					path: 'checkout.thankyou_hero_subtitle',
+					label: __( 'Hero subtitle', 'noorifa' ),
+					help: __( 'Leave empty to hide the subtitle.', 'noorifa' ),
+					onChange: onChange,
+				} )
+			)
+		);
+	}
+
 	function PageHeaderSection( { settings, onChange } ) {
 		var alignmentOptions = Object.keys( DATA.choices.pageHeader.alignment ).map( function ( value ) {
 			return { value: value, label: DATA.choices.pageHeader.alignment[ value ] };
@@ -1801,6 +1833,7 @@
 		footer: FooterSection,
 		newsletter: NewsletterSection,
 		shop: ShopSection,
+		'cart-checkout': CartCheckoutSection,
 		blog: BlogSection,
 		'page-header': PageHeaderSection,
 		buttons: ButtonsSection,
