@@ -278,6 +278,7 @@ a:focus, a:hover {
 
 p {
   display: block;
+  line-height: 32px;
 }
 
 .grid-2 {
