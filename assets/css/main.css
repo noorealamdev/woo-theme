@@ -268,7 +268,6 @@ a {
   text-decoration: none;
   cursor: pointer;
   display: inline-block;
-  font-family: "DM Sans", sans-serif;
   color: var(--text);
 }
 
