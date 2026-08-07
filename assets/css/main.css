@@ -8545,30 +8545,37 @@ body.noorifa-btn-style-5 .btn:hover {
   box-shadow: 0 12px 24px rgba(16, 16, 16, 0.24);
 }
 
-/* The sticky add-to-cart bar's button (template-parts/product/sticky-add-
-   -to-cart.php) has its own separate `.btn-add-to-cart` rule (not `.btn`),
-   since it needs its own fixed pill shape regardless of Buttons > Style —
-   the same style variants apply here too, matching the real .btn ones. */
-body.noorifa-btn-style-2 .sticky-btn-atc .btn-add-to-cart {
+/* The sticky add-to-cart bar's button has its own separate rule (not
+   `.btn`), since it needs its own fixed pill shape regardless of Buttons >
+   Style — the same style variants apply here too, matching the real .btn
+   ones. Covers both the theme's own bar (template-parts/product/sticky-add-
+   -to-cart.php, `.btn-add-to-cart`) and the Noorifa Core plugin's Sticky
+   Add to Cart block (`.noorifa-core-sticky-add-to-cart__button`). */
+body.noorifa-btn-style-2 .sticky-btn-atc .btn-add-to-cart,
+body.noorifa-btn-style-2 .wp-block-noorifa-core-sticky-add-to-cart .noorifa-core-sticky-add-to-cart__button {
   border-radius: 12px;
 }
 
-body.noorifa-btn-style-3 .sticky-btn-atc .btn-add-to-cart {
+body.noorifa-btn-style-3 .sticky-btn-atc .btn-add-to-cart,
+body.noorifa-btn-style-3 .wp-block-noorifa-core-sticky-add-to-cart .noorifa-core-sticky-add-to-cart__button {
   border-radius: 0;
 }
 
-body.noorifa-btn-style-4 .sticky-btn-atc .btn-add-to-cart {
+body.noorifa-btn-style-4 .sticky-btn-atc .btn-add-to-cart,
+body.noorifa-btn-style-4 .wp-block-noorifa-core-sticky-add-to-cart .noorifa-core-sticky-add-to-cart__button {
   background: transparent;
   color: var(--text);
   border: 2px solid var(--text);
 }
 
-body.noorifa-btn-style-5 .sticky-btn-atc .btn-add-to-cart {
+body.noorifa-btn-style-5 .sticky-btn-atc .btn-add-to-cart,
+body.noorifa-btn-style-5 .wp-block-noorifa-core-sticky-add-to-cart .noorifa-core-sticky-add-to-cart__button {
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(16, 16, 16, 0.18);
 }
 
-body.noorifa-btn-style-5 .sticky-btn-atc .btn-add-to-cart:hover {
+body.noorifa-btn-style-5 .sticky-btn-atc .btn-add-to-cart:hover,
+body.noorifa-btn-style-5 .wp-block-noorifa-core-sticky-add-to-cart .noorifa-core-sticky-add-to-cart__button:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 24px rgba(16, 16, 16, 0.24);
 }
@@ -14247,12 +14254,6 @@ a.woocommerce-Button.button.pay {
   color: var(--noorifa-page-title-fg, var(--text-3)) !important;
 }
 
-/* Equal specificity to .cl-text-2/.cl-text-3 above (both 2 selectors +
-   !important) — without this, the breadcrumb links' existing hover-to-
-   primary-color effect (.link:hover) would be permanently overridden by
-   source order alone, same bug already fixed for .footer above. */
-.section-page-title .cl-text-2:hover,
-.section-page-title .cl-text-3:hover,
 .section-page-title a:hover {
   color: var(--primary) !important;
 }
@@ -14597,8 +14598,6 @@ a.woocommerce-Button.button.pay {
   color: var(--noorifa-footer-fg, var(--text-3)) !important;
 }
 
-.footer .cl-text-2:hover,
-.footer .cl-text-3:hover,
 .footer a:hover {
   color: var(--primary) !important;
 }
