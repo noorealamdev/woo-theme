@@ -14101,6 +14101,118 @@ a.woocommerce-Button.button.pay {
   margin-bottom: 4px;
 }
 
+/*------------ Order received / Thank you page --------------------------- */
+/* Scoped to the order-received body class so it never affects the shared
+   order-details/customer-details styling reused on the My Account view-order
+   page. The green here is a semantic success color, deliberately independent
+   of the brand --primary (a red brand color would read as an error). */
+.woocommerce-order-received .noorifa-thankyou-hero {
+  margin: 0 0 24px;
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--white);
+  background: linear-gradient(135deg, #0b6e1a 0%, #1aa02b 100%);
+  border-radius: 16px;
+}
+
+.noorifa-thankyou-hero__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 18px;
+  color: var(--white);
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+}
+
+.noorifa-thankyou-hero__icon svg {
+  width: 30px;
+  height: 30px;
+}
+
+.noorifa-thankyou-hero__title {
+  margin: 0 0 10px;
+  color: var(--white);
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.noorifa-thankyou-hero__subtitle {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(15px, 2.5vw, 20px);
+  line-height: 1.5;
+}
+
+.woocommerce-order-received .noorifa-thankyou-card {
+  padding: 32px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+
+.woocommerce-order-received .woocommerce-thankyou-order-received {
+  margin: 0 0 24px;
+  color: var(--text);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+/* Order overview (Date / Total / Payment method) as a light rounded box. */
+.woocommerce-order-received .woocommerce-order-overview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  margin: 0 0 28px;
+  padding: 22px 24px;
+  list-style: none;
+  background: var(--surface);
+  border-radius: 12px;
+}
+
+.woocommerce-order-received .woocommerce-order-overview li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  color: var(--text-3);
+  font-size: 14px;
+}
+
+.woocommerce-order-received .woocommerce-order-overview li strong {
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* The target design shows only Date / Total / Payment method; hide the order
+   number and email lines WooCommerce also outputs. The `li` qualifier keeps
+   this above the `.woocommerce-order-overview li { display: flex }` rule. */
+.woocommerce-order-received .woocommerce-order-overview li.woocommerce-order-overview__order,
+.woocommerce-order-received .woocommerce-order-overview li.woocommerce-order-overview__email {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .woocommerce-order-received .noorifa-thankyou-hero {
+    padding: 36px 20px;
+  }
+
+  .woocommerce-order-received .noorifa-thankyou-card {
+    padding: 20px;
+  }
+
+  .woocommerce-order-received .woocommerce-order-overview {
+    gap: 18px;
+    padding: 18px;
+  }
+}
+
 /*------------ Widget (layout/structure real classes only) ---------------- */
 .wg-comment .title {
   margin-bottom: 24px;
