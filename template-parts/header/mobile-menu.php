@@ -19,14 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<span class="icon-close-popup" data-bs-dismiss="offcanvas">
 			<?php \Noorifa\Setup\Icons::render( 'X2' ); ?>
 		</span>
-		<form class="form-search-nav" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-			<fieldset>
-				<input type="text" name="s" placeholder="<?php esc_attr_e( 'What are you looking for?', 'noorifa' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>" required>
-			</fieldset>
-			<button type="submit" class="btn-action">
-				<?php \Noorifa\Setup\Icons::render( 'MagnifyingGlass' ); ?>
-			</button>
-		</form>
 	</div>
 	<div class="canvas-body">
 		<div class="mb-content-top">
