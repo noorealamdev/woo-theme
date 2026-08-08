@@ -33,6 +33,11 @@ class ProductPageLayout implements ComponentInterface {
 	const META_BODY_BG = '_noorifa_body_bg';
 
 	/**
+	 * Meta key: opacity (0–100) for the body background color override.
+	 */
+	const META_BODY_BG_OPACITY = '_noorifa_body_bg_opacity';
+
+	/**
 	 * Nonce action/name for the meta box save.
 	 */
 	const NONCE = 'noorifa_product_layout';
@@ -70,7 +75,7 @@ class ProductPageLayout implements ComponentInterface {
 		wp_enqueue_script( 'wp-color-picker' );
 		wp_add_inline_script(
 			'wp-color-picker',
-			'jQuery(function($){$(".noorifa-color-field").wpColorPicker();});'
+			'jQuery(function($){$(".noorifa-color-field").wpColorPicker();$("#noorifa_body_bg_opacity").on("input change",function(){$(".noorifa-opacity-value").text(this.value+"%");});});'
 		);
 	}
 
@@ -100,6 +105,8 @@ class ProductPageLayout implements ComponentInterface {
 		$hide_header = '1' === get_post_meta( $post->ID, self::META_HIDE_HEADER, true );
 		$hide_footer = '1' === get_post_meta( $post->ID, self::META_HIDE_FOOTER, true );
 		$body_bg     = (string) get_post_meta( $post->ID, self::META_BODY_BG, true );
+		$stored_op   = get_post_meta( $post->ID, self::META_BODY_BG_OPACITY, true );
+		$opacity     = '' === $stored_op ? 100 : max( 0, min( 100, (int) $stored_op ) );
 
 		wp_nonce_field( self::NONCE, self::NONCE );
 		?>
@@ -125,6 +132,11 @@ class ProductPageLayout implements ComponentInterface {
 		<p class="description">
 			<?php esc_html_e( 'Overrides the theme’s body background on this product only. Leave empty to use the global color.', 'noorifa' ); ?>
 		</p>
+		<p style="margin:8px 0 4px;">
+			<label for="noorifa_body_bg_opacity"><strong><?php esc_html_e( 'Opacity', 'noorifa' ); ?></strong></label>
+		</p>
+		<input type="range" id="noorifa_body_bg_opacity" name="noorifa_body_bg_opacity" min="0" max="100" step="1" value="<?php echo esc_attr( (string) $opacity ); ?>" style="width:75%;vertical-align:middle;" />
+		<span class="noorifa-opacity-value"><?php echo esc_html( $opacity . '%' ); ?></span>
 		<?php
 	}
 
@@ -152,10 +164,14 @@ class ProductPageLayout implements ComponentInterface {
 		$this->save_flag( $post_id, self::META_HIDE_FOOTER, isset( $_POST['noorifa_hide_footer'] ) );
 
 		$raw_color = isset( $_POST['noorifa_body_bg'] ) ? sanitize_hex_color( wp_unslash( $_POST['noorifa_body_bg'] ) ) : '';
+		$opacity   = isset( $_POST['noorifa_body_bg_opacity'] ) ? max( 0, min( 100, absint( wp_unslash( $_POST['noorifa_body_bg_opacity'] ) ) ) ) : 100;
+
 		if ( $raw_color ) {
 			update_post_meta( $post_id, self::META_BODY_BG, $raw_color );
+			update_post_meta( $post_id, self::META_BODY_BG_OPACITY, $opacity );
 		} else {
 			delete_post_meta( $post_id, self::META_BODY_BG );
+			delete_post_meta( $post_id, self::META_BODY_BG_OPACITY );
 		}
 	}
 
@@ -225,6 +241,40 @@ class ProductPageLayout implements ComponentInterface {
 	}
 
 	/**
+	 * The final CSS color value for the body background override — the hex
+	 * as-is at full opacity, or an rgba() when a lower opacity is set.
+	 * Empty string when no override is configured.
+	 *
+	 * @return string
+	 */
+	public static function body_bg_css(): string {
+		$hex = self::body_bg_color();
+
+		if ( '' === $hex ) {
+			return '';
+		}
+
+		$stored  = get_post_meta( get_queried_object_id(), self::META_BODY_BG_OPACITY, true );
+		$opacity = '' === $stored ? 100 : max( 0, min( 100, (int) $stored ) );
+
+		if ( 100 === $opacity ) {
+			return $hex;
+		}
+
+		$digits = ltrim( $hex, '#' );
+		if ( 3 === strlen( $digits ) ) {
+			$digits = $digits[0] . $digits[0] . $digits[1] . $digits[1] . $digits[2] . $digits[2];
+		}
+
+		$r = hexdec( substr( $digits, 0, 2 ) );
+		$g = hexdec( substr( $digits, 2, 2 ) );
+		$b = hexdec( substr( $digits, 4, 2 ) );
+		$a = rtrim( rtrim( number_format( $opacity / 100, 2, '.', '' ), '0' ), '.' );
+
+		return sprintf( 'rgba(%d,%d,%d,%s)', $r, $g, $b, $a );
+	}
+
+	/**
 	 * Prints a per-product override of the theme's body-background CSS
 	 * variable. Set on `body` (not `:root`) so it always wins over the
 	 * global value for this product's page.
@@ -232,12 +282,12 @@ class ProductPageLayout implements ComponentInterface {
 	 * @return void
 	 */
 	public function print_body_background(): void {
-		$color = self::body_bg_color();
+		$value = self::body_bg_css();
 
-		if ( '' === $color ) {
+		if ( '' === $value ) {
 			return;
 		}
 
-		echo '<style id="noorifa-product-body-bg">body{--noorifa-body-bg:' . esc_attr( $color ) . ';}</style>' . "\n";
+		echo '<style id="noorifa-product-body-bg">body{--noorifa-body-bg:' . esc_attr( $value ) . ';}</style>' . "\n";
 	}
 }
