@@ -366,6 +366,37 @@ class Schema {
 				'default' => Layout::thankyou_hero_subtitle_default(),
 			),
 			array(
+				'path'    => 'floating.whatsapp_enabled',
+				'flat'    => 'floating_whatsapp_enabled',
+				'type'    => 'bool',
+				'default' => false,
+			),
+			array(
+				'path'    => 'floating.whatsapp_number',
+				'flat'    => 'floating_whatsapp_number',
+				'type'    => 'text',
+				'default' => '',
+			),
+			array(
+				'path'    => 'floating.whatsapp_message',
+				'flat'    => 'floating_whatsapp_message',
+				'type'    => 'text',
+				'default' => '',
+			),
+			array(
+				'path'    => 'floating.whatsapp_tooltip',
+				'flat'    => 'floating_whatsapp_tooltip',
+				'type'    => 'text',
+				'default' => '',
+			),
+			array(
+				'path'    => 'floating.position',
+				'flat'    => 'floating_position',
+				'type'    => 'select',
+				'default' => Layout::FLOATING_POSITION_DEFAULT,
+				'choices' => array_keys( Layout::floating_position_choices() ),
+			),
+			array(
 				'path'    => 'page_header.breadcrumbs_enabled',
 				'flat'    => 'page_header_breadcrumbs_enabled',
 				'type'    => 'bool',

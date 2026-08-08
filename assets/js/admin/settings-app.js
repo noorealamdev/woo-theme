@@ -34,6 +34,7 @@
 		{ id: 'topbar', label: __( 'Topbar', 'noorifa' ), icon: 'megaphone', real: true },
 		{ id: 'footer', label: __( 'Footer', 'noorifa' ), icon: 'align-wide', real: true },
 		{ id: 'newsletter', label: __( 'Newsletter', 'noorifa' ), icon: 'email', real: true },
+		{ id: 'floating', label: __( 'Floating Button', 'noorifa' ), icon: 'format-chat', real: true },
 		{ id: 'shop', label: __( 'Shop', 'noorifa' ), icon: 'store', real: true },
 		{ id: 'product', label: __( 'Product Page', 'noorifa' ), icon: 'products' },
 		{ id: 'cart-checkout', label: __( 'Cart & Checkout', 'noorifa' ), icon: 'cart', real: true },
@@ -1438,6 +1439,71 @@
 		);
 	}
 
+	function FloatingButtonSection( { settings, onChange } ) {
+		var positionOptions = Object.keys( DATA.choices.floating.position ).map(
+			function ( value ) {
+				return {
+					value: value,
+					label: DATA.choices.floating.position[ value ],
+				};
+			}
+		);
+
+		return el(
+			c.Card,
+			null,
+			el(
+				c.CardHeader,
+				null,
+				el( 'h2', null, __( 'Floating Button', 'noorifa' ) )
+			),
+			el(
+				c.CardBody,
+				null,
+				el( 'h3', { className: 'noorifa-subheading' }, __( 'WhatsApp chat', 'noorifa' ) ),
+				el(
+					'p',
+					{ className: 'noorifa-section-intro' },
+					__( 'A round WhatsApp button fixed to the corner of every page, opening a chat via wa.me.', 'noorifa' )
+				),
+				el( ToggleField, {
+					settings: settings,
+					path: 'floating.whatsapp_enabled',
+					label: __( 'Show floating WhatsApp button', 'noorifa' ),
+					onChange: onChange,
+				} ),
+				el( TextField, {
+					settings: settings,
+					path: 'floating.whatsapp_number',
+					label: __( 'WhatsApp number', 'noorifa' ),
+					help: __( 'Country code + number, digits only (e.g. 8801XXXXXXXXX). Leave empty to reuse the Header WhatsApp Number.', 'noorifa' ),
+					onChange: onChange,
+				} ),
+				el( TextField, {
+					settings: settings,
+					path: 'floating.whatsapp_message',
+					label: __( 'Pre-filled message', 'noorifa' ),
+					help: __( 'Optional text the chat opens with, e.g. "Hi, I have a question about…".', 'noorifa' ),
+					onChange: onChange,
+				} ),
+				el( TextField, {
+					settings: settings,
+					path: 'floating.whatsapp_tooltip',
+					label: __( 'Greeting bubble (optional)', 'noorifa' ),
+					help: __( 'Short text shown next to the button, e.g. "Need help? Chat with us".', 'noorifa' ),
+					onChange: onChange,
+				} ),
+				el( SelectField, {
+					settings: settings,
+					path: 'floating.position',
+					label: __( 'Position', 'noorifa' ),
+					options: positionOptions,
+					onChange: onChange,
+				} )
+			)
+		);
+	}
+
 	function CartCheckoutSection( { settings, onChange } ) {
 		return el(
 			c.Card,
@@ -1834,6 +1900,7 @@
 		newsletter: NewsletterSection,
 		shop: ShopSection,
 		'cart-checkout': CartCheckoutSection,
+		floating: FloatingButtonSection,
 		blog: BlogSection,
 		'page-header': PageHeaderSection,
 		buttons: ButtonsSection,

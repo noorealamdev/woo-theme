@@ -73,6 +73,7 @@ $top_partials = array(
 get_template_part( 'template-parts/header/mobile-menu' );
 get_template_part( 'template-parts/header/search-modal' );
 get_template_part( 'template-parts/header/cart-drawer' );
+get_template_part( 'template-parts/global/floating-buttons' );
 
 if ( function_exists( 'is_shop' ) && ( is_shop() || is_product_taxonomy() ) ) {
 	get_template_part( 'template-parts/shop/filter-panel' );

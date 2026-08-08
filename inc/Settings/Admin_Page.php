@@ -104,6 +104,9 @@ class Admin_Page implements ComponentInterface {
 					'pageHeader'  => array(
 						'alignment' => Layout::page_header_alignment_choices(),
 					),
+					'floating'    => array(
+						'position' => Layout::floating_position_choices(),
+					),
 				),
 				'defaults'    => array(
 					'colorPrimary'   => Layout::COLOR_PRIMARY_DEFAULT,

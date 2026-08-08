@@ -15691,3 +15691,103 @@ a.woocommerce-Button.button.pay {
 }
 
 
+
+/*------------ Floating chat button (WhatsApp) --------------------------- */
+/* Sits above page content but below Bootstrap overlays (offcanvas/modal at
+   1040+) so an open cart drawer / search modal covers it instead of the
+   button floating over them. WhatsApp brand green is intentional, not the
+   theme --primary. */
+.noorifa-floating {
+  position: fixed;
+  bottom: 24px;
+  z-index: 1030;
+}
+
+.noorifa-floating--right {
+  right: 24px;
+}
+
+.noorifa-floating--left {
+  left: 24px;
+}
+
+.noorifa-floating__whatsapp {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: #25d366;
+  border-radius: 50%;
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.noorifa-floating__whatsapp:hover,
+.noorifa-floating__whatsapp:focus {
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+.noorifa-floating__whatsapp .icon {
+  font-size: 30px;
+}
+
+.noorifa-floating__tooltip {
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(50%);
+  white-space: nowrap;
+  padding: 8px 14px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  color: var(--text, #101010);
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.noorifa-floating--right .noorifa-floating__tooltip {
+  right: calc(100% + 12px);
+}
+
+.noorifa-floating--left .noorifa-floating__tooltip {
+  left: calc(100% + 12px);
+}
+
+.noorifa-floating__whatsapp:hover .noorifa-floating__tooltip {
+  opacity: 1;
+}
+
+@media (max-width: 575px) {
+  .noorifa-floating {
+    bottom: 16px;
+  }
+
+  .noorifa-floating--right {
+    right: 16px;
+  }
+
+  .noorifa-floating--left {
+    left: 16px;
+  }
+
+  .noorifa-floating__whatsapp {
+    width: 50px;
+    height: 50px;
+  }
+
+  .noorifa-floating__whatsapp .icon {
+    font-size: 26px;
+  }
+
+  .noorifa-floating__tooltip {
+    display: none;
+  }
+}

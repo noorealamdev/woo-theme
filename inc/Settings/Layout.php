@@ -424,6 +424,35 @@ class Layout {
 	}
 
 	/**
+	 * Screen corner the floating chat button sits in.
+	 */
+	const FLOATING_POSITION_DEFAULT = 'right';
+
+	/**
+	 * @return array<string, string>
+	 */
+	public static function floating_position_choices(): array {
+		return array(
+			'right' => __( 'Bottom right', 'noorifa' ),
+			'left'  => __( 'Bottom left', 'noorifa' ),
+		);
+	}
+
+	/**
+	 * The WhatsApp number the floating button should use — its own value, or
+	 * the Header WhatsApp Number as a fallback so a site owner only has to
+	 * enter it once. Returns digits only (country code included, no "+").
+	 */
+	public static function floating_whatsapp_number(): string {
+		$all    = self::all();
+		$number = $all['floating']['whatsapp_number'] ?? '';
+		if ( '' === trim( $number ) ) {
+			$number = $all['header']['whatsapp_number'] ?? '';
+		}
+		return preg_replace( '/[^0-9]/', '', (string) $number );
+	}
+
+	/**
 	 * Same real white the header/footer background-color toggles already
 	 * default to — the page-title banner has no background of its own
 	 * today (transparent, inherits the body background).
