@@ -14727,6 +14727,17 @@ a.woocommerce-Button.button.pay {
   border-color: var(--noorifa-footer-fg, var(--line));
 }
 
+/* On hover the circle fills with the brand color; force the icon white so it
+   stays visible (a footer link-hover rule otherwise tints it the same brand
+   color, making it disappear against the filled background). */
+.footer .social-icon-2 a:hover {
+  color: var(--white);
+}
+
+.footer .social-icon-2 a:hover .icon {
+  fill: var(--white);
+}
+
 .footer .br-line.fake-class {
   position: absolute;
   left: 0;
@@ -14827,7 +14838,6 @@ a.woocommerce-Button.button.pay {
 }
 
 .payment-list-image img {
-  max-width: 220px;
   max-height: 32px;
   width: auto;
   height: auto;

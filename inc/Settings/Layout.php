@@ -98,7 +98,7 @@ class Layout {
 		return __( 'Your order has been placed successfully.', 'noorifa' );
 	}
 
-	const COLOR_PRIMARY_DEFAULT   = '#DC4646';
+	const COLOR_PRIMARY_DEFAULT   = '#B28C19';
 	const COLOR_SECONDARY_DEFAULT = '#70857A';
 	const SITE_WIDTH_DEFAULT      = 'boxed';
 	const NEWSLETTER_PROVIDER_DEFAULT = 'theme';
