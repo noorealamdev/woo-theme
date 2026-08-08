@@ -28,6 +28,11 @@ class ProductPageLayout implements ComponentInterface {
 	const META_HIDE_FOOTER = '_noorifa_hide_footer';
 
 	/**
+	 * Meta key: a per-product body background color override.
+	 */
+	const META_BODY_BG = '_noorifa_body_bg';
+
+	/**
 	 * Nonce action/name for the meta box save.
 	 */
 	const NONCE = 'noorifa_product_layout';
@@ -38,6 +43,35 @@ class ProductPageLayout implements ComponentInterface {
 	public function initialize(): void {
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
 		add_action( 'save_post_product', array( $this, 'save' ), 10, 2 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_color_picker' ) );
+		// Later than the global brand overrides (priority 10) so the
+		// per-product value reliably wins; targeting `body` beats the
+		// global `:root` value regardless, this just keeps source order tidy.
+		add_action( 'wp_head', array( $this, 'print_body_background' ), 20 );
+	}
+
+	/**
+	 * Loads the WordPress color picker on the product edit screen.
+	 *
+	 * @param string $hook The current admin page.
+	 * @return void
+	 */
+	public function enqueue_color_picker( string $hook ): void {
+		if ( 'post.php' !== $hook && 'post-new.php' !== $hook ) {
+			return;
+		}
+
+		$screen = get_current_screen();
+		if ( ! $screen || 'product' !== $screen->post_type ) {
+			return;
+		}
+
+		wp_enqueue_style( 'wp-color-picker' );
+		wp_enqueue_script( 'wp-color-picker' );
+		wp_add_inline_script(
+			'wp-color-picker',
+			'jQuery(function($){$(".noorifa-color-field").wpColorPicker();});'
+		);
 	}
 
 	/**
@@ -65,6 +99,7 @@ class ProductPageLayout implements ComponentInterface {
 	public function render( \WP_Post $post ): void {
 		$hide_header = '1' === get_post_meta( $post->ID, self::META_HIDE_HEADER, true );
 		$hide_footer = '1' === get_post_meta( $post->ID, self::META_HIDE_FOOTER, true );
+		$body_bg     = (string) get_post_meta( $post->ID, self::META_BODY_BG, true );
 
 		wp_nonce_field( self::NONCE, self::NONCE );
 		?>
@@ -82,6 +117,13 @@ class ProductPageLayout implements ComponentInterface {
 				<input type="checkbox" name="noorifa_hide_footer" value="1" <?php checked( $hide_footer ); ?> />
 				<?php esc_html_e( 'Hide footer on this product', 'noorifa' ); ?>
 			</label>
+		</p>
+		<p style="margin-bottom:4px;">
+			<label for="noorifa_body_bg"><strong><?php esc_html_e( 'Body background color', 'noorifa' ); ?></strong></label>
+		</p>
+		<input type="text" id="noorifa_body_bg" name="noorifa_body_bg" value="<?php echo esc_attr( $body_bg ); ?>" class="noorifa-color-field" data-default-color="" />
+		<p class="description">
+			<?php esc_html_e( 'Overrides the theme’s body background on this product only. Leave empty to use the global color.', 'noorifa' ); ?>
 		</p>
 		<?php
 	}
@@ -108,6 +150,13 @@ class ProductPageLayout implements ComponentInterface {
 
 		$this->save_flag( $post_id, self::META_HIDE_HEADER, isset( $_POST['noorifa_hide_header'] ) );
 		$this->save_flag( $post_id, self::META_HIDE_FOOTER, isset( $_POST['noorifa_hide_footer'] ) );
+
+		$raw_color = isset( $_POST['noorifa_body_bg'] ) ? sanitize_hex_color( wp_unslash( $_POST['noorifa_body_bg'] ) ) : '';
+		if ( $raw_color ) {
+			update_post_meta( $post_id, self::META_BODY_BG, $raw_color );
+		} else {
+			delete_post_meta( $post_id, self::META_BODY_BG );
+		}
 	}
 
 	/**
@@ -159,5 +208,36 @@ class ProductPageLayout implements ComponentInterface {
 		}
 
 		return '1' === get_post_meta( get_queried_object_id(), $key, true );
+	}
+
+	/**
+	 * The per-product body background color for the product being viewed,
+	 * or an empty string when none is set.
+	 *
+	 * @return string
+	 */
+	public static function body_bg_color(): string {
+		if ( ! is_singular( 'product' ) ) {
+			return '';
+		}
+
+		return (string) get_post_meta( get_queried_object_id(), self::META_BODY_BG, true );
+	}
+
+	/**
+	 * Prints a per-product override of the theme's body-background CSS
+	 * variable. Set on `body` (not `:root`) so it always wins over the
+	 * global value for this product's page.
+	 *
+	 * @return void
+	 */
+	public function print_body_background(): void {
+		$color = self::body_bg_color();
+
+		if ( '' === $color ) {
+			return;
+		}
+
+		echo '<style id="noorifa-product-body-bg">body{--noorifa-body-bg:' . esc_attr( $color ) . ';}</style>' . "\n";
 	}
 }
