@@ -72,6 +72,7 @@ final class Theme {
 			$this->components[] = new \Noorifa\WooCommerce\BuyItNow();
 			$this->components[] = new \Noorifa\WooCommerce\VariationPricing();
 			$this->components[] = new \Noorifa\WooCommerce\CheckoutFields();
+			$this->components[] = new \Noorifa\WooCommerce\ProductPageLayout();
 		}
 	}
 

@@ -23,6 +23,11 @@ $top_partials = array(
 	'newsletter'   => 'template-parts/footer/newsletter',
 );
 ?>
+	<?php
+	// A product can opt out of the footer for a distraction-free landing
+	// page (Product edit screen > Page Layout).
+	if ( ! ( class_exists( '\Noorifa\WooCommerce\ProductPageLayout' ) && \Noorifa\WooCommerce\ProductPageLayout::should_hide_footer() ) ) :
+	?>
 	<footer class="footer">
 		<div class="footer-inner flat-spacing position-relative">
 			<div class="container">
@@ -61,6 +66,7 @@ $top_partials = array(
 			</div>
 		</div>
 	</footer>
+	<?php endif; ?>
 </main>
 
 <?php

@@ -29,5 +29,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 </div>
 
 <main id="wrapper">
-	<?php get_template_part( 'template-parts/header/topbar' ); ?>
-	<?php get_template_part( 'template-parts/header/site-header' ); ?>
+	<?php
+	// A product can opt out of the header for a distraction-free landing
+	// page (Product edit screen > Page Layout).
+	if ( ! ( class_exists( '\Noorifa\WooCommerce\ProductPageLayout' ) && \Noorifa\WooCommerce\ProductPageLayout::should_hide_header() ) ) :
+		get_template_part( 'template-parts/header/topbar' );
+		get_template_part( 'template-parts/header/site-header' );
+	endif;
+	?>
