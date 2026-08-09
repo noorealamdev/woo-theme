@@ -2018,7 +2018,18 @@
 					el(
 						'div',
 						null,
-						el( 'div', { className: 'noorifa-settings-nav__brand-title' }, __( 'Noorifa', 'noorifa' ) ),
+						el(
+							'div',
+							{ className: 'noorifa-settings-nav__brand-title' },
+							__( 'Noorifa', 'noorifa' ),
+							DATA.version
+								? el(
+										'span',
+										{ className: 'noorifa-settings-nav__version' },
+										'v' + DATA.version
+								  )
+								: null
+						),
 						el( 'div', { className: 'noorifa-settings-nav__brand-subtitle' }, __( 'Theme Settings', 'noorifa' ) )
 					)
 				),
