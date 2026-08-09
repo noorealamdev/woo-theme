@@ -125,7 +125,10 @@ class Admin_Page implements ComponentInterface {
 					'colorPrimary'   => Layout::COLOR_PRIMARY_DEFAULT,
 					'colorSecondary' => Layout::COLOR_SECONDARY_DEFAULT,
 				),
-				'version'     => defined( 'NOORIFA_VERSION' ) ? NOORIFA_VERSION : '',
+				// Read the canonical version from the theme's style.css header
+				// (get_template() = the Noorifa theme even if a child theme is
+				// active), so the badge always matches the theme's real version.
+				'version'     => wp_get_theme( get_template() )->get( 'Version' ),
 			)
 		);
 	}
