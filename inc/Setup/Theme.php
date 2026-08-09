@@ -61,6 +61,7 @@ final class Theme {
 			new \Noorifa\Hooks\TemplateHooks(),
 			new \Noorifa\Search\LiveSearch(),
 			new \Noorifa\Settings\Admin_Page(),
+			new \Noorifa\Settings\Migrate_Tool(),
 			new \Noorifa\Settings\Rest_Controller(),
 			new \Noorifa\Settings\Frontend_Output(),
 		);

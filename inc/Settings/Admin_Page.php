@@ -41,6 +41,19 @@ class Admin_Page implements ComponentInterface {
 			'dashicons-layout',
 			59
 		);
+
+		// Rename the auto-generated first submenu (which otherwise repeats
+		// the top-level "Noorifa" label) to "Theme Settings", so the shared
+		// menu reads: Theme Settings / Product Layouts / Core Settings / …
+		add_submenu_page(
+			'noorifa-settings',
+			__( 'Theme Settings', 'noorifa' ),
+			__( 'Theme Settings', 'noorifa' ),
+			'manage_options',
+			'noorifa-settings',
+			array( $this, 'render' ),
+			0
+		);
 	}
 
 	/**
