@@ -11,30 +11,36 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 
-get_template_part(
-	'template-parts/global/page-title',
-	null,
-	array(
-		'title'    => __( 'Page not found', 'noorifa' ),
-		'subtitle' => __( 'The page you were looking for could not be found. It might have been moved or no longer exists.', 'noorifa' ),
-	)
-);
+$shop_url = ( function_exists( 'wc_get_page_permalink' ) ) ? wc_get_page_permalink( 'shop' ) : '';
 ?>
 
 <div id="primary" class="site-main">
-	<div class="content-area content-area--single">
-		<div class="content-area__main">
-			<section class="error-404">
-				<?php get_search_form(); ?>
-
-				<p>
-					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="error-404__home-link">
-						<?php esc_html_e( 'Back to homepage', 'noorifa' ); ?>
-					</a>
+	<section class="error-404 flat-spacing">
+		<div class="container">
+			<div class="error-404__inner">
+				<div class="error-404__code" aria-hidden="true">404</div>
+				<h1 class="error-404__title"><?php esc_html_e( 'Oops! Page not found', 'noorifa' ); ?></h1>
+				<p class="error-404__description">
+					<?php esc_html_e( 'The page you’re looking for doesn’t exist or may have been moved. Try searching, or head back to safe ground.', 'noorifa' ); ?>
 				</p>
-			</section>
+
+				<div class="error-404__search">
+					<?php get_search_form(); ?>
+				</div>
+
+				<div class="error-404__actions">
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="error-404__btn">
+						<?php esc_html_e( 'Back to Home', 'noorifa' ); ?>
+					</a>
+					<?php if ( $shop_url ) : ?>
+						<a href="<?php echo esc_url( $shop_url ); ?>" class="error-404__btn error-404__btn--outline">
+							<?php esc_html_e( 'Continue Shopping', 'noorifa' ); ?>
+						</a>
+					<?php endif; ?>
+				</div>
+			</div>
 		</div>
-	</div>
+	</section>
 </div>
 
 <?php

@@ -4308,22 +4308,75 @@ body.noorifa-force-mobile-menu .header .header-inner .header-zone--left {
   text-align: center;
 }
 
-.error-404__description {
-  margin: 16px 0 24px;
-  color: var(--text-2);
+.error-404__inner {
+  max-width: 640px;
+  margin: 0 auto;
 }
 
-.error-404__home-link {
+.error-404__code {
+  font-size: clamp(96px, 22vw, 200px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--primary);
+}
+
+.error-404__title {
+  margin: 8px 0 12px;
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 700;
+}
+
+.error-404__description {
+  margin: 0 auto 28px;
+  max-width: 480px;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+.error-404__search {
+  max-width: 440px;
+  margin: 0 auto 28px;
+}
+
+.error-404__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.error-404__btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 44px;
+  height: 48px;
   padding: 0 28px;
-  margin-top: 16px;
+  background: var(--text);
+  border: 2px solid var(--text);
   border-radius: 60px;
-  background: var(--black);
   color: var(--white);
   font-weight: 600;
+  transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.error-404__btn:hover,
+.error-404__btn:focus {
+  color: var(--white);
+  opacity: 0.88;
+}
+
+.error-404__btn--outline {
+  background: transparent;
+  color: var(--text);
+}
+
+.error-404__btn--outline:hover,
+.error-404__btn--outline:focus {
+  background: var(--text);
+  color: var(--white);
+  opacity: 1;
 }
 
 .no-results {
