@@ -604,3 +604,23 @@
 .noorifa-field__help--error {
 	color: #dc2626;
 }
+
+/* Theme version badge on the settings Dashboard. */
+.noorifa-version-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 4px;
+	padding: 6px 12px;
+	background: #f0f0f1;
+	border-radius: 999px;
+	font-size: 13px;
+}
+
+.noorifa-version-badge span {
+	color: #646970;
+}
+
+.noorifa-version-badge strong {
+	color: #1d2327;
+}

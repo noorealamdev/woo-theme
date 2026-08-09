@@ -693,7 +693,15 @@
 				c.CardBody,
 				null,
 				el( 'p', null, __( 'Configure your store’s contact details, social links, brand colors, and the header/footer builders from the sections on the left.', 'noorifa' ) ),
-				el( 'p', { className: 'noorifa-section-intro' }, __( 'Changes are saved to this site only and take effect immediately after clicking Save Settings.', 'noorifa' ) )
+				el( 'p', { className: 'noorifa-section-intro' }, __( 'Changes are saved to this site only and take effect immediately after clicking Save Settings.', 'noorifa' ) ),
+				DATA.version
+					? el(
+							'p',
+							{ className: 'noorifa-version-badge' },
+							el( 'span', null, __( 'Theme version', 'noorifa' ) ),
+							el( 'strong', null, DATA.version )
+					  )
+					: null
 			)
 		);
 	}

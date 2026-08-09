@@ -125,6 +125,7 @@ class Admin_Page implements ComponentInterface {
 					'colorPrimary'   => Layout::COLOR_PRIMARY_DEFAULT,
 					'colorSecondary' => Layout::COLOR_SECONDARY_DEFAULT,
 				),
+				'version'     => defined( 'NOORIFA_VERSION' ) ? NOORIFA_VERSION : '',
 			)
 		);
 	}
