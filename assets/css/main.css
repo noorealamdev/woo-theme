@@ -15844,3 +15844,20 @@ a.woocommerce-Button.button.pay {
     display: none;
   }
 }
+
+/*------------ Header builder button element ---------------------------- */
+/* The header "Button" module reuses the theme's .btn (so it follows the
+   Buttons > Style preset); tighten its padding and bump the font size so it
+   reads as a prominent header CTA. */
+.header-button .btn {
+	height: auto;
+	padding: 8px 24px;
+	font-size: 18px;
+}
+
+@media (min-width: 1200px) {
+	.header-button .btn {
+		padding: 10px 26px;
+		font-size: 20px;
+	}
+}
