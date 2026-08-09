@@ -1043,6 +1043,32 @@
 					placeholder: __( 'e.g. 8801XXXXXXXXX', 'noorifa' ),
 					help: __( 'Shown in bold in the mobile menu’s "Need Help?" box and links straight to a WhatsApp chat. Include the country code, digits only — no spaces, dashes, or a leading +.', 'noorifa' ),
 					onChange: onChange,
+				} ),
+				el( 'h3', { className: 'noorifa-subheading' }, __( 'Button', 'noorifa' ) ),
+				el(
+					'p',
+					{ className: 'noorifa-section-intro' },
+					__( 'Drag the "Button" element into a header zone above, then set its text and link here.', 'noorifa' )
+				),
+				el( TextField, {
+					settings: settings,
+					path: 'header.button_text',
+					label: __( 'Button text', 'noorifa' ),
+					placeholder: __( 'e.g. Order Now', 'noorifa' ),
+					onChange: onChange,
+				} ),
+				el( TextField, {
+					settings: settings,
+					path: 'header.button_url',
+					label: __( 'Button link (URL)', 'noorifa' ),
+					placeholder: 'https://',
+					onChange: onChange,
+				} ),
+				el( ToggleField, {
+					settings: settings,
+					path: 'header.button_new_tab',
+					label: __( 'Open link in a new tab', 'noorifa' ),
+					onChange: onChange,
 				} )
 			)
 		);

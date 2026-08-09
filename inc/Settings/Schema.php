@@ -498,6 +498,24 @@ class Schema {
 				'default' => '',
 			),
 			array(
+				'path'    => 'header.button_text',
+				'flat'    => 'header_button_text',
+				'type'    => 'text',
+				'default' => '',
+			),
+			array(
+				'path'    => 'header.button_url',
+				'flat'    => 'header_button_url',
+				'type'    => 'text',
+				'default' => '',
+			),
+			array(
+				'path'    => 'header.button_new_tab',
+				'flat'    => 'header_button_new_tab',
+				'type'    => 'bool',
+				'default' => false,
+			),
+			array(
 				'path'    => 'header.background_color_enabled',
 				'flat'    => 'header_background_color_enabled',
 				'type'    => 'bool',

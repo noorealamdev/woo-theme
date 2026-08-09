@@ -24,6 +24,7 @@ $module_partials = array(
 	'search'     => 'template-parts/header/search',
 	'account'    => 'template-parts/header/account',
 	'cart'       => 'template-parts/header/cart',
+	'button'     => 'template-parts/header/button',
 );
 
 $icon_modules = array( 'search', 'account', 'cart' );

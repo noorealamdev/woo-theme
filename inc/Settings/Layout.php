@@ -548,6 +548,7 @@ class Layout {
 			'search'     => __( 'Search Icon', 'noorifa' ),
 			'account'    => __( 'Account Icon', 'noorifa' ),
 			'cart'       => __( 'Cart Icon', 'noorifa' ),
+			'button'     => __( 'Button', 'noorifa' ),
 		);
 	}
 
