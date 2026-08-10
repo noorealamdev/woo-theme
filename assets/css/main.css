@@ -2291,7 +2291,7 @@ header {
 }
 
 header.header-sticky:not(.header-s5, .header-abs) {
-  background: var(--noorifa-header-bg, var(--white));
+  background: var(--noorifa-header-bg, var(--noorifa-body-bg, var(--white)));
 }
 
 header.header-sticky.scr-box-shadow {
