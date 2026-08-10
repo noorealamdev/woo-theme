@@ -203,9 +203,13 @@ class SvgUpload implements ComponentInterface {
 			return null;
 		}
 
-		// Reject any custom DOCTYPE/entity declaration outright — the cheapest
-		// defence against XXE and billion-laughs entity-expansion payloads.
-		if ( preg_match( '/<!(DOCTYPE|ENTITY)/i', $svg ) ) {
+		// Reject only entity *definitions* — the actual XXE / billion-laughs
+		// vector. A plain `<!DOCTYPE svg PUBLIC ...>` (as SVG editors and
+		// svgrepo emit) carries no entity subset and is harmless: its external
+		// DTD is never fetched (entity loading is off by default under libxml
+		// 2.9+, and LIBXML_NONET blocks network), and the DOCTYPE itself is
+		// dropped from the output since we serialize the root element only.
+		if ( preg_match( '/<!ENTITY/i', $svg ) ) {
 			return null;
 		}
 
