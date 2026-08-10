@@ -18,6 +18,7 @@ class ThemeSupport implements ComponentInterface {
 	public function initialize(): void {
 		add_action( 'after_setup_theme', array( $this, 'add_theme_support' ) );
 		add_action( 'after_setup_theme', array( $this, 'set_content_width' ) );
+		add_filter( 'wp_theme_json_data_theme', array( $this, 'enable_line_height_setting' ) );
 	}
 
 	/**
@@ -92,6 +93,42 @@ class ThemeSupport implements ComponentInterface {
 		// WP 7.0.2 core before landing on the correct filename. See
 		// languages/README.txt for the translator-facing instructions.
 		load_theme_textdomain( 'noorifa', NOORIFA_THEME_DIR . '/languages' );
+	}
+
+	/**
+	 * Turns on the block editor's native Line height typography control.
+	 *
+	 * Font weight and letter spacing already show in the Styles > Typography
+	 * panel because WordPress core defaults `typography.fontWeight` and
+	 * `typography.letterSpacing` to true. Line height is the exception: core
+	 * defaults `typography.lineHeight` to false, and — despite the docs —
+	 * `add_theme_support( 'appearance-tools' )` does NOT flip it on for a
+	 * classic (non-theme.json) theme like this one (verified: the resolved
+	 * global setting stays false with appearance-tools active). Rather than
+	 * add a whole theme.json just for this one flag, inject the single
+	 * setting through the theme.json data filter, so the native Line height
+	 * control appears alongside Font size for every block that opts into
+	 * `supports.typography.lineHeight` (e.g. the Noorifa Core Feature Cards
+	 * and Hero blocks). Zero output cost until a value is actually set.
+	 *
+	 * @param \WP_Theme_JSON_Data $theme_json The theme's theme.json data.
+	 * @return \WP_Theme_JSON_Data
+	 */
+	public function enable_line_height_setting( $theme_json ) {
+		if ( ! is_object( $theme_json ) || ! method_exists( $theme_json, 'update_with' ) ) {
+			return $theme_json;
+		}
+
+		return $theme_json->update_with(
+			array(
+				'version'  => 2,
+				'settings' => array(
+					'typography' => array(
+						'lineHeight' => true,
+					),
+				),
+			)
+		);
 	}
 
 	/**
