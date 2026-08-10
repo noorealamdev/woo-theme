@@ -56,6 +56,7 @@ final class Theme {
 			new CustomCode(),
 			new Assets(),
 			new Icons(),
+			new SvgUpload(),
 			new NavMenus(),
 			new NavMenuAdminUi(),
 			new \Noorifa\Hooks\TemplateHooks(),
