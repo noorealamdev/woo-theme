@@ -29,8 +29,8 @@ class TemplateHooks implements ComponentInterface {
 		// `woocommerce_before_main_content` at priority 20) renders a second,
 		// unstyled breadcrumb on top of the theme's own real one (the
 		// page-title template part on shop/category archives) — remove the
-		// default. Single product pages intentionally have no breadcrumb at
-		// all — their own breadcrumb-nav.php was removed outright.
+		// default. Single products render their own themed breadcrumb trail
+		// instead (template-parts/product/breadcrumb.php).
 		remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
 
 		// The shop archive (woocommerce/archive-product.php) still fires

@@ -26,6 +26,8 @@ if ( post_password_required() ) {
 }
 
 do_action( 'woocommerce_before_single_product' );
+
+get_template_part( 'template-parts/product/breadcrumb' );
 ?>
 
 <section class="section-product-single main-product section-image-zoom">

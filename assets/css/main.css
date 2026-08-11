@@ -14486,6 +14486,25 @@ a.woocommerce-Button.button.pay {
   font-size: 12px;
 }
 
+.section-product-breadcrumb {
+  padding-top: 24px;
+}
+
+.section-product-breadcrumb .breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.section-product-breadcrumb .breadcrumbs .icon {
+  font-size: 12px;
+}
+
+.section-product-breadcrumb a:hover {
+  color: var(--primary) !important;
+}
+
 .section-page-title-single .nav-post-list {
   display: flex;
   gap: 4px;
