@@ -14487,7 +14487,15 @@ a.woocommerce-Button.button.pay {
 }
 
 .section-product-breadcrumb {
-  padding-top: 24px;
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+@media (max-width: 575px) {
+  .section-product-breadcrumb {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 }
 
 .section-product-breadcrumb .breadcrumbs {
