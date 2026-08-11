@@ -10728,8 +10728,11 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 }
 
 @media (min-width: 1200px) {
+  /* zoom.js sets an explicit height matching the main image so the vertical
+     rail scrolls its overflow; this is only a pre-JS fallback cap. */
   .product-media-thumbs {
     max-height: 764px;
+    overflow: hidden;
   }
 }
 .product-info-wrap {

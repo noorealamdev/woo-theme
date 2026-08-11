@@ -30,6 +30,14 @@ if ($(".product-thumbs-slider").length > 0) {
         watchSlidesProgress: true,
         observer: true,
         observeParents: true,
+        // Let the wheel scroll the thumbnail rail (mainly the vertical
+        // ≥1200px layout). forceToAxis keeps normal vertical page scroll
+        // working over a horizontal rail; releaseOnEdges hands scrolling
+        // back to the page once the rail reaches its end.
+        mousewheel: {
+            forceToAxis: true,
+            releaseOnEdges: true,
+        },
 
         breakpoints: {
             0: {
@@ -65,6 +73,38 @@ if ($(".product-thumbs-slider").length > 0) {
         thumbs: {
             swiper: thumbs,
         },
+    });
+
+    // Match the vertical thumbnail rail's height to the main image so extra
+    // thumbnails scroll/swipe within that space instead of overflowing below
+    // it. Only the ≥1200px vertical layout gets a fixed height; the smaller
+    // horizontal layout clears it. Re-run on image load (the main image
+    // often sizes after DOM ready) and on resize.
+    function syncThumbRailHeight() {
+        if (!$thumbEl.length || !$mainEl.length) {
+            return;
+        }
+        if (window.innerWidth >= 1200) {
+            var mainHeight = $mainEl.outerHeight();
+            if (mainHeight > 0) {
+                $thumbEl.css("height", mainHeight + "px");
+            }
+        } else {
+            $thumbEl.css("height", "");
+        }
+        if (thumbs && typeof thumbs.update === "function") {
+            thumbs.update();
+        }
+    }
+
+    syncThumbRailHeight();
+    $(window).on("load", syncThumbRailHeight);
+    $mainEl.find("img").on("load", syncThumbRailHeight);
+
+    var thumbRailResizeTimer;
+    $(window).on("resize", function () {
+        clearTimeout(thumbRailResizeTimer);
+        thumbRailResizeTimer = setTimeout(syncThumbRailHeight, 150);
     });
 
     // =========================
