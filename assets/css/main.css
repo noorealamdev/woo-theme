@@ -179,7 +179,7 @@ body::-webkit-scrollbar-thumb {
 
 @media (max-width: 1199px) {
   body {
-    padding-bottom: 70px;
+    padding-bottom: 20px;
   }
 }
 img {
@@ -14775,11 +14775,7 @@ a.woocommerce-Button.button.pay {
 }
 
 /*------------ Footer ---------------- */
-/*------------ Footer ---------------- */
-/*--------- Abstracts variable ---------- */
 .footer {
-  padding-top: 20px;
-  margin-top: 60px;
   background: var(--noorifa-footer-bg, transparent);
   /* `color` is inherited, so this alone covers every footer heading and
      icon (`.icon` fills with currentColor) that doesn't set its own
@@ -14843,7 +14839,8 @@ a.woocommerce-Button.button.pay {
   }
 }
 .footer-inner {
-  padding-bottom: 0;
+	padding-bottom: 0;
+	padding-top: 80px;
 }
 
 @media (min-width: 576px) {
@@ -15895,4 +15892,11 @@ a.woocommerce-Button.button.pay {
 		padding: 10px 26px;
 		font-size: 20px;
 	}
+}
+
+/*------------ Custom CSS ---------------------------- */
+@media (max-width: 667px) {
+  .noorifa-core-layout .wp-block-media-text > .wp-block-media-text__content {
+    padding: 0;
+  }
 }
