@@ -66,6 +66,7 @@ final class Theme {
 			new \Noorifa\Settings\Migrate_Tool(),
 			new \Noorifa\Settings\Rest_Controller(),
 			new \Noorifa\Settings\Frontend_Output(),
+			new \Noorifa\Demo\Importer(),
 		);
 
 		if ( class_exists( 'WooCommerce' ) ) {
