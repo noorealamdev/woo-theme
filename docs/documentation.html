@@ -1,0 +1,570 @@
+<title>Noorifa Theme Handbook</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --bg: #faf7f0;
+    --surface: #fffdf8;
+    --surface-2: #f3ecdb;
+    --ink: #211c14;
+    --muted: #6d6555;
+    --line: #e7dec9;
+    --gold: #a97f14;
+    --gold-strong: #8a6410;
+    --gold-soft: #f4e8c8;
+    --green: #2c6b3e;
+    --green-soft: #e0eed9;
+    --amber: #9a6a12;
+    --amber-soft: #f6e7c6;
+    --code-bg: #f3ecdb;
+    --sidebar-w: 288px;
+    --reading: 46rem;
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "Consolas", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #15130d;
+      --surface: #1e1a11;
+      --surface-2: #262115;
+      --ink: #f1ead9;
+      --muted: #a99d83;
+      --line: #332e1f;
+      --gold: #e0b64d;
+      --gold-strong: #f0cd77;
+      --gold-soft: #2c2413;
+      --green: #74b184;
+      --green-soft: #1b291f;
+      --amber: #e0b055;
+      --amber-soft: #2c2413;
+      --code-bg: #241f14;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #15130d;
+    --surface: #1e1a11;
+    --surface-2: #262115;
+    --ink: #f1ead9;
+    --muted: #a99d83;
+    --line: #332e1f;
+    --gold: #e0b64d;
+    --gold-strong: #f0cd77;
+    --gold-soft: #2c2413;
+    --green: #74b184;
+    --green-soft: #1b291f;
+    --amber: #e0b055;
+    --amber-soft: #2c2413;
+    --code-bg: #241f14;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: 16.5px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--gold-strong); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ---------- Layout ---------- */
+  .layout { display: grid; grid-template-columns: var(--sidebar-w) 1fr; }
+  .sidebar {
+    position: sticky; top: 0; align-self: start; height: 100vh; overflow-y: auto;
+    background: var(--surface); border-right: 1px solid var(--line); padding: 22px 18px 40px;
+  }
+  .content { min-width: 0; padding: 40px clamp(20px, 5vw, 72px) 96px; }
+  .content-inner { max-width: var(--reading); margin: 0 auto; }
+
+  /* ---------- Sidebar ---------- */
+  .brand { display: flex; align-items: center; gap: 11px; padding: 6px 8px 16px; }
+  .brand .mark { width: 34px; height: 34px; flex: none; }
+  .brand b { font-size: 1.05rem; }
+  .brand span { display: block; font-family: var(--mono); font-size: 9.5px; letter-spacing: .13em; text-transform: uppercase; color: var(--muted); }
+  .toc { list-style: none; margin: 0; padding: 0; }
+  .toc .group { font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-strong); padding: 18px 8px 6px; }
+  .toc a { display: block; color: var(--muted); padding: 5px 10px; border-radius: 7px; font-size: .92rem; line-height: 1.4; text-decoration: none; }
+  .toc a:hover { background: var(--surface-2); color: var(--ink); }
+  .toc a.active { background: var(--gold-soft); color: var(--gold-strong); font-weight: 600; }
+
+  .theme-toggle {
+    display: inline-flex; align-items: center; gap: 7px; margin: 4px 8px 8px; padding: 7px 12px;
+    background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px;
+    color: var(--muted); font-size: .82rem; cursor: pointer; font-family: var(--font);
+  }
+  .theme-toggle:hover { color: var(--ink); border-color: var(--gold); }
+
+  /* ---------- Mobile nav ---------- */
+  .topbar { display: none; position: sticky; top: 0; z-index: 40; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; background: var(--surface); border-bottom: 1px solid var(--line); }
+  .menu-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; color: var(--ink); font: 600 .9rem var(--font); cursor: pointer; }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .topbar { display: flex; }
+    .sidebar { position: fixed; inset: 0 auto 0 0; z-index: 50; width: min(85vw, var(--sidebar-w)); height: 100vh; transform: translateX(-100%); transition: transform .2s ease; box-shadow: 0 0 40px rgba(0,0,0,.25); }
+    .sidebar.open { transform: none; }
+    .scrim { display: none; position: fixed; inset: 0; z-index: 45; background: rgba(0,0,0,.4); }
+    .scrim.open { display: block; }
+  }
+  @media (prefers-reduced-motion: reduce) { .sidebar { transition: none; } }
+
+  /* ---------- Typography ---------- */
+  h1, h2, h3, h4 { line-height: 1.25; text-wrap: balance; scroll-margin-top: 80px; }
+  h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); margin: 0 0 .4em; letter-spacing: -.02em; }
+  h2 { font-size: 1.55rem; margin: 2.6em 0 .5em; padding-top: .4em; border-top: 1px solid var(--line); letter-spacing: -.01em; }
+  h2:first-of-type { border-top: 0; }
+  h3 { font-size: 1.15rem; margin: 1.8em 0 .4em; }
+  p { margin: 0 0 1em; }
+  ul, ol { margin: 0 0 1em; padding-left: 1.3em; }
+  li { margin: .3em 0; }
+  strong { color: var(--ink); }
+  .lead { font-size: 1.12rem; color: var(--muted); margin-bottom: 1.6em; }
+  .eyebrow { font-family: var(--mono); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-strong); }
+
+  code { font-family: var(--mono); font-size: .86em; background: var(--code-bg); padding: .12em .42em; border-radius: 5px; }
+  pre { background: var(--code-bg); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; overflow-x: auto; margin: 0 0 1.2em; }
+  pre code { background: none; padding: 0; font-size: .82rem; line-height: 1.6; }
+
+  .path { font-family: var(--mono); font-size: .85em; color: var(--gold-strong); background: var(--gold-soft); padding: .1em .45em; border-radius: 5px; white-space: nowrap; }
+
+  /* ---------- Callouts ---------- */
+  .callout { display: flex; gap: 12px; border: 1px solid var(--line); border-left-width: 4px; border-radius: 10px; padding: 14px 16px; margin: 0 0 1.4em; background: var(--surface); }
+  .callout .ic { flex: none; font-family: var(--mono); font-weight: 700; }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout.tip { border-left-color: var(--green); background: var(--green-soft); }
+  .callout.tip .ic { color: var(--green); }
+  .callout.note { border-left-color: var(--gold); background: var(--gold-soft); }
+  .callout.note .ic { color: var(--gold-strong); }
+  .callout.warn { border-left-color: var(--amber); background: var(--amber-soft); }
+  .callout.warn .ic { color: var(--amber); }
+
+  /* ---------- Steps ---------- */
+  ol.steps { counter-reset: step; list-style: none; padding: 0; }
+  ol.steps > li { counter-increment: step; position: relative; padding: 2px 0 2px 44px; margin: 0 0 14px; }
+  ol.steps > li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 30px; height: 30px; border-radius: 9px; background: var(--gold); color: #241a05; font: 700 .9rem var(--mono); display: grid; place-items: center; }
+  :root[data-theme="dark"] ol.steps > li::before, :root:not([data-theme="light"]) ol.steps > li::before { color: #201703; }
+
+  /* ---------- Table ---------- */
+  .table-wrap { overflow-x: auto; margin: 0 0 1.4em; border: 1px solid var(--line); border-radius: 12px; }
+  table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--surface-2); font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  tr:last-child td { border-bottom: 0; }
+  td code { white-space: nowrap; }
+
+  /* ---------- Cards (block catalog) ---------- */
+  .cardgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin: 0 0 1.4em; }
+  .bcard { border: 1px solid var(--line); border-radius: 10px; padding: 13px 15px; background: var(--surface); }
+  .bcard b { display: block; margin-bottom: 2px; }
+  .bcard span { color: var(--muted); font-size: .86rem; line-height: 1.5; }
+
+  .pill { display: inline-block; font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--green); background: var(--green-soft); border: 1px solid var(--line); padding: 2px 8px; border-radius: 999px; vertical-align: middle; }
+
+  hr { border: 0; border-top: 1px solid var(--line); margin: 2.4em 0; }
+  .foot { color: var(--muted); font-size: .9rem; margin-top: 3em; padding-top: 1.4em; border-top: 1px solid var(--line); }
+</style>
+
+<div class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Open navigation">☰ Contents</button>
+  <strong>Noorifa Handbook</strong>
+</div>
+<div class="scrim" id="scrim"></div>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <rect x="2" y="2" width="36" height="36" rx="10" fill="var(--green)"/>
+        <path d="M11 27V14l9 7 9-7v13" stroke="var(--gold)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span style="line-height:1.1"><b>Noorifa</b><span>Theme Handbook</span></span>
+    </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme">◐ Theme</button>
+    <nav>
+      <ul class="toc" id="toc">
+        <li class="group">Getting started</li>
+        <li><a href="#intro">Introduction</a></li>
+        <li><a href="#requirements">Requirements</a></li>
+        <li><a href="#install">Installing the theme</a></li>
+        <li><a href="#plugins">Required plugins</a></li>
+        <li class="group">Your store</li>
+        <li><a href="#woocommerce">WooCommerce setup</a></li>
+        <li><a href="#products">Adding products</a></li>
+        <li><a href="#menus">Menus &amp; navigation</a></li>
+        <li><a href="#homepage">Building the homepage</a></li>
+        <li class="group">Theme settings</li>
+        <li><a href="#settings">Settings overview</a></li>
+        <li><a href="#branding">Colors &amp; typography</a></li>
+        <li><a href="#header-footer">Header &amp; footer builder</a></li>
+        <li><a href="#other-settings">Shop, blog &amp; more</a></li>
+        <li class="group">Building with blocks</li>
+        <li><a href="#blocks">Noorifa Core blocks</a></li>
+        <li><a href="#block-extras">Visibility &amp; animation</a></li>
+        <li><a href="#product-pages">Product pages</a></li>
+        <li><a href="#landing">Landing pages &amp; COD</a></li>
+        <li class="group">Finishing up</li>
+        <li><a href="#customcode">Custom CSS / JS</a></li>
+        <li><a href="#performance">Performance &amp; SEO</a></li>
+        <li><a href="#importexport">Import / export</a></li>
+        <li><a href="#updating">Updating</a></li>
+        <li><a href="#faq">Troubleshooting</a></li>
+        <li><a href="#support">Support</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <div class="content-inner">
+
+      <span class="eyebrow">Documentation</span>
+      <h1 id="intro">Noorifa Theme Handbook</h1>
+      <p class="lead">Everything you need to launch a complete, conversion-focused WooCommerce store with Noorifa — from installing the theme to building product pages that sell. No coding required.</p>
+
+      <p>Noorifa is a WooCommerce theme built around one goal: turning visitors into buyers. It pairs a lightweight, mobile-first design with the free <strong>Noorifa Core</strong> plugin, which adds a set of Gutenberg blocks for building rich product and landing pages visually. This handbook walks you through the whole journey in order — you can follow it top to bottom for a brand-new store, or jump to any section from the menu.</p>
+
+      <div class="callout tip">
+        <span class="ic">TIP</span>
+        <p>New to WooCommerce? Follow the sections in order. Each one builds on the last, and by the end you'll have a fully working store.</p>
+      </div>
+
+      <h2 id="requirements">Requirements</h2>
+      <p>Noorifa runs on any standard WordPress host. Make sure your site meets these minimums:</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Item</th><th>Minimum</th><th>Recommended</th></tr>
+          <tr><td>WordPress</td><td>6.4</td><td>Latest</td></tr>
+          <tr><td>PHP</td><td>8.0</td><td>8.2+</td></tr>
+          <tr><td>WooCommerce</td><td>Latest</td><td>Latest</td></tr>
+          <tr><td>Noorifa Core plugin</td><td>Bundled with the theme</td><td>Bundled with the theme</td></tr>
+        </table>
+      </div>
+      <p>If you're not sure about your PHP version, ask your host or check <span class="path">WP Admin → Tools → Site Health → Info → Server</span>.</p>
+
+      <h2 id="install">Installing the theme</h2>
+      <ol class="steps">
+        <li>In WordPress, go to <span class="path">Appearance → Themes → Add New → Upload Theme</span>.</li>
+        <li>Choose the <code>noorifa.zip</code> file you received and click <strong>Install Now</strong>.</li>
+        <li>Click <strong>Activate</strong>.</li>
+      </ol>
+      <div class="callout warn">
+        <span class="ic">!</span>
+        <p>Upload the theme <em>zip file</em> — not an unzipped folder. If you get "The package could not be installed. The theme is missing the style.css stylesheet," you likely uploaded the wrong zip (for example a zip that contains the theme folder inside another folder).</p>
+      </div>
+
+      <h2 id="plugins">Required plugins</h2>
+      <p>Right after you activate the theme, a notice appears at the top of your dashboard asking you to install two plugins. Both install in one click:</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Plugin</th><th>Where it comes from</th><th>Why</th></tr>
+          <tr><td><strong>Noorifa Core</strong></td><td>Bundled inside the theme</td><td>Adds all the Noorifa blocks and product-page tools. Free.</td></tr>
+          <tr><td><strong>WooCommerce</strong></td><td>wordpress.org</td><td>The store engine: products, cart, checkout, orders.</td></tr>
+        </table>
+      </div>
+      <ol class="steps">
+        <li>Click <strong>Install &amp; Activate Noorifa Core</strong> in the notice.</li>
+        <li>Click <strong>Install &amp; Activate WooCommerce</strong>.</li>
+        <li>The notice disappears once both are active — you're ready to build.</li>
+      </ol>
+      <div class="callout note">
+        <span class="ic">i</span>
+        <p>Noorifa Core is completely free and ships inside the theme, so you never need a separate download or license for it. When a theme update includes a newer Noorifa Core, the same notice offers a one-click <strong>Update</strong>.</p>
+      </div>
+
+      <h2 id="woocommerce">WooCommerce setup</h2>
+      <p>The first time WooCommerce activates, it runs a short setup wizard. You can also configure everything later under <span class="path">WooCommerce → Settings</span>. The essentials:</p>
+      <ul>
+        <li><strong>Store address &amp; currency</strong> — <span class="path">WooCommerce → Settings → General</span>.</li>
+        <li><strong>Payments</strong> — <span class="path">WooCommerce → Settings → Payments</span>. Enable the methods you need. For markets that use it, enable <strong>Cash on delivery</strong>; add card/wallet gateways via their plugins.</li>
+        <li><strong>Shipping</strong> — <span class="path">WooCommerce → Settings → Shipping</span>. Create a <em>shipping zone</em> for each region you deliver to and add a rate (Flat rate or Free shipping). Without a zone that matches the customer's address, checkout shows "no shipping methods available."</li>
+        <li><strong>Store pages</strong> — WooCommerce creates Shop, Cart, Checkout and My Account automatically. Noorifa styles all of them out of the box.</li>
+      </ul>
+      <div class="callout warn">
+        <span class="ic">!</span>
+        <p>The most common "I can't check out" issue is a missing shipping zone for the customer's country. Add a zone that covers where you actually ship, with at least one rate.</p>
+      </div>
+
+      <h2 id="products">Adding products</h2>
+      <ol class="steps">
+        <li>Go to <span class="path">Products → Add New</span>.</li>
+        <li>Enter a name and description, set a <strong>Regular price</strong> (and optional <strong>Sale price</strong>).</li>
+        <li>Set a <strong>Product image</strong> and add more shots to the <strong>Product gallery</strong> — Noorifa shows them in a synced gallery with zoom and lightbox.</li>
+        <li>Assign a <strong>Category</strong> (used in the breadcrumb and shop filters).</li>
+        <li>Click <strong>Publish</strong>.</li>
+      </ol>
+      <p>Your product immediately gets a polished Noorifa product page — gallery, price, rating, quantity, add-to-cart and a sticky buy bar on scroll. You can leave it as-is, or design a completely custom product page with blocks (see <a href="#product-pages">Product pages</a>).</p>
+
+      <h2 id="menus">Menus &amp; navigation</h2>
+      <p>Create menus under <span class="path">Appearance → Menus</span>. Noorifa registers these locations:</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Location</th><th>Where it shows</th></tr>
+          <tr><td>Primary Menu</td><td>Main header navigation (and the mobile menu)</td></tr>
+          <tr><td>Footer — Company</td><td>First footer link column</td></tr>
+          <tr><td>Footer — Customer</td><td>Second footer link column</td></tr>
+        </table>
+      </div>
+      <p>Assign each menu to its location in the <strong>Menu settings</strong> box, or from the <strong>Manage Locations</strong> tab.</p>
+
+      <h2 id="homepage">Building the homepage</h2>
+      <p>By default WordPress shows your latest posts. To use a designed page as your homepage:</p>
+      <ol class="steps">
+        <li>Create a page: <span class="path">Pages → Add New</span> (e.g. "Home"). Build it with blocks, then Publish.</li>
+        <li>Go to <span class="path">Settings → Reading</span>.</li>
+        <li>Set <strong>Your homepage displays</strong> → <strong>A static page</strong>, and choose your page under <strong>Homepage</strong>.</li>
+      </ol>
+      <div class="callout tip">
+        <span class="ic">TIP</span>
+        <p>The homepage template is a clean canvas — Noorifa blocks like <strong>Hero</strong>, <strong>Feature Cards</strong> and <strong>Image Card</strong> already size and center themselves, so you can stack full-width sections without fighting the layout.</p>
+      </div>
+
+      <h2 id="settings">Theme settings overview</h2>
+      <p>All theme options live under the <span class="path">Noorifa</span> menu in your dashboard sidebar. Settings are grouped into sections down the left of the panel; change what you need and click <strong>Save Settings</strong>. Changes apply to the whole site immediately — you never edit code for any of this.</p>
+      <div class="cardgrid">
+        <div class="bcard"><b>Layout</b><span>Site width (boxed / full) and container sizing.</span></div>
+        <div class="bcard"><b>Typography</b><span>Body, heading &amp; menu fonts and base font size.</span></div>
+        <div class="bcard"><b>Colors</b><span>Primary, secondary and body-background colors.</span></div>
+        <div class="bcard"><b>Header</b><span>Drag-and-drop header builder (see below).</span></div>
+        <div class="bcard"><b>Topbar</b><span>The announcement bar above the header.</span></div>
+        <div class="bcard"><b>Footer</b><span>Drag-and-drop footer builder.</span></div>
+        <div class="bcard"><b>Newsletter</b><span>Built-in form or paste your provider's embed.</span></div>
+        <div class="bcard"><b>Floating Button</b><span>Site-wide floating WhatsApp / chat button.</span></div>
+        <div class="bcard"><b>Shop</b><span>Grid columns, products per page, card typography.</span></div>
+        <div class="bcard"><b>Product Page</b><span>Options for the single-product layout.</span></div>
+        <div class="bcard"><b>Cart &amp; Checkout</b><span>Thank-you page hero and related options.</span></div>
+        <div class="bcard"><b>Blog</b><span>Blog grid columns, excerpt length, sidebar.</span></div>
+        <div class="bcard"><b>Page Header</b><span>The shared page-title banner &amp; breadcrumbs.</span></div>
+        <div class="bcard"><b>Buttons</b><span>Choose from ready-made button styles.</span></div>
+        <div class="bcard"><b>Performance</b><span>Optional speed tweaks (see Performance).</span></div>
+        <div class="bcard"><b>SEO</b><span>Site-wide title / meta description fallbacks.</span></div>
+        <div class="bcard"><b>Integrations</b><span>Google Analytics 4 &amp; Facebook Pixel.</span></div>
+        <div class="bcard"><b>Custom CSS / JS</b><span>Your own snippets, safely wrapped.</span></div>
+        <div class="bcard"><b>Import / Export</b><span>Back up or move your settings.</span></div>
+      </div>
+
+      <h2 id="branding">Colors &amp; typography</h2>
+      <p>Make the theme yours in two sections:</p>
+      <ul>
+        <li><strong>Colors</strong> — set your <strong>Primary</strong> color (buttons, links, accents), <strong>Secondary</strong> color, and <strong>Body background</strong>. Every element that uses the brand color updates at once.</li>
+        <li><strong>Typography</strong> — pick fonts for body text, headings and the menu from the built-in Google Fonts list, and set the base font size. Leave a font blank to use the theme default.</li>
+      </ul>
+      <div class="callout note">
+        <span class="ic">i</span>
+        <p>Because these are global variables, changing the primary color once restyles buttons, links, badges, and highlights across the entire site — including the blocks — without touching any section individually.</p>
+      </div>
+
+      <h2 id="header-footer">Header &amp; footer builder</h2>
+      <p>Noorifa includes visual builders for both the header and footer, so you arrange elements by dragging — no menus of checkboxes.</p>
+      <h3>Header builder</h3>
+      <p>Under <span class="path">Noorifa → Header</span>, the header has three zones: <strong>Left</strong>, <strong>Center</strong> and <strong>Right</strong>. Drag elements between zones to arrange them:</p>
+      <ul>
+        <li><strong>Logo</strong> (set your logo under <span class="path">Appearance → Customize → Site Identity</span> or the branding area), <strong>Navigation</strong>, <strong>Search</strong>, <strong>Account</strong>, <strong>Cart</strong>, a free <strong>HTML</strong> slot, and a <strong>Button</strong>.</li>
+        <li>Configure the sticky behavior, mobile menu, and an optional WhatsApp number for the mobile menu.</li>
+      </ul>
+      <h3>Footer builder</h3>
+      <p>Under <span class="path">Noorifa → Footer</span>, build the footer from columns: an <strong>info card</strong> (logo, description, social links), the two footer <strong>nav menus</strong>, a <strong>newsletter</strong> block, plus the bottom bar with <strong>copyright</strong> and <strong>payment icons</strong>. Reorder and show/hide each part.</p>
+      <div class="callout tip">
+        <span class="ic">TIP</span>
+        <p>Set your social links and contact details in the footer's info-card settings once — they feed the footer automatically.</p>
+      </div>
+
+      <h2 id="other-settings">Shop, blog &amp; the rest</h2>
+      <ul>
+        <li><strong>Shop</strong> — choose how many product columns per row and products per page, and tune the product-card title/price typography.</li>
+        <li><strong>Topbar</strong> — enable the announcement bar, set its message and colors.</li>
+        <li><strong>Page Header</strong> — the banner with the page title and breadcrumbs shown on pages, archives and the shop. Toggle breadcrumbs and alignment here.</li>
+        <li><strong>Buttons</strong> — pick a global button style preset (shape, fill, hover).</li>
+        <li><strong>Cart &amp; Checkout</strong> — customize the order-received (thank-you) page hero.</li>
+        <li><strong>Floating Button</strong> — turn on a site-wide floating WhatsApp/chat button and set the number and message.</li>
+      </ul>
+
+      <h2 id="blocks">Noorifa Core blocks</h2>
+      <p>With Noorifa Core active, open any page or post and click the <strong>+</strong> inserter — you'll find a <strong>Noorifa</strong> category (its block icons are tinted gold so they're easy to spot). These blocks let you build rich pages visually.</p>
+
+      <h3>Content &amp; layout</h3>
+      <div class="cardgrid">
+        <div class="bcard"><b>Hero</b><span>Full-width banner: heading, subheading, highlights list, background image/color, and call-to-action buttons.</span></div>
+        <div class="bcard"><b>Advanced Heading</b><span>A heading with an optional subheading, alignment and full typography control.</span></div>
+        <div class="bcard"><b>Feature Cards</b><span>A row/grid of cards with icon, heading and text — benefits, ingredients, features.</span></div>
+        <div class="bcard"><b>Image Card</b><span>Promo cards: a background image with overlaid heading, text and a link.</span></div>
+        <div class="bcard"><b>Icon List</b><span>A checklist of points, each with an icon.</span></div>
+        <div class="bcard"><b>Container</b><span>A flexible wrapper for building custom multi-column layouts.</span></div>
+        <div class="bcard"><b>Accordion / FAQ</b><span>Collapsible rows — perfect for FAQs.</span></div>
+        <div class="bcard"><b>Tabs</b><span>Tabbed content panels.</span></div>
+        <div class="bcard"><b>Marquee</b><span>A smooth scrolling strip of text or logos.</span></div>
+        <div class="bcard"><b>Comparison Table</b><span>Compare your product against alternatives.</span></div>
+        <div class="bcard"><b>Video Testimonials</b><span>Grid or carousel of customer videos (YouTube/Vimeo or upload), lazy-loaded.</span></div>
+        <div class="bcard"><b>Button</b><span>A styled call-to-action button.</span></div>
+      </div>
+
+      <h3>Marketing &amp; conversion</h3>
+      <div class="cardgrid">
+        <div class="bcard"><b>Trust Badges</b><span>Guarantee / secure-checkout / delivery badges.</span></div>
+        <div class="bcard"><b>Urgency</b><span>Scarcity &amp; countdown cues to prompt action.</span></div>
+        <div class="bcard"><b>Review Carousel</b><span>A swipeable carousel of hand-picked reviews.</span></div>
+        <div class="bcard"><b>Add to Cart Button</b><span>A standalone buy button for a chosen product.</span></div>
+        <div class="bcard"><b>Inline Checkout</b><span>An on-page cash-on-delivery order form (see Landing pages).</span></div>
+      </div>
+
+      <h3>Single-product blocks</h3>
+      <p>These pull live data from a product and are used when designing a custom product page: <span class="pill">Product Title</span> <span class="pill">Price</span> <span class="pill">Rating</span> <span class="pill">Gallery</span> <span class="pill">Short Description</span> <span class="pill">Meta</span> <span class="pill">Specifications</span> <span class="pill">Tabs</span> <span class="pill">Reviews</span> <span class="pill">Breadcrumbs</span> <span class="pill">Sticky Add to Cart</span> <span class="pill">Add to Cart</span> <span class="pill">Related Products</span> <span class="pill">Product Grid</span> <span class="pill">Product Category</span>.</p>
+
+      <h2 id="block-extras">Block visibility &amp; animation</h2>
+      <p>Every Noorifa block has two shared controls in the block sidebar:</p>
+      <ul>
+        <li><strong>Visibility</strong> — hide a block on <em>mobile</em>, <em>tablet</em> or <em>desktop</em>. Great for showing a compact version on phones and a richer one on desktop.</li>
+        <li><strong>Animation</strong> — reveal the block on scroll with <em>fade-in</em>, <em>slide-up</em> or <em>zoom-in</em>, with adjustable duration and delay. Animations respect a visitor's "reduce motion" preference automatically.</li>
+      </ul>
+
+      <h2 id="product-pages">Product pages &amp; custom layouts</h2>
+      <p>Every product gets Noorifa's polished default product page automatically — gallery, price, rating, quantity, add-to-cart, tabs and related products. When you want a bespoke, high-converting page instead — with your own sections, videos, benefits and buy box — you build a <strong>Product Layout</strong> and assign it to products. There are three parts: <strong>create</strong> the layout, <strong>assign</strong> it so it displays, and optionally set <strong>per-product display</strong> options.</p>
+
+      <h3>Step 1 — Create a product layout</h3>
+      <ol class="steps">
+        <li>Go to <span class="path">Noorifa → Product Layouts → Add New Product Layout</span>.</li>
+        <li>Give it a name (e.g. "Supplement Landing"). This is just a label for you — customers never see it.</li>
+        <li>Design the page in the block editor. Start from a ready-made design using the <strong>Noorifa template library</strong> (open it from the editor toolbar), or build from scratch.</li>
+        <li>Add <strong>single-product blocks</strong> — Product Title, Gallery, Price, Rating, Add to Cart, Short Description, Specifications, Tabs, Reviews, Sticky Add to Cart, Related Products — alongside content blocks like Hero, Feature Cards, Video Testimonials, Trust Badges and Urgency. The product blocks automatically show the details of whichever product the layout is applied to, so you design once and it works for every product that uses it.</li>
+        <li>Click <strong>Publish</strong>.</li>
+      </ol>
+      <div class="callout tip">
+        <span class="ic">TIP</span>
+        <p>In the Product Layouts list you can <strong>Duplicate</strong> a layout to reuse it as a starting point, and <strong>Preview</strong> a layout against a real product before assigning it.</p>
+      </div>
+
+      <h3>Step 2 — Display it on the single product page</h3>
+      <p>A layout only appears once you <em>assign</em> it. You can assign at three levels. Noorifa checks them in order and uses the <strong>first match</strong>, so a more specific choice always wins over a broader one:</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Priority</th><th>Where you set it</th><th>Applies to</th></tr>
+          <tr><td><strong>1 · Per product</strong></td><td>Edit a product → the <strong>Product Page Template</strong> box (right sidebar) → choose a layout</td><td>That one product</td></tr>
+          <tr><td><strong>2 · Per category</strong></td><td><span class="path">Products → Categories</span> → edit a category → <strong>Default Product Page Template</strong></td><td>Every product in that category that has no choice of its own</td></tr>
+          <tr><td><strong>3 · Site-wide default</strong></td><td>The Noorifa Core dashboard under the <span class="path">Noorifa</span> menu → <strong>Default Product Layout</strong></td><td>All products with no product- or category-level choice</td></tr>
+        </table>
+      </div>
+      <p>If none is set, the product simply uses the standard theme/WooCommerce product page. On a single product you can also pick <strong>"— Default (theme/WooCommerce) —"</strong> to force that product back to the default, even when a category or site-wide layout exists.</p>
+      <div class="callout note">
+        <span class="ic">i</span>
+        <p>Only <strong>published</strong> layouts can be assigned — a draft layout won't show up in the dropdowns or render on the front end. If your layout isn't appearing, check that it's published and that the product/category/default actually points to it.</p>
+      </div>
+
+      <h3>Step 3 — Per-product display options (distraction-free)</h3>
+      <p>Separate from <em>which</em> layout a product uses, each product has a <strong>Page Layout</strong> box (provided by the theme) that controls the page chrome — ideal for paid-traffic landing pages:</p>
+      <ul>
+        <li><strong>Hide the site header</strong> and/or <strong>footer</strong> on that product, so there's no navigation pulling attention away from the offer.</li>
+        <li>Set a custom <strong>body background color</strong> (and opacity) just for that product.</li>
+      </ul>
+      <p>Combine a custom <em>Product Layout</em> (Step 1–2) with the header and footer hidden here to get a fully self-contained sales page.</p>
+
+      <div class="callout warn">
+        <span class="ic">!</span>
+        <p>Two similarly named boxes, two different jobs: <strong>Product Page Template</strong> (from Noorifa Core) chooses <em>which custom layout</em> renders; <strong>Page Layout</strong> (from the theme) hides the header/footer and sets the background. Use them together for landing pages.</p>
+      </div>
+
+      <h2 id="landing">Landing pages &amp; cash on delivery</h2>
+      <p>To build a single-product landing page that takes orders on the page itself:</p>
+      <ol class="steps">
+        <li>Create a page (or a custom product layout) and add your selling sections — Hero, benefits (Feature Cards), Video Testimonials, Trust Badges, Urgency.</li>
+        <li>Add the <strong>Inline Checkout</strong> block and pick the product(s) it sells.</li>
+        <li>The visitor enters name, address and phone and orders directly — no cart, no separate checkout. Ideal for cash-on-delivery.</li>
+      </ol>
+      <div class="callout note">
+        <span class="ic">i</span>
+        <p>Prices and order totals are always calculated on the server from the real product, so they can't be tampered with from the browser.</p>
+      </div>
+
+      <h2 id="customcode">Custom CSS / JS</h2>
+      <p>Need a small tweak? Go to <span class="path">Noorifa → Custom CSS / JS</span> and paste your own CSS or JavaScript. The theme wraps and loads them for you — CSS in the head, JS in the footer. This survives theme updates, unlike editing theme files directly.</p>
+      <div class="callout warn">
+        <span class="ic">!</span>
+        <p>Don't edit the theme's own files. Use Custom CSS/JS (or a child theme for larger changes) so your customizations aren't overwritten when you update Noorifa.</p>
+      </div>
+
+      <h2 id="performance">Performance &amp; SEO</h2>
+      <p>Noorifa is built to be light and fast on mobile out of the box. Two settings sections help you go further:</p>
+      <ul>
+        <li><strong>Performance</strong> — optional switches such as disabling XML-RPC and removing version query strings from assets. Turn these on unless a specific plugin needs them.</li>
+        <li><strong>SEO</strong> — set a site-wide title format and a fallback meta description so every page (including shop archives) has sensible search snippets. Works alongside dedicated SEO plugins if you use one.</li>
+        <li><strong>Integrations</strong> — paste your <strong>Google Analytics 4</strong> and <strong>Facebook Pixel</strong> snippets to start tracking. Nothing loads until you add them.</li>
+      </ul>
+
+      <h2 id="importexport">Import / export settings</h2>
+      <p>Under <span class="path">Noorifa → Import / Export</span> you can export all your theme settings to a file and import them into another site — handy for moving from a staging site to production, or reusing a configuration across stores.</p>
+
+      <h2 id="updating">Updating the theme &amp; plugin</h2>
+      <ul>
+        <li><strong>Theme</strong> — update it the same way you installed it (upload the new zip), or via your update channel if provided.</li>
+        <li><strong>Noorifa Core</strong> — when a theme update ships a newer plugin, the dashboard shows a one-click <strong>Update Noorifa Core</strong> notice. WooCommerce updates normally from <span class="path">Plugins</span>.</li>
+      </ul>
+      <div class="callout tip">
+        <span class="ic">TIP</span>
+        <p>Always back up your site (or export your settings) before a major update. Use <strong>Import / Export</strong> to snapshot your theme settings in seconds.</p>
+      </div>
+
+      <h2 id="faq">Troubleshooting</h2>
+      <h3>The "required plugins" notice won't go away</h3>
+      <p>It stays until <em>both</em> Noorifa Core and WooCommerce are active. Click each button in the notice, or install them from <span class="path">Plugins → Add New</span>.</p>
+      <h3>Blocks are missing from the inserter</h3>
+      <p>Make sure Noorifa Core is active (<span class="path">Plugins</span>). The Noorifa block category appears only when it's running.</p>
+      <h3>"No shipping methods available" at checkout</h3>
+      <p>Add a shipping zone that covers the customer's country with at least one rate — see <a href="#woocommerce">WooCommerce setup</a>.</p>
+      <h3>My homepage shows blog posts</h3>
+      <p>Set a static homepage under <span class="path">Settings → Reading</span> — see <a href="#homepage">Building the homepage</a>.</p>
+      <h3>A change I made in a theme file disappeared</h3>
+      <p>Theme files are overwritten on update. Move the change to <span class="path">Noorifa → Custom CSS / JS</span> or a child theme.</p>
+
+      <h2 id="support">Support</h2>
+      <p>Still stuck? When you contact support, include your WordPress version, PHP version, active theme &amp; plugin versions (from <span class="path">Tools → Site Health → Info</span>), and a description of what you expected versus what happened — it gets you a faster answer.</p>
+
+      <p class="foot">Noorifa Theme Handbook · Smart marketing, successful business. Built for WooCommerce.</p>
+    </div>
+  </main>
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var toggle = document.getElementById('themeToggle');
+    var stored = null;
+    try { stored = localStorage.getItem('noorifa-docs-theme'); } catch (e) {}
+    if (stored) { root.setAttribute('data-theme', stored); }
+    toggle.addEventListener('click', function () {
+      var current = root.getAttribute('data-theme');
+      if (!current) {
+        current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      var next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('noorifa-docs-theme', next); } catch (e) {}
+    });
+
+    // Mobile drawer
+    var sidebar = document.getElementById('sidebar');
+    var scrim = document.getElementById('scrim');
+    var menuBtn = document.getElementById('menuBtn');
+    function closeNav() { sidebar.classList.remove('open'); scrim.classList.remove('open'); }
+    menuBtn.addEventListener('click', function () { sidebar.classList.add('open'); scrim.classList.add('open'); });
+    scrim.addEventListener('click', closeNav);
+    sidebar.addEventListener('click', function (e) { if (e.target.tagName === 'A') { closeNav(); } });
+
+    // Active section highlight
+    var links = Array.prototype.slice.call(document.querySelectorAll('#toc a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var sections = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); }).filter(Boolean);
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            links.forEach(function (l) { l.classList.remove('active'); });
+            var active = map[entry.target.id];
+            if (active) { active.classList.add('active'); }
+          }
+        });
+      }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+      sections.forEach(function (s) { obs.observe(s); });
+    }
+  })();
+</script>
