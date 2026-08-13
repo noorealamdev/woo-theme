@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'NOORIFA_VERSION', '0.1.1' );
+define( 'NOORIFA_VERSION', '1.0.0' );
 define( 'NOORIFA_MIN_PHP', '8.0' );
 define( 'NOORIFA_THEME_DIR', get_template_directory() );
 define( 'NOORIFA_THEME_URI', get_template_directory_uri() );
