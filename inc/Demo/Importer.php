@@ -179,7 +179,10 @@ class Importer implements ComponentInterface {
 			'post_title'   => 'Home',
 			'post_status'  => 'publish',
 			'post_type'    => 'page',
-			'post_content' => $this->home_content( $banner, $promo_a, $promo_b, $cta_img, $shop_url ),
+			// wp_slash: wp_insert_post runs wp_unslash internally, which would
+			// otherwise strip the backslashes from the block attributes' JSON
+			// unicode escapes (—, &) and corrupt the text.
+			'post_content' => wp_slash( $this->home_content( $banner, $promo_a, $promo_b, $cta_img, $shop_url ) ),
 		) );
 		if ( $home_id ) {
 			$record['pages'][] = $home_id;
@@ -250,6 +253,8 @@ class Importer implements ComponentInterface {
 			) ),
 		) ) . ' /-->';
 
+		$blocks[] = $this->spacer( 64 );
+
 		$blocks[] = '<!-- wp:noorifa-core/feature-cards ' . wp_json_encode( array(
 			'columns' => 3,
 			'items'   => array(
@@ -259,11 +264,15 @@ class Importer implements ComponentInterface {
 			),
 		) ) . ' /-->';
 
+		$blocks[] = $this->spacer( 64 );
+
 		$blocks[] = '<!-- wp:noorifa-core/product-grid ' . wp_json_encode( array(
-			'relation'      => 'latest',
+			'relation'       => 'latest',
 			'productsToShow' => 8,
-			'columns'       => 4,
+			'columns'        => 4,
 		) ) . ' /-->';
+
+		$blocks[] = $this->spacer( 64 );
 
 		$blocks[] = '<!-- wp:noorifa-core/image-card ' . wp_json_encode( array(
 			'columns' => 2,
@@ -272,6 +281,8 @@ class Importer implements ComponentInterface {
 				array( 'imageId' => (int) $promo_b, 'imageUrl' => $promo_b ? wp_get_attachment_url( $promo_b ) : '', 'heading' => 'Best sellers', 'subheading' => 'The favourites everyone loves.', 'linkText' => 'Shop now', 'linkUrl' => $shop_url, 'textColor' => '#ffffff', 'overlay' => 40 ),
 			),
 		) ) . ' /-->';
+
+		$blocks[] = $this->spacer( 64 );
 
 		$blocks[] = '<!-- wp:noorifa-core/image-card ' . wp_json_encode( array(
 			'columns'   => 1,
@@ -288,7 +299,22 @@ class Importer implements ComponentInterface {
 			) ),
 		) ) . ' /-->';
 
+		$blocks[] = $this->spacer( 64 );
+
 		return implode( "\n\n", $blocks );
+	}
+
+	/**
+	 * Returns a core Spacer block of the given pixel height — used to space
+	 * the home page's full-width sections apart on the blank-canvas template.
+	 *
+	 * @param int $height Height in pixels.
+	 * @return string
+	 */
+	private function spacer( int $height ): string {
+		return '<!-- wp:spacer {"height":"' . $height . 'px"} -->' . "\n"
+			. '<div style="height:' . $height . 'px" aria-hidden="true" class="wp-block-spacer"></div>' . "\n"
+			. '<!-- /wp:spacer -->';
 	}
 
 	/**
