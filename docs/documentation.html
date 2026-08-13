@@ -176,9 +176,15 @@
 <div class="layout">
   <aside class="sidebar" id="sidebar">
     <div class="brand">
-      <svg class="mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-        <rect x="2" y="2" width="36" height="36" rx="10" fill="var(--green)"/>
-        <path d="M11 27V14l9 7 9-7v13" stroke="var(--gold)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+        <defs>
+          <linearGradient id="docMark" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#C99A2C"/>
+            <stop offset="1" stop-color="#9E6E12"/>
+          </linearGradient>
+        </defs>
+        <rect x="2" y="2" width="60" height="60" rx="17" fill="url(#docMark)"/>
+        <path d="M47.02 15.79L47.02 48.22L38 48.22L26 30.09L26 48.22L16.98 48.22L16.98 15.79L26 15.79L38 34.14L38 15.79" fill="#ffffff"/>
       </svg>
       <span style="line-height:1.1"><b>Noorifa</b><span>Theme Handbook</span></span>
     </div>
