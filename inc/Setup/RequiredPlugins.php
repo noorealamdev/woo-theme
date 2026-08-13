@@ -31,7 +31,7 @@ class RequiredPlugins implements ComponentInterface {
 	 * README) so the "update available" notice fires for anyone running an
 	 * older copy of the plugin.
 	 */
-	const BUNDLED_CORE_VERSION = '1.0.0';
+	const BUNDLED_CORE_VERSION = '1.0.1';
 
 	/**
 	 * admin-post action name (also used as the nonce action).
