@@ -59,6 +59,7 @@ final class Theme {
 			new SvgUpload(),
 			new NavMenus(),
 			new NavMenuAdminUi(),
+			new RequiredPlugins(),
 			new \Noorifa\Hooks\TemplateHooks(),
 			new \Noorifa\Search\LiveSearch(),
 			new \Noorifa\Settings\Admin_Page(),
