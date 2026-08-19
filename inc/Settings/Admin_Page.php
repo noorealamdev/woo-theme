@@ -120,6 +120,20 @@ class Admin_Page implements ComponentInterface {
 					'floating'    => array(
 						'position' => Layout::floating_position_choices(),
 					),
+					'popups'      => array(
+						'trigger'    => Layout::popup_trigger_choices(),
+						'frequency'  => Layout::popup_frequency_choices(),
+						'displayOn'  => Layout::popup_display_on_choices(),
+						'device'     => Layout::popup_device_choices(),
+						'position'   => Layout::popup_position_choices(),
+						'size'       => Layout::popup_size_choices(),
+						'animation'  => Layout::popup_animation_choices(),
+						'closeStyle' => Layout::popup_close_style_choices(),
+						'targets'    => Layout::popup_target_options(),
+					),
+					'privacy'     => array(
+						'position' => Layout::cookie_notice_position_choices(),
+					),
 				),
 				'defaults'    => array(
 					'colorPrimary'   => Layout::COLOR_PRIMARY_DEFAULT,

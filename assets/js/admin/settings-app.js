@@ -10,6 +10,7 @@
 	'use strict';
 
 	var el = wp.element.createElement;
+	var Fragment = wp.element.Fragment;
 	var useState = wp.element.useState;
 	var useEffect = wp.element.useEffect;
 	var __ = wp.i18n.__;
@@ -35,6 +36,8 @@
 		{ id: 'footer', label: __( 'Footer', 'noorifa' ), icon: 'align-wide', real: true },
 		{ id: 'newsletter', label: __( 'Newsletter', 'noorifa' ), icon: 'email', real: true },
 		{ id: 'floating', label: __( 'Floating Button', 'noorifa' ), icon: 'format-chat', real: true },
+		{ id: 'popups', label: __( 'Popups', 'noorifa' ), icon: 'index-card', real: true },
+		{ id: 'privacy', label: __( 'Privacy', 'noorifa' ), icon: 'shield-alt', real: true },
 		{ id: 'shop', label: __( 'Shop', 'noorifa' ), icon: 'store', real: true },
 		{ id: 'product', label: __( 'Product Page', 'noorifa' ), icon: 'products' },
 		{ id: 'cart-checkout', label: __( 'Cart & Checkout', 'noorifa' ), icon: 'cart', real: true },
@@ -1538,6 +1541,463 @@
 		);
 	}
 
+	/**
+	 * `{value, label}` options built from a plain `{value: label}` choices
+	 * map — the shape every `SelectField`/`SelectControl` in this file
+	 * expects. A tiny shared helper, since the popups UI needs it for
+	 * eight separate choice lists.
+	 */
+	function choiceOptions( choices ) {
+		return Object.keys( choices ).map( function ( value ) {
+			return { value: value, label: choices[ value ] };
+		} );
+	}
+
+	function generatePopupId() {
+		return 'pop_' + Math.random().toString( 36 ).slice( 2, 10 );
+	}
+
+	/**
+	 * Client-side mirror of `Schema::popup_row_fields()`'s defaults — used
+	 * only so a freshly added popup shows sensible values immediately,
+	 * before the first save round-trips it through the real server-side
+	 * defaults. The server is still the source of truth: a value here that
+	 * ever drifts from Schema.php just means the popup looks slightly off
+	 * for a few seconds until saved, not a validation gap.
+	 */
+	function newPopupDefaults() {
+		return {
+			id: generatePopupId(),
+			enabled: true,
+			name: __( 'New Popup', 'noorifa' ),
+			content_mode: 'fields',
+			heading: '',
+			subheading: '',
+			image: '',
+			body: '',
+			button_label: '',
+			button_url: '',
+			button_new_tab: false,
+			custom_html: '',
+			trigger_type: 'delay',
+			trigger_delay_seconds: 5,
+			trigger_scroll_percent: 50,
+			trigger_click_selector: '',
+			frequency: 'once_per_session',
+			frequency_days: 7,
+			display_on: 'all',
+			specific_ids: [],
+			device: 'all',
+			hide_logged_in: false,
+			position: 'center',
+			size: 'medium',
+			animation: 'fade',
+			overlay_enabled: true,
+			overlay_color: '#000000B3',
+			background_color: '#ffffff',
+			text_color: '#1a1a1a',
+			border_radius: 12,
+			close_style: 'icon',
+		};
+	}
+
+	/**
+	 * A page/post multi-picker for a popup's "Specific Pages/Posts"
+	 * targeting — stores an array of real post ids, but `FormTokenField`
+	 * itself only understands string tokens, so this maps ids to titles
+	 * (via `DATA.choices.popups.targets`) for display and back to ids on
+	 * change. A typed token with no matching suggestion (i.e. not a real
+	 * id) is silently dropped rather than stored as free text — targeting
+	 * only ever makes sense against a real post.
+	 */
+	function PopupTargetsField( { settings, path, label, help, onChange } ) {
+		var ids = getPath( settings, path ) || [];
+		var targets = ( DATA.choices.popups && DATA.choices.popups.targets ) || [];
+		var titleById = {};
+		var idByTitle = {};
+		targets.forEach( function ( target ) {
+			titleById[ target.id ] = target.title;
+			idByTitle[ target.title ] = target.id;
+		} );
+
+		var value = ids.map( function ( id ) {
+			return titleById[ id ] || ( '#' + id );
+		} );
+
+		return el(
+			Field,
+			{ label: label, help: help },
+			el( c.FormTokenField, {
+				value: value,
+				suggestions: targets.map( function ( target ) {
+					return target.title;
+				} ),
+				onChange: function ( tokens ) {
+					var nextIds = tokens
+						.map( function ( token ) {
+							return idByTitle[ token ];
+						} )
+						.filter( function ( id ) {
+							return !! id;
+						} );
+					onChange( setPath( settings, path, nextIds ) );
+				},
+			} )
+		);
+	}
+
+	/**
+	 * One popup builder row — a collapsible card. The header (name,
+	 * enabled toggle, trigger badge, duplicate/remove/expand) is always
+	 * visible; the full field set only renders while expanded, so a
+	 * site owner with a dozen popups isn't scrolling past hundreds of
+	 * fields at once.
+	 */
+	function PopupItem( { settings, index, onChange, expanded, onToggleExpand, onRemove, onDuplicate } ) {
+		var base = 'popups.items.' + index + '.';
+		var popup = ( getPath( settings, 'popups.items' ) || [] )[ index ] || {};
+		var isHtml = 'html' === popup.content_mode;
+		var isBarPosition = 'top-bar' === popup.position || 'bottom-bar' === popup.position;
+		var choices = DATA.choices.popups;
+
+		return el(
+			'div',
+			{ className: 'noorifa-popup-item' + ( popup.enabled ? '' : ' is-disabled' ) },
+			el(
+				'div',
+				{ className: 'noorifa-popup-item__header' },
+				el( c.ToggleControl, {
+					className: 'noorifa-popup-item__toggle',
+					checked: !! popup.enabled,
+					label: __( 'Enabled', 'noorifa' ),
+					hideLabelFromVision: true,
+					onChange: function ( value ) {
+						onChange( setPath( settings, base + 'enabled', value ) );
+					},
+				} ),
+				el( 'input', {
+					type: 'text',
+					className: 'noorifa-popup-item__name',
+					value: popup.name || '',
+					placeholder: __( 'Popup name', 'noorifa' ),
+					onChange: function ( event ) {
+						onChange( setPath( settings, base + 'name', event.target.value ) );
+					},
+				} ),
+				el( 'span', { className: 'noorifa-popup-item__badge' }, choices.trigger[ popup.trigger_type ] || popup.trigger_type ),
+				el(
+					'div',
+					{ className: 'noorifa-popup-item__actions' },
+					el( c.Button, { variant: 'tertiary', onClick: onDuplicate }, __( 'Duplicate', 'noorifa' ) ),
+					el( c.Button, { variant: 'tertiary', isDestructive: true, onClick: onRemove }, __( 'Remove', 'noorifa' ) ),
+					el(
+						'button',
+						{
+							type: 'button',
+							className: 'noorifa-popup-item__chevron',
+							'aria-expanded': expanded,
+							'aria-label': expanded ? __( 'Collapse', 'noorifa' ) : __( 'Expand', 'noorifa' ),
+							onClick: onToggleExpand,
+						},
+						el( c.Icon, { icon: expanded ? 'arrow-up-alt2' : 'arrow-down-alt2' } )
+					)
+				)
+			),
+			expanded
+				? el(
+						'div',
+						{ className: 'noorifa-popup-item__body' },
+
+						el( 'h3', { className: 'noorifa-subheading' }, __( 'Content', 'noorifa' ) ),
+						el( ChoiceField, {
+							settings: settings,
+							path: base + 'content_mode',
+							label: __( 'Content Mode', 'noorifa' ),
+							choices: { fields: __( 'Structured Fields', 'noorifa' ), html: __( 'Custom HTML', 'noorifa' ) },
+							onChange: onChange,
+						} ),
+						isHtml
+							? el( TextareaField, {
+									settings: settings,
+									path: base + 'custom_html',
+									label: __( 'Custom HTML', 'noorifa' ),
+									help: __( 'Full HTML/shortcode markup for this popup, unfiltered — same trust model as Custom Code.', 'noorifa' ),
+									onChange: onChange,
+							  } )
+							: el(
+									Fragment,
+									null,
+									el( ImageField, { settings: settings, path: base + 'image', label: __( 'Image (optional)', 'noorifa' ), onChange: onChange } ),
+									el( TextField, { settings: settings, path: base + 'heading', label: __( 'Heading', 'noorifa' ), onChange: onChange } ),
+									el( TextField, { settings: settings, path: base + 'subheading', label: __( 'Subheading', 'noorifa' ), onChange: onChange } ),
+									el( TextareaField, {
+										settings: settings,
+										path: base + 'body',
+										label: __( 'Body Text', 'noorifa' ),
+										help: __( 'Basic HTML is allowed here (e.g. a link or bold text).', 'noorifa' ),
+										onChange: onChange,
+									} ),
+									el( TextField, { settings: settings, path: base + 'button_label', label: __( 'Button Label', 'noorifa' ), onChange: onChange } ),
+									el( TextField, { settings: settings, path: base + 'button_url', label: __( 'Button URL', 'noorifa' ), type: 'url', onChange: onChange } ),
+									el( ToggleField, { settings: settings, path: base + 'button_new_tab', label: __( 'Open button link in a new tab', 'noorifa' ), onChange: onChange } )
+							  ),
+
+						el( 'h3', { className: 'noorifa-subheading' }, __( 'Trigger', 'noorifa' ) ),
+						el( SelectField, {
+							settings: settings,
+							path: base + 'trigger_type',
+							label: __( 'Show this popup…', 'noorifa' ),
+							options: choiceOptions( choices.trigger ),
+							onChange: onChange,
+						} ),
+						'delay' === popup.trigger_type
+							? el( RangeField, { settings: settings, path: base + 'trigger_delay_seconds', label: __( 'Delay (seconds)', 'noorifa' ), min: 0, max: 120, onChange: onChange } )
+							: null,
+						'scroll' === popup.trigger_type
+							? el( RangeField, { settings: settings, path: base + 'trigger_scroll_percent', label: __( 'Scroll depth (%)', 'noorifa' ), min: 1, max: 100, onChange: onChange } )
+							: null,
+						'click' === popup.trigger_type
+							? el( TextField, {
+									settings: settings,
+									path: base + 'trigger_click_selector',
+									label: __( 'Click target (CSS selector)', 'noorifa' ),
+									help: __( 'e.g. ".open-popup-btn" or "#some-link" — any element matching this opens the popup when clicked.', 'noorifa' ),
+									onChange: onChange,
+							  } )
+							: null,
+
+						el( 'h3', { className: 'noorifa-subheading' }, __( 'Frequency', 'noorifa' ) ),
+						el( SelectField, {
+							settings: settings,
+							path: base + 'frequency',
+							label: __( 'Show again', 'noorifa' ),
+							options: choiceOptions( choices.frequency ),
+							onChange: onChange,
+						} ),
+						'once_per_days' === popup.frequency
+							? el( RangeField, { settings: settings, path: base + 'frequency_days', label: __( 'Every how many days', 'noorifa' ), min: 1, max: 365, onChange: onChange } )
+							: null,
+
+						el( 'h3', { className: 'noorifa-subheading' }, __( 'Targeting', 'noorifa' ) ),
+						el( SelectField, {
+							settings: settings,
+							path: base + 'display_on',
+							label: __( 'Display On', 'noorifa' ),
+							options: choiceOptions( choices.displayOn ),
+							onChange: onChange,
+						} ),
+						'specific_pages' === popup.display_on
+							? el( PopupTargetsField, {
+									settings: settings,
+									path: base + 'specific_ids',
+									label: __( 'Specific Pages/Posts', 'noorifa' ),
+									help: __( 'Type to search — only published pages and posts can be chosen.', 'noorifa' ),
+									onChange: onChange,
+							  } )
+							: null,
+						el( SelectField, {
+							settings: settings,
+							path: base + 'device',
+							label: __( 'Device', 'noorifa' ),
+							options: choiceOptions( choices.device ),
+							onChange: onChange,
+						} ),
+						el( ToggleField, { settings: settings, path: base + 'hide_logged_in', label: __( 'Hide from logged-in users', 'noorifa' ), onChange: onChange } ),
+
+						el( 'h3', { className: 'noorifa-subheading' }, __( 'Design', 'noorifa' ) ),
+						el( SelectField, {
+							settings: settings,
+							path: base + 'position',
+							label: __( 'Position', 'noorifa' ),
+							options: choiceOptions( choices.position ),
+							onChange: onChange,
+						} ),
+						isBarPosition
+							? null
+							: el( SelectField, {
+									settings: settings,
+									path: base + 'size',
+									label: __( 'Size', 'noorifa' ),
+									options: choiceOptions( choices.size ),
+									onChange: onChange,
+							  } ),
+						el( SelectField, {
+							settings: settings,
+							path: base + 'animation',
+							label: __( 'Animation', 'noorifa' ),
+							options: choiceOptions( choices.animation ),
+							onChange: onChange,
+						} ),
+						isBarPosition
+							? null
+							: el( ToggleField, { settings: settings, path: base + 'overlay_enabled', label: __( 'Show dark overlay behind popup', 'noorifa' ), onChange: onChange } ),
+						( ! isBarPosition && popup.overlay_enabled )
+							? el( ColorField, { settings: settings, path: base + 'overlay_color', label: __( 'Overlay Color', 'noorifa' ), enableAlpha: true, onChange: onChange } )
+							: null,
+						el( ColorField, { settings: settings, path: base + 'background_color', label: __( 'Background Color', 'noorifa' ), onChange: onChange } ),
+						el( ColorField, { settings: settings, path: base + 'text_color', label: __( 'Text Color', 'noorifa' ), onChange: onChange } ),
+						el( RangeField, { settings: settings, path: base + 'border_radius', label: __( 'Corner Radius', 'noorifa' ), min: 0, max: 40, onChange: onChange } ),
+						el( SelectField, {
+							settings: settings,
+							path: base + 'close_style',
+							label: __( 'Close Button', 'noorifa' ),
+							options: choiceOptions( choices.closeStyle ),
+							onChange: onChange,
+						} )
+				  )
+				: null
+		);
+	}
+
+	function PopupsSection( { settings, onChange } ) {
+		var expandedState = useState( null );
+		var expandedId = expandedState[ 0 ];
+		var setExpandedId = expandedState[ 1 ];
+
+		var items = getPath( settings, 'popups.items' ) || [];
+
+		function updateItems( nextItems ) {
+			onChange( setPath( settings, 'popups.items', nextItems ) );
+		}
+
+		function addPopup() {
+			var popup = newPopupDefaults();
+			updateItems( items.concat( [ popup ] ) );
+			setExpandedId( popup.id );
+		}
+
+		function duplicatePopup( index ) {
+			var copy = Object.assign( {}, items[ index ], {
+				id: generatePopupId(),
+				name: ( items[ index ].name || __( 'Popup', 'noorifa' ) ) + ' ' + __( '(copy)', 'noorifa' ),
+			} );
+			var next = items.slice();
+			next.splice( index + 1, 0, copy );
+			updateItems( next );
+			setExpandedId( copy.id );
+		}
+
+		function removePopup( index ) {
+			if ( ! window.confirm( __( 'Remove this popup? This cannot be undone once saved.', 'noorifa' ) ) ) {
+				return;
+			}
+			var next = items.slice();
+			next.splice( index, 1 );
+			updateItems( next );
+		}
+
+		return el(
+			c.Card,
+			null,
+			el( c.CardHeader, null, el( 'h2', null, __( 'Popups', 'noorifa' ) ) ),
+			el(
+				c.CardBody,
+				null,
+				el(
+					'p',
+					{ className: 'noorifa-section-intro' },
+					__( 'Build announcement bars, exit-intent offers and lead-capture modals — each with its own trigger, targeting and design.', 'noorifa' )
+				),
+				items.length
+					? el(
+							'div',
+							{ className: 'noorifa-popup-list' },
+							items.map( function ( popup, index ) {
+								return el( PopupItem, {
+									key: popup.id || index,
+									settings: settings,
+									index: index,
+									onChange: onChange,
+									expanded: expandedId === popup.id,
+									onToggleExpand: function () {
+										setExpandedId( expandedId === popup.id ? null : popup.id );
+									},
+									onDuplicate: function () {
+										duplicatePopup( index );
+									},
+									onRemove: function () {
+										removePopup( index );
+									},
+								} );
+							} )
+					  )
+					: el( 'p', { className: 'noorifa-section-intro' }, __( 'No popups yet — add your first one below.', 'noorifa' ) ),
+				el( c.Button, { variant: 'secondary', onClick: addPopup }, __( '+ Add Popup', 'noorifa' ) )
+			)
+		);
+	}
+
+	/**
+	 * A single site-wide GDPR-style cookie consent banner — unlike Popups,
+	 * this is one flat settings group (like Topbar/Floating Button), not a
+	 * repeatable list, so it just reuses the plain field components
+	 * directly with no repeater/collapsible-row plumbing.
+	 */
+	function PrivacySection( { settings, onChange } ) {
+		var enabled = !! getPath( settings, 'privacy.cookie_notice_enabled' );
+		var positionOptions = choiceOptions( DATA.choices.privacy.position );
+
+		return el(
+			c.Card,
+			null,
+			el( c.CardHeader, null, el( 'h2', null, __( 'Privacy', 'noorifa' ) ) ),
+			el(
+				c.CardBody,
+				null,
+				el(
+					'p',
+					{ className: 'noorifa-section-intro' },
+					__( 'A cookie consent banner shown to first-time visitors. Accepting it just remembers the choice and hides the banner — it doesn’t block any other script (Google Analytics/Facebook Pixel in Integrations load the same either way).', 'noorifa' )
+				),
+				el( ToggleField, {
+					settings: settings,
+					path: 'privacy.cookie_notice_enabled',
+					label: __( 'Show cookie consent banner', 'noorifa' ),
+					onChange: onChange,
+				} ),
+				! enabled
+					? null
+					: el(
+							Fragment,
+							null,
+							el( TextField, { settings: settings, path: 'privacy.cookie_notice_heading', label: __( 'Heading', 'noorifa' ), onChange: onChange } ),
+							el( TextareaField, {
+								settings: settings,
+								path: 'privacy.cookie_notice_message',
+								label: __( 'Message', 'noorifa' ),
+								help: __( 'Basic HTML is allowed here (e.g. a link or bold text).', 'noorifa' ),
+								onChange: onChange,
+							} ),
+							el( TextField, { settings: settings, path: 'privacy.cookie_notice_button_label', label: __( 'Accept Button Label', 'noorifa' ), onChange: onChange } ),
+
+							el( 'h3', { className: 'noorifa-subheading' }, __( 'Cookie Policy Link (optional)', 'noorifa' ) ),
+							el( TextField, { settings: settings, path: 'privacy.cookie_notice_policy_url', label: __( 'Cookie Policy URL', 'noorifa' ), type: 'url', onChange: onChange } ),
+							el( TextField, { settings: settings, path: 'privacy.cookie_notice_policy_link_text', label: __( 'Link Text', 'noorifa' ), onChange: onChange } ),
+
+							el( 'h3', { className: 'noorifa-subheading' }, __( 'Design', 'noorifa' ) ),
+							el( SelectField, {
+								settings: settings,
+								path: 'privacy.cookie_notice_position',
+								label: __( 'Position', 'noorifa' ),
+								options: positionOptions,
+								onChange: onChange,
+							} ),
+							el( ColorField, { settings: settings, path: 'privacy.cookie_notice_background_color', label: __( 'Background Color', 'noorifa' ), onChange: onChange } ),
+							el( ColorField, { settings: settings, path: 'privacy.cookie_notice_text_color', label: __( 'Text Color', 'noorifa' ), onChange: onChange } ),
+							el( RangeField, {
+								settings: settings,
+								path: 'privacy.cookie_notice_duration_days',
+								label: __( 'Remember choice for (days)', 'noorifa' ),
+								help: __( 'How long after accepting before the banner can show again.', 'noorifa' ),
+								min: 30,
+								max: 365,
+								onChange: onChange,
+							} )
+					  )
+			)
+		);
+	}
+
 	function CartCheckoutSection( { settings, onChange } ) {
 		return el(
 			c.Card,
@@ -1935,6 +2395,8 @@
 		shop: ShopSection,
 		'cart-checkout': CartCheckoutSection,
 		floating: FloatingButtonSection,
+		popups: PopupsSection,
+		privacy: PrivacySection,
 		blog: BlogSection,
 		'page-header': PageHeaderSection,
 		buttons: ButtonsSection,

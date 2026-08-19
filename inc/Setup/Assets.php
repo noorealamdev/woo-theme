@@ -52,6 +52,17 @@ class Assets implements ComponentInterface {
 			wp_enqueue_style( 'noorifa-drift', NOORIFA_THEME_URI . '/assets/css/drift-basic.min.css', array(), '1.5' );
 			wp_enqueue_style( 'noorifa-photoswipe', NOORIFA_THEME_URI . '/assets/css/photoswipe.css', array(), '5' );
 		}
+
+		// Only when a real popup actually targets this request — an
+		// untouched install (or one where every popup is disabled/targets
+		// other pages) never loads this file at all.
+		if ( \Noorifa\Settings\Layout::popups_for_display() ) {
+			wp_enqueue_style( 'noorifa-popups', NOORIFA_THEME_URI . '/assets/css/popups.css', array(), NOORIFA_VERSION );
+		}
+
+		if ( ! empty( \Noorifa\Settings\Layout::all()['privacy']['cookie_notice_enabled'] ) ) {
+			wp_enqueue_style( 'noorifa-cookie-notice', NOORIFA_THEME_URI . '/assets/css/cookie-notice.css', array(), NOORIFA_VERSION );
+		}
 	}
 
 	/**
@@ -165,6 +176,14 @@ class Assets implements ComponentInterface {
 
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
+		}
+
+		if ( \Noorifa\Settings\Layout::popups_for_display() ) {
+			wp_enqueue_script( 'noorifa-popups', NOORIFA_THEME_URI . '/assets/js/popups.js', array(), NOORIFA_VERSION, $footer );
+		}
+
+		if ( ! empty( \Noorifa\Settings\Layout::all()['privacy']['cookie_notice_enabled'] ) ) {
+			wp_enqueue_script( 'noorifa-cookie-notice', NOORIFA_THEME_URI . '/assets/js/cookie-notice.js', array(), NOORIFA_VERSION, $footer );
 		}
 	}
 

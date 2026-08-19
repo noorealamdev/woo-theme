@@ -29,14 +29,15 @@ class Schema {
 	 * Each entry: `path` (dot-path into the nested settings array),
 	 * `type` (drives sanitization — text/email/textarea/html/raw_html/url/
 	 * image/bool/hex_color/hex_color_alpha/select/range/order/zones/
-	 * subset_order/social_links), `default`, `flat` (the `noorifa_settings()` key), and, only for
+	 * subset_order/social_links/popups/id_list), `default`, `flat` (the `noorifa_settings()` key), and, only for
 	 * select/range/order/zones/subset_order/social_links, whatever extra
 	 * shape that type needs (`choices`/`min`/`max`/`modules`). `order`,
-	 * `zones`, `subset_order` and `social_links` fields additionally take
-	 * a `read` callback so `flatten()` returns the *validated* stored
-	 * value (falling back to
+	 * `zones`, `subset_order`, `social_links` and `popups` fields
+	 * additionally take a `read` callback so `flatten()` returns the
+	 * *validated* stored value (falling back to
 	 * `default` if it's ever a stale/corrupted set) instead of a raw,
-	 * unvalidated read.
+	 * unvalidated read. `popups` is itself a list of rows, each validated
+	 * against its own sub-registry — see `popup_row_fields()`.
 	 *
 	 * @return array<int, array<string, mixed>>
 	 */
@@ -656,9 +657,187 @@ class Schema {
 				'type'    => 'raw_html',
 				'default' => '',
 			),
+			array(
+				'path'    => 'popups.items',
+				'flat'    => 'popups',
+				'type'    => 'popups',
+				'default' => array(),
+				'read'    => array( Layout::class, 'popups_items' ),
+			),
+			array(
+				'path'    => 'privacy.cookie_notice_enabled',
+				'flat'    => 'cookie_notice_enabled',
+				'type'    => 'bool',
+				'default' => false,
+			),
+			array(
+				'path'    => 'privacy.cookie_notice_heading',
+				'flat'    => 'cookie_notice_heading',
+				'type'    => 'text',
+				'default' => Layout::cookie_notice_heading_default(),
+			),
+			array(
+				'path'    => 'privacy.cookie_notice_message',
+				'flat'    => 'cookie_notice_message',
+				'type'    => 'html',
+				'default' => Layout::cookie_notice_message_default(),
+			),
+			array(
+				'path'    => 'privacy.cookie_notice_button_label',
+				'flat'    => 'cookie_notice_button_label',
+				'type'    => 'text',
+				'default' => Layout::cookie_notice_button_label_default(),
+			),
+			array(
+				'path'    => 'privacy.cookie_notice_policy_url',
+				'flat'    => 'cookie_notice_policy_url',
+				'type'    => 'url',
+				'default' => '',
+			),
+			array(
+				'path'    => 'privacy.cookie_notice_policy_link_text',
+				'flat'    => 'cookie_notice_policy_link_text',
+				'type'    => 'text',
+				'default' => Layout::cookie_notice_policy_link_text_default(),
+			),
+			array(
+				'path'    => 'privacy.cookie_notice_position',
+				'flat'    => 'cookie_notice_position',
+				'type'    => 'select',
+				'default' => Layout::COOKIE_NOTICE_POSITION_DEFAULT,
+				'choices' => array_keys( Layout::cookie_notice_position_choices() ),
+			),
+			array(
+				'path'    => 'privacy.cookie_notice_background_color',
+				'flat'    => 'cookie_notice_background_color',
+				'type'    => 'hex_color',
+				'default' => Layout::COOKIE_NOTICE_BG_DEFAULT,
+			),
+			array(
+				'path'    => 'privacy.cookie_notice_text_color',
+				'flat'    => 'cookie_notice_text_color',
+				'type'    => 'hex_color',
+				'default' => Layout::COOKIE_NOTICE_TEXT_DEFAULT,
+			),
+			array(
+				'path'    => 'privacy.cookie_notice_duration_days',
+				'flat'    => 'cookie_notice_duration_days',
+				'type'    => 'range',
+				'default' => Layout::COOKIE_NOTICE_DURATION_DEFAULT,
+				'min'     => 30,
+				'max'     => 365,
+			),
 		);
 
 		return $fields;
+	}
+
+	/**
+	 * The per-row field registry for a single `popups`-type entry (one
+	 * popup builder item). Deliberately reuses `sanitize_value()` — the
+	 * same generic, type-driven sanitizer every top-level field already
+	 * goes through — instead of hand-writing per-field casts a second
+	 * time, so a popup row is sanitized exactly as strictly as any other
+	 * field of the same `type`.
+	 *
+	 * @return array<int, array<string, mixed>>
+	 */
+	private static function popup_row_fields(): array {
+		return array(
+			array( 'key' => 'enabled', 'type' => 'bool', 'default' => true ),
+			array( 'key' => 'name', 'type' => 'text', 'default' => __( 'New Popup', 'noorifa' ) ),
+
+			// Content.
+			array( 'key' => 'content_mode', 'type' => 'select', 'default' => 'fields', 'choices' => array( 'fields', 'html' ) ),
+			array( 'key' => 'heading', 'type' => 'text', 'default' => '' ),
+			array( 'key' => 'subheading', 'type' => 'text', 'default' => '' ),
+			array( 'key' => 'image', 'type' => 'image', 'default' => '' ),
+			array( 'key' => 'body', 'type' => 'html', 'default' => '' ),
+			array( 'key' => 'button_label', 'type' => 'text', 'default' => '' ),
+			array( 'key' => 'button_url', 'type' => 'url', 'default' => '' ),
+			array( 'key' => 'button_new_tab', 'type' => 'bool', 'default' => false ),
+			// Same trust model as `custom_code.js`/`.css` — this REST route
+			// already requires `manage_options`; only used while
+			// `content_mode` is 'html'.
+			array( 'key' => 'custom_html', 'type' => 'raw_html', 'default' => '' ),
+
+			// Trigger.
+			array( 'key' => 'trigger_type', 'type' => 'select', 'default' => 'delay', 'choices' => array( 'immediate', 'delay', 'scroll', 'exit_intent', 'click' ) ),
+			array( 'key' => 'trigger_delay_seconds', 'type' => 'range', 'default' => 5, 'min' => 0, 'max' => 120 ),
+			array( 'key' => 'trigger_scroll_percent', 'type' => 'range', 'default' => 50, 'min' => 1, 'max' => 100 ),
+			array( 'key' => 'trigger_click_selector', 'type' => 'text', 'default' => '' ),
+
+			// Frequency / display cap.
+			array( 'key' => 'frequency', 'type' => 'select', 'default' => 'once_per_session', 'choices' => array( 'every_visit', 'once_per_session', 'once_per_day', 'once_per_days', 'once_ever' ) ),
+			array( 'key' => 'frequency_days', 'type' => 'range', 'default' => 7, 'min' => 1, 'max' => 365 ),
+
+			// Targeting.
+			array( 'key' => 'display_on', 'type' => 'select', 'default' => 'all', 'choices' => array( 'all', 'front_page', 'specific_pages', 'shop', 'cart', 'checkout' ) ),
+			array( 'key' => 'specific_ids', 'type' => 'id_list', 'default' => array() ),
+			array( 'key' => 'device', 'type' => 'select', 'default' => 'all', 'choices' => array( 'all', 'desktop', 'mobile' ) ),
+			array( 'key' => 'hide_logged_in', 'type' => 'bool', 'default' => false ),
+
+			// Design.
+			array( 'key' => 'position', 'type' => 'select', 'default' => 'center', 'choices' => array( 'center', 'bottom-right', 'bottom-left', 'top-bar', 'bottom-bar', 'fullscreen' ) ),
+			array( 'key' => 'size', 'type' => 'select', 'default' => 'medium', 'choices' => array( 'small', 'medium', 'large' ) ),
+			array( 'key' => 'animation', 'type' => 'select', 'default' => 'fade', 'choices' => array( 'fade', 'slide-up', 'zoom', 'none' ) ),
+			array( 'key' => 'overlay_enabled', 'type' => 'bool', 'default' => true ),
+			array( 'key' => 'overlay_color', 'type' => 'hex_color_alpha', 'default' => '#000000B3' ),
+			array( 'key' => 'background_color', 'type' => 'hex_color', 'default' => '#ffffff' ),
+			array( 'key' => 'text_color', 'type' => 'hex_color', 'default' => '#1a1a1a' ),
+			array( 'key' => 'border_radius', 'type' => 'range', 'default' => 12, 'min' => 0, 'max' => 40 ),
+			array( 'key' => 'close_style', 'type' => 'select', 'default' => 'icon', 'choices' => array( 'icon', 'text', 'none' ) ),
+		);
+	}
+
+	/**
+	 * Sanitizes a `popups`-type field: a real repeatable list of popup
+	 * builder items, each row validated one subfield at a time against
+	 * `popup_row_fields()` via the same generic `sanitize_value()` every
+	 * scalar field already uses. A row missing/failing a subfield falls
+	 * back to that subfield's own default (never the whole row) — same
+	 * "never let one bad field nuke the row" behaviour `sanitize()` gives
+	 * top-level fields. Each row gets a stable `id` (kept if already a
+	 * real, unique `sanitize_key()`-safe string; generated otherwise) —
+	 * this is what frequency-capping cookies and the front-end DOM id key
+	 * off, so it must never change across saves.
+	 *
+	 * Public (not `private`, unlike the other per-type sanitizers) because
+	 * `Layout::popups_items()` also calls it directly, to re-validate the
+	 * raw stored option on every read the same way this validates a posted
+	 * payload on every save — see that method's own docblock.
+	 *
+	 * @param mixed $raw Raw stored or posted value, an array of popup rows.
+	 * @return array<int, array<string, mixed>>
+	 */
+	public static function sanitize_popups( $raw ): array {
+		if ( ! is_array( $raw ) ) {
+			return array();
+		}
+
+		$row_fields = self::popup_row_fields();
+		$seen_ids   = array();
+		$result     = array();
+
+		foreach ( $raw as $row ) {
+			if ( ! is_array( $row ) ) {
+				continue;
+			}
+
+			$id = isset( $row['id'] ) ? sanitize_key( (string) $row['id'] ) : '';
+			if ( '' === $id || isset( $seen_ids[ $id ] ) ) {
+				$id = 'pop_' . substr( md5( wp_generate_password( 16, false ) ), 0, 10 );
+			}
+			$seen_ids[ $id ] = true;
+
+			$item = array( 'id' => $id );
+			foreach ( $row_fields as $field ) {
+				$item[ $field['key'] ] = self::sanitize_value( $row[ $field['key'] ] ?? null, $field );
+			}
+			$result[] = $item;
+		}
+
+		return $result;
 	}
 
 	/**
@@ -921,6 +1100,20 @@ class Schema {
 
 			case 'social_links':
 				return self::sanitize_social_links( $raw, $field );
+
+			case 'popups':
+				return self::sanitize_popups( $raw );
+
+			case 'id_list':
+				// A plain list of post/page ids (e.g. a popup's "Specific
+				// Pages" targeting) — unlike 'order'/'zones', any real
+				// integer id is accepted (not checked against a fixed
+				// choices list), deduplicated, and an empty list is itself
+				// valid (falls back to `default`, i.e. `[]`, not an error).
+				if ( ! is_array( $raw ) ) {
+					return $field['default'];
+				}
+				return array_values( array_unique( array_filter( array_map( 'absint', $raw ) ) ) );
 
 			default:
 				return $field['default'];

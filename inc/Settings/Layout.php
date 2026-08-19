@@ -453,6 +453,257 @@ class Layout {
 	}
 
 	/**
+	 * Real stored popup builder items, re-validated against the raw stored
+	 * option (not the `array_replace_recursive`-unsafe `self::all()`) the
+	 * same way `footer_social_links_items()` etc. do — see `Schema::merge()`'s
+	 * own docblock for why. Re-uses `Schema::sanitize_popups()`, the exact
+	 * same validator a save already ran the data through, so a stale/
+	 * corrupted item (e.g. from an old field that's since been removed)
+	 * quietly drops instead of ever reaching the front end. This is the
+	 * `read` callback `Schema::flatten()` calls for the `popups` field.
+	 *
+	 * @return array<int, array<string, mixed>>
+	 */
+	public static function popups_items(): array {
+		return Schema::sanitize_popups( self::raw_stored( 'popups', 'items' ) );
+	}
+
+	/**
+	 * Every enabled popup whose targeting rules match the CURRENT request
+	 * (page targeting only — device targeting is deliberately left to CSS/
+	 * JS on the front end, via `matchMedia`, so it responds live to window
+	 * resizing rather than a one-shot server-side `wp_is_mobile()` guess).
+	 * Both `Assets::enqueue_styles()`/`enqueue_scripts()` (to decide
+	 * whether to load the popup CSS/JS at all) and
+	 * `template-parts/global/popups.php` (to render the matching popups)
+	 * call this single method, so "does this popup apply here" is decided
+	 * in exactly one place.
+	 *
+	 * @return array<int, array<string, mixed>>
+	 */
+	public static function popups_for_display(): array {
+		$matched = array();
+
+		foreach ( self::popups_items() as $popup ) {
+			if ( empty( $popup['enabled'] ) ) {
+				continue;
+			}
+			if ( ! empty( $popup['hide_logged_in'] ) && is_user_logged_in() ) {
+				continue;
+			}
+			if ( self::popup_matches_current_request( $popup ) ) {
+				$matched[] = $popup;
+			}
+		}
+
+		return $matched;
+	}
+
+	/**
+	 * @param array $popup A single validated popup item (see `popups_items()`).
+	 */
+	private static function popup_matches_current_request( array $popup ): bool {
+		switch ( $popup['display_on'] ?? 'all' ) {
+			case 'front_page':
+				return is_front_page();
+
+			case 'specific_pages':
+				return is_singular() && in_array( get_the_ID(), $popup['specific_ids'] ?? array(), true );
+
+			case 'shop':
+				return function_exists( 'is_shop' ) && ( is_shop() || is_product_taxonomy() || is_product() );
+
+			case 'cart':
+				return function_exists( 'is_cart' ) && is_cart();
+
+			case 'checkout':
+				return function_exists( 'is_checkout' ) && is_checkout() && ! is_order_received_page();
+
+			case 'all':
+			default:
+				return true;
+		}
+	}
+
+	/**
+	 * @return array<string, string>
+	 */
+	public static function popup_trigger_choices(): array {
+		return array(
+			'immediate'   => __( 'Immediately on page load', 'noorifa' ),
+			'delay'       => __( 'After a time delay', 'noorifa' ),
+			'scroll'      => __( 'After scrolling a percentage of the page', 'noorifa' ),
+			'exit_intent' => __( 'On exit intent (mouse leaves the window)', 'noorifa' ),
+			'click'       => __( 'When a specific element is clicked', 'noorifa' ),
+		);
+	}
+
+	/**
+	 * @return array<string, string>
+	 */
+	public static function popup_frequency_choices(): array {
+		return array(
+			'every_visit'      => __( 'Every page view', 'noorifa' ),
+			'once_per_session' => __( 'Once per browser session', 'noorifa' ),
+			'once_per_day'     => __( 'Once per day', 'noorifa' ),
+			'once_per_days'    => __( 'Once every N days', 'noorifa' ),
+			'once_ever'        => __( 'Once ever (until cookies are cleared)', 'noorifa' ),
+		);
+	}
+
+	/**
+	 * @return array<string, string>
+	 */
+	public static function popup_display_on_choices(): array {
+		return array(
+			'all'            => __( 'Entire site', 'noorifa' ),
+			'front_page'     => __( 'Front page only', 'noorifa' ),
+			'specific_pages' => __( 'Specific pages/posts', 'noorifa' ),
+			'shop'           => __( 'Shop & product pages', 'noorifa' ),
+			'cart'           => __( 'Cart page', 'noorifa' ),
+			'checkout'       => __( 'Checkout page', 'noorifa' ),
+		);
+	}
+
+	/**
+	 * @return array<string, string>
+	 */
+	public static function popup_device_choices(): array {
+		return array(
+			'all'     => __( 'All devices', 'noorifa' ),
+			'desktop' => __( 'Desktop only', 'noorifa' ),
+			'mobile'  => __( 'Mobile only', 'noorifa' ),
+		);
+	}
+
+	/**
+	 * @return array<string, string>
+	 */
+	public static function popup_position_choices(): array {
+		return array(
+			'center'       => __( 'Center modal', 'noorifa' ),
+			'bottom-right' => __( 'Corner box — bottom right', 'noorifa' ),
+			'bottom-left'  => __( 'Corner box — bottom left', 'noorifa' ),
+			'top-bar'      => __( 'Announcement bar — top', 'noorifa' ),
+			'bottom-bar'   => __( 'Announcement bar — bottom', 'noorifa' ),
+			'fullscreen'   => __( 'Fullscreen takeover', 'noorifa' ),
+		);
+	}
+
+	/**
+	 * @return array<string, string>
+	 */
+	public static function popup_size_choices(): array {
+		return array(
+			'small'  => __( 'Small', 'noorifa' ),
+			'medium' => __( 'Medium', 'noorifa' ),
+			'large'  => __( 'Large', 'noorifa' ),
+		);
+	}
+
+	/**
+	 * @return array<string, string>
+	 */
+	public static function popup_animation_choices(): array {
+		return array(
+			'fade'     => __( 'Fade in', 'noorifa' ),
+			'slide-up' => __( 'Slide up', 'noorifa' ),
+			'zoom'     => __( 'Zoom in', 'noorifa' ),
+			'none'     => __( 'None', 'noorifa' ),
+		);
+	}
+
+	/**
+	 * @return array<string, string>
+	 */
+	public static function popup_close_style_choices(): array {
+		return array(
+			'icon' => __( '× icon', 'noorifa' ),
+			'text' => __( 'Text ("Close")', 'noorifa' ),
+			'none' => __( 'No close button', 'noorifa' ),
+		);
+	}
+
+	/**
+	 * Published pages and posts, for the "Specific pages/posts" targeting
+	 * picker — capped at 300 so a very large site never balloons the
+	 * settings screen's localized payload.
+	 *
+	 * @return array<int, array{id: int, title: string}>
+	 */
+	public static function popup_target_options(): array {
+		$posts = get_posts(
+			array(
+				'post_type'        => array( 'page', 'post' ),
+				'post_status'      => 'publish',
+				'posts_per_page'   => 300,
+				'orderby'          => 'title',
+				'order'            => 'ASC',
+				'suppress_filters' => false,
+			)
+		);
+
+		return array_map(
+			function ( $post ) {
+				return array(
+					'id'    => $post->ID,
+					'title' => ( 'page' === $post->post_type ? '' : __( 'Post: ', 'noorifa' ) ) . get_the_title( $post ),
+				);
+			},
+			$posts
+		);
+	}
+
+	/**
+	 * Real default cookie-notice copy — a plain, self-contained sentence
+	 * that reads correctly whether or not a site owner ever sets a Cookie
+	 * Policy URL (see `cookie_notice_policy_url`); the policy link, when
+	 * present, is appended as its own sentence by
+	 * `template-parts/global/cookie-notice.php` rather than being baked
+	 * into this string, so there's no dangling "…agreeing to our" if the
+	 * URL is left blank.
+	 */
+	public static function cookie_notice_heading_default(): string {
+		return __( 'We Care About Your Privacy', 'noorifa' );
+	}
+
+	/**
+	 * @see cookie_notice_heading_default()
+	 */
+	public static function cookie_notice_message_default(): string {
+		return __( 'We use cookies to improve your shopping experience. By continuing to browse this site, you agree to our use of cookies.', 'noorifa' );
+	}
+
+	public static function cookie_notice_button_label_default(): string {
+		return __( 'Accept Cookies', 'noorifa' );
+	}
+
+	/**
+	 * Link text for the optional Cookie Policy URL, e.g. "Read our
+	 * cookie policy." — only rendered while a URL is actually set.
+	 */
+	public static function cookie_notice_policy_link_text_default(): string {
+		return __( 'cookie policy', 'noorifa' );
+	}
+
+	const COOKIE_NOTICE_POSITION_DEFAULT = 'bottom-left';
+	const COOKIE_NOTICE_BG_DEFAULT       = '#ffffff';
+	const COOKIE_NOTICE_TEXT_DEFAULT     = '#1a1a1a';
+	const COOKIE_NOTICE_DURATION_DEFAULT = 180;
+
+	/**
+	 * @return array<string, string>
+	 */
+	public static function cookie_notice_position_choices(): array {
+		return array(
+			'bottom-left'  => __( 'Bottom left corner', 'noorifa' ),
+			'bottom-right' => __( 'Bottom right corner', 'noorifa' ),
+			'bottom-bar'   => __( 'Full-width bar — bottom', 'noorifa' ),
+			'top-bar'      => __( 'Full-width bar — top', 'noorifa' ),
+		);
+	}
+
+	/**
 	 * Same real white the header/footer background-color toggles already
 	 * default to — the page-title banner has no background of its own
 	 * today (transparent, inherits the body background).
