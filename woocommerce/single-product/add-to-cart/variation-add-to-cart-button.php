@@ -20,8 +20,6 @@ global $product;
 <div class="woocommerce-variation-add-to-cart variations_button product-total-quantity">
 	<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
 
-	<p class="mb-0"><?php esc_html_e( 'Quantity:', 'noorifa' ); ?></p>
-
 	<div class="group-action">
 		<?php
 		do_action( 'woocommerce_before_add_to_cart_quantity' );

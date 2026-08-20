@@ -13933,6 +13933,21 @@ a.woocommerce-Button.button.pay {
 .wg-comment .comment-list {
   display: grid;
   gap: 24px;
+  list-style: none;
+}
+
+/*
+ * The site-wide base reset only ever zeroes markers on `ul`/`li`
+ * (`ul, li { list-style-type: none; }` near the top of this file) —
+ * `.comment-list` is a real `<ol>` (`wp_list_comments()`'s own default
+ * markup), which that selector never matched, so each real review
+ * rendered with its browser-default "1.", "2." … numeral. `list-style:
+ * none` on the `<ol>` itself (above) only stops it from generating a
+ * counter value at all; explicitly targeting the `<li>` too guarantees
+ * the marker is gone regardless of which of the two would otherwise win.
+ */
+.wg-comment .comment-list > li {
+  list-style: none;
 }
 
 .wg-comment .comment_info {

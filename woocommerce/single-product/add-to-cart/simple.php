@@ -25,8 +25,6 @@ if ( $product->is_in_stock() ) :
 		<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
 
 		<div class="product-total-quantity">
-			<p class="mb-0"><?php esc_html_e( 'Quantity:', 'noorifa' ); ?></p>
-
 			<div class="group-action">
 				<?php
 				do_action( 'woocommerce_before_add_to_cart_quantity' );
