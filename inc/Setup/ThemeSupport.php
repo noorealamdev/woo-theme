@@ -71,6 +71,28 @@ class ThemeSupport implements ComponentInterface {
 		// the real frontend. Purely an editor-canvas concern; this theme's
 		// blocks handle their own real frontend width already.
 		add_theme_support( 'align-wide' );
+		// Without this, the block editor canvas never loads the theme's own
+		// CSS at all — every Noorifa Core block (Button, Hero, Advanced
+		// Heading, …) falls back to its own bare, unstyled/placeholder look
+		// while editing (e.g. Button's own style.scss sets a plain blue
+		// `#2c6ecb` background purely as a "something is visibly a button"
+		// fallback; the real black/pill look lives entirely in this file,
+		// which only ever ran on the real frontend before this). Since
+		// WP 5.9 the block canvas renders inside its own `<iframe>`, so
+		// loading the full frontend stylesheet here can't leak out and
+		// clash with the surrounding editor UI chrome — that isolation is
+		// the whole reason `add_editor_style()` is safe to point at a
+		// theme's real stylesheet instead of a hand-maintained editor-only
+		// subset. One real gap remains: rules gated behind a `body` class
+		// this theme only ever adds on the real frontend (e.g.
+		// `body.noorifa-btn-style-2` for a non-default Button Style choice
+		// under Noorifa → Buttons) still can't match inside the editor's
+		// own iframe body, so the canvas shows the theme's default look for
+		// those, not whichever style a site owner picked — everything else
+		// (colors, typography, the base button/heading/hero look) matches
+		// the real frontend exactly.
+		add_theme_support( 'editor-styles' );
+		add_editor_style( 'assets/css/main.css' );
 		// Deliberately NOT declaring wc-product-gallery-zoom/lightbox/slider:
 		// the single product gallery is a full custom replacement (the
 		// theme's own swiper + zoom.js + photoswipe), not WooCommerce's
@@ -96,7 +118,12 @@ class ThemeSupport implements ComponentInterface {
 	}
 
 	/**
-	 * Turns on the block editor's native Line height typography control.
+	 * Turns on the block editor's native Line height typography control,
+	 * and sets the site's default block spacing (the gap WordPress core
+	 * inserts between two stacked blocks with no gap of their own — the
+	 * `:root :where(.is-layout-flow) > *` / `.is-layout-constrained` /
+	 * `.is-layout-flex`/`.is-layout-grid` rules core's global styles engine
+	 * prints on every page).
 	 *
 	 * Font weight and letter spacing already show in the Styles > Typography
 	 * panel because WordPress core defaults `typography.fontWeight` and
@@ -104,12 +131,20 @@ class ThemeSupport implements ComponentInterface {
 	 * defaults `typography.lineHeight` to false, and — despite the docs —
 	 * `add_theme_support( 'appearance-tools' )` does NOT flip it on for a
 	 * classic (non-theme.json) theme like this one (verified: the resolved
-	 * global setting stays false with appearance-tools active). Rather than
-	 * add a whole theme.json just for this one flag, inject the single
-	 * setting through the theme.json data filter, so the native Line height
-	 * control appears alongside Font size for every block that opts into
-	 * `supports.typography.lineHeight` (e.g. the Noorifa Core Feature Cards
-	 * and Hero blocks). Zero output cost until a value is actually set.
+	 * global setting stays false with appearance-tools active).
+	 *
+	 * Block spacing is a separate, unrelated fix riding the same filter:
+	 * core's own default is 24px (`styles.spacing.blockGap` unset falls
+	 * back to that), which is *not* a value in this codebase to search for
+	 * and edit directly — it only ever exists as this filtered-in override
+	 * or core's own hardcoded fallback, never as a static rule in any
+	 * stylesheet here.
+	 *
+	 * Rather than add a whole theme.json for either of these two flags,
+	 * inject both through the same theme.json data filter. Zero output
+	 * cost for the line-height half until a site owner actually sets a
+	 * value; the block-gap half always prints (it's a real default, not an
+	 * opt-in control).
 	 *
 	 * @param \WP_Theme_JSON_Data $theme_json The theme's theme.json data.
 	 * @return \WP_Theme_JSON_Data
@@ -125,6 +160,11 @@ class ThemeSupport implements ComponentInterface {
 				'settings' => array(
 					'typography' => array(
 						'lineHeight' => true,
+					),
+				),
+				'styles'   => array(
+					'spacing' => array(
+						'blockGap' => '13px',
 					),
 				),
 			)

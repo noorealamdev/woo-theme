@@ -64,7 +64,7 @@ $rating = (int) get_comment_meta( $comment->comment_ID, 'rating', true );
 			<?php endif; ?>
 
 			<?php do_action( 'woocommerce_review_before_comment_text', $comment ); ?>
-			<div class="comment_text text-body-1">
+			<div class="comment_text">
 				<?php
 				/**
 				 * Real hook — no default callback (comment_text() below

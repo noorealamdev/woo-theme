@@ -146,13 +146,18 @@ class Assets implements ComponentInterface {
 
 		if ( class_exists( 'WooCommerce' ) ) {
 			// Deliberately NOT enqueuing WooCommerce's own 'wc-cart' script
-			// here: its global `added_to_cart` handler assumes it's running
-			// on the actual Cart page and calls `window.location.reload()`
-			// when `.woocommerce-cart-form` isn't found — which is every
-			// other page, including this drawer. The shipping-calculator
-			// and coupon panels get their own toggle in noorifa-cart.js, and
-			// both forms are plain POSTs that WooCommerce's global
-			// `wp_loaded` cart-action handler processes either way.
+			// anywhere: its global `added_to_cart` handler assumes it's
+			// running on a classic `.woocommerce-cart-form` cart page and
+			// calls `window.location.reload()` when that element isn't
+			// found. The real Cart and Checkout pages are WooCommerce's
+			// modern Cart/Checkout BLOCKS (`<!-- wp:woocommerce/cart -->`),
+			// which manage their own state via the Store API, not classic
+			// `.woocommerce-cart-form` markup or this script — so
+			// `.woocommerce-cart-form` now exists on no page at all, making
+			// 'wc-cart' pure dead weight (or worse, an unwanted reload) if
+			// ever enqueued. The header mini-cart drawer's quantity stepper
+			// and open/close behavior are handled entirely by
+			// noorifa-cart.js + Noorifa\WooCommerce\CartFragments instead.
 			$cart_deps = array( 'jquery', 'noorifa-bootstrap-js' );
 			if ( 'yes' === get_option( 'woocommerce_enable_ajax_add_to_cart' ) ) {
 				$cart_deps[] = 'wc-add-to-cart';
@@ -163,15 +168,6 @@ class Assets implements ComponentInterface {
 				'noorifaCartParams',
 				array( 'checkoutUrl' => wc_get_checkout_url() )
 			);
-
-			// Safe here specifically: the reload landmine documented above
-			// only fires when `.woocommerce-cart-form` is missing from the
-			// page — on the real Cart page (woocommerce/cart/cart.php) it's
-			// always present, so this gives real AJAX quantity/coupon/
-			// shipping-calculator updates instead of a full form POST.
-			if ( function_exists( 'is_cart' ) && is_cart() ) {
-				wp_enqueue_script( 'wc-cart' );
-			}
 		}
 
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {

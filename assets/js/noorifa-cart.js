@@ -79,17 +79,6 @@
 		}
 
 		$qty.val( value ).trigger( 'change' );
-
-		// On the real cart page, also trigger WooCommerce's own real
-		// AJAX quantity update (wc-cart.js) — its `change` handler only
-		// *enables* the (hidden) "Update cart" button rather than
-		// auto-submitting, since it's built for an explicit click; a
-		// stepper click is that explicit action here, so finish the job.
-		var $cartForm = $qty.closest( 'form.woocommerce-cart-form' );
-
-		if ( $cartForm.length ) {
-			$cartForm.find( ':input[name="update_cart"]' ).prop( 'disabled', false ).trigger( 'click' );
-		}
 	} );
 
 	// AJAX-ify the single product page's real add-to-cart form (simple and

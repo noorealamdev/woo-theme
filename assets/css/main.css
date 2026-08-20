@@ -2792,7 +2792,6 @@ body.noorifa-force-mobile-menu .header .header-inner .header-zone--left {
 .header-inner .header-zone {
   display: flex;
   align-items: center;
-  gap: 24px;
 }
 
 .header-inner .header-zone--left,
@@ -4271,6 +4270,23 @@ body.noorifa-force-mobile-menu .header .header-inner .header-zone--left {
 
 .entry-content ol {
   list-style: decimal;
+}
+
+/*
+ * The base reset (near the top of this file) sets `list-style-type: none`
+ * directly on every `<li>`, not just `<ul>`/`<ol>` — so `list-style: disc`
+ * on the parent above never actually reached the markers; the `li` rule
+ * below only ever restyled spacing/color, not the marker itself. Needs to
+ * be set on the `li` directly to win over that reset (see the matching
+ * .tab-content_desc fix elsewhere in this file for the product-description
+ * tab's version of the same bug).
+ */
+.entry-content ul li {
+  list-style-type: disc;
+}
+
+.entry-content ol li {
+  list-style-type: decimal;
 }
 
 .entry-content li {
@@ -8562,7 +8578,7 @@ select.select-3:focus {
 
 @media (min-width: 1200px) {
   .btn {
-    height: 58px;
+    height: 48px;
     padding-left: 32px;
     padding-right: 32px;
   }
@@ -8697,7 +8713,7 @@ body.noorifa-btn-style-5 .product-info-wrap .variant-size .size-btn:not(.select-
 @media (min-width: 1200px) {
   .wp-block-noorifa-core-button a.noorifa-core-button__link,
   .wp-block-noorifa-core-add-to-cart-button__wrap a.noorifa-core-add-to-cart-button__link {
-    height: 58px;
+    height: 48px;
     padding-left: 32px;
     padding-right: 32px;
   }
@@ -11768,337 +11784,6 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   min-width: 47px;
 }
 
-.notification-progress .text {
-  margin-bottom: 16px;
-}
-
-.notification-progress .progress-cart {
-  margin-top: 8px;
-  margin-bottom: 8px;
-  width: 100%;
-  background-color: var(--line);
-  height: 4px;
-  position: relative;
-  border-radius: 100px;
-}
-
-.notification-progress .value {
-  position: relative;
-  height: 100%;
-  background-color: var(--success);
-  transition: width 2s ease;
-  border-radius: 100px;
-}
-
-.notification-progress .round {
-  position: absolute;
-  left: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  background-color: var(--white);
-  border: 1px solid var(--success);
-  border-radius: 50%;
-}
-
-.notification-progress .round .icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 12px;
-  height: 12px;
-  fill: var(--success);
-}
-
-.table-page-cart {
-  border-collapse: separate;
-  border-spacing: 0;
-}
-
-.table-page-cart td {
-  padding-top: 27px;
-  padding-bottom: 28px;
-  border-bottom: 1px solid var(--line);
-}
-
-.table-page-cart th {
-  font-weight: 600;
-  border-bottom: 1px solid var(--line);
-}
-
-.table-page-cart thead th {
-  padding-bottom: 11px;
-}
-
-.table-page-cart .wg-quantity {
-  max-width: 160px;
-  min-width: unset;
-  padding-top: 11px;
-  padding-bottom: 11px;
-}
-
-.table-page-cart .cart_quantity .quantity {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border: 1px solid var(--line);
-  padding: 8px 16px;
-  border-radius: 100px;
-  max-width: 160px;
-  min-width: unset;
-  flex-shrink: 0;
-}
-
-.table-page-cart .cart_quantity .qty {
-  width: 40px;
-  padding: 0;
-  background: transparent;
-  border: 0;
-  text-align: center;
-  font-weight: 600;
-  -moz-appearance: textfield;
-}
-
-.table-page-cart .cart_quantity .qty::-webkit-inner-spin-button,
-.table-page-cart .cart_quantity .qty::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.table-page-cart .cart_quantity .btn-quantity {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-  color: var(--black);
-  transition: all 0.3s ease;
-}
-
-.table-page-cart .cart_quantity .btn-quantity:hover {
-  color: var(--primary);
-}
-
-@media (min-width: 576px) {
-  .table-page-cart td:nth-child(1),
-  .table-page-cart th:nth-child(1) {
-    min-width: 360px;
-  }
-  .table-page-cart td:nth-child(2),
-  .table-page-cart th:nth-child(2) {
-    min-width: 110px;
-  }
-  .table-page-cart td:nth-child(3),
-  .table-page-cart th:nth-child(3) {
-    min-width: 160px;
-  }
-  .table-page-cart td:nth-child(4),
-  .table-page-cart th:nth-child(4) {
-    min-width: 110px;
-  }
-}
-@media (max-width: 767px) {
-  .table-page-cart thead {
-    display: none;
-  }
-}
-.cart_item .img-prd {
-  border-radius: 8px;
-  overflow: hidden;
-  max-width: 100px;
-}
-
-.cart_item .img-prd img {
-  aspect-ratio: 0.7518796992;
-}
-
-.cart_item .cart_product {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-.cart_item .cart_remove {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-.cart_item .cart_total {
-  text-align: end;
-}
-
-.cart_item .infor-prd {
-  display: grid;
-  place-items: start;
-  gap: 4px;
-}
-
-.cart_item .prd_select {
-  display: flex;
-  align-items: center;
-}
-
-.cart_item .prd_select .type-text {
-  position: relative;
-  z-index: 2;
-}
-
-@media (max-width: 767px) {
-  /* Scoped to the real Cart page's own table (.table-page-cart, see
-     template-parts/cart/cart-table.php) — WITHOUT this scope, these rules
-     also match the Checkout page's order-review table, since WooCommerce
-     reuses the same `.cart_item` row class on both tables. Unscoped, they
-     forced every review-order `<td>` into `display: flex`, which breaks
-     out of the `table-layout: fixed` column-width algorithm and squeezed
-     the product-name column into a sliver on mobile checkout. */
-  .table-page-cart .cart_item {
-    margin-bottom: 15px;
-    padding-inline-start: 94px;
-    min-height: 140px;
-    display: block;
-    font-weight: 500;
-    position: relative;
-  }
-  .table-page-cart .cart_item .wg-quantity {
-    min-width: 110px;
-    padding: 6px 10px;
-  }
-  .table-page-cart .cart_item .img-prd {
-    position: absolute;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border-bottom: none;
-    width: 80px;
-    flex-shrink: 0;
-    border: 1px solid var(--line);
-  }
-  .table-page-cart .cart_item .img-prd img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .table-page-cart .cart_item td {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 10px 0;
-    margin: 0;
-  }
-  .table-page-cart .cart_item td:not(:last-child) {
-    border-bottom: 1px solid var(--line);
-  }
-  .table-page-cart .cart_item td[data-cart-title]:before {
-    content: attr(data-cart-title);
-    color: var(--black);
-    text-align: start;
-    flex: 1 1 auto;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-  }
-}
-.fl-sidebar-cart {
-  margin-top: 30px;
-}
-
-.fl-sidebar-cart .title {
-  margin-bottom: 24px;
-}
-
-@media (min-width: 1200px) {
-  .fl-sidebar-cart.type-2 {
-    padding-left: 30px;
-  }
-}
-.box-order-summary {
-  padding: 24px;
-  background: var(--bg-2);
-  border-radius: 12px;
-}
-
-.box-order-summary .notification-progress {
-  margin-bottom: 32px;
-}
-
-.box-order-summary .subtotal,
-.box-order-summary .discount,
-.box-order-summary .ship {
-  margin-bottom: 12px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--line);
-}
-
-.box-order-summary .ship {
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.box-order-summary .ship .box-check-payment {
-  max-width: 220px;
-  width: 100%;
-}
-
-.box-order-summary .ship-item:not(:last-child) {
-  margin-bottom: 8px;
-}
-
-.box-order-summary .ship-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.box-order-summary .ship-item label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-grow: 1;
-  color: var(--text-2);
-  cursor: pointer;
-}
-
-.box-order-summary .ship-item input:checked ~ label {
-  color: var(--text);
-}
-
-.box-order-summary .check-agree {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.box-order-summary .total-order {
-  margin-bottom: 24px;
-}
-
-.box-order-summary .action-checkout,
-.box-order-summary .check-agree {
-  margin-bottom: 12px;
-}
-
-@media (min-width: 1200px) {
-  .box-order-summary .subtotal,
-  .box-order-summary .discount,
-  .box-order-summary .ship {
-    padding-bottom: 19px;
-    margin-bottom: 20px;
-  }
-}
-@media (max-width: 575px) {
-  .box-order-summary {
-    padding: 20px 15px;
-  }
-}
 .wrap-quick-login .title {
   padding: 12px 16px;
   border-radius: 8px;
@@ -12408,57 +12093,6 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 
 .type-select.has-icon select {
   padding-right: 18px;
-}
-
-.ip-discount-code {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 28px;
-  flex-wrap: wrap;
-}
-
-.ip-discount-code input {
-  border-radius: 100px !important;
-}
-
-.ip-discount-code button {
-  white-space: nowrap;
-  width: 100%;
-}
-
-@media (min-width: 1200px) {
-  .ip-discount-code input {
-    padding: 15px 23px !important;
-  }
-}
-@media (min-width: 426px) {
-  .ip-discount-code {
-    flex-wrap: nowrap;
-  }
-  .ip-discount-code button {
-    width: auto;
-    flex-shrink: 0;
-  }
-}
-@media (max-width: 1199px) {
-  .ip-discount-code button {
-    height: 48px;
-  }
-}
-.ip-discount-code.coupon {
-  flex-wrap: wrap;
-}
-
-.ip-discount-code .coupon-error-notice {
-  width: 100%;
-  margin: 0;
-  color: var(--critical);
-  font-size: 14px;
-}
-
-.ip-discount-code input.has-error {
-  border-color: var(--critical) !important;
 }
 
 @media (min-width: 1200px) {
@@ -14597,6 +14231,20 @@ a.woocommerce-Button.button.pay {
   row-gap: 28px;
 }
 
+/*
+ * `row-gap` above is a no-op — `.tab-content_desc` is a plain block div,
+ * never `display: flex`/`grid`, and row-gap only has an effect on those.
+ * The raw `the_content()` output it wraps (see the .tab-content_desc ul/ol
+ * comment below) is therefore a stack of <p>/<img>/<ul> children with the
+ * base reset's `margin: 0` and nothing putting space between them — same
+ * "lobotomized owl" fix `.entry-content > * + *` already uses for blog
+ * posts, applied here too so paragraphs actually get breathing room
+ * instead of running together.
+ */
+.tab-content_desc > * + * {
+  margin-top: 20px;
+}
+
 .tab-content_desc .desc_title {
   margin-bottom: 12px;
 }
@@ -14609,6 +14257,36 @@ a.woocommerce-Button.button.pay {
 .tab-content_desc .list {
   display: grid;
   gap: 4px;
+}
+
+/*
+ * `the_content()` (template-parts/product/tabs.php) prints a product's raw
+ * post content straight into `.tab-content_desc` with no `.entry-content`
+ * wrapper, so a merchant-authored <ul>/<ol> (e.g. a "Key Benefits" list)
+ * only ever inherited the site-wide `ul, li { list-style: none }` reset
+ * and rendered with no markers at all. Restoring it here needs to target
+ * `li` directly (not just the `ul`) because that reset sets
+ * `list-style-type: none` on `li` itself, which wins over inheriting
+ * `disc`/`decimal` from a restyled parent.
+ */
+.tab-content_desc ul,
+.tab-content_desc ol {
+  padding-left: 20px;
+}
+
+.tab-content_desc ul li {
+  list-style-type: disc;
+}
+
+.tab-content_desc ol li {
+  list-style-type: decimal;
+}
+
+.tab-content_desc ul li,
+.tab-content_desc ol li {
+  line-height: 26px;
+  color: var(--text-2);
+  margin-bottom: 8px;
 }
 
 @media (min-width: 1440px) {
