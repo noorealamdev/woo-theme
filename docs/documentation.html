@@ -347,6 +347,8 @@
         <div class="bcard"><b>SEO</b><span>Site-wide title / meta description fallbacks.</span></div>
         <div class="bcard"><b>Integrations</b><span>Google Analytics 4 &amp; Facebook Pixel.</span></div>
         <div class="bcard"><b>Custom CSS / JS</b><span>Your own snippets, safely wrapped.</span></div>
+        <div class="bcard"><b>Popups</b><span>Build promo/newsletter popups — trigger, targeting, frequency and design, all visual.</span></div>
+        <div class="bcard"><b>Privacy</b><span>GDPR-style cookie consent banner — message, button, position and colors.</span></div>
         <div class="bcard"><b>Import / Export</b><span>Back up or move your settings.</span></div>
       </div>
 
@@ -384,6 +386,8 @@
         <li><strong>Buttons</strong> — pick a global button style preset (shape, fill, hover).</li>
         <li><strong>Cart &amp; Checkout</strong> — customize the order-received (thank-you) page hero.</li>
         <li><strong>Floating Button</strong> — turn on a site-wide floating WhatsApp/chat button and set the number and message.</li>
+        <li><strong>Popups</strong> — add one or more popups (a heading, image, body text and button, or your own HTML), each with its own trigger (immediate, after a delay, on scroll, on exit-intent, or on click), frequency cap (once per session/day/ever), and targeting (all pages, just the homepage, specific pages, shop, cart or checkout).</li>
+        <li><strong>Privacy</strong> — turn on the cookie consent banner and set its message, button label, policy link and position. Off by default; enable it if your site needs GDPR-style consent.</li>
       </ul>
 
       <h2 id="blocks">Noorifa Core blocks</h2>
@@ -395,7 +399,8 @@
         <div class="bcard"><b>Advanced Heading</b><span>A heading with an optional subheading, alignment and full typography control.</span></div>
         <div class="bcard"><b>Feature Cards</b><span>A row/grid of cards with icon, heading and text — benefits, ingredients, features.</span></div>
         <div class="bcard"><b>Image Card</b><span>Promo cards: a background image with overlaid heading, text and a link.</span></div>
-        <div class="bcard"><b>Icon List</b><span>A checklist of points, each with an icon.</span></div>
+        <div class="bcard"><b>Icon List</b><span>A checklist of points, each with an icon. Icon size and line height are both independently adjustable in the block sidebar.</span></div>
+        <div class="bcard"><b>Before/After</b><span>A draggable slider comparing two images — great for skincare, fitness and restoration results.</span></div>
         <div class="bcard"><b>Container</b><span>A flexible wrapper for building custom multi-column layouts.</span></div>
         <div class="bcard"><b>Accordion / FAQ</b><span>Collapsible rows — perfect for FAQs.</span></div>
         <div class="bcard"><b>Tabs</b><span>Tabbed content panels.</span></div>
@@ -467,6 +472,23 @@
       <div class="callout warn">
         <span class="ic">!</span>
         <p>Two similarly named boxes, two different jobs: <strong>Product Page Template</strong> (from Noorifa Core) chooses <em>which custom layout</em> renders; <strong>Page Layout</strong> (from the theme) hides the header/footer and sets the background. Use them together for landing pages.</p>
+      </div>
+
+      <h3>A/B testing two layouts</h3>
+      <p>Instead of guessing which layout converts better, let real traffic decide. A product can run <strong>two</strong> Product Layouts as a live split test — visitors are split 50/50 and remembered for 30 days, so the same visitor always sees the same version.</p>
+      <ol class="steps">
+        <li>Edit the product, and in the <strong>Product Page Template</strong> box check <strong>"Run this as an A/B split test instead"</strong>.</li>
+        <li>Pick a published layout for <strong>Layout A</strong> and a different one for <strong>Layout B</strong>, then update the product. The single-layout dropdown is replaced by a read-only summary while the test is running — you can't change layouts mid-test, only end it.</li>
+        <li>Go to <span class="path">Noorifa → Split Tests</span> to watch results: impressions, add-to-cart rate and purchase rate for each variant, side by side, with a confidence indicator once there's enough traffic to say which is ahead.</li>
+        <li>When you're satisfied, click <strong>Declare winner</strong> next to the better-performing variant. That layout becomes the product's normal layout, and the test moves to the page's "Past tests" list.</li>
+      </ol>
+      <div class="callout note">
+        <span class="ic">i</span>
+        <p>Impressions aren't counted for logged-in staff (so you browsing your own site doesn't skew results) or for layout previews. Let a test run for at least a week before declaring a winner — checking daily and calling it the moment a number looks good increases the chance of a false read.</p>
+      </div>
+      <div class="callout warn">
+        <span class="ic">!</span>
+        <p>If you use a page-caching plugin, exclude products under an active split test from the cache (or configure it to vary by cookie) — otherwise every visitor can end up seeing whichever version happened to be cached, instead of their own assigned variant.</p>
       </div>
 
       <h2 id="landing">Landing pages &amp; cash on delivery</h2>

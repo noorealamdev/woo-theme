@@ -4239,16 +4239,6 @@ body.noorifa-force-mobile-menu .header .header-inner .header-zone--left {
   margin-top: 20px;
 }
 
-.entry-content h1,
-.entry-content h2,
-.entry-content h3,
-.entry-content h4,
-.entry-content h5,
-.entry-content h6 {
-  margin-top: 32px;
-  margin-bottom: 4px;
-}
-
 .entry-content p {
   line-height: 26px;
   color: var(--text-2);
@@ -7900,6 +7890,56 @@ form input[type=submit] {
 form textarea {
   height: 100px;
   resize: none;
+}
+
+/* Contact Form 7 compatibility. Its auto-generated markup never carries
+   the theme's own `.btn` class, so the generic `form input[type=submit]`
+   reset above (transparent/no padding — meant to strip native button
+   chrome before `.btn` repaints it) leaves the Submit button with nothing
+   visually applied. Scoped to `.wpcf7-form` so it only affects real CF7
+   output, styled to match the theme's own `.btn.btn-primary`. */
+.wpcf7-form p {
+  margin-bottom: 20px;
+}
+
+.wpcf7-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.wpcf7-form .wpcf7-form-control-wrap {
+  display: block;
+  margin-top: 4px;
+}
+
+.wpcf7-form textarea.wpcf7-form-control {
+  height: 140px;
+}
+
+.wpcf7-form .wpcf7-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 44px;
+  padding: 0 24px;
+  background: var(--primary);
+  color: var(--white);
+  border: 0;
+  border-radius: 60px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.wpcf7-form .wpcf7-submit:hover {
+  opacity: 0.9;
+}
+
+.wpcf7-form .wpcf7-spinner {
+  margin-left: 8px;
 }
 
 form .form-content {
