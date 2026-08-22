@@ -14344,28 +14344,36 @@ a.woocommerce-Button.button.pay {
   margin-bottom: 8px;
 }
 
-/* Same fix, editor-side: `add_editor_style()` (see ThemeSupport.php) loads
-   this whole stylesheet inside both the block editor's iframe
-   (`.editor-styles-wrapper`) and the classic/TinyMCE editor
-   (`.mce-content-body` — what WooCommerce's product description field
-   actually uses), so the site-wide `ul, li { list-style-type: none }`
-   reset above strips bullets/numbers there too. Neither editor wraps
-   content in `.tab-content_desc`, so that fix alone never reached them. */
-.editor-styles-wrapper ul li,
-.mce-content-body ul li {
+/* Same fix, block-editor-side: `add_editor_style()` (see ThemeSupport.php)
+   loads this whole stylesheet inside the block editor's iframe
+   (`.editor-styles-wrapper`), so the site-wide
+   `ul, li { list-style-type: none }` reset above strips bullets/numbers
+   there too — the editor never wraps content in `.tab-content_desc`, so
+   that fix alone never reached it. The classic/TinyMCE editor (what
+   WooCommerce's product description field actually uses) no longer
+   loads this stylesheet at all — see
+   `ThemeSupport::exclude_frontend_stylesheet_from_classic_editor()` —
+   so it needs no matching fix here. */
+.editor-styles-wrapper ul li {
   list-style-type: disc;
 }
 
-.editor-styles-wrapper ol li,
-.mce-content-body ol li {
+.editor-styles-wrapper ol li {
   list-style-type: decimal;
 }
 
 .editor-styles-wrapper ul,
-.editor-styles-wrapper ol,
-.mce-content-body ul,
-.mce-content-body ol {
+.editor-styles-wrapper ol {
   padding-left: 20px;
+}
+
+/* Same reset also strips the block editor's own body margin/padding (the
+   `body { margin: 0; padding: 0; ... }` rule near the top of this file
+   is part of a blanket element reset, not scoped to the real frontend
+   only), so text sits flush against the canvas edges instead of the
+   breathing room WordPress core normally gives it. */
+.editor-styles-wrapper {
+  padding: 20px;
 }
 
 @media (min-width: 1440px) {

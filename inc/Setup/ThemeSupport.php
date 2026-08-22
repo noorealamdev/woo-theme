@@ -19,6 +19,7 @@ class ThemeSupport implements ComponentInterface {
 		add_action( 'after_setup_theme', array( $this, 'add_theme_support' ) );
 		add_action( 'after_setup_theme', array( $this, 'set_content_width' ) );
 		add_filter( 'wp_theme_json_data_theme', array( $this, 'enable_line_height_setting' ) );
+		add_filter( 'mce_css', array( $this, 'exclude_frontend_stylesheet_from_classic_editor' ) );
 	}
 
 	/**
@@ -115,6 +116,47 @@ class ThemeSupport implements ComponentInterface {
 		// WP 7.0.2 core before landing on the correct filename. See
 		// languages/README.txt for the translator-facing instructions.
 		load_theme_textdomain( 'noorifa', NOORIFA_THEME_DIR . '/languages' );
+	}
+
+	/**
+	 * Keeps `add_editor_style()`'s frontend stylesheet out of the classic/
+	 * TinyMCE editor specifically, while leaving it in place for the block
+	 * editor (both consume the exact same `add_editor_style()` registration
+	 * via `get_editor_stylesheets()` — there's no separate opt-in for one
+	 * without the other, only this filter to subtract it back out again).
+	 *
+	 * The block editor genuinely needs it: every Noorifa Core block
+	 * (Button, Hero, Advanced Heading, …) previews its real colors/
+	 * typography/layout there instead of a bare placeholder look — see
+	 * the comment above `add_editor_style()` in `add_theme_support()`.
+	 *
+	 * The classic editor gets none of that benefit (it renders plain rich
+	 * text, no blocks) and only inherits collateral damage from a
+	 * 2900+ line frontend stylesheet full of resets and component styling
+	 * never written with a generic content field in mind — confirmed
+	 * directly: the sitewide `ul, li { list-style-type: none }` reset and
+	 * the `body { margin: 0; padding: 0; … }` reset both leaked into
+	 * WooCommerce's product description field this way, stripping list
+	 * markers and all breathing room from ordinary editor content.
+	 *
+	 * @param string $mce_css Comma-delimited list of stylesheet URLs TinyMCE loads.
+	 * @return string
+	 */
+	public function exclude_frontend_stylesheet_from_classic_editor( $mce_css ) {
+		if ( '' === (string) $mce_css ) {
+			return $mce_css;
+		}
+
+		$frontend_stylesheet = NOORIFA_THEME_URI . '/assets/css/main.css';
+
+		$stylesheets = array_filter(
+			array_map( 'trim', explode( ',', $mce_css ) ),
+			static function ( $url ) use ( $frontend_stylesheet ) {
+				return 0 !== strpos( $url, $frontend_stylesheet );
+			}
+		);
+
+		return implode( ',', $stylesheets );
 	}
 
 	/**
