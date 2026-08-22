@@ -14344,6 +14344,30 @@ a.woocommerce-Button.button.pay {
   margin-bottom: 8px;
 }
 
+/* Same fix, editor-side: `add_editor_style()` (see ThemeSupport.php) loads
+   this whole stylesheet inside both the block editor's iframe
+   (`.editor-styles-wrapper`) and the classic/TinyMCE editor
+   (`.mce-content-body` — what WooCommerce's product description field
+   actually uses), so the site-wide `ul, li { list-style-type: none }`
+   reset above strips bullets/numbers there too. Neither editor wraps
+   content in `.tab-content_desc`, so that fix alone never reached them. */
+.editor-styles-wrapper ul li,
+.mce-content-body ul li {
+  list-style-type: disc;
+}
+
+.editor-styles-wrapper ol li,
+.mce-content-body ol li {
+  list-style-type: decimal;
+}
+
+.editor-styles-wrapper ul,
+.editor-styles-wrapper ol,
+.mce-content-body ul,
+.mce-content-body ol {
+  padding-left: 20px;
+}
+
 @media (min-width: 1440px) {
   .tab-content_desc:not(.desc-3, .desc-2) {
     gap: 80px;
