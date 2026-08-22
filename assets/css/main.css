@@ -2792,6 +2792,7 @@ body.noorifa-force-mobile-menu .header .header-inner .header-zone--left {
 .header-inner .header-zone {
   display: flex;
   align-items: center;
+  gap: 20px;
 }
 
 .header-inner .header-zone--left,
@@ -15611,18 +15612,22 @@ a.woocommerce-Button.button.pay {
 
 /*------------ Header builder button element ---------------------------- */
 /* The header "Button" module reuses the theme's .btn (so it follows the
-   Buttons > Style preset); tighten its padding and bump the font size so it
-   reads as a prominent header CTA. */
+   Buttons > Style preset), but that base sizing (44px tall, 24px
+   horizontal padding) is tuned for a hero/product page CTA — inline with
+   24px nav icons and compact menu text in the header itself, it reads as
+   oversized rather than "prominent". Scaled down instead, with a further
+   reduction on narrow screens where header space is tightest. */
 .header-button .btn {
-	height: auto;
-	padding: 8px 24px;
-	font-size: 18px;
+	height: 38px;
+	padding: 0 18px;
+	font-size: 14px;
 }
 
-@media (min-width: 1200px) {
+@media (max-width: 767px) {
 	.header-button .btn {
-		padding: 10px 26px;
-		font-size: 20px;
+		height: 34px;
+		padding: 0 14px;
+		font-size: 13px;
 	}
 }
 
