@@ -3755,12 +3755,21 @@ body.noorifa-force-mobile-menu .header .header-inner .header-zone--left {
   color: var(--noorifa-topbar-text, #fff);
 }
 
-/* The topbar message is a single-line clamp (no marquee/wrap), so on
-   narrow screens the full text needs a smaller size to actually fit
-   instead of clipping mid-word. */
+/* The message is a single-line clamp by default (desktop has room for
+   it), but on narrow screens a long message truncates unreadably at
+   any reasonable font size — so the clamp itself is lifted here and
+   the text wraps to as many lines as it needs instead. */
 @media (max-width: 767px) {
   .topbar p {
     font-size: min(var(--noorifa-topbar-font-size, 16px), 12px);
+  }
+
+  .topbar .text-line-clamp-1 {
+    display: block !important;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    overflow: visible;
+    white-space: normal;
   }
 }
 
