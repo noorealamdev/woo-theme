@@ -3755,6 +3755,15 @@ body.noorifa-force-mobile-menu .header .header-inner .header-zone--left {
   color: var(--noorifa-topbar-text, #fff);
 }
 
+/* The topbar message is a single-line clamp (no marquee/wrap), so on
+   narrow screens the full text needs a smaller size to actually fit
+   instead of clipping mid-word. */
+@media (max-width: 767px) {
+  .topbar p {
+    font-size: min(var(--noorifa-topbar-font-size, 16px), 12px);
+  }
+}
+
 .topbar .br-line.fake-class {
   position: absolute;
   left: 0;
@@ -15655,11 +15664,12 @@ a.woocommerce-Button.button.pay {
 	font-size: 14px;
 }
 
+/* Header space is tightest on mobile (hamburger + logo + icons already
+   fill the row), so the CTA button is dropped there entirely rather
+   than shrunk — a truncated button reads worse than no button. */
 @media (max-width: 767px) {
-	.header-button .btn {
-		height: 34px;
-		padding: 0 14px;
-		font-size: 13px;
+	.header-button {
+		display: none;
 	}
 }
 
