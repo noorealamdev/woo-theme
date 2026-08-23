@@ -9,10 +9,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo-site">
-	<?php if ( has_custom_logo() ) : ?>
-		<?php the_custom_logo(); ?>
-	<?php else : ?>
+<?php if ( has_custom_logo() ) : ?>
+	<?php // the_custom_logo() renders its own complete <a class="custom-logo-link"> wrapper — an outer <a> here would nest anchors, which is invalid HTML and gets silently split by the browser. ?>
+	<?php the_custom_logo(); ?>
+<?php else : ?>
+	<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo-site">
 		<?php bloginfo( 'name' ); ?>
-	<?php endif; ?>
-</a>
+	</a>
+<?php endif; ?>
