@@ -3762,7 +3762,7 @@ body.noorifa-force-mobile-menu .header .header-inner .header-zone--left {
    the text wraps to as many lines as it needs instead. */
 @media (max-width: 767px) {
   .topbar p {
-    font-size: min(var(--noorifa-topbar-font-size, 16px), 12px);
+    font-size: min(var(--noorifa-topbar-font-size, 16px), 14px);
   }
 
   .topbar .text-line-clamp-1 {
